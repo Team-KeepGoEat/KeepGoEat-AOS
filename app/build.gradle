@@ -56,7 +56,7 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.6.0'
     implementation 'androidx.fragment:fragment-ktx:1.5.3'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation 'androidx.security:security-crypto-ktx:1.1.0'
+    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha04'
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
@@ -78,7 +78,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
 
     // Firebase
-    implementation "com.google.firebase:firebase-bom:31.1.1"
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
