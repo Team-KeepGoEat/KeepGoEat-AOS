@@ -3,15 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.dummy.DummyViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.MainActivity">
+        tools:context=".presentation.dummy.DummyActivity">
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material.Button.Basic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:backgroundTint="@color/orange_700"
+            android:onClick="@{() -> viewModel.uploadDummy()}"
+            android:text="@string/dummy_upload"
+            android:textAppearance="@style/TextAppearance.System4"
+            app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

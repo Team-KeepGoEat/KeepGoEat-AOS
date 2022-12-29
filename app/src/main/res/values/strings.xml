@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KeepGoEat</string>
+    <string name="dummy_upload">upload</string>
 </resources>
