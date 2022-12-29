@@ -1,4 +1,4 @@
-package org.keepgoeat.util.extensions
+package org.keepgoeat.util.extension
 
 import android.app.Activity
 import android.content.Context

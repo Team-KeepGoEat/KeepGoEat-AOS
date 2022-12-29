@@ -1,4 +1,4 @@
-package org.keepgoeat.util.extensions
+package org.keepgoeat.util.extension
 
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
