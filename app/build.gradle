@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.20'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
