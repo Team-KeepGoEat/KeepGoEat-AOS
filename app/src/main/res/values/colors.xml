@@ -36,4 +36,6 @@
     <color name="gray_600">#757474</color>
     <color name="gray_700">#474646</color>
     <color name="gray_800">#191919</color>
+
+    <color name="kakao">#FED820</color>
 </resources>
