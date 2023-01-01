@@ -3,6 +3,8 @@
     <string name="dummy_upload">upload</string>
 
     <!--  sign  -->
+    <string name="kakao_app_key1">8023bf5dba44e18383b689f7efcad88c</string>
+    <string name="kakao_app_key2">kakao8023bf5dba44e18383b689f7efcad88c</string>
     <string name="signin">카카오톡 로그인</string>
     <string name="sign_description1">식습관 관리</string>
     <string name="sign_description2">같이 천천히 시작해볼까요?\n먹는 재미는 언제나 소중하니까!</string>
