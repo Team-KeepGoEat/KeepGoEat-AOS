@@ -3,4 +3,6 @@
     <string name="dummy_upload">upload</string>
 
     <string name="kakao_button">카카오로 시작하기</string>
+    <string name="kakao_app_key">8023bf5dba44e18383b689f7efcad88c</string>
+    <string name="kakao_app_key2">kakao8023bf5dba44e18383b689f7efcad88c</string>
 </resources>
