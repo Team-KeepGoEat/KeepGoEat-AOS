@@ -10,6 +10,7 @@ import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.RecyclerLayoutType
 import org.keepgoeat.util.ItemDecorationUtil
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.safeValueOf
 
 @AndroidEntryPoint
 class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.activity_goal_detail) {
@@ -21,10 +22,13 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val eatingType = EatingType.MORE // TODO intent로 argument 전달받기
-        viewModel.setEatingType(eatingType)
+        intent.getStringExtra(ARG_EATING_TYPE)?.let { strExtra ->
+            val eatingType = safeValueOf<EatingType>(strExtra) ?: return@let
+            viewModel.setEatingType(eatingType)
+            adapter = GoalStickerListAdapter(eatingType, CELL_COUNT)
+        }
+
         viewModel.fetchGoalDetailInfo()
-        adapter = GoalStickerListAdapter(eatingType, CELL_COUNT)
 
         initLayout()
         addListeners()
@@ -54,5 +58,6 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         private const val CARD_ITEM_SPACE = 2
         private const val CARD_MATRIX_ROW = 5
         private const val CARD_MATRIX_COL = 7
+        const val ARG_EATING_TYPE = "eatingType"
     }
 }
