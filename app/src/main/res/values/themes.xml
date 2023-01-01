@@ -22,22 +22,27 @@
         <item name="android:textSize">24dp</item>
         <item name="android:fontFamily">@font/pretendard_r</item>
     </style>
+
     <style name="TextAppearance.System2" parent="">
         <item name="android:textSize">20dp</item>
         <item name="android:fontFamily">@font/pretendard_r</item>
     </style>
+
     <style name="TextAppearance.System3" parent="">
         <item name="android:textSize">18dp</item>
         <item name="android:fontFamily">@font/pretendard_r</item>
     </style>
+
     <style name="TextAppearance.System4" parent="">
         <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/pretendard_r</item>
     </style>
+
     <style name="TextAppearance.System5" parent="">
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/pretendard_r</item>
     </style>
+
     <style name="TextAppearance.System6" parent="">
         <item name="android:textSize">12dp</item>
         <item name="android:fontFamily">@font/pretendard_r</item>
@@ -47,22 +52,27 @@
         <item name="android:textSize">24dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
     </style>
+
     <style name="TextAppearance.System2_Bold" parent="">
         <item name="android:textSize">20dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
     </style>
+
     <style name="TextAppearance.System3_Bold" parent="">
         <item name="android:textSize">18dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
     </style>
+
     <style name="TextAppearance.System4_Bold" parent="">
         <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
     </style>
+
     <style name="TextAppearance.System5_Bold" parent="">
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
     </style>
+
     <style name="TextAppearance.System6_Bold" parent="">
         <item name="android:textSize">12dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
