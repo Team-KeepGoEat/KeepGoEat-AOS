@@ -15,11 +15,12 @@ class GoalStickerListAdapter(private val eatingType: EatingType, private val cel
         ItemDiffCallback<GoalSticker>(
             onContentsTheSame = { old, new -> old == new },
             onItemsTheSame = { old, new -> old.id == new.id }
-        )) {
+        )
+    ) {
 
-    private lateinit var inflater: LayoutInflater
     /** 전체 셀 개수에서 월별 일 수를 뺀 빈칸 수 */
     private val blankCellCount: Int = cellCount - LocalDate.now().lengthOfMonth()
+    private lateinit var inflater: LayoutInflater
 
     class FollowerViewHolder(private val binding: ItemGoalStickerBinding) :
         RecyclerView.ViewHolder(binding.root) {
