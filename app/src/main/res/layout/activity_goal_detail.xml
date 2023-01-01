@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.detail.GoalDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.detail.GoalDetailActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="4dp"
+            android:paddingHorizontal="@dimen/spacing16"
+            android:paddingVertical="@dimen/spacing8"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goal_detail_my_goal"
+                android:textAppearance="@style/TextAppearance.System4_Bold"
+                android:textColor="@color/gray_700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing4"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_storage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_storage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_storage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacingBase" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacingBase" />
+
+        <include
+            android:id="@+id/view_eating_tag"
+            layout="@layout/view_eating_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing24"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
+            bind:eatingType="@{viewModel.eatingType}" />
+
+        <TextView
+            android:id="@+id/tv_goal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/goal_detail_title(viewModel.goalTitle, context.getString(viewModel.eatingType.strRes))}"
+            android:textAppearance="@style/TextAppearance.System2_Bold"
+            android:textColor="@color/gray_800"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/view_eating_tag"
+            tools:text="하루 1끼 이상 야채 더 먹기" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_day_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing12"
+            android:background="@drawable/shape_border_gray_radius_8"
+            android:paddingVertical="@dimen/spacing36"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_title">
+
+            <TextView
+                android:id="@+id/tv_num_of_days_eaten_last_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/goal_detail_num_of_days_eaten_last_month"
+                android:textAppearance="@style/TextAppearance.System5"
+                android:textColor="@color/gray_600"
+                app:layout_constraintEnd_toEndOf="@id/view_divider"
+                app:layout_constraintStart_toStartOf="@id/layout_day_container"
+                app:layout_constraintTop_toTopOf="@id/layout_day_container" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing8"
+                android:layout_marginBottom="@dimen/spacing4"
+                android:fontFamily="@font/pretendard_b"
+                android:text="@{viewModel.numOfDaysEatenLastMonth.toString()}"
+                android:textColor="@color/gray_700"
+                android:textSize="48dp"
+                app:layout_constraintBottom_toBottomOf="@id/view_divider"
+                app:layout_constraintEnd_toEndOf="@id/tv_num_of_days_eaten_last_month"
+                app:layout_constraintStart_toStartOf="@id/tv_num_of_days_eaten_last_month"
+                app:layout_constraintTop_toBottomOf="@id/tv_num_of_days_eaten_last_month"
+                tools:text="4" />
+
+            <View
+                android:id="@+id/view_divider"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/gray_300"
+                app:layout_constraintBottom_toBottomOf="@id/layout_day_container"
+                app:layout_constraintEnd_toEndOf="@id/layout_day_container"
+                app:layout_constraintStart_toStartOf="@id/layout_day_container"
+                app:layout_constraintTop_toTopOf="@id/layout_day_container" />
+
+            <TextView
+                android:id="@+id/tv_num_of_days_eaten_this_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/goal_detail_num_of_days_eaten_this_month"
+                android:textAppearance="@style/TextAppearance.System5"
+                android:textColor="@color/gray_600"
+                app:layout_constraintEnd_toEndOf="@id/layout_day_container"
+                app:layout_constraintStart_toStartOf="@id/view_divider"
+                app:layout_constraintTop_toTopOf="@id/layout_day_container" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing8"
+                android:layout_marginBottom="@dimen/spacing4"
+                android:fontFamily="@font/pretendard_b"
+                android:text="@{viewModel.numOfDaysEatenThisMonth.toString()}"
+                android:textColor="@{context.getColor(viewModel.eatingType.thisMonthTextColor)}"
+                android:textSize="48dp"
+                app:layout_constraintBottom_toBottomOf="@id/view_divider"
+                app:layout_constraintEnd_toEndOf="@id/tv_num_of_days_eaten_this_month"
+                app:layout_constraintStart_toStartOf="@id/tv_num_of_days_eaten_this_month"
+                app:layout_constraintTop_toBottomOf="@id/tv_num_of_days_eaten_this_month"
+                tools:text="8"
+                tools:textColor="@color/orange_600" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_goal_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing16"
+            android:background="@drawable/shape_border_radius_8"
+            android:backgroundTint="@color/white"
+            android:clipToOutline="true"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/layout_day_container"
+            app:spanCount="7"
+            tools:itemCount="35"
+            tools:listitem="@layout/item_goal_sticker" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
