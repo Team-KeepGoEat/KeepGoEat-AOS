@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="eatingType"
+            type="org.keepgoeat.presentation.type.EatingType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_border_radius_4"
+        android:backgroundTint="@{context.getColor(eatingType.tagBackgroundColor)}"
+        android:paddingVertical="@dimen/spacingMicro"
+        android:paddingStart="6dp"
+        android:paddingEnd="@dimen/spacingMicro"
+        tools:backgroundTint="@color/orange_100">
+
+        <ImageView
+            android:id="@+id/iv_tag_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@{context.getDrawable(eatingType.tagIconRes)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_eating_more_tag_plus" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/pretendard_b"
+            android:text="@{eatingType.strRes}"
+            android:textColor="@{context.getColor(eatingType.tagTextColor)}"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_tag_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/eating_type_more"
+            tools:textColor="@color/orange_600" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -19,7 +19,10 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
-        adapter = GoalStickerListAdapter(EatingType.MORE, CELL_COUNT)
+
+        val eatingType = EatingType.MORE // TODO intent로 argument 전달받기
+        viewModel.setEatingType(eatingType)
+        adapter = GoalStickerListAdapter(eatingType, CELL_COUNT)
 
         initLayout()
         addObservers()

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="2dp"
-        tools:background="@color/orange_200">
+        tools:background="@color/orange_50">
 
         <ImageView
             android:id="@+id/iv_sticker"
