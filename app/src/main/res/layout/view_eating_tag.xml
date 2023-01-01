@@ -16,9 +16,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_border_radius_4"
         android:backgroundTint="@{context.getColor(eatingType.tagBackgroundColor)}"
-        android:paddingVertical="@dimen/spacingMicro"
+        android:paddingVertical="@dimen/spacing4"
         android:paddingStart="6dp"
-        android:paddingEnd="@dimen/spacingMicro"
+        android:paddingEnd="@dimen/spacing4"
         tools:backgroundTint="@color/orange_100">
 
         <ImageView
