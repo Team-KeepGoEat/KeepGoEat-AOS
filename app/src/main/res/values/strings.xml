@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
+
+    <string name="eating_type_less">덜 먹기</string>
+    <string name="eating_type_more">더 먹기</string>
 </resources>
