@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.KakaoLoginActivity">
+        tools:context=".presentation.kakaologin.KakaoLoginActivity">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_kakao_login"

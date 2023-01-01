@@ -1,28 +1,19 @@
-package org.keepgoeat.presentation
+package org.keepgoeat.data.service
 
 import android.content.ContentValues
-import android.content.Intent
-import android.os.Bundle
+import android.content.Context
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import org.keepgoeat.R
-import org.keepgoeat.databinding.ActivityKakaoLoginBinding
-import org.keepgoeat.util.binding.BindingActivity
+import dagger.hilt.android.qualifiers.ActivityContext
 import timber.log.Timber
+import javax.inject.Inject
 
-class KakaoLoginActivity : BindingActivity<ActivityKakaoLoginBinding>(R.layout.activity_kakao_login){
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-            KakaoSdk.init(this, this.getString(R.string.kakao_app_key))
-            binding.btnKakaoLogin.setOnClickListener {
-                loginKakao() //로그인
-            }
-    }
-
-    private fun loginKakao() {
+class LoginService @Inject constructor(
+    @ActivityContext private val context: Context,
+) {
+    fun loginKakao(){
         // 카카오계정으로 로그인 공통 callback 구성
         // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -31,14 +22,13 @@ class KakaoLoginActivity : BindingActivity<ActivityKakaoLoginBinding>(R.layout.a
             } else if (token != null) {
                 UserApiClient.instance.me { user, error ->
                     Timber.i(ContentValues.TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
-                    moveMain()
                 }
             }
         }
 
         // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
-            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
+            UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
                 if (error != null) {
                     Timber.e(ContentValues.TAG, "카카오톡으로 로그인 실패", error)
                     // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
@@ -48,20 +38,13 @@ class KakaoLoginActivity : BindingActivity<ActivityKakaoLoginBinding>(R.layout.a
                     }
 
                     // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
-                    UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
+                    UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
                 } else if (token != null) {
                     Timber.i(ContentValues.TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
-                    moveMain()
                 }
             }
         } else {
-            UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
+            UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
         }
-    }
-
-    private fun moveMain(){
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-        finish()
     }
 }
