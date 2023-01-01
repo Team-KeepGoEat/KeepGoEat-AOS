@@ -19,12 +19,15 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         val eatingType = EatingType.MORE // TODO intent로 argument 전달받기
         viewModel.setEatingType(eatingType)
+        viewModel.fetchGoalDetailInfo()
         adapter = GoalStickerListAdapter(eatingType, CELL_COUNT)
 
         initLayout()
+        addListeners()
         addObservers()
     }
 
@@ -36,7 +39,9 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
     }
 
     private fun addListeners() {
-        TODO("Not yet implemented")
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun addObservers() {

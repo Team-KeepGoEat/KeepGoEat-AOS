@@ -14,6 +14,7 @@ enum class EatingType(
     @DrawableRes val tagIconRes: Int,
     @ColorRes val tagTextColor: Int,
     @ColorRes val tagBackgroundColor: Int,
+    @ColorRes val thisMonthTextColor: Int,
     @ColorInt val cardBackgroundColor: Int,
 ) {
     LESS(
@@ -23,6 +24,7 @@ enum class EatingType(
         R.drawable.ic_eating_less_tag_minus,
         R.color.green_600,
         R.color.green_200,
+        R.color.green_700,
         Color.parseColor("#EAFBF4"),
     ),
     MORE(
@@ -32,6 +34,7 @@ enum class EatingType(
         R.drawable.ic_eating_more_tag_plus,
         R.color.orange_600,
         R.color.orange_100,
+        R.color.orange_600,
         Color.parseColor("#FFF0EB"),
     )
 }
