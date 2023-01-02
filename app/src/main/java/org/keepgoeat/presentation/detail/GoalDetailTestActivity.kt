@@ -29,7 +29,7 @@ class GoalDetailTestActivity : BindingActivity<ActivityGoalDetailTestBinding>(R.
     }
 
     private fun moveToGoalDetail(eatingType: EatingType) {
-        Intent(this, GoalSettingActivity::class.java).apply {
+        Intent(this, GoalDetailActivity::class.java).apply {
             putExtra(ARG_EATING_TYPE, eatingType.name)
         }.also {
             startActivity(it)
