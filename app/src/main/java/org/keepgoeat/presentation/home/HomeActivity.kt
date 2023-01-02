@@ -40,5 +40,23 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private var mockGoalList = listOf<MyGoalInfo>(
+        MyGoalInfo(
+            "하루 1끼 이상 야채 더 먹기",
+            "8",
+            true,
+            true
+        ),
+        MyGoalInfo(
+            "라면 덜 먹기",
+            "8",
+            false,
+            true
+        ),
+        MyGoalInfo(
+            "커피 덜 먹기",
+            "30",
+            false,
+            false
+        )
     )
 }

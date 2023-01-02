@@ -131,21 +131,50 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_no_goal_1" />
 
-                    <com.google.android.material.button.MaterialButton
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/btn_no_goal"
-                        style="@style/Widget.Material.Button.Basic"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginBottom="44dp"
-                        android:drawableLeft="@drawable/ic_plus"
-                        android:text="@string/home_make_goal"
-                        android:textAppearance="@style/TextAppearance.System4_Bold"
-                        android:textColor="@color/gray_50"
-                        app:backgroundTint="@color/orange_600"
+                        android:background="@drawable/shape_border_radius_8"
+                        android:backgroundTint="@color/orange_600"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+                            <ImageView
+                                android:id="@+id/img_home_btn_plus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_plus"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+                            <TextView
+                                android:id="@+id/tv_home_btn_goal_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_make_goal"
+                                android:textAppearance="@style/TextAppearance.System4_Bold"
+                                android:textColor="@color/gray_50"
+                                android:layout_marginVertical="14dp"
+                                android:layout_marginStart="@dimen/spacing4"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/img_home_btn_plus"
+                                app:layout_constraintTop_toTopOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
