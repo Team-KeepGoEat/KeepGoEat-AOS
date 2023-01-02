@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
-
+    <string name="keep_go_eat">킵고잇</string>
     <!-- Global -->
     <string name="complete">완료</string>
     <string name="eating_type_less">덜 먹기</string>
