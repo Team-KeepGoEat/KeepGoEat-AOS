@@ -89,7 +89,10 @@
             app:layout_constraintEnd_toStartOf="@id/tv_eating_type"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="@id/tv_eating_type"
-            tools:hint="@string/goal_setting_title_hint_for_more" />
+            tools:hint="@string/goal_setting_title_hint_for_more">
+
+            <requestFocus />
+        </EditText>
 
         <TextView
             android:id="@+id/tv_eating_type"
