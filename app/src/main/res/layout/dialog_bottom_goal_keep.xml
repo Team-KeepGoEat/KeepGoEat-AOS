@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.detail.GoalDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".presentation.keep.GoalKeepBottomDialogFragment">
+
+        <TextView
+            android:id="@+id/tv_goal_keep_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/goal_keep_dialog_guide"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_600"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_snail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@{context.getDrawable(viewModel.eatingType.snailCheerInKeepRes)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_keep_guide"
+            tools:src="@drawable/ic_snail_orange_cheer_left" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_keep"
+            style="@style/Widget.FullButton.Basic"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/spacing16"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@{context.getColor(viewModel.eatingType.buttonBackgroundColor)}"
+            android:text="목표 보관하기"
+            android:textColor="@{context.getColor(viewModel.eatingType.buttonTextColor)}"
+            app:layout_constraintTop_toBottomOf="@id/iv_snail"
+            app:rippleColor="@{context.getColor(viewModel.eatingType.buttonRippleColor)}"
+            tools:backgroundTint="@color/orange_600" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="30dp"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/goal_keep_delete_guide"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.System6"
+            android:textColor="@color/gray_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_keep" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -6,6 +6,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalDetailBinding
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
+import org.keepgoeat.presentation.keep.GoalKeepBottomDialogFragment
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.RecyclerLayoutType
 import org.keepgoeat.util.ItemDecorationUtil
@@ -46,12 +47,19 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         binding.ivBack.setOnClickListener {
             finish()
         }
+        binding.ivKeep.setOnClickListener {
+            showGoalKeepDialog()
+        }
     }
 
     private fun addObservers() {
         viewModel.goalStickers.observe(this) { stickers ->
             adapter.submitList(stickers)
         }
+    }
+
+    private fun showGoalKeepDialog() {
+        GoalKeepBottomDialogFragment().show(supportFragmentManager, "goalKeepDialog")
     }
 
     companion object {

@@ -1,15 +1,19 @@
 <resources>
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
-
+    <string name="keep_go_eat">킵고잇</string>
+    <!-- Global -->
+    <string name="complete">완료</string>
     <string name="eating_type_less">덜 먹기</string>
     <string name="eating_type_more">더 먹기</string>
+
+    <!-- Goal Detail -->
     <string name="goal_detail_my_goal">나의 목표</string>
     <string name="goal_detail_title">%s %s</string>
     <string name="goal_detail_num_of_days_eaten_last_month">지난달 먹은 날</string>
     <string name="goal_detail_num_of_days_eaten_this_month">이번달 먹은 날</string>
 
-    //Home Activity
+    <!-- Home View -->
     <string name="home_today_goal">오늘 식습관 목표</string>
 
     <string name="goal_more">더 먹기</string>
@@ -33,4 +37,18 @@
     <string name="home_make_goal">목표 추가하기</string>
 
     <string name="cheer_msg">나 김더팽, 멋진 달팽...✨\n내가 세상을 지배한다...!!</string>
+
+    <!-- Goal Keep -->
+    <string name="goal_keep_dialog_guide">목표 달성이 끝났나요?\n달성 완료된 목표는 보관해서 모아볼 수 있어요.</string>
+    <string name="goal_keep_delete_guide">잘못된 목표인가요? 삭제하기</string>
+
+    <!-- Goal Setting -->
+    <string name="goal_setting">목표 설정</string>
+    <string name="goal_setting_title">나의 목표를 입력해볼까요?</string>
+    <string name="goal_setting_title_hint_for_more">ex) 하루 1끼 이상 야채</string>
+    <string name="goal_setting_title_hint_for_less">ex) 라면</string>
+    <string name="goal_setting_title_length_guide">목표는 최소 1글자 이상 입력해주세요.</string>
+    <string name="goal_setting_title_language_guide">한글, 영문, 숫자만 입력 가능합니다.</string>
+    <string name="goal_setting_title_length_limit">(%d/20)</string>
+
 </resources>
