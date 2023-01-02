@@ -28,6 +28,10 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
     }
 
     private fun addListeners() {
+        binding.root.setOnClickListener {
+            showKeyboard(it, false)
+            binding.etGoal.clearFocus()
+        }
         binding.ivBack.setOnClickListener {
             finish()
         }
