@@ -133,7 +133,7 @@
             android:id="@+id/btn_complete"
             style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
-            android:layout_marginBottom="52dp"
+            android:layout_marginBottom="42dp"
             android:backgroundTint="@color/selector_complete_button_color"
             android:enabled="@{viewModel.isValidTitle}"
             android:text="@string/complete"
