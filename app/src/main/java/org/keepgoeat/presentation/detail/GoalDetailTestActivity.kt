@@ -6,7 +6,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalDetailTestBinding
 import org.keepgoeat.presentation.detail.GoalDetailActivity.Companion.ARG_EATING_TYPE
-import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
 
