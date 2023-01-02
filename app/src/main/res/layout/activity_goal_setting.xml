@@ -131,17 +131,13 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_complete"
-            style="@style/Widget.Material.Button.Basic"
+            style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
-            android:layout_height="48dp"
             android:layout_marginBottom="52dp"
             android:backgroundTint="@color/selector_complete_button_color"
             android:enabled="@{viewModel.isValidTitle}"
-            android:fontFamily="@font/pretendard_b"
             android:text="@string/complete"
             android:textColor="@color/selector_complete_button_text_color"
-            android:textSize="16dp"
-            app:cornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start" />

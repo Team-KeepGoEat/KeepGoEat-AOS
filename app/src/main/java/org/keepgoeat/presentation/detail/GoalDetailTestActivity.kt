@@ -6,7 +6,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalDetailTestBinding
 import org.keepgoeat.presentation.detail.GoalDetailActivity.Companion.ARG_EATING_TYPE
-import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
 
@@ -29,7 +28,7 @@ class GoalDetailTestActivity : BindingActivity<ActivityGoalDetailTestBinding>(R.
     }
 
     private fun moveToGoalDetail(eatingType: EatingType) {
-        Intent(this, GoalSettingActivity::class.java).apply {
+        Intent(this, GoalDetailActivity::class.java).apply {
             putExtra(ARG_EATING_TYPE, eatingType.name)
         }.also {
             startActivity(it)
