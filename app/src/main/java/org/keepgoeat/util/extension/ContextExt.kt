@@ -11,7 +11,7 @@ fun Context.showToast(message: String, isShort: Boolean = true) {
     Toast.makeText(this, message, duration).show()
 }
 
-fun Context.showKeyboard(view: View, toShow: Boolean) {
+fun Context.showKeyboard(view: View, toShow: Boolean = true) {
     (getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).run {
         if (toShow) showSoftInput(view, 0)
         else hideSoftInputFromWindow(view.windowToken, 0)
