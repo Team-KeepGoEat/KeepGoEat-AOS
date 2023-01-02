@@ -26,10 +26,10 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         binding.layoutGoalInfo.setVisibility(mockGoalList.isNotEmpty())
         when (mockGoalList.size) {
             0 -> {}
-            1 -> binding.tvAddMoreGoal.text = getString(R.string.two_more_goal)
-            2 -> binding.tvAddMoreGoal.text = getString(R.string.one_more_goal)
+            1 -> binding.tvAddMoreGoal.text = getString(R.string.home_two_more_goal)
+            2 -> binding.tvAddMoreGoal.text = getString(R.string.home_one_more_goal)
             3 -> {
-                binding.tvAddMoreGoal.text = getString(R.string.no_more_goal)
+                binding.tvAddMoreGoal.text = getString(R.string.home_no_more_goal)
                 binding.btnMakeGoal.setVisibility(false)
             }
         }

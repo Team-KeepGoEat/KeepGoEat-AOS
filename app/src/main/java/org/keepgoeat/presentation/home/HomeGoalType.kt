@@ -20,7 +20,7 @@ enum class HomeGoalType(
         R.drawable.ic_tag_plus,
         Color.parseColor("#FF774B"),
         Color.parseColor("#FF774B"),
-        R.string.goal_more_btn
+        R.string.home_goal_more_btn
     ),
     LESS(
         R.string.goal_less,
@@ -28,6 +28,6 @@ enum class HomeGoalType(
         R.drawable.ic_tag_minus,
         Color.parseColor("#2ECFA8"),
         Color.parseColor("#73E5B5"),
-        R.string.goal_less_btn
+        R.string.home_goal_less_btn
     )
 }
