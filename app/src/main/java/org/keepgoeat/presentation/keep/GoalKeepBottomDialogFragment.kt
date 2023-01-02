@@ -1,17 +1,17 @@
-package org.keepgoeat.presentation.storage
+package org.keepgoeat.presentation.keep
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
-import org.keepgoeat.databinding.DialogBottomGoalStorageBinding
+import org.keepgoeat.databinding.DialogBottomGoalKeepBinding
 import org.keepgoeat.presentation.detail.GoalDetailViewModel
 import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
 @AndroidEntryPoint
-class GoalStorageBottomDialogFragment :
-    BindingBottomSheetDialogFragment<DialogBottomGoalStorageBinding>(R.layout.dialog_bottom_goal_storage) {
+class GoalKeepBottomDialogFragment :
+    BindingBottomSheetDialogFragment<DialogBottomGoalKeepBinding>(R.layout.dialog_bottom_goal_keep) {
     private val viewModel: GoalDetailViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class GoalStorageBottomDialogFragment :
     }
 
     private fun addListeners() {
-        binding.btnStorage.setOnClickListener {
+        binding.btnKeep.setOnClickListener {
             // TODO 화면 전환 처리 구현
             viewModel.keepGoal()
         }

@@ -12,7 +12,7 @@ enum class EatingType(
     @DrawableRes val snailStickerRes: Int,
     @DrawableRes val defaultStickerRes: Int,
     @DrawableRes val tagIconRes: Int,
-    @DrawableRes val snailCheerInStorageRes: Int,
+    @DrawableRes val snailCheerInKeepRes: Int,
     @ColorRes val tagTextColor: Int,
     @ColorRes val tagBackgroundColor: Int,
     @ColorRes val thisMonthTextColor: Int,

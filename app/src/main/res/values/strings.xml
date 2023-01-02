@@ -13,9 +13,9 @@
     <string name="goal_detail_num_of_days_eaten_last_month">지난달 먹은 날</string>
     <string name="goal_detail_num_of_days_eaten_this_month">이번달 먹은 날</string>
 
-    <!-- Goal Storage -->
-    <string name="goal_storage_dialog_guide">목표 달성이 끝났나요?\n달성 완료된 목표는 보관해서 모아볼 수 있어요.</string>
-    <string name="goal_storage_delete_guide">잘못된 목표인가요? 삭제하기</string>
+    <!-- Goal Keep -->
+    <string name="goal_keep_dialog_guide">목표 달성이 끝났나요?\n달성 완료된 목표는 보관해서 모아볼 수 있어요.</string>
+    <string name="goal_keep_delete_guide">잘못된 목표인가요? 삭제하기</string>
 
     <!-- Goal Setting -->
     <string name="goal_setting">목표 설정</string>

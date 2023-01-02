@@ -13,15 +13,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".presentation.storage.GoalStorageBottomDialogFragment">
+        tools:context=".presentation.keep.GoalKeepBottomDialogFragment">
 
         <TextView
-            android:id="@+id/tv_storage_guide"
+            android:id="@+id/tv_goal_keep_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:lineSpacingExtra="4dp"
-            android:text="@string/goal_storage_dialog_guide"
+            android:text="@string/goal_keep_dialog_guide"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_600"
@@ -34,14 +34,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:src="@{context.getDrawable(viewModel.eatingType.snailCheerInStorageRes)}"
+            android:src="@{context.getDrawable(viewModel.eatingType.snailCheerInKeepRes)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_storage_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_keep_guide"
             tools:src="@drawable/ic_snail_orange_cheer_left" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_storage"
+            android:id="@+id/btn_keep"
             style="@style/Widget.Material.Button.Basic"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
@@ -64,14 +64,14 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="30dp"
             android:lineSpacingExtra="4dp"
-            android:text="@string/goal_storage_delete_guide"
+            android:text="@string/goal_keep_delete_guide"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.System6"
             android:textColor="@color/gray_500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_storage" />
+            app:layout_constraintTop_toBottomOf="@id/btn_keep" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
