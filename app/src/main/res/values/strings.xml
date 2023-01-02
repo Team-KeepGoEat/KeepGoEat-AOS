@@ -16,7 +16,9 @@
     <string name="goal_less">덜 먹기</string>
 
     <string name="home_goal_more_btn">오늘도 잘 먹었나요?</string>
+    <string name="home_goal_more_achieved">오늘도 해냈어요!</string>
     <string name="home_goal_less_btn">오늘도 잘 참았나요?</string>
+    <string name="home_goal_less_achieved">오늘도 참았어요!</string>
 
     <string name="home_goal_string">일 해냈어요.</string>
 

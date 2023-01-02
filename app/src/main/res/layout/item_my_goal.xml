@@ -12,6 +12,10 @@
         <variable
             name="goalType"
             type="org.keepgoeat.presentation.home.HomeGoalType" />
+
+        <variable
+            name="goalBtn"
+            type="org.keepgoeat.presentation.home.HomeBtnType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +34,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/shape_goal_tag"
-            android:backgroundTint="@color/orange_100"
+            android:backgroundTint="@{context.getColor(goalType.tagColorRes)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -55,7 +59,7 @@
                 android:layout_marginEnd="4dp"
                 android:text="@{goalType.goalTypeRes}"
                 android:textAppearance="@style/TextAppearance.System6_Bold"
-                android:textColor="@color/orange_600"
+                android:textColor="@{context.getColor(goalType.tagTextColorRes)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_goal_tag"
@@ -90,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{goal.goalDate}"
                 android:textAppearance="@style/TextAppearance.System1_Bold"
-                android:textColor="@color/orange_600"
+                android:textColor="@{context.getColor(goalType.tagTextColorRes)}"
                 android:textSize="36dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -112,28 +116,56 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_goal"
-            style="@style/Widget.Material.Button.Basic"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:drawableLeft="@drawable/ic_check"
-            android:paddingVertical="8dp"
-            android:text="@{goalType.btnTextRes}"
-            android:textAppearance="@style/TextAppearance.System5_Bold"
-            android:textColor="@color/gray_50"
-            app:backgroundColor="@color/orange_600"
-            app:cornerRadius="10dp"
-            app:iconGravity="textStart"
+            android:layout_marginVertical="@dimen/spacing16"
+            android:background="@drawable/shape_border_radius_8"
+            android:backgroundTint="@{context.getColor(goalBtn.btnColorInt)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_item_goal_date"
-            tools:backgroundTint="@color/orange_600"
-            tools:text="버튼" />
+            tools:backgroundTint="@color/orange_600">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_btn_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@{context.getDrawable(goalBtn.btnDrawableRes)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@drawable/ic_check" />
+
+                <TextView
+                    android:id="@+id/tv_btn_goal_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="14dp"
+                    android:layout_marginStart="@dimen/spacing4"
+                    android:text="@{goalBtn.btnStringRes}"
+                    android:textAppearance="@style/TextAppearance.System5_Bold"
+                    android:textColor="@{context.getColor(goalBtn.btnTextColorInt)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/img_btn_check"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="오늘도 잘 먹었나요?"
+                    tools:textColor="@color/gray_50" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
