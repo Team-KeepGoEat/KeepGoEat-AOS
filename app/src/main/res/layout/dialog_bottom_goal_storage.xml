@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".presentation.storage.GoalStorageBottomDialogFragment">
+
+        <TextView
+            android:id="@+id/tv_storage_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/goal_storage_dialog_guide"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_600"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_snail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_storage_guide"
+            tools:src="@drawable/ic_snail_orange_cheer" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_storage"
+            style="@style/Widget.Material.Button.Basic"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginHorizontal="@dimen/spacing16"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/pretendard_b"
+            android:text="목표 보관하기"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            app:cornerRadius="8dp"
+            app:layout_constraintTop_toBottomOf="@id/iv_snail"
+            tools:backgroundTint="@color/orange_600" />
+
+        <TextView
+            android:id="@+id/tv_delete_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="30dp"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/goal_storage_delete_guide"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.System6"
+            android:textColor="@color/gray_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_storage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
