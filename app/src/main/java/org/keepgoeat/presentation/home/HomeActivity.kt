@@ -26,7 +26,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             rvMyGoals.setVisibility(mockGoalList.isNotEmpty())
         }
 
-        //맨 밑에 목표 추가하는 레이아웃 제외한 목표의 개수가 0일때
+        // 맨 밑에 목표 추가하는 레이아웃 제외한 목표의 개수가 0일때
         if (mockGoalList.size - 1 == 0) {
             binding.imgHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
         }

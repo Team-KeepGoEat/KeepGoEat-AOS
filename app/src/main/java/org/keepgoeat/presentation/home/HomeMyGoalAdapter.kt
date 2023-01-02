@@ -21,13 +21,13 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
         fun bind(myGoal: MyGoalInfo, goalType: HomeGoalType) {
-            val btnType: HomeBtnType = if (goalType == HomeGoalType.MORE) {//더 먹기인 경우
+            val btnType: HomeBtnType = if (goalType == HomeGoalType.MORE) { // 더 먹기인 경우
                 if (myGoal.goalAchieved) {
                     HomeBtnType.PLUS_ACHIEVED
                 } else {
                     HomeBtnType.PLUS_NOT_ACHIEVED
                 }
-            } else {//덜 먹기인 경우
+            } else { // 덜 먹기인 경우
                 if (myGoal.goalAchieved) {
                     HomeBtnType.MINUS_ACHIEVED
                 } else {
@@ -55,7 +55,6 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
                 }
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -97,7 +96,6 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
     override fun getItemViewType(position: Int): Int {
         return currentList[position].type
     }
-
 }
 
 object MyGoalDiffCallback : DiffUtil.ItemCallback<MyGoalInfo>() {
