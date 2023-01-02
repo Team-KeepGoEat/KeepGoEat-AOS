@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -17,7 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:background="@drawable/shape_goal_list">
+        android:background="@drawable/shape_goal_list"
+        android:elevation="4dp"
+        android:backgroundTint="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_goal_tag"
@@ -36,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="2dp"
                 android:layout_marginLeft="4dp"
-                android:src="@drawable/ic_tag_plus"
+                android:src="@{context.getDrawable(goalType.tagDrawableRes)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -51,6 +54,7 @@
                 android:text="@{goalType.goalTypeRes}"
                 android:textAppearance="@style/TextAppearance.System6_Bold"
                 android:textColor="@color/orange_600"
+                tools:text="더 먹기"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_goal_tag"
@@ -66,6 +70,7 @@
             android:text="@{goal.goalName}"
             android:textAppearance="@style/TextAppearance.System4_Bold"
             android:textColor="@color/gray_700"
+            tools:text="물 더 먹기"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_goal_tag" />
 
@@ -83,8 +88,9 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.System1_Bold"
                 android:textColor="@color/orange_600"
-                android:textSize="36sp"
+                android:textSize="36dp"
                 android:text="@{goal.goalDate}"
+                tools:text="8"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,10 +119,13 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:drawableLeft="@drawable/ic_check"
+            app:iconGravity="textStart"
             android:paddingVertical="8dp"
             android:textAppearance="@style/TextAppearance.System5_Bold"
             android:textColor="@color/gray_50"
             android:text="@{goalType.btnTextRes}"
+            tools:backgroundTint="@color/orange_600"
+            tools:text="버튼"
             app:backgroundColor="@color/orange_600"
             app:cornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
