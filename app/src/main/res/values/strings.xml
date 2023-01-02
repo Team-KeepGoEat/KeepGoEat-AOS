@@ -2,6 +2,13 @@
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
 
+    <string name="eating_type_less">덜 먹기</string>
+    <string name="eating_type_more">더 먹기</string>
+    <string name="goal_detail_my_goal">나의 목표</string>
+    <string name="goal_detail_title">%s %s</string>
+    <string name="goal_detail_num_of_days_eaten_last_month">지난달 먹은 날</string>
+    <string name="goal_detail_num_of_days_eaten_this_month">이번달 먹은 날</string>
+
     //Home Activity
     <string name="home_today_goal">오늘 식습관 목표</string>
 
