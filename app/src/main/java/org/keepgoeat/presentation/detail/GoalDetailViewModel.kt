@@ -38,6 +38,14 @@ class GoalDetailViewModel @Inject constructor() : ViewModel() {
         _numOfDaysEatenThisMonth.value = 8
     }
 
+    fun keepGoal() {
+        // TODO api 연동 필요
+    }
+
+    fun deleteGoal() {
+        // TODO api 연동 필요
+    }
+
     fun setEatingType(eatingType: EatingType) {
         _eatingType.value = eatingType
     }
