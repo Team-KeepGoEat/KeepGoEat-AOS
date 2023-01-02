@@ -1,7 +1,5 @@
 package org.keepgoeat.presentation.home
 
-import android.graphics.Color
-import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
