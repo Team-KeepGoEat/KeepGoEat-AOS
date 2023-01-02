@@ -1,12 +1,12 @@
 package org.keepgoeat.presentation.home.adapter
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.databinding.ItemMyGoalBinding
+import org.keepgoeat.presentation.home.HomeBtnType
 import org.keepgoeat.presentation.home.HomeGoalType
 import org.keepgoeat.presentation.home.MyGoalInfo
 
@@ -16,14 +16,24 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, HomeMyGoalAdapter.MyGoalViewHo
     class MyGoalViewHolder(
         private val binding: ItemMyGoalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        var layout = binding
         fun bind(myGoal: MyGoalInfo, goalType: HomeGoalType) {
             binding.goal = myGoal
             binding.goalType = goalType
-            binding.imgGoalTag.setImageResource(goalType.tagDrawableRes)
-            binding.layoutGoalTag.backgroundTintList = ColorStateList.valueOf(goalType.tagColorRes)
-            binding.tvGoalName.setTextColor(goalType.textColorRes)
-            binding.tvItemGoalDate.setTextColor(goalType.textColorRes)
-            binding.btnGoal.setBackgroundColor(goalType.btnColorRes)
+            val btnType: HomeBtnType = if (goalType == HomeGoalType.MORE) {//더 먹기인 경우
+                if (myGoal.goalAchieved) {
+                    HomeBtnType.PLUS_ACHIEVED
+                } else {
+                    HomeBtnType.PLUS_NOT_ACHIEVED
+                }
+            } else {//덜 먹기인 경우
+                if (myGoal.goalAchieved) {
+                    HomeBtnType.MINUS_ACHIEVED
+                } else {
+                    HomeBtnType.MINUS_NOT_ACHIEVED
+                }
+            }
+            binding.goalBtn = btnType
         }
     }
 
@@ -38,6 +48,11 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, HomeMyGoalAdapter.MyGoalViewHo
             holder.bind(currentList[position], HomeGoalType.MORE)
         } else {
             holder.bind(currentList[position], HomeGoalType.LESS)
+        }
+
+        holder.layout.btnGoal.setOnClickListener {
+            currentList[position].goalAchieved = !currentList[position].goalAchieved
+            notifyItemChanged(position)
         }
     }
 }
