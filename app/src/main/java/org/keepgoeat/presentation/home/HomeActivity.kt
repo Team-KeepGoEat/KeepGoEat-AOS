@@ -20,10 +20,12 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     private fun initLayout() {
         goalAdapter = HomeMyGoalAdapter()
         goalAdapter.submitList(mockGoalList)
-        binding.rvMyGoals.adapter = goalAdapter
-        binding.layoutNoGoal.setVisibility(mockGoalList.isEmpty())
-        binding.rvMyGoals.setVisibility(mockGoalList.isNotEmpty())
-        binding.layoutGoalInfo.setVisibility(mockGoalList.isNotEmpty())
+        with(binding) {
+            rvMyGoals.adapter = goalAdapter
+            layoutNoGoal.setVisibility(mockGoalList.isEmpty())
+            rvMyGoals.setVisibility(mockGoalList.isNotEmpty())
+            layoutGoalInfo.setVisibility(mockGoalList.isNotEmpty())
+        }
         when (mockGoalList.size) {
             0 -> {}
             1 -> binding.tvAddMoreGoal.text = getString(R.string.home_two_more_goal)

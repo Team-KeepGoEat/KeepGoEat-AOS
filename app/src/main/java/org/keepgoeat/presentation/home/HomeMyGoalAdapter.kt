@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.databinding.ItemMyGoalBinding
-import org.keepgoeat.presentation.home.HomeBtnType
-import org.keepgoeat.presentation.home.HomeGoalType
+import org.keepgoeat.presentation.type.HomeBtnType
+import org.keepgoeat.presentation.type.HomeGoalType
 import org.keepgoeat.presentation.home.MyGoalInfo
 
 class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, HomeMyGoalAdapter.MyGoalViewHolder>(

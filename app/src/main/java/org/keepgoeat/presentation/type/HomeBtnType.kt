@@ -1,4 +1,4 @@
-package org.keepgoeat.presentation.home
+package org.keepgoeat.presentation.type
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes

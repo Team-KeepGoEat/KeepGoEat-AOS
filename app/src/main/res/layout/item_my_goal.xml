@@ -11,11 +11,11 @@
 
         <variable
             name="goalType"
-            type="org.keepgoeat.presentation.home.HomeGoalType" />
+            type="org.keepgoeat.presentation.type.HomeGoalType" />
 
         <variable
             name="goalBtn"
-            type="org.keepgoeat.presentation.home.HomeBtnType" />
+            type="org.keepgoeat.presentation.type.HomeBtnType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
