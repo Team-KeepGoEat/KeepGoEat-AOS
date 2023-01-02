@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="goal"
             type="org.keepgoeat.presentation.home.MyGoalInfo" />
@@ -19,14 +20,14 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:background="@drawable/shape_goal_list"
-        android:elevation="4dp"
-        android:backgroundTint="@color/white">
+        android:backgroundTint="@color/white"
+        android:elevation="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_goal_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/shape_goal_tag"
             android:backgroundTint="@color/orange_100"
@@ -38,47 +39,48 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="2dp"
-                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
                 android:src="@{context.getDrawable(goalType.tagDrawableRes)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_tag_plus" />
 
             <TextView
                 android:id="@+id/tv_goal_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="4dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="4dp"
                 android:text="@{goalType.goalTypeRes}"
                 android:textAppearance="@style/TextAppearance.System6_Bold"
                 android:textColor="@color/orange_600"
-                tools:text="더 먹기"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_goal_tag"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="더 먹기" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tv_item_goal_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:text="@{goal.goalName}"
             android:textAppearance="@style/TextAppearance.System4_Bold"
             android:textColor="@color/gray_700"
-            tools:text="물 더 먹기"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_goal_tag" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_goal_tag"
+            tools:text="물 더 먹기" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_item_goal_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_item_goal_name">
 
@@ -86,19 +88,19 @@
                 android:id="@+id/tv_item_goal_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{goal.goalDate}"
                 android:textAppearance="@style/TextAppearance.System1_Bold"
                 android:textColor="@color/orange_600"
                 android:textSize="36dp"
-                android:text="@{goal.goalDate}"
-                tools:text="8"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="8" />
 
             <TextView
                 android:id="@+id/tv_item_date_string"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:text="@string/first_goal_string"
@@ -119,19 +121,19 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:drawableLeft="@drawable/ic_check"
-            app:iconGravity="textStart"
             android:paddingVertical="8dp"
+            android:text="@{goalType.btnTextRes}"
             android:textAppearance="@style/TextAppearance.System5_Bold"
             android:textColor="@color/gray_50"
-            android:text="@{goalType.btnTextRes}"
-            tools:backgroundTint="@color/orange_600"
-            tools:text="버튼"
             app:backgroundColor="@color/orange_600"
             app:cornerRadius="10dp"
+            app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_item_goal_date" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_item_goal_date"
+            tools:backgroundTint="@color/orange_600"
+            tools:text="버튼" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
