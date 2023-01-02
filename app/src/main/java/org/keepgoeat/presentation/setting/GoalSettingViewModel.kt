@@ -24,6 +24,6 @@ class GoalSettingViewModel @Inject constructor() : ViewModel() {
     }
 
     companion object {
-        private const val TITLE_PATTERN = "^[A-Za-zㄱ-ㅎ가-힣0-9]*\$"
+        private const val TITLE_PATTERN = "^[A-Za-zㄱ-ㅎ가-힣0-9\\s]*\$"
     }
 }
