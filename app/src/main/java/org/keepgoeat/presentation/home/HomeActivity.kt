@@ -24,18 +24,11 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             rvMyGoals.adapter = goalAdapter
             layoutNoGoal.setVisibility(mockGoalList.isEmpty())
             rvMyGoals.setVisibility(mockGoalList.isNotEmpty())
-            layoutGoalInfo.setVisibility(mockGoalList.isNotEmpty())
         }
-        when (mockGoalList.size) {
-            0 -> {
-                binding.imgHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
-            }
-            1 -> binding.tvAddMoreGoal.text = getString(R.string.home_two_more_goal)
-            2 -> binding.tvAddMoreGoal.text = getString(R.string.home_one_more_goal)
-            3 -> {
-                binding.tvAddMoreGoal.text = getString(R.string.home_no_more_goal)
-                binding.btnMakeGoal.setVisibility(false)
-            }
+
+        //맨 밑에 목표 추가하는 레이아웃 제외한 목표의 개수가 0일때
+        if (mockGoalList.size - 1 == 0) {
+            binding.imgHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
         }
     }
 
@@ -44,19 +37,29 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             "하루 1끼 이상 야채 더 먹기",
             "8",
             true,
-            true
+            true,
+            MyGoalInfo.MY_GOAL_TYPE
         ),
         MyGoalInfo(
             "라면 덜 먹기",
             "8",
             false,
-            true
+            true,
+            MyGoalInfo.MY_GOAL_TYPE
         ),
         MyGoalInfo(
             "커피 덜 먹기",
             "30",
             false,
-            false
+            false,
+            MyGoalInfo.MY_GOAL_TYPE
+        ),
+        MyGoalInfo(
+            "",
+            "",
+            false,
+            false,
+            MyGoalInfo.ADD_GOAL_TYPE
         )
     )
 }

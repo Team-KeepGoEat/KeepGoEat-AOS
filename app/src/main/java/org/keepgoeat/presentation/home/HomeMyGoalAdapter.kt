@@ -5,12 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import org.keepgoeat.R
+import org.keepgoeat.databinding.ItemAddGoalBinding
 import org.keepgoeat.databinding.ItemMyGoalBinding
+import org.keepgoeat.presentation.home.MyGoalInfo
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalType
-import org.keepgoeat.presentation.home.MyGoalInfo
+import org.keepgoeat.util.setVisibility
 
-class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, HomeMyGoalAdapter.MyGoalViewHolder>(
+class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
     MyGoalDiffCallback
 ) {
     class MyGoalViewHolder(
@@ -18,8 +21,6 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, HomeMyGoalAdapter.MyGoalViewHo
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
         fun bind(myGoal: MyGoalInfo, goalType: HomeGoalType) {
-            binding.goal = myGoal
-            binding.goalType = goalType
             val btnType: HomeBtnType = if (goalType == HomeGoalType.MORE) {//더 먹기인 경우
                 if (myGoal.goalAchieved) {
                     HomeBtnType.PLUS_ACHIEVED
@@ -33,28 +34,70 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, HomeMyGoalAdapter.MyGoalViewHo
                     HomeBtnType.MINUS_NOT_ACHIEVED
                 }
             }
+            binding.goal = myGoal
+            binding.goalType = goalType
             binding.goalBtn = btnType
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyGoalViewHolder {
-        val binding =
-            ItemMyGoalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyGoalViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MyGoalViewHolder, position: Int) {
-        if (currentList[position].moreGoal) {
-            holder.bind(currentList[position], HomeGoalType.MORE)
-        } else {
-            holder.bind(currentList[position], HomeGoalType.LESS)
+    class AddGoalViewHolder(
+        private val binding: ItemAddGoalBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        var layout = binding
+        fun bind(goalCount: Int) {
+            when (goalCount) {
+                0 -> {}
+                1 -> binding.tvAddMoreGoal.setText(R.string.home_two_more_goal)
+                2 -> binding.tvAddMoreGoal.setText(R.string.home_one_more_goal)
+                3 -> {
+                    binding.tvAddMoreGoal.setText(R.string.home_no_more_goal)
+                    binding.btnMakeGoal.setVisibility(false)
+                }
+            }
         }
 
-        holder.layout.btnGoal.setOnClickListener {
-            currentList[position].goalAchieved = !currentList[position].goalAchieved
-            notifyItemChanged(position)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            MyGoalInfo.MY_GOAL_TYPE -> {
+                val binding =
+                    ItemMyGoalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                MyGoalViewHolder(binding)
+            }
+            MyGoalInfo.ADD_GOAL_TYPE -> {
+                val binding = ItemAddGoalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                AddGoalViewHolder(binding)
+            }
+            else -> {
+                throw java.lang.ClassCastException("Unknown ViewType Error")
+            }
         }
     }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (currentList[position].type) {
+            MyGoalInfo.MY_GOAL_TYPE -> {
+                if (currentList[position].moreGoal) {
+                    (holder as MyGoalViewHolder).bind(currentList[position], HomeGoalType.MORE)
+                } else {
+                    (holder as MyGoalViewHolder).bind(currentList[position], HomeGoalType.LESS)
+                }
+                holder.layout.btnGoal.setOnClickListener {
+                    currentList[position].goalAchieved = !currentList[position].goalAchieved
+                    notifyItemChanged(position)
+                }
+            }
+            MyGoalInfo.ADD_GOAL_TYPE -> {
+                (holder as AddGoalViewHolder).bind(currentList.size - 1)
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return currentList[position].type
+    }
+
 }
 
 object MyGoalDiffCallback : DiffUtil.ItemCallback<MyGoalInfo>() {
