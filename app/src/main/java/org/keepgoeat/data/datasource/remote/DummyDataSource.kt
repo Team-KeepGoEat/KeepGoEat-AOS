@@ -10,8 +10,10 @@ class DummyDataSource @Inject constructor(
 ) {
     suspend fun uploadDummy(signInRequest: RequestData): ResponseResult {
         //        dummyService.uploadDummy(signInRequest) // TODO api 요청하기
-        return ResponseResult(1,
+        return ResponseResult(
+            1,
             "success",
-            ResponseResult.ResponseData(1, "keepgoeat", "keepgoeat@gmamil.com"))
+            ResponseResult.ResponseData(1, "keepgoeat", "keepgoeat@gmamil.com")
+        )
     }
 }

@@ -36,9 +36,9 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Decode google-services.json
-          env:
-            FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
-          run: echo $FIREBASE_SECRET > app/google-services.json
+        env:
+          FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+        run: echo $FIREBASE_SECRET > app/google-services.json
         
       - name: Touch local properties
         run: touch local.properties
@@ -47,7 +47,7 @@ jobs:
         run: ./gradlew ktlintCheck
 
       - name: Build with Gradle
-          run: ./gradlew build
+        run: ./gradlew build
 
       - name: On Success!! Congratulations
         if: ${{ success() }}
