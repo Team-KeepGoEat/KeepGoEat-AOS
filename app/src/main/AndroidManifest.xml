@@ -27,7 +27,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.detail.GoalDetailTestActivity"
+            android:name=".presentation.onboarding.OnBoardingActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -44,5 +44,4 @@
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
     </application>
-
 </manifest>
