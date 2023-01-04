@@ -12,7 +12,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.System3_Bold"
-            android:textSize="18dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_onboarding_des"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +24,6 @@
             android:layout_marginBottom="59dp"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.System5"
-            android:textSize="14dp"
             app:layout_constraintBottom_toTopOf="@+id/iv_onboarding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +36,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/img_onboarding_1" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

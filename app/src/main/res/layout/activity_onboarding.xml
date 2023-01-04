@@ -40,7 +40,6 @@
                 android:text="@string/onboarding_skip"
                 android:textAppearance="@style/TextAppearance.System5"
                 android:textColor="@color/gray_400"
-                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -48,10 +47,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
+            android:id="@+id/vp_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/spacing16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -68,7 +67,6 @@
             android:paddingVertical="@dimen/spacing12"
             android:text="@string/onboarding1_button"
             android:textColor="@color/gray_50"
-            android:textSize="16dp"
             app:cornerRadius="@dimen/spacing8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
