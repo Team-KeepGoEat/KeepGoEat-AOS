@@ -10,15 +10,15 @@ import org.keepgoeat.presentation.dummy.DummyActivity
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
-class SplashActivity: BindingActivity<ActivitySplashBinding>(R.layout.activity_splash) {
+class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadSplashScreen()
     }
 
-    private fun loadSplashScreen(){
+    private fun loadSplashScreen() {
         Handler().postDelayed({
-            val intent = Intent(this,DummyActivity::class.java)
+            val intent = Intent(this, DummyActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)
