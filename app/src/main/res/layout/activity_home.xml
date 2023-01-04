@@ -17,17 +17,17 @@
         tools:context=".presentation.home.HomeActivity">
 
         <ImageView
-            android:id="@+id/img_home_snail"
+            android:id="@+id/iv_home_snail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="31dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_my_page"
+            app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
             app:srcCompat="@drawable/img_snail_orange_cheer" />
 
         <ImageView
-            android:id="@+id/img_my_page"
+            android:id="@+id/iv_my_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -44,8 +44,8 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/background_cheer_msg"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_home_snail"
-            app:layout_constraintTop_toBottomOf="@+id/img_my_page">
+            app:layout_constraintStart_toEndOf="@+id/iv_home_snail"
+            app:layout_constraintTop_toBottomOf="@+id/iv_my_page">
 
             <TextView
                 android:id="@+id/tv_cheer_msg"
@@ -99,7 +99,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_today_goal">
 
                     <ImageView
-                        android:id="@+id/img_gray_plate"
+                        android:id="@+id/iv_gray_plate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
@@ -118,7 +118,7 @@
                         android:textColor="@color/gray_700"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img_gray_plate" />
+                        app:layout_constraintTop_toBottomOf="@+id/iv_gray_plate" />
 
                     <TextView
                         android:id="@+id/tv_no_goal_2"
@@ -154,7 +154,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:id="@+id/img_home_btn_plus"
+                                android:id="@+id/iv_home_btn_plus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/ic_plus"
@@ -172,7 +172,7 @@
                                 android:textAppearance="@style/TextAppearance.System4_Bold"
                                 android:textColor="@color/gray_50"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/img_home_btn_plus"
+                                app:layout_constraintStart_toEndOf="@+id/iv_home_btn_plus"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
