@@ -2,7 +2,6 @@ package org.keepgoeat.presentation.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
@@ -11,6 +10,7 @@ import org.keepgoeat.databinding.ItemMyGoalBinding
 import org.keepgoeat.presentation.home.MyGoalInfo
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalType
+import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.ItemDiffCallback
 import org.keepgoeat.util.setVisibility
 
@@ -21,6 +21,8 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
         onItemsTheSame = { old, new -> old.goalName == new.goalName }
     )
 ) {
+    private lateinit var inflater: LayoutInflater
+
     class MyGoalViewHolder(
         private val binding: ItemMyGoalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -63,15 +65,14 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (!::inflater.isInitialized)
+            inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            MyGoalInfo.MY_GOAL_TYPE -> {
-                val binding =
-                    ItemMyGoalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                MyGoalViewHolder(binding)
+            HomeGoalViewType.MY_GOAL_TYPE.goalType -> {
+                MyGoalViewHolder(ItemMyGoalBinding.inflate(inflater, parent, false))
             }
-            MyGoalInfo.ADD_GOAL_TYPE -> {
-                val binding = ItemAddGoalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                AddGoalViewHolder(binding)
+            HomeGoalViewType.ADD_GOAL_TYPE.goalType -> {
+                AddGoalViewHolder(ItemAddGoalBinding.inflate(inflater, parent, false))
             }
             else -> {
                 throw java.lang.ClassCastException("Unknown ViewType Error")
@@ -80,25 +81,21 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (currentList[position].type) {
-            MyGoalInfo.MY_GOAL_TYPE -> {
+        when (holder) {
+            is MyGoalViewHolder -> {
                 if (currentList[position].moreGoal) {
-                    (holder as MyGoalViewHolder).bind(currentList[position], HomeGoalType.MORE)
+                    holder.bind(currentList[position], HomeGoalType.MORE)
                 } else {
-                    (holder as MyGoalViewHolder).bind(currentList[position], HomeGoalType.LESS)
+                    holder.bind(currentList[position], HomeGoalType.LESS)
                 }
                 holder.layout.btnGoal.setOnClickListener {
                     currentList[position].goalAchieved = !currentList[position].goalAchieved
                     notifyItemChanged(position)
                 }
             }
-            MyGoalInfo.ADD_GOAL_TYPE -> {
-                (holder as AddGoalViewHolder).bind(currentList.size - 1)
-            }
+            is AddGoalViewHolder -> holder.bind(currentList.size - 1)
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return currentList[position].type
-    }
+    override fun getItemViewType(position: Int): Int = currentList[position].type.goalType
 }

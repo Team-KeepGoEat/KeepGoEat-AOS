@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.presentation.home.adapter.HomeMyGoalAdapter
+import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.setVisibility
 
@@ -38,28 +39,28 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             "8",
             true,
             true,
-            MyGoalInfo.MY_GOAL_TYPE
+            HomeGoalViewType.MY_GOAL_TYPE
         ),
         MyGoalInfo(
             "라면 덜 먹기",
             "8",
             false,
             true,
-            MyGoalInfo.MY_GOAL_TYPE
+            HomeGoalViewType.MY_GOAL_TYPE
         ),
         MyGoalInfo(
             "커피 덜 먹기",
             "30",
             false,
             false,
-            MyGoalInfo.MY_GOAL_TYPE
+            HomeGoalViewType.MY_GOAL_TYPE
         ),
         MyGoalInfo(
             "",
             "",
             false,
             false,
-            MyGoalInfo.ADD_GOAL_TYPE
+            HomeGoalViewType.ADD_GOAL_TYPE
         )
     )
 }
