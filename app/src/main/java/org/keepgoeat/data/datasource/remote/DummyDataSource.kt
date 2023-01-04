@@ -10,7 +10,6 @@ import javax.inject.Inject
 class DummyDataSource @Inject constructor(
     private val dummyService: DummyService,
 ) {
-    suspend fun uploadDummy(signInRequest: RequestData): ApiResult<ResponseListResult?> {
-        return safeApiCall { dummyService.uploadDummy(signInRequest) }
-    }
+    suspend fun uploadDummy(signInRequest: RequestData): ApiResult<ResponseListResult?> =
+        safeApiCall { dummyService.uploadDummy(signInRequest) }
 }
