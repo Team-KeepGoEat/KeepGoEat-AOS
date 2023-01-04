@@ -9,9 +9,9 @@ import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.setVisibility
 
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
-
     private val viewModel by viewModels<HomeViewModel>()
     private lateinit var goalAdapter: HomeMyGoalAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initLayout()
