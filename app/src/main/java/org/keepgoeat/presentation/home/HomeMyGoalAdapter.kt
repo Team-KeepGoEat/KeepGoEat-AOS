@@ -11,10 +11,15 @@ import org.keepgoeat.databinding.ItemMyGoalBinding
 import org.keepgoeat.presentation.home.MyGoalInfo
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalType
+import org.keepgoeat.util.ItemDiffCallback
 import org.keepgoeat.util.setVisibility
 
 class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
-    MyGoalDiffCallback
+    ItemDiffCallback<MyGoalInfo>(
+        onContentsTheSame = { old, new -> old == new },
+        // TODO Response에서 받아올 때는 목표별 고유 아이디 값으로 바꾸기
+        onItemsTheSame = { old, new -> old.goalName == new.goalName }
+    )
 ) {
     class MyGoalViewHolder(
         private val binding: ItemMyGoalBinding
@@ -95,15 +100,5 @@ class HomeMyGoalAdapter : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
 
     override fun getItemViewType(position: Int): Int {
         return currentList[position].type
-    }
-}
-
-object MyGoalDiffCallback : DiffUtil.ItemCallback<MyGoalInfo>() {
-    override fun areItemsTheSame(oldItem: MyGoalInfo, newItem: MyGoalInfo): Boolean {
-        return oldItem.goalName == newItem.goalName
-    }
-
-    override fun areContentsTheSame(oldItem: MyGoalInfo, newItem: MyGoalInfo): Boolean {
-        return oldItem == newItem
     }
 }
