@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityDummyBinding
+import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
@@ -26,6 +27,13 @@ class DummyActivity : BindingActivity<ActivityDummyBinding>(R.layout.activity_du
     }
 
     private fun addObservers() {
-        TODO("Not yet implemented")
+        viewModel.dummyList.observe(this) { result ->
+            when (result) {
+                is UiState.Success -> {}
+                is UiState.Loading -> {}
+                is UiState.Empty -> {}
+                else -> {}
+            }
+        }
     }
 }
