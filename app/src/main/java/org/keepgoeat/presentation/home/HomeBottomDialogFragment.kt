@@ -6,8 +6,7 @@ import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomHomeBinding
 import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
-class HomeBottomDialogFragment
-    : BindingBottomSheetDialogFragment<DialogBottomHomeBinding>(R.layout.dialog_bottom_home) {
+class HomeBottomDialogFragment : BindingBottomSheetDialogFragment<DialogBottomHomeBinding>(R.layout.dialog_bottom_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -15,11 +14,7 @@ class HomeBottomDialogFragment
     }
 
     private fun addListeners() {
-        binding.layoutHomeBottomMore.setOnClickListener {
-
-        }
-        binding.layoutHomeBottomLess.setOnClickListener {
-
-        }
+        binding.layoutHomeBottomMore.setOnClickListener {}
+        binding.layoutHomeBottomLess.setOnClickListener {}
     }
 }

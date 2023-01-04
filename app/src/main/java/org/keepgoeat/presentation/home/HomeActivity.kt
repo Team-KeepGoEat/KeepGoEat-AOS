@@ -19,7 +19,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         initLayout()
         addListeners()
         addObservers()
-
     }
 
     private fun addListeners() {
