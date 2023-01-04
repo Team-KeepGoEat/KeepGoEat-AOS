@@ -10,7 +10,7 @@
 
         <variable
             name="goalType"
-            type="org.keepgoeat.presentation.type.HomeGoalType" />
+            type="org.keepgoeat.presentation.type.EatingType" />
 
         <variable
             name="goalBtn"
@@ -33,7 +33,7 @@
             android:layout_marginStart="@dimen/spacing16"
             android:layout_marginTop="@dimen/spacing16"
             android:background="@drawable/background_goal_tag"
-            android:backgroundTint="@{context.getColor(goalType.tagColorRes)}"
+            android:backgroundTint="@{context.getColor(goalType.tagBackgroundColor)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="2dp"
                 android:layout_marginStart="@dimen/spacing4"
-                android:src="@{context.getDrawable(goalType.tagDrawableRes)}"
+                android:src="@{context.getDrawable(goalType.defaultStickerRes)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -56,9 +56,9 @@
                 android:layout_marginVertical="@dimen/spacing4"
                 android:layout_marginStart="6dp"
                 android:layout_marginEnd="@dimen/spacing4"
-                android:text="@{goalType.goalTypeRes}"
+                android:text="@{goalType.strRes}"
                 android:textAppearance="@style/TextAppearance.System6_Bold"
-                android:textColor="@{context.getColor(goalType.tagTextColorRes)}"
+                android:textColor="@{context.getColor(goalType.tagTextColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_goal_tag"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{goal.goalDate}"
                 android:textAppearance="@style/TextAppearance.System1_Bold"
-                android:textColor="@{context.getColor(goalType.tagTextColorRes)}"
+                android:textColor="@{context.getColor(goalType.tagTextColor)}"
                 android:textSize="36dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
