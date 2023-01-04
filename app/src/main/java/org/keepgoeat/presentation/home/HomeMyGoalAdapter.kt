@@ -40,11 +40,7 @@ class HomeMyGoalAdapter(
 
     class HomeTextHolder(
         private val binding: ItemHomeTextBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-
-        }
-    }
+    ) : RecyclerView.ViewHolder(binding.root)
 
     class MyGoalViewHolder(
         private val binding: ItemMyGoalBinding

@@ -17,7 +17,8 @@ class HomeViewModel : ViewModel() {
         val position = goalList.value?.indexOf(myGoal) ?: return
         with(myGoal) {
             _goalList.value?.set(
-                position, MyGoalInfo(
+                position,
+                MyGoalInfo(
                     goalName, goalDate, moreGoal, !goalAchieved, type
                 )
             )

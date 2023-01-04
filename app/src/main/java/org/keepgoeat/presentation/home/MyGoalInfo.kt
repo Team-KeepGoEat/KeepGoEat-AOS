@@ -10,5 +10,4 @@ data class MyGoalInfo(
     val moreGoal: Boolean,
     var goalAchieved: Boolean,
     var type: HomeGoalViewType
-) {
-}
+)
