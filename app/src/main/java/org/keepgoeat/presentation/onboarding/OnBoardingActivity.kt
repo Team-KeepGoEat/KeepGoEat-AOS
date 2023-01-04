@@ -40,22 +40,23 @@ class OnBoardingActivity : BindingActivity<ActivityOnboardingBinding>(R.layout.a
 
     private fun initLayout() {
         val adapter = OnBoardingAdapter(this)
-        val viewPager = binding.viewPager
-        viewPager.isUserInputEnabled = false
-        viewPager.adapter = adapter
-        adapter.setOnBoardingList(mockOnboardingList)
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                viewModel.setPosition(position)
-            }
-        })
-        TabLayoutMediator(binding.indicator, viewPager) { tab, position -> }.attach()
+        with(binding) {
+            vpViewPager.isUserInputEnabled = false
+            vpViewPager.adapter = adapter
+            adapter.setOnBoardingList(mockOnboardingList)
+            vpViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    viewModel?.setPosition(position)
+                }
+            })
+            TabLayoutMediator(binding.indicator, vpViewPager) { tab, position -> }.attach()
+        }
     }
 
     private fun addListeners() {
         binding.btnNext.setOnClickListener {
-            binding.viewPager.currentItem++
+            binding.vpViewPager.currentItem++
         }
     }
 }

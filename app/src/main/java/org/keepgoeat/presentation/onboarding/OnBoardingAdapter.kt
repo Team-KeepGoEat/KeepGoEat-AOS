@@ -20,13 +20,15 @@ class OnBoardingAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = ItemOnboardingBinding.inflate(inflater, parent, false)
-        return OnBoardingViewHolder(binding)
+        return OnBoardingViewHolder(ItemOnboardingBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val currentItem = onBoardingList[position]
-        (holder as OnBoardingViewHolder).bind(currentItem)
+        when (holder) {
+            is OnBoardingViewHolder -> {
+                holder.bind(onBoardingList[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int = onBoardingList.size
