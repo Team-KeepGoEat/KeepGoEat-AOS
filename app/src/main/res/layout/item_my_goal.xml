@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="goal"
+            type="org.keepgoeat.presentation.home.MyGoalInfo" />
+
+        <variable
+            name="goalType"
+            type="org.keepgoeat.presentation.type.EatingType" />
+
+        <variable
+            name="goalBtn"
+            type="org.keepgoeat.presentation.type.HomeBtnType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing16"
+        android:layout_marginVertical="@dimen/spacing8"
+        android:background="@drawable/background_goal_list"
+        android:backgroundTint="@color/white"
+        android:elevation="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_goal_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing16"
+            android:background="@drawable/background_goal_tag"
+            android:backgroundTint="@{context.getColor(goalType.tagBackgroundColor)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_goal_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="2dp"
+                android:layout_marginStart="@dimen/spacing4"
+                android:src="@{context.getDrawable(goalType.defaultStickerRes)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_tag_plus" />
+
+            <TextView
+                android:id="@+id/tv_goal_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing4"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="@dimen/spacing4"
+                android:text="@{goalType.strRes}"
+                android:textAppearance="@style/TextAppearance.System6_Bold"
+                android:textColor="@{context.getColor(goalType.tagTextColor)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_goal_tag"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="더 먹기" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_item_goal_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing12"
+            android:text="@{goal.goalName}"
+            android:textAppearance="@style/TextAppearance.System4_Bold"
+            android:textColor="@color/gray_700"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_goal_tag"
+            tools:text="물 더 먹기" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_item_goal_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_goal_name">
+
+            <TextView
+                android:id="@+id/tv_item_goal_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{goal.goalDate}"
+                android:textAppearance="@style/TextAppearance.System1_Bold"
+                android:textColor="@{context.getColor(goalType.tagTextColor)}"
+                android:textSize="36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="8" />
+
+            <TextView
+                android:id="@+id/tv_item_date_string"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing8"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/home_goal_string"
+                android:textAppearance="@style/TextAppearance.System3_Bold"
+                android:textColor="@color/gray_700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_item_goal_date"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_goal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/spacing16"
+            android:layout_marginVertical="@dimen/spacing16"
+            android:background="@drawable/shape_border_radius_8"
+            android:backgroundTint="@{context.getColor(goalBtn.btnColorInt)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_item_goal_date"
+            tools:backgroundTint="@color/orange_600">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_btn_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@{context.getDrawable(goalBtn.btnDrawableRes)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@drawable/ic_check" />
+
+                <TextView
+                    android:id="@+id/tv_btn_goal_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="14dp"
+                    android:layout_marginStart="@dimen/spacing4"
+                    android:text="@{goalBtn.btnStringRes}"
+                    android:textAppearance="@style/TextAppearance.System5_Bold"
+                    android:textColor="@{context.getColor(goalBtn.btnTextColorInt)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_btn_check"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="오늘도 잘 먹었나요?"
+                    tools:textColor="@color/gray_50" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
