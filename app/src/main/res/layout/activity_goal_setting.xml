@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="org.keepgoeat.R" />
+
+        <import type="org.keepgoeat.presentation.type.EatingType" />
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.setting.GoalSettingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.setting.GoalSettingActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_toolbar"
+            style="@style/Widget.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goal_setting"
+                android:textAppearance="@style/TextAppearance.System4_Bold"
+                android:textColor="@color/gray_700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacingBase" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacingBase" />
+
+        <TextView
+            android:id="@+id/tv_goal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing24"
+            android:text="@string/goal_setting_title"
+            android:textAppearance="@style/TextAppearance.System2_Bold"
+            android:textColor="@color/gray_700"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
+
+        <EditText
+            android:id="@+id/et_goal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing16"
+            android:background="@drawable/selector_edittext_background"
+            android:hint="@{context.getString(viewModel.eatingType == EatingType.MORE ? R.string.goal_setting_title_hint_for_more : R.string.goal_setting_title_hint_for_less)}"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:text="@={viewModel.goalTitle}"
+            android:textAppearance="@style/TextAppearance.System4_Bold"
+            android:textColor="@color/gray_700"
+            android:textColorHint="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="@id/tv_eating_type"
+            app:layout_constraintEnd_toStartOf="@id/tv_eating_type"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toTopOf="@id/tv_eating_type"
+            tools:hint="@string/goal_setting_title_hint_for_more">
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/tv_eating_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:text="@{viewModel.eatingType.strRes}"
+            android:textAppearance="@style/TextAppearance.System4_Bold"
+            android:textColor="@color/gray_700"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_title"
+            tools:text="@string/eating_type_more" />
+
+        <TextView
+            android:id="@+id/tv_goal_length_limit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing8"
+            android:text="@{@string/goal_setting_title_length_limit(viewModel.goalTitle.length())}"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_400"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/et_goal"
+            tools:text="(0/20)" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing12"
+            android:text="@{viewModel.goalTitle.length() == 0 || viewModel.goalTitle.blank ? context.getString(R.string.goal_setting_title_length_guide) : viewModel.isValidTitle == false ? context.getString(R.string.goal_setting_title_language_guide) : ``}"
+            android:textAppearance="@style/TextAppearance.System6"
+            android:textColor="@color/orange_400"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_length_limit"
+            tools:text="@string/goal_setting_title_length_guide" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_complete"
+            style="@style/Widget.FullButton.Basic"
+            android:layout_width="0dp"
+            android:layout_marginBottom="42dp"
+            android:backgroundTint="@color/selector_complete_button_color"
+            android:enabled="@{viewModel.isValidTitle}"
+            android:text="@string/complete"
+            android:textColor="@color/selector_complete_button_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
