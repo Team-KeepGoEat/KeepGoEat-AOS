@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="goal"
             type="org.keepgoeat.presentation.home.MyGoalInfo" />
@@ -163,7 +162,6 @@
                     tools:text="오늘도 잘 먹었나요?"
                     tools:textColor="@color/gray_50" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

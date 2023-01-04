@@ -13,193 +13,110 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_700"
         tools:context=".presentation.home.HomeActivity">
 
-        <ImageView
-            android:id="@+id/iv_home_snail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing16"
-            android:layout_marginTop="31dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
-            app:srcCompat="@drawable/img_snail_orange_cheer" />
-
-        <ImageView
-            android:id="@+id/iv_my_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing12"
-            android:layout_marginEnd="@dimen/spacing16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_mypage" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing4"
-            android:layout_marginTop="31dp"
-            android:layout_marginEnd="@dimen/spacing16"
-            android:background="@drawable/background_cheer_msg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_home_snail"
-            app:layout_constraintTop_toBottomOf="@+id/iv_my_page">
-
-            <TextView
-                android:id="@+id/tv_cheer_msg"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing12"
-                android:text="@string/cheer_msg"
-                android:textAppearance="@style/TextAppearance.System4_Bold"
-                android:textColor="@color/gray_700"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nsv_home_bottom"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_my_goals"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="240dp"
-            android:background="@drawable/background_home_bottom"
-            android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
 
-                <TextView
-                    android:id="@+id/tv_today_goal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing16"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/home_today_goal"
-                    android:textAppearance="@style/TextAppearance.System2_Bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_no_goal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_my_goals"
+            app:visibility="@{viewModel.goalList.size() == 2}">
+
+            <ImageView
+                android:id="@+id/iv_gray_plate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/img_plate_gray_view" />
+
+            <TextView
+                android:id="@+id/tv_no_goal_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing8"
+                android:text="@string/home_txt_no_goal_1"
+                android:textAppearance="@style/TextAppearance.System3_Bold"
+                android:textColor="@color/gray_700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_gray_plate" />
+
+            <TextView
+                android:id="@+id/tv_no_goal_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing12"
+                android:text="@string/home_txt_no_goal_2"
+                android:textAppearance="@style/TextAppearance.System4"
+                android:textColor="@color/gray_600"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_no_goal_1" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_no_goal"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="@dimen/spacing16"
+                android:layout_marginBottom="44dp"
+                android:background="@drawable/shape_border_radius_8"
+                android:backgroundTint="@color/orange_600"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_no_goal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_today_goal">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/iv_gray_plate"
+                        android:id="@+id/iv_home_btn_plus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/img_plate_gray_view" />
-
-                    <TextView
-                        android:id="@+id/tv_no_goal_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing8"
-                        android:text="@string/home_txt_no_goal_1"
-                        android:textAppearance="@style/TextAppearance.System3_Bold"
-                        android:textColor="@color/gray_700"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/iv_gray_plate" />
-
-                    <TextView
-                        android:id="@+id/tv_no_goal_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing12"
-                        android:text="@string/home_txt_no_goal_2"
-                        android:textAppearance="@style/TextAppearance.System4"
-                        android:textColor="@color/gray_600"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_no_goal_1" />
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/btn_no_goal"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginHorizontal="@dimen/spacing16"
-                        android:layout_marginBottom="44dp"
-                        android:background="@drawable/shape_border_radius_8"
-                        android:backgroundTint="@color/orange_600"
+                        android:src="@drawable/ic_plus"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/iv_home_btn_plus"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_plus"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/tv_home_btn_goal_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="14dp"
-                                android:layout_marginStart="@dimen/spacing4"
-                                android:text="@string/home_make_goal"
-                                android:textAppearance="@style/TextAppearance.System4_Bold"
-                                android:textColor="@color/gray_50"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/iv_home_btn_plus"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    <TextView
+                        android:id="@+id/tv_home_btn_goal_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="14dp"
+                        android:layout_marginStart="@dimen/spacing4"
+                        android:text="@string/home_make_goal"
+                        android:textAppearance="@style/TextAppearance.System4_Bold"
+                        android:textColor="@color/gray_50"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_home_btn_plus"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_my_goals"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/spacing8"
-                    android:orientation="vertical"
-                    android:visibility="visible"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_today_goal"
-                    app:layout_constraintVertical_bias="1.0" />
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

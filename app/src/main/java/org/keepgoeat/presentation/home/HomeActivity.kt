@@ -5,62 +5,33 @@ import androidx.activity.viewModels
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.presentation.home.adapter.HomeMyGoalAdapter
-import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.binding.BindingActivity
-import org.keepgoeat.util.setVisibility
 
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var goalAdapter: HomeMyGoalAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         initLayout()
+        addObservers()
     }
 
     private fun initLayout() {
-        goalAdapter = HomeMyGoalAdapter()
-        goalAdapter.submitList(mockGoalList)
-        with(binding) {
-            rvMyGoals.adapter = goalAdapter
-            layoutNoGoal.setVisibility(mockGoalList.isEmpty())
-            rvMyGoals.setVisibility(mockGoalList.isNotEmpty())
-        }
+        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor)
+        binding.rvMyGoals.adapter = goalAdapter
+    }
 
-        // 맨 밑에 목표 추가하는 레이아웃 제외한 목표의 개수가 0일때
-        if (mockGoalList.size - 1 == 0) {
-            binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
+    private fun addObservers() {
+        viewModel.goalList.observe(this) { goalList ->
+            goalAdapter.submitList(goalList.toMutableList())
         }
     }
 
-    private var mockGoalList = listOf<MyGoalInfo>(
-        MyGoalInfo(
-            "하루 1끼 이상 야채 더 먹기",
-            "8",
-            true,
-            true,
-            HomeGoalViewType.MY_GOAL_TYPE
-        ),
-        MyGoalInfo(
-            "라면 덜 먹기",
-            "8",
-            false,
-            true,
-            HomeGoalViewType.MY_GOAL_TYPE
-        ),
-        MyGoalInfo(
-            "커피 덜 먹기",
-            "30",
-            false,
-            false,
-            HomeGoalViewType.MY_GOAL_TYPE
-        ),
-        MyGoalInfo(
-            "",
-            "",
-            false,
-            false,
-            HomeGoalViewType.ADD_GOAL_TYPE
-        )
-    )
+    private fun changeGoalItemBtnColor(myGoal: MyGoalInfo) {
+        viewModel.changeGoalAchieved(myGoal)
+    }
 }

@@ -12,13 +12,13 @@ enum class HomeGoalType(
     @ColorRes val tagTextColorRes: Int
 ) {
     MORE(
-        R.string.goal_more,
+        R.string.eating_type_more,
         R.color.orange_100,
         R.drawable.ic_tag_plus,
         R.color.orange_600
     ),
     LESS(
-        R.string.goal_less,
+        R.string.eating_type_less,
         R.color.green_200,
         R.drawable.ic_tag_minus,
         R.color.green_600
