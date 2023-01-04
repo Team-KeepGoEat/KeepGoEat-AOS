@@ -17,7 +17,15 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         binding.lifecycleOwner = this
 
         initLayout()
+        addListeners()
         addObservers()
+
+    }
+
+    private fun addListeners() {
+        binding.btnNoGoal.setOnClickListener {
+            showMakeGoalDialog()
+        }
     }
 
     private fun initLayout() {
@@ -29,6 +37,10 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         viewModel.goalList.observe(this) { goalList ->
             goalAdapter.submitList(goalList.toMutableList())
         }
+    }
+
+    private fun showMakeGoalDialog() {
+        HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
     }
 
     private fun changeGoalItemBtnColor(myGoal: MyGoalInfo) {
