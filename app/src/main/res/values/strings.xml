@@ -27,14 +27,15 @@
     <string name="goal_setting_title_length_limit">(%d/20)</string>
 
     <!-- On Boarding -->
-    <string name="onboarding1_des_title">차근차근 식습관 목표를 세워보세요.</string>
-    <string name="onboarding2_dest_body">건강한 식습관의 필요성을 느끼셨나요?\n이제는 조금씩 더 먹고, 덜 먹으며 균형을 맞춰요.</string>
+    <string name="onboarding1_title">차근차근 식습관 목표를 세워보세요.</string>
+    <string name="onboarding1_des">건강한 식습관의 필요성을 느끼셨나요?\n이제는 조금씩 더 먹고, 덜 먹으며 균형을 맞춰요.</string>
     <string name="onboarding1_button">조금 더 설명해주세요!</string>
-    <string name="onboarding2_des_title">우리는 같이 해낼 거예요.</string>
-    <string name="onboarding2_des_body">목표를 달성한 날이면 킵고잇을 찾아와\n달성 버튼을 눌러주세요.</string>
+    <string name="onboarding2_title">우리는 같이 해낼 거예요.</string>
+    <string name="onboarding2_des">목표를 달성한 날이면 킵고잇을 찾아와\n달성 버튼을 눌러주세요.</string>
     <string name="onboarding2_button">매일 기록에 실패하면 어쩌죠?</string>
-    <string name="onboarding3_des_title">완벽하지 않아도 괜찮아요.</string>
-    <string name="onboarding3_des_body">노력한 날들은 빈틈없이 채워질 거예요.\n성취의 즐거움과 뿌듯함이 오롯이 남아요.</string>
+    <string name="onboarding3_title">완벽하지 않아도 괜찮아요.</string>
+    <string name="onboarding3_des">노력한 날들은 빈틈없이 채워질 거예요.\n성취의 즐거움과 뿌듯함이 오롯이 남아요.</string>
     <string name="onboarding3_button">KEEP GO EAT 시작하기</string>
+    <string name="onboarding_skip">건너뛰기</string>
 
 </resources>
