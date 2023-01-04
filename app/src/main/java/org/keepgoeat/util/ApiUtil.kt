@@ -16,3 +16,6 @@ suspend inline fun <T> safeApiCall(crossinline apiCall: suspend () -> Response<T
         }
     }
 }
+
+fun <T> List<T>.toUiState() =
+    if (this.isEmpty()) UiState.Empty else UiState.Success(this)
