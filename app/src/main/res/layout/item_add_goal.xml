@@ -7,8 +7,7 @@
     android:layout_marginHorizontal="@dimen/spacing16"
     android:layout_marginTop="@dimen/spacing8"
     android:layout_marginBottom="44dp"
-    android:background="@drawable/background_goal_info"
-    android:visibility="visible">
+    android:background="@drawable/background_goal_info">
 
     <TextView
         android:id="@+id/tv_more_goal"
@@ -46,8 +45,5 @@
         app:backgroundTint="@color/gray_400"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </com.google.android.material.button.MaterialButton>
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
