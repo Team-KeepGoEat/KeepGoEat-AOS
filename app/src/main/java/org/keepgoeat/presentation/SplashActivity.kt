@@ -2,8 +2,10 @@ package org.keepgoeat.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivitySplashBinding
 import org.keepgoeat.presentation.dummy.DummyActivity
@@ -17,10 +19,13 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun loadSplashScreen() {
-        Handler().postDelayed({
-            val intent = Intent(this, DummyActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 3000)
+        lifecycleScope.launch {
+            delay(2000)
+            moveToNext()
+        }
+    }
+
+    private fun moveToNext() {
+        startActivity(Intent(this, DummyActivity::class.java))
     }
 }

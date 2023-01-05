@@ -13,17 +13,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing16"
-            android:layout_marginBottom="17dp"
+            android:layout_marginTop="84dp"
             android:src="@drawable/img_logo"
-            app:layout_constraintBottom_toTopOf="@+id/iv_snails"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_snails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="64dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
             android:src="@drawable/img_snail_splash"
             app:layout_constraintBottom_toBottomOf="parent" />
 
