@@ -7,17 +7,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ItemAddGoalBinding
+import org.keepgoeat.databinding.ItemHomeGoalBinding
 import org.keepgoeat.databinding.ItemHomeHeaderBinding
-import org.keepgoeat.databinding.ItemMyGoalBinding
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.ItemDiffCallback
 import org.keepgoeat.util.setVisibility
-import timber.log.Timber
 
 class HomeMyGoalAdapter(
-    private val changeBtnColor: (MyGoalInfo) -> Unit
+    private val changeBtnColor: (MyGoalInfo) -> Unit,
+    private val changeActivity: (EatingType) -> Unit
 ) : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
     ItemDiffCallback<MyGoalInfo>(
         onContentsTheSame = { old, new -> old == new },
@@ -37,11 +37,11 @@ class HomeMyGoalAdapter(
     }
 
     class MyGoalViewHolder(
-        private val binding: ItemMyGoalBinding
+        private val binding: ItemHomeGoalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
-        fun bind(myGoal: MyGoalInfo, goalType: EatingType, changeBtnColor: (MyGoalInfo) -> Unit) {
-            val btnType: HomeBtnType = if (goalType == EatingType.MORE) { // 더 먹기인 경우
+        fun bind(myGoal: MyGoalInfo, eatingType: EatingType, changeBtnColor: (MyGoalInfo) -> Unit, changeActivity: (EatingType) -> Unit) {
+            val btnType: HomeBtnType = if (eatingType == EatingType.MORE) { // 더 먹기인 경우
                 if (myGoal.goalAchieved) {
                     HomeBtnType.PLUS_ACHIEVED
                 } else {
@@ -54,13 +54,17 @@ class HomeMyGoalAdapter(
                     HomeBtnType.MINUS_NOT_ACHIEVED
                 }
             }
-            Timber.d(btnType.toString())
             binding.goal = myGoal
-            binding.goalType = goalType
+            binding.goalType = eatingType
             binding.goalBtn = btnType
 
-            binding.btnGoal.setOnClickListener {
-                changeBtnColor(myGoal)
+            with(binding) {
+                btnGoal.setOnClickListener {
+                    changeBtnColor(myGoal)
+                }
+                layoutHomeGoal.setOnClickListener {
+                    changeActivity(eatingType)
+                }
             }
         }
     }
@@ -87,7 +91,7 @@ class HomeMyGoalAdapter(
             inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             HomeGoalViewType.MY_GOAL_TYPE.goalType -> {
-                MyGoalViewHolder(ItemMyGoalBinding.inflate(inflater, parent, false))
+                MyGoalViewHolder(ItemHomeGoalBinding.inflate(inflater, parent, false))
             }
             HomeGoalViewType.ADD_GOAL_TYPE.goalType -> {
                 AddGoalViewHolder(ItemAddGoalBinding.inflate(inflater, parent, false))
@@ -105,9 +109,9 @@ class HomeMyGoalAdapter(
         when (holder) {
             is MyGoalViewHolder -> {
                 if (currentList[position].moreGoal) {
-                    holder.bind(currentList[position], EatingType.MORE, changeBtnColor)
+                    holder.bind(currentList[position], EatingType.MORE, changeBtnColor, changeActivity)
                 } else {
-                    holder.bind(currentList[position], EatingType.LESS, changeBtnColor)
+                    holder.bind(currentList[position], EatingType.LESS, changeBtnColor, changeActivity)
                 }
             }
             // TODO 서버통신 데이터클래스로 변경하면 size 정보 받아온걸로 바꾸기
