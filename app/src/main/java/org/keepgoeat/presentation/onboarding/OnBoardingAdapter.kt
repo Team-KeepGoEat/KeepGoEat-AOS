@@ -5,14 +5,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.databinding.ItemOnboardingBinding
+import org.keepgoeat.presentation.type.OnBoardingViewType
 
 class OnBoardingAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
-    private var onBoardingList: List<OnBoardingItem> = emptyList()
+    private var onBoardingList = OnBoardingViewType.values()
+
+    init {
+        notifyDataSetChanged()
+    }
 
     class OnBoardingViewHolder(private val binding: ItemOnboardingBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(onboarding: OnBoardingItem) {
+        fun bind(onboarding: OnBoardingViewType) {
             binding.item = onboarding
         }
     }
@@ -30,9 +35,4 @@ class OnBoardingAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vi
     }
 
     override fun getItemCount(): Int = onBoardingList.size
-
-    fun setOnBoardingList(onboardingList: List<OnBoardingItem>) {
-        this.onBoardingList = onboardingList
-        notifyDataSetChanged()
-    }
 }

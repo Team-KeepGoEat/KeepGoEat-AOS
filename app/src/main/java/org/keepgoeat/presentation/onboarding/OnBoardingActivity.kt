@@ -42,7 +42,6 @@ class OnBoardingActivity : BindingActivity<ActivityOnboardingBinding>(R.layout.a
         val adapter = OnBoardingAdapter(this)
         with(binding) {
             vpViewPager.adapter = adapter
-            adapter.setOnBoardingList(onboardingList)
             vpViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
