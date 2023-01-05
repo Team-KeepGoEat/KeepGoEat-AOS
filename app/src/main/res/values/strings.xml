@@ -50,6 +50,12 @@
     <string name="goal_setting_title_length_guide">목표는 최소 1글자 이상 입력해주세요.</string>
     <string name="goal_setting_title_language_guide">한글, 영문, 숫자만 입력 가능합니다.</string>
     <string name="goal_setting_title_length_limit">(%d/20)</string>
+
+    <!-- My -->
+    <string name="all">전체</string>
+    <string name="more_without_space">더먹기</string>
+    <string name="less_without_space">덜먹기</string>
+    <string name="my_achieved_goal">보관한 목표</string>
     <string name="my_total_achievement_day">총 달성일</string>
     <string name="my_duration">진행기간</string>
 
