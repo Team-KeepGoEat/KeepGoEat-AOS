@@ -28,10 +28,9 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun moveToNext() {
-        if(SignSharedPreferences.getUserToken(this).isNullOrBlank()) {
+        if (SignSharedPreferences.getUserToken(this).isNullOrBlank()) {
             startActivity(Intent(this, SignActivity::class.java))
-        }
-        else{
+        } else {
             startActivity(Intent(this, OnboardingActivity::class.java))
         }
     }
