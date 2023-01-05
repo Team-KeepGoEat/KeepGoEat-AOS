@@ -7,7 +7,6 @@ import org.keepgoeat.databinding.DialogBottomHomeBinding
 import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
 class HomeBottomDialogFragment : BindingBottomSheetDialogFragment<DialogBottomHomeBinding>(R.layout.dialog_bottom_home) {
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addListeners()
