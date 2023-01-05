@@ -25,7 +25,7 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
     private fun addListeners() {
         binding.layoutSignIn.setOnClickListener {
             signService.loginKakao()
-            //moveMain()
+            // moveMain()
         }
     }
 
