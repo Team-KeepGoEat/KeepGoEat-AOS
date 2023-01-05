@@ -21,6 +21,15 @@
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
+        </activity>
+        <activity
+            android:name=".presentation.dummy.DummyActivity"
+            android:exported="false" >
+
+        </activity>
+        <activity
+            android:name=".presentation.sign.SignActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,6 +59,18 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="oauth"
+                    android:scheme="@string/kakao_app_key2" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
