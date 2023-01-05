@@ -35,6 +35,9 @@
 
     <string name="cheer_msg">나 김더팽, 멋진 달팽...✨\n내가 세상을 지배한다...!!</string>
 
+    <!-- Home Bottom -->
+    <string name="bottom_home_more_txt">건강한 음식을 더 먹어볼까?</string>
+    <string name="bottom_home_less_txt">안 좋은 식습관을 줄여가보자!</string>
     <!-- Goal Keep -->
     <string name="goal_keep_dialog_guide">목표 달성이 끝났나요?\n달성 완료된 목표는 보관해서 모아볼 수 있어요.</string>
     <string name="goal_keep_delete_guide">잘못된 목표인가요? 삭제하기</string>
