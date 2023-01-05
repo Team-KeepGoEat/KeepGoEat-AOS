@@ -71,4 +71,12 @@
     <string name="onboarding3_button">KEEP GO EAT 시작하기</string>
     <string name="onboarding_skip">건너뛰기</string>
 
+    <!-- My -->
+    <string name="all">전체</string>
+    <string name="more_without_space">더먹기</string>
+    <string name="less_without_space">덜먹기</string>
+    <string name="my_achieved_goal">보관한 목표</string>
+    <string name="my_total_achievement_day">총 달성일</string>
+    <string name="my_duration">진행기간</string>
+
 </resources>

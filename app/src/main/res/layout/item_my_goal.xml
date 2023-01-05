@@ -8,15 +8,7 @@
 
         <variable
             name="goal"
-            type="org.keepgoeat.presentation.home.MyGoalInfo" />
-
-        <variable
-            name="goalType"
-            type="org.keepgoeat.presentation.type.EatingType" />
-
-        <variable
-            name="goalBtn"
-            type="org.keepgoeat.presentation.type.HomeBtnType" />
+            type="org.keepgoeat.domain.model.AchievedGoal" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,117 +19,82 @@
         android:layout_marginVertical="@dimen/spacing8"
         android:background="@drawable/background_goal_list"
         android:backgroundTint="@color/white"
-        android:elevation="4dp">
+        android:elevation="2dp"
+        android:paddingHorizontal="@dimen/spacingBase"
+        android:paddingVertical="@dimen/spacing16">
 
         <include
-            android:id="@+id/layout_goal_tag"
+            android:id="@+id/view_eating_tag"
             layout="@layout/view_eating_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing16"
-            android:layout_marginTop="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            bind:eatingType="@{goalType}" />
+            bind:eatingType="@{goal.eatingType}" />
 
         <TextView
             android:id="@+id/tv_item_goal_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing16"
-            android:layout_marginTop="@dimen/spacing12"
-            android:text="@{goal.goalName}"
-            android:textAppearance="@style/TextAppearance.System4_Bold"
-            android:textColor="@color/gray_700"
+            android:layout_marginTop="@dimen/spacing8"
+            android:text="@{goal.goalTitle}"
+            android:textAppearance="@style/TextAppearance.System2_Bold"
+            android:textColor="@color/gray_800"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_goal_tag"
-            tools:text="물 더 먹기" />
+            app:layout_constraintTop_toBottomOf="@+id/view_eating_tag"
+            tools:text="하루 1끼 이상 야채 더 먹기기" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_item_goal_date"
+        <TextView
+            android:id="@+id/tv_total_achievement_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing16"
+            android:layout_marginTop="15dp"
+            android:text="@string/my_total_achievement_day"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_500"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_goal_name">
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_goal_name" />
 
-            <TextView
-                android:id="@+id/tv_item_goal_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{goal.goalDate}"
-                android:textAppearance="@style/TextAppearance.System1_Bold"
-                android:textColor="@{context.getColor(goalType.tagTextColor)}"
-                android:textSize="36dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="8" />
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing8"
+            android:fontFamily="@font/pretendard_b"
+            android:textColor="@{context.getColor(goal.eatingType.achievedGoalDayTextColor)}"
+            android:textSize="40dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_total_achievement_day"
+            app:layout_constraintStart_toEndOf="@+id/tv_total_achievement_day"
+            app:layout_constraintTop_toTopOf="@id/tv_total_achievement_day"
+            tools:text="8"
+            tools:textColor="@color/orange_500" />
 
-            <TextView
-                android:id="@+id/tv_item_date_string"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing8"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/home_goal_string"
-                android:textAppearance="@style/TextAppearance.System3_Bold"
-                android:textColor="@color/gray_700"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_item_goal_date"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btn_goal"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/spacing16"
-            android:layout_marginVertical="@dimen/spacing16"
-            android:background="@drawable/shape_border_radius_8"
-            android:backgroundTint="@{context.getColor(goalBtn.btnColorInt)}"
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/my_duration"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_500"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_item_goal_date"
-            tools:backgroundTint="@color/orange_600">
+            app:layout_constraintTop_toBottomOf="@id/tv_total_achievement_day" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/iv_btn_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@{context.getDrawable(goalBtn.btnDrawableRes)}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@drawable/ic_check" />
-
-                <TextView
-                    android:id="@+id/tv_btn_goal_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="14dp"
-                    android:layout_marginStart="@dimen/spacing4"
-                    android:text="@{goalBtn.btnStringRes}"
-                    android:textAppearance="@style/TextAppearance.System5_Bold"
-                    android:textColor="@{context.getColor(goalBtn.btnTextColorInt)}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/iv_btn_check"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="오늘도 잘 먹었나요?"
-                    tools:textColor="@color/gray_50" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_duration_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/my_duration"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_700"
+            app:endDate="@{goal.endAt}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_total_achievement_day"
+            app:startDate="@{goal.startAt}"
+            tools:text="2022. 09. 01 ~ 2022. 12. 19" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

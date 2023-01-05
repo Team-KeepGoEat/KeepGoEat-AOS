@@ -11,7 +11,7 @@ import org.keepgoeat.util.ItemDiffCallback
 import java.time.LocalDate
 
 class GoalStickerListAdapter(private val eatingType: EatingType, private val cellCount: Int) :
-    ListAdapter<GoalSticker, GoalStickerListAdapter.FollowerViewHolder>(
+    ListAdapter<GoalSticker, GoalStickerListAdapter.GoalStickerViewHolder>(
         ItemDiffCallback<GoalSticker>(
             onContentsTheSame = { old, new -> old == new },
             onItemsTheSame = { old, new -> old.id == new.id }
@@ -22,7 +22,7 @@ class GoalStickerListAdapter(private val eatingType: EatingType, private val cel
     private val blankCellCount: Int = cellCount - LocalDate.now().lengthOfMonth()
     private lateinit var inflater: LayoutInflater
 
-    class FollowerViewHolder(private val binding: ItemGoalStickerBinding) :
+    class GoalStickerViewHolder(private val binding: ItemGoalStickerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: GoalSticker, eatingType: EatingType, isDefault: Boolean) {
             binding.layout.setBackgroundColor(eatingType.cardBackgroundColor)
@@ -33,14 +33,14 @@ class GoalStickerListAdapter(private val eatingType: EatingType, private val cel
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalStickerViewHolder {
         if (!::inflater.isInitialized)
             inflater = LayoutInflater.from(parent.context)
 
-        return FollowerViewHolder(ItemGoalStickerBinding.inflate(inflater, parent, false))
+        return GoalStickerViewHolder(ItemGoalStickerBinding.inflate(inflater, parent, false))
     }
 
-    override fun onBindViewHolder(holder: FollowerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GoalStickerViewHolder, position: Int) {
         holder.onBind(currentList[position], eatingType, position >= itemCount - blankCellCount)
     }
 }
