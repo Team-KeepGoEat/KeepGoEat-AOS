@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ItemAddGoalBinding
+import org.keepgoeat.databinding.ItemHomeGoalBinding
 import org.keepgoeat.databinding.ItemHomeHeaderBinding
 import org.keepgoeat.databinding.ItemMyGoalBinding
 import org.keepgoeat.presentation.type.EatingType
@@ -37,7 +38,7 @@ class HomeMyGoalAdapter(
     }
 
     class MyGoalViewHolder(
-        private val binding: ItemMyGoalBinding
+        private val binding: ItemHomeGoalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
         fun bind(myGoal: MyGoalInfo, goalType: EatingType, changeBtnColor: (MyGoalInfo) -> Unit) {
@@ -87,7 +88,7 @@ class HomeMyGoalAdapter(
             inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             HomeGoalViewType.MY_GOAL_TYPE.goalType -> {
-                MyGoalViewHolder(ItemMyGoalBinding.inflate(inflater, parent, false))
+                MyGoalViewHolder(ItemHomeGoalBinding.inflate(inflater, parent, false))
             }
             HomeGoalViewType.ADD_GOAL_TYPE.goalType -> {
                 AddGoalViewHolder(ItemAddGoalBinding.inflate(inflater, parent, false))

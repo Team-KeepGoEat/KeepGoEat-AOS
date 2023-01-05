@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -27,45 +28,16 @@
         android:backgroundTint="@color/white"
         android:elevation="4dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <include
             android:id="@+id/layout_goal_tag"
+            layout="@layout/view_eating_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing16"
             android:layout_marginTop="@dimen/spacing16"
-            android:background="@drawable/background_goal_tag"
-            android:backgroundTint="@{context.getColor(goalType.tagBackgroundColor)}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_goal_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
-                android:layout_marginStart="@dimen/spacing4"
-                android:src="@{context.getDrawable(goalType.defaultStickerRes)}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_eating_more_tag_plus"/>
-
-            <TextView
-                android:id="@+id/tv_goal_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/spacing4"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="@dimen/spacing4"
-                android:text="@{goalType.strRes}"
-                android:textAppearance="@style/TextAppearance.System6_Bold"
-                android:textColor="@{context.getColor(goalType.tagTextColor)}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_goal_tag"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="더 먹기" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            bind:eatingType="@{goalType}" />
 
         <TextView
             android:id="@+id/tv_item_goal_name"
@@ -168,4 +140,3 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
-
