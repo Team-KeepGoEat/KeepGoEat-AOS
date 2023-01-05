@@ -19,6 +19,7 @@ enum class EatingType(
     @ColorRes val buttonBackgroundColor: Int,
     @ColorRes val buttonTextColor: Int,
     @ColorRes val buttonRippleColor: Int,
+    @ColorRes val achievedGoalDayTextColor: Int,
     @ColorInt val cardBackgroundColor: Int,
 ) {
     LESS(
@@ -33,6 +34,7 @@ enum class EatingType(
         R.color.green_500,
         R.color.white,
         R.color.green_700,
+        R.color.green_600,
         Color.parseColor("#EAFBF4"),
     ),
     MORE(
@@ -47,6 +49,7 @@ enum class EatingType(
         R.color.orange_600,
         R.color.gray_50,
         R.color.orange_700,
+        R.color.green_500,
         Color.parseColor("#FFF0EB"),
     )
 }
