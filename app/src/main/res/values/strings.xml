@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
+
+    <!--  sign  -->
+    <string name="kakao_app_key1">8023bf5dba44e18383b689f7efcad88c</string>
+    <string name="kakao_app_key2">kakao8023bf5dba44e18383b689f7efcad88c</string>
+    <string name="signin">카카오톡 로그인</string>
+    <string name="sign_description1">식습관 관리,</string>
+    <string name="sign_description2">같이 천천히 시작해볼까요?\n먹는 재미는 언제나 소중하니까!</string>
+
     <string name="keep_go_eat">킵고잇</string>
     <!-- Global -->
     <string name="complete">완료</string>
@@ -13,6 +21,31 @@
     <string name="goal_detail_num_of_days_eaten_last_month">지난달 먹은 날</string>
     <string name="goal_detail_num_of_days_eaten_this_month">이번달 먹은 날</string>
 
+    <!-- Home View -->
+    <string name="home_today_goal">오늘 식습관 목표</string>
+
+    <string name="home_goal_more_btn">오늘도 잘 먹었나요?</string>
+    <string name="home_goal_more_achieved">오늘도 해냈어요!</string>
+    <string name="home_goal_less_btn">오늘도 잘 참았나요?</string>
+    <string name="home_goal_less_achieved">오늘도 참았어요!</string>
+
+    <string name="home_goal_string">일 해냈어요.</string>
+
+    <string name="home_more_goal">또 다른 도전을 원하시나요?</string>
+    <string name="home_two_more_goal">2개의 목표를 더 정할 수 있어요.</string>
+    <string name="home_one_more_goal">1개의 목표를 더 정할 수 있어요.</string>
+    <string name="home_no_more_goal">3개의 목표까지 동시에 진행할 수 있어요.</string>
+
+    <string name="home_txt_no_goal_1">아직 목표를 정하지 않았어요.</string>
+    <string name="home_txt_no_goal_2">새로운 목표를 추가해 보세요.</string>
+
+    <string name="home_make_goal">목표 추가하기</string>
+
+    <string name="cheer_msg">나 김더팽, 멋진 달팽...✨\n내가 세상을 지배한다...!!</string>
+
+    <!-- Home Bottom -->
+    <string name="bottom_home_more_txt">건강한 음식을 더 먹어볼까?</string>
+    <string name="bottom_home_less_txt">안 좋은 식습관을 줄여가보자!</string>
     <!-- Goal Keep -->
     <string name="goal_keep_dialog_guide">목표 달성이 끝났나요?\n달성 완료된 목표는 보관해서 모아볼 수 있어요.</string>
     <string name="goal_keep_delete_guide">잘못된 목표인가요? 삭제하기</string>
