@@ -19,12 +19,11 @@ fun View.setVisibility(isVisible: Boolean?) {
     this.isVisible = isVisible
 }
 
-
 @BindingAdapter(value = ["startDate", "endDate"], requireAll = false)
 fun TextView.setDuration(startDate: LocalDate?, endDate: LocalDate?) {
     safeLet(startDate, endDate) { start, end ->
-        text = "${start.year}. ${start.monthValue.toString().padStart(2, '0')}. ${start.dayOfMonth} ~ ${end.year}. ${
-            end.monthValue.toString().padStart(2, '0')
-        }. ${end.dayOfMonth}"
+        text = "${start.year}. ${
+            start.monthValue.toString().padStart(2, '0')
+        }. ${start.dayOfMonth} ~ ${end.year}. " + "${end.monthValue.toString().padStart(2, '0')}. ${end.dayOfMonth}"
     }
 }

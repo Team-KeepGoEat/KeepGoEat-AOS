@@ -9,7 +9,6 @@ import org.keepgoeat.R
 import org.keepgoeat.databinding.ItemAddGoalBinding
 import org.keepgoeat.databinding.ItemHomeGoalBinding
 import org.keepgoeat.databinding.ItemHomeHeaderBinding
-import org.keepgoeat.databinding.ItemMyGoalBinding
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType

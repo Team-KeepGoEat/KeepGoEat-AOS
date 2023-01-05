@@ -31,10 +31,18 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
     }
 
     private fun getFilteredGoalWithEatingType(eatingType: EatingType?) {
-        when(eatingType) {
-            null -> { goalAdapter.submitList(viewModel.goalList.value?.toMutableList()) }
-            EatingType.MORE -> { goalAdapter.submitList(viewModel.goalList.value?.filter { it.eatingType == EatingType.MORE }?.toMutableList()) }
-            EatingType.LESS -> { goalAdapter.submitList(viewModel.goalList.value?.filter { it.eatingType == EatingType.LESS }?.toMutableList()) }
+        when (eatingType) {
+            null -> goalAdapter.submitList(
+                viewModel.goalList.value?.toMutableList()
+            )
+            EatingType.MORE -> goalAdapter.submitList(
+                viewModel.goalList.value?.filter { it.eatingType == EatingType.MORE }
+                    ?.toMutableList()
+            )
+            EatingType.LESS -> goalAdapter.submitList(
+                viewModel.goalList.value?.filter { it.eatingType == EatingType.LESS }
+                    ?.toMutableList()
+            )
         }
     }
 
