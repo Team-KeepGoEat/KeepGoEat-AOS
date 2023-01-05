@@ -1,4 +1,4 @@
-package org.keepgoeat.presentation.home.adapter
+package org.keepgoeat.presentation.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ItemAddGoalBinding
 import org.keepgoeat.databinding.ItemHomeHeaderBinding
-import org.keepgoeat.databinding.ItemHomeTextBinding
 import org.keepgoeat.databinding.ItemMyGoalBinding
-import org.keepgoeat.presentation.home.MyGoalInfo
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
@@ -37,10 +35,6 @@ class HomeMyGoalAdapter(
                 binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
         }
     }
-
-    class HomeTextHolder(
-        private val binding: ItemHomeTextBinding
-    ) : RecyclerView.ViewHolder(binding.root)
 
     class MyGoalViewHolder(
         private val binding: ItemMyGoalBinding
@@ -101,9 +95,6 @@ class HomeMyGoalAdapter(
             HomeGoalViewType.HOME_HEADER_TYPE.goalType -> {
                 HomeHeaderHolder(ItemHomeHeaderBinding.inflate(inflater, parent, false))
             }
-            HomeGoalViewType.HOME_TEXT_TYPE.goalType -> {
-                HomeTextHolder(ItemHomeTextBinding.inflate(inflater, parent, false))
-            }
             else -> {
                 throw java.lang.ClassCastException("Unknown ViewType Error")
             }
@@ -120,8 +111,8 @@ class HomeMyGoalAdapter(
                 }
             }
             // TODO 서버통신 데이터클래스로 변경하면 size 정보 받아온걸로 바꾸기
-            is AddGoalViewHolder -> holder.bind(currentList.size - 3)
-            is HomeHeaderHolder -> holder.bind(currentList.size - 3)
+            is AddGoalViewHolder -> holder.bind(currentList.size - 2)
+            is HomeHeaderHolder -> holder.bind(currentList.size - 2)
         }
     }
 
