@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="goal"
+            type="org.keepgoeat.domain.model.AchievedGoal" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing16"
+        android:layout_marginVertical="@dimen/spacing8"
+        android:background="@drawable/background_goal_list"
+        android:backgroundTint="@color/white"
+        android:elevation="2dp"
+        android:paddingHorizontal="@dimen/spacingBase"
+        android:paddingVertical="@dimen/spacing16">
+
+        <include
+            android:id="@+id/view_eating_tag"
+            layout="@layout/view_eating_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing24"
+            app:layout_constraintStart_toStartOf="parent"
+            bind:eatingType="@{goal.eatingType}" />
+
+        <TextView
+            android:id="@+id/tv_item_goal_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing8"
+            android:text="@{goal.goalTitle}"
+            android:textAppearance="@style/TextAppearance.System2_Bold"
+            android:textColor="@color/gray_800"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_eating_tag"
+            tools:text="하루 1끼 이상 야채 더 먹기기" />
+
+        <TextView
+            android:id="@+id/tv_total_achievement_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/my_total_achievement_day"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_goal_name" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing8"
+            android:fontFamily="@font/pretendard_b"
+            android:textColor="@{context.getColor(goal.eatingType.achievedGoalDayTextColor)}"
+            android:textSize="40dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_total_achievement_day"
+            app:layout_constraintStart_toEndOf="@+id/tv_total_achievement_day"
+            app:layout_constraintTop_toTopOf="@id/tv_total_achievement_day"
+            tools:text="8"
+            tools:textColor="@color/orange_500" />
+
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/my_duration"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_total_achievement_day" />
+
+        <TextView
+            android:id="@+id/tv_duration_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/my_duration"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_700"
+            app:endDate="@{goal.endAt}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_total_achievement_day"
+            app:startDate="@{goal.startAt}"
+            tools:text="2022. 09. 01 ~ 2022. 12. 19" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
