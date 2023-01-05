@@ -22,7 +22,7 @@ class GoalStickerListAdapter(private val eatingType: EatingType, private val cel
     private val blankCellCount: Int = cellCount - LocalDate.now().lengthOfMonth()
     private lateinit var inflater: LayoutInflater
 
-    class FollowerViewHolder(private val binding: ItemGoalStickerBinding) :
+    class FollowerViewHolder(private val binding: ItemGoalStickerBinding) : // TODO 네이밍 수정
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: GoalSticker, eatingType: EatingType, isDefault: Boolean) {
             binding.layout.setBackgroundColor(eatingType.cardBackgroundColor)
