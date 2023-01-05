@@ -10,25 +10,27 @@ import org.keepgoeat.databinding.ActivityOnboardingBinding
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
-class OnBoardingActivity : BindingActivity<ActivityOnboardingBinding>(R.layout.activity_onboarding) {
-    private val viewModel: OnBoardingViewModel by viewModels()
+class OnboardingActivity : BindingActivity<ActivityOnboardingBinding>(R.layout.activity_onboarding) {
+    private val viewModel: OnboardingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
         initLayout()
         addListeners()
     }
 
     private fun initLayout() {
-        val adapter = OnBoardingAdapter(this)
+        val adapter = OnboardingAdapter(this)
+        viewModel.setPosition(1)
         with(binding) {
             vpViewPager.adapter = adapter
             vpViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    viewModel?.setPosition(position)
+                    this@OnboardingActivity.viewModel.setPosition(position)
                 }
             })
             TabLayoutMediator(binding.indicator, vpViewPager) { _, _ -> }.attach()

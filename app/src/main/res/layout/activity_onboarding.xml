@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="org.keepgoeat.presentation.onboarding.OnBoardingViewModel" />
+            type="org.keepgoeat.presentation.onboarding.OnboardingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.onboarding.OnBoardingActivity">
+        tools:context=".presentation.onboarding.OnboardingActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

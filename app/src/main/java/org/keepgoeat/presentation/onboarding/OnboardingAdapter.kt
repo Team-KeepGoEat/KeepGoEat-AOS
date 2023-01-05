@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.databinding.ItemOnboardingBinding
 import org.keepgoeat.presentation.type.OnBoardingViewType
 
-class OnBoardingAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OnboardingAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
     private var onBoardingList = OnBoardingViewType.values()
 
