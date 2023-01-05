@@ -34,39 +34,32 @@ class HomeViewModel : ViewModel() {
                 false,
                 false,
                 HomeGoalViewType.HOME_HEADER_TYPE
-            ),
-            MyGoalInfo(
-                "2",
-                "",
-                false,
-                false,
-                HomeGoalViewType.HOME_TEXT_TYPE
             )
         )
-//        var myGoalList = mutableListOf(
-//            MyGoalInfo(
-//                "하루 1끼 이상 야채 더 먹기",
-//                "8",
-//                true,
-//                false,
-//                HomeGoalViewType.MY_GOAL_TYPE
-//            ),
-//            MyGoalInfo(
-//                "라면 덜 먹기",
-//                "8",
-//                false,
-//                false,
-//                HomeGoalViewType.MY_GOAL_TYPE
-//            ),
-//            MyGoalInfo(
-//                "커피 덜 먹기",
-//                "30",
-//                false,
-//                true,
-//                HomeGoalViewType.MY_GOAL_TYPE
-//            )
-//        )
-        val myGoalList = emptyList<MyGoalInfo>()
+        var myGoalList = mutableListOf(
+            MyGoalInfo(
+                "하루 1끼 이상 야채 더 먹기",
+                "8",
+                true,
+                false,
+                HomeGoalViewType.MY_GOAL_TYPE
+            ),
+            MyGoalInfo(
+                "라면 덜 먹기",
+                "8",
+                false,
+                false,
+                HomeGoalViewType.MY_GOAL_TYPE
+            ),
+            MyGoalInfo(
+                "커피 덜 먹기",
+                "30",
+                false,
+                true,
+                HomeGoalViewType.MY_GOAL_TYPE
+            )
+        )
+//        val myGoalList = emptyList<MyGoalInfo>()
         val addGoalBtn = mutableListOf(
             MyGoalInfo(
                 "3",

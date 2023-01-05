@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="org.keepgoeat.presentation.type.OnBoardingViewType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_onboarding_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{context.getString(item.titleStrRes)}"
+            android:textAppearance="@style/TextAppearance.System3_Bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_onboarding_des"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_onboarding_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="59dp"
+            android:gravity="center"
+            android:text="@{context.getString(item.desStrRes)}"
+            android:textAppearance="@style/TextAppearance.System5"
+            app:layout_constraintBottom_toTopOf="@+id/iv_onboarding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_onboarding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@{context.getDrawable(item.imageRes)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

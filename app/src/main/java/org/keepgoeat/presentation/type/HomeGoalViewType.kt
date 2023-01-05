@@ -5,6 +5,5 @@ enum class HomeGoalViewType(
 ) {
     MY_GOAL_TYPE(0),
     ADD_GOAL_TYPE(1),
-    HOME_HEADER_TYPE(2),
-    HOME_TEXT_TYPE(3)
+    HOME_HEADER_TYPE(2)
 }

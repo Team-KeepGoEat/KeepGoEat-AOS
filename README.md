@@ -17,7 +17,7 @@ IN SOPT 31st APPJAM 킵고잇 Android 팀 레포입니다.
 
 | [@YuBeen-Park](https://github.com/YuBeen-Park) | [@Dani43](https://github.com/Dan2dani) | [@youngjinc](https://github.com/youngjinc) |
 | :---: | :---: | :---: |
-|<img width="540" src="https://user-images.githubusercontent.com/74285061/210170256-288c20b1-f02c-41d8-823a-76e1c045dba3.jpg"/>|<img width="540" src="https://user-images.githubusercontent.com/77060011/210170719-2723b6c7-868c-4258-9376-bb39c39c9c3e.jpg"/>|<img width="540" src="https://user-images.githubusercontent.com/48701368/210170185-9ffc6662-6d82-445d-b8c5-602d93c06acd.jpg"/>|
+|<img width="540" src="https://user-images.githubusercontent.com/74285061/210170256-288c20b1-f02c-41d8-823a-76e1c045dba3.jpg"/>|<img width="540" src="https://user-images.githubusercontent.com/77060011/210755750-b583720a-550f-4c65-bd07-ac0b9579da5d.png"/>|<img width="540" src="https://user-images.githubusercontent.com/48701368/210170185-9ffc6662-6d82-445d-b8c5-602d93c06acd.jpg"/>|
 |`HomeView`|`LoginView`, `OnBoardingView`|`GoalSettingView`, `GoalDetailView`|
 
 <br>

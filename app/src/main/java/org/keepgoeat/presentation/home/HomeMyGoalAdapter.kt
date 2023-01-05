@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
-import org.keepgoeat.databinding.*
-import org.keepgoeat.presentation.home.MyGoalInfo
+import org.keepgoeat.databinding.ItemAddGoalBinding
+import org.keepgoeat.databinding.ItemHomeHeaderBinding
+import org.keepgoeat.databinding.ItemMyGoalBinding
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
@@ -35,12 +36,8 @@ class HomeMyGoalAdapter(
         }
     }
 
-    class HomeTextHolder(
-        private val binding: ItemHomeTextBinding
-    ) : RecyclerView.ViewHolder(binding.root)
-
     class MyGoalViewHolder(
-        private val binding: ItemHomeGoalBinding
+        private val binding: ItemMyGoalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
         fun bind(myGoal: MyGoalInfo, goalType: EatingType, changeBtnColor: (MyGoalInfo) -> Unit) {
@@ -90,16 +87,13 @@ class HomeMyGoalAdapter(
             inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             HomeGoalViewType.MY_GOAL_TYPE.goalType -> {
-                MyGoalViewHolder(ItemHomeGoalBinding.inflate(inflater, parent, false))
+                MyGoalViewHolder(ItemMyGoalBinding.inflate(inflater, parent, false))
             }
             HomeGoalViewType.ADD_GOAL_TYPE.goalType -> {
                 AddGoalViewHolder(ItemAddGoalBinding.inflate(inflater, parent, false))
             }
             HomeGoalViewType.HOME_HEADER_TYPE.goalType -> {
                 HomeHeaderHolder(ItemHomeHeaderBinding.inflate(inflater, parent, false))
-            }
-            HomeGoalViewType.HOME_TEXT_TYPE.goalType -> {
-                HomeTextHolder(ItemHomeTextBinding.inflate(inflater, parent, false))
             }
             else -> {
                 throw java.lang.ClassCastException("Unknown ViewType Error")
@@ -117,8 +111,8 @@ class HomeMyGoalAdapter(
                 }
             }
             // TODO 서버통신 데이터클래스로 변경하면 size 정보 받아온걸로 바꾸기
-            is AddGoalViewHolder -> holder.bind(currentList.size - 3)
-            is HomeHeaderHolder -> holder.bind(currentList.size - 3)
+            is AddGoalViewHolder -> holder.bind(currentList.size - 2)
+            is HomeHeaderHolder -> holder.bind(currentList.size - 2)
         }
     }
 
