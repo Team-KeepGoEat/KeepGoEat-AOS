@@ -30,6 +30,10 @@ class ItemDecorationUtil(
                     outRect.right = if (pos % second + 1 < second) spaceDp else zeroDp
                 }
             }
+            RecyclerLayoutType.VERTICAL -> {
+                val isLastItem = pos == parent.adapter?.itemCount?.minus(1)
+                outRect.bottom = if (!isLastItem) spaceDp else zeroDp
+            }
             else -> {}
         }
     }
