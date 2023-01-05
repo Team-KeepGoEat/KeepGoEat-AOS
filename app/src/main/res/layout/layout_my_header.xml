@@ -4,13 +4,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/spacing16">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tv_my_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing16"
             android:text="@string/my_achieved_goal"
             android:textAppearance="@style/TextAppearance.System4_Bold"
             android:textColor="@color/gray_800"
@@ -21,6 +21,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -29,19 +30,21 @@
                 android:id="@+id/tv_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/spacing8"
                 android:text="@string/all" />
 
             <TextView
                 android:id="@+id/tv_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:padding="@dimen/spacing8"
                 android:text="@string/more_without_space" />
 
             <TextView
                 android:id="@+id/tv_less"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/spacing8"
                 android:text="@string/less_without_space" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
