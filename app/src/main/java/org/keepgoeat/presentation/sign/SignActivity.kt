@@ -12,7 +12,7 @@ import org.keepgoeat.util.binding.BindingActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SignActivity: BindingActivity<ActivitySignBinding>(R.layout.activity_sign){
+class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign) {
     @Inject
     lateinit var signService: SignService
 
@@ -23,13 +23,13 @@ class SignActivity: BindingActivity<ActivitySignBinding>(R.layout.activity_sign)
     }
 
     private fun addListeners() {
-        binding.btnSignIn.setOnClickListener {
+        binding.layoutSignIn.setOnClickListener {
             signService.loginKakao()
             //moveMain()
         }
     }
 
-    private fun moveMain(){
+    private fun moveMain() {
         val intent = Intent(this, DummyActivity::class.java)
         startActivity(intent)
         finish()

@@ -13,7 +13,7 @@ import javax.inject.Inject
 class SignService @Inject constructor(
     @ActivityContext private val context: Context,
 ) {
-    fun loginKakao(){
+    fun loginKakao() {
         // 카카오계정으로 로그인 공통 callback 구성
         // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->

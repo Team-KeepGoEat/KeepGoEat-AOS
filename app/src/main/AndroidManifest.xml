@@ -21,8 +21,6 @@
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
-            android:name=".presentation.MainActivity"
-            android:exported="false">
         </activity>
         <activity
             android:name=".presentation.dummy.DummyActivity"
@@ -61,6 +59,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
