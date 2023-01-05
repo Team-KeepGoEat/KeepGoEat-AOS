@@ -53,7 +53,6 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.onboarding.OnboardingActivity"
-            android:exported="true"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
