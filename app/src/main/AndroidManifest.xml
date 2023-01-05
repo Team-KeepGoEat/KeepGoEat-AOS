@@ -54,6 +54,12 @@
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".presentation.my.MyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
@@ -68,7 +74,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.my.MyActivity"
+            android:name=".presentation.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">

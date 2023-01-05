@@ -20,7 +20,8 @@ class SignService @Inject constructor(
             } else if (token != null) {
                 UserApiClient.instance.me { user, error ->
                     Timber.i("카카오계정으로 로그인 성공 ${token.accessToken}")
-                    SignSharedPreferences.setUserToken(context, token.accessToken)
+                    SignSharedPreferences(context).isLogin = true
+                    SignSharedPreferences(context).accestToken = token.accessToken
                 }
             }
         }
@@ -34,7 +35,8 @@ class SignService @Inject constructor(
                     UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
                 } else if (token != null) {
                     Timber.i("카카오톡으로 로그인 성공 ${token.accessToken}")
-                    SignSharedPreferences.setUserToken(context, token.accessToken)
+                    SignSharedPreferences(context).isLogin = true
+                    SignSharedPreferences(context).accestToken = token.accessToken
                 }
             }
         } else {
