@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.data.service.SignService
 import org.keepgoeat.databinding.ActivitySignBinding
-import org.keepgoeat.presentation.dummy.DummyActivity
+import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.util.binding.BindingActivity
 import javax.inject.Inject
 
@@ -20,17 +20,17 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
         super.onCreate(savedInstanceState)
         KakaoSdk.init(this, this.getString(R.string.kakao_app_key1))
         addListeners()
+        // moveMain()
     }
 
     private fun addListeners() {
         binding.layoutSignIn.setOnClickListener {
             signService.loginKakao()
-            // moveMain()
         }
     }
 
     private fun moveMain() {
-        val intent = Intent(this, DummyActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }
