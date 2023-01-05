@@ -12,7 +12,7 @@ import org.keepgoeat.util.binding.BindingActivity
 @AndroidEntryPoint
 class OnBoardingActivity : BindingActivity<ActivityOnboardingBinding>(R.layout.activity_onboarding) {
     private val viewModel: OnBoardingViewModel by viewModels()
-    private val mockOnboardingList = listOf(
+    private val onboardingList = listOf(
         OnBoardingItem(
             title = R.string.onboarding1_title,
             des = R.string.onboarding1_des,
@@ -41,16 +41,15 @@ class OnBoardingActivity : BindingActivity<ActivityOnboardingBinding>(R.layout.a
     private fun initLayout() {
         val adapter = OnBoardingAdapter(this)
         with(binding) {
-            vpViewPager.isUserInputEnabled = false
             vpViewPager.adapter = adapter
-            adapter.setOnBoardingList(mockOnboardingList)
+            adapter.setOnBoardingList(onboardingList)
             vpViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     viewModel?.setPosition(position)
                 }
             })
-            TabLayoutMediator(binding.indicator, vpViewPager) { tab, position -> }.attach()
+            TabLayoutMediator(binding.indicator, vpViewPager) { _, _ -> }.attach()
         }
     }
 

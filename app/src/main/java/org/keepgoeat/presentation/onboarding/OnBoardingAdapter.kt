@@ -13,13 +13,11 @@ class OnBoardingAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vi
     class OnBoardingViewHolder(private val binding: ItemOnboardingBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(onboarding: OnBoardingItem) {
-            binding.tvOnboardingTitle.setText(onboarding.title)
-            binding.tvOnboardingDes.setText(onboarding.des)
-            binding.ivOnboarding.setImageDrawable(binding.root.context.getDrawable(onboarding.image))
+            binding.item = onboarding
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnBoardingViewHolder {
         return OnBoardingViewHolder(ItemOnboardingBinding.inflate(inflater, parent, false))
     }
 
@@ -34,7 +32,7 @@ class OnBoardingAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vi
     override fun getItemCount(): Int = onBoardingList.size
 
     fun setOnBoardingList(onboardingList: List<OnBoardingItem>) {
-        this.onBoardingList = onboardingList.toList()
+        this.onBoardingList = onboardingList
         notifyDataSetChanged()
     }
 }
