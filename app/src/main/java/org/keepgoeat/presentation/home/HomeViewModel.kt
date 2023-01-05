@@ -34,13 +34,6 @@ class HomeViewModel : ViewModel() {
                 false,
                 false,
                 HomeGoalViewType.HOME_HEADER_TYPE
-            ),
-            MyGoalInfo(
-                "2",
-                "",
-                false,
-                false,
-                HomeGoalViewType.HOME_TEXT_TYPE
             )
         )
 //        var myGoalList = mutableListOf(

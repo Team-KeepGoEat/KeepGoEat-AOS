@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
-import org.keepgoeat.presentation.home.adapter.HomeMyGoalAdapter
 import org.keepgoeat.util.binding.BindingActivity
 
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
