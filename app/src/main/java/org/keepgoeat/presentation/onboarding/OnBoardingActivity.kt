@@ -12,23 +12,6 @@ import org.keepgoeat.util.binding.BindingActivity
 @AndroidEntryPoint
 class OnBoardingActivity : BindingActivity<ActivityOnboardingBinding>(R.layout.activity_onboarding) {
     private val viewModel: OnBoardingViewModel by viewModels()
-    private val onboardingList = listOf(
-        OnBoardingItem(
-            title = R.string.onboarding1_title,
-            des = R.string.onboarding1_des,
-            image = R.drawable.img_onboarding_1
-        ),
-        OnBoardingItem(
-            title = R.string.onboarding2_title,
-            des = R.string.onboarding2_des,
-            image = R.drawable.img_onboarding_2
-        ),
-        OnBoardingItem(
-            R.string.onboarding3_title,
-            des = R.string.onboarding3_des,
-            image = R.drawable.img_onboarding_3
-        )
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
