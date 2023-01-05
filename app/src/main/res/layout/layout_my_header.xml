@@ -31,21 +31,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing8"
-                android:text="@string/all" />
+                android:text="@string/all"
+                android:textAppearance="@style/TextAppearance.System5_Bold"
+                android:textColor="@color/gray_800" />
 
             <TextView
                 android:id="@+id/tv_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing8"
-                android:text="@string/more_without_space" />
+                android:text="@string/more_without_space"
+                android:textAppearance="@style/TextAppearance.System5"
+                android:textColor="@color/gray_400" />
 
             <TextView
                 android:id="@+id/tv_less"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing8"
-                android:text="@string/less_without_space" />
+                android:text="@string/less_without_space"
+                android:textAppearance="@style/TextAppearance.System5"
+                android:textColor="@color/gray_400" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
