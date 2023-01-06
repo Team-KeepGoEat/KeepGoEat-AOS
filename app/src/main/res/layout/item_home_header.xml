@@ -7,6 +7,14 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_700">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="235dp"
+            android:background="@drawable/img_home_background_0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/iv_home_snail"
             android:layout_width="wrap_content"
