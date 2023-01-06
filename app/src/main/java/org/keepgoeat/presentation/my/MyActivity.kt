@@ -27,7 +27,10 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
     }
 
     private fun initLayout() {
-        binding.rvGoalList.adapter = goalConcatAdapter
+        binding.rvGoalList.apply {
+            adapter = goalConcatAdapter
+            itemAnimator = null
+        }
     }
 
     private fun getFilteredGoalWithEatingType(eatingType: EatingType?) {
