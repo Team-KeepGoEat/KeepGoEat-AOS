@@ -17,7 +17,7 @@ import org.keepgoeat.util.setVisibility
 
 class HomeMyGoalAdapter(
     private val changeBtnColor: (MyGoalInfo) -> Unit,
-    private val changeActivity: (EatingType) -> Unit
+    private val changeActivityToDetail: (EatingType) -> Unit
 ) : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
     ItemDiffCallback<MyGoalInfo>(
         onContentsTheSame = { old, new -> old == new },
@@ -109,9 +109,9 @@ class HomeMyGoalAdapter(
         when (holder) {
             is MyGoalViewHolder -> {
                 if (currentList[position].moreGoal) {
-                    holder.bind(currentList[position], EatingType.MORE, changeBtnColor, changeActivity)
+                    holder.bind(currentList[position], EatingType.MORE, changeBtnColor, changeActivityToDetail)
                 } else {
-                    holder.bind(currentList[position], EatingType.LESS, changeBtnColor, changeActivity)
+                    holder.bind(currentList[position], EatingType.LESS, changeBtnColor, changeActivityToDetail)
                 }
             }
             // TODO 서버통신 데이터클래스로 변경하면 size 정보 받아온걸로 바꾸기
