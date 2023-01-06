@@ -51,7 +51,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         startActivity(intent)
     }
 
-    private fun changeActivityToMyPage(){
+    private fun changeActivityToMyPage() {
         val intent = Intent(this@HomeActivity, MyActivity::class.java)
         startActivity(intent)
     }

@@ -31,10 +31,10 @@ class HomeMyGoalAdapter(
     class HomeHeaderHolder(
         private val binding: ItemHomeHeaderBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(goalCount: Int, changeActivityToMyPage : () -> Unit) {
+        fun bind(goalCount: Int, changeActivityToMyPage: () -> Unit) {
             if (goalCount == 0)
                 binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
-            binding.ivMyPage.setOnClickListener{
+            binding.ivMyPage.setOnClickListener {
                 changeActivityToMyPage()
             }
         }
