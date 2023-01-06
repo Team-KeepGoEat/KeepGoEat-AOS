@@ -3,6 +3,7 @@ package org.keepgoeat.presentation.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.SimpleItemAnimator
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.presentation.detail.GoalDetailActivity
@@ -32,6 +33,10 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     private fun initLayout() {
         goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::changeActivityToDetail, ::changeActivityToMyPage)
+        var animator = binding.rvMyGoals.itemAnimator
+        if (animator is SimpleItemAnimator) {
+            animator.supportsChangeAnimations = false
+        }
         binding.rvMyGoals.adapter = goalAdapter
     }
 
