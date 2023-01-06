@@ -33,7 +33,7 @@
             android:layout_marginEnd="@dimen/spacing16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_mypage" />
+            app:srcCompat="@drawable/ic_mypage_white" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
