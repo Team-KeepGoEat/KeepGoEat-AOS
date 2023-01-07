@@ -25,13 +25,18 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun addListeners() {
-        binding.btnNoGoal.setOnClickListener {
-            showMakeGoalDialog()
+        with(binding) {
+            btnNoGoal.setOnClickListener {
+                showMakeGoalDialog()
+            }
+            ivMyPage.setOnClickListener {
+                moveToMy()
+            }
         }
     }
 
     private fun initLayout() {
-        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::changeActivityToDetail, ::changeActivityToMyPage)
+        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::moveToDetail)
         binding.rvMyGoals.apply {
             itemAnimator = null
             adapter = goalAdapter
@@ -42,19 +47,23 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         viewModel.goalList.observe(this) { goalList ->
             goalAdapter.submitList(goalList.toMutableList())
         }
+        viewModel.goalCount.observe(this) { goalCount ->
+            if (goalCount == 0)
+                binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
+        }
     }
 
     private fun showMakeGoalDialog() {
         HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
     }
 
-    private fun changeActivityToDetail(eatingType: EatingType) {
+    private fun moveToDetail(eatingType: EatingType) {
         val intent = Intent(this@HomeActivity, GoalDetailActivity::class.java)
         intent.putExtra(GoalDetailActivity.ARG_EATING_TYPE, eatingType.name)
         startActivity(intent)
     }
 
-    private fun changeActivityToMyPage() {
+    private fun moveToMy() {
         val intent = Intent(this@HomeActivity, MyActivity::class.java)
         startActivity(intent)
     }

@@ -4,10 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.keepgoeat.presentation.type.HomeGoalViewType
+import java.time.LocalDateTime
 
 class HomeViewModel : ViewModel() {
     private val _goalList = MutableLiveData<MutableList<MyGoalInfo>>()
     val goalList: LiveData<MutableList<MyGoalInfo>> get() = _goalList
+    private val _goalCount = MutableLiveData<Int>()
+    val goalCount: LiveData<Int> get() = _goalCount
+    private val _hour = MutableLiveData(LocalDateTime.now().hour)
+    val hour: LiveData<Int> get() = _hour
 
     init {
         fetchGoalList()
@@ -27,15 +32,6 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun fetchGoalList() {
-        var homeList = mutableListOf(
-            MyGoalInfo(
-                "1",
-                "",
-                false,
-                false,
-                HomeGoalViewType.HOME_HEADER_TYPE
-            )
-        )
         var myGoalList = mutableListOf(
             MyGoalInfo(
                 "하루 1끼 이상 야채 더 먹기",
@@ -69,9 +65,11 @@ class HomeViewModel : ViewModel() {
                 HomeGoalViewType.ADD_GOAL_TYPE
             )
         )
+        var homeList = mutableListOf<MyGoalInfo>()
         homeList.addAll(myGoalList)
         if (myGoalList.size > 0)
             homeList.addAll(addGoalBtn)
         _goalList.value = homeList.toMutableList()
+        _goalCount.value = myGoalList.size
     }
 }
