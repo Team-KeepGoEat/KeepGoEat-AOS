@@ -9,6 +9,8 @@ import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.setBackground
+import java.time.LocalDateTime
 
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel: HomeViewModel by viewModels()
@@ -25,22 +27,33 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun addListeners() {
-        binding.btnNoGoal.setOnClickListener {
-            showMakeGoalDialog()
+        with(binding) {
+            btnNoGoal.setOnClickListener {
+                showMakeGoalDialog()
+            }
+            ivMyPage.setOnClickListener {
+                changeActivityToMyPage()
+            }
         }
     }
 
     private fun initLayout() {
-        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::changeActivityToDetail, ::changeActivityToMyPage)
+        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::changeActivityToDetail)
         binding.rvMyGoals.apply {
             itemAnimator = null
             adapter = goalAdapter
         }
+        binding.ivHomeBackground.setBackground(LocalDateTime.now().hour)
     }
 
     private fun addObservers() {
         viewModel.goalList.observe(this) { goalList ->
             goalAdapter.submitList(goalList.toMutableList())
+        }
+        viewModel.goalCount.observe(this) { goalCount ->
+            if (goalCount == 0) {
+                binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
+            }
         }
     }
 

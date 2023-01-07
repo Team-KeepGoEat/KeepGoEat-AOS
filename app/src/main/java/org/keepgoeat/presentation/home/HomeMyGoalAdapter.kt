@@ -8,19 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ItemAddGoalBinding
 import org.keepgoeat.databinding.ItemHomeGoalBinding
-import org.keepgoeat.databinding.ItemHomeHeaderBinding
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.ItemDiffCallback
-import org.keepgoeat.util.setBackground
 import org.keepgoeat.util.setVisibility
-import java.time.LocalDateTime
 
 class HomeMyGoalAdapter(
     private val changeBtnColor: (MyGoalInfo) -> Unit,
-    private val changeActivityToDetail: (EatingType) -> Unit,
-    private val changeActivityToMyPage: () -> Unit
+    private val changeActivityToDetail: (EatingType) -> Unit
 ) : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
     ItemDiffCallback<MyGoalInfo>(
         onContentsTheSame = { old, new -> old == new },
@@ -29,22 +25,6 @@ class HomeMyGoalAdapter(
     )
 ) {
     private lateinit var inflater: LayoutInflater
-
-    class HomeHeaderHolder(
-        private val binding: ItemHomeHeaderBinding,
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(goalCount: Int, changeActivityToMyPage: () -> Unit) {
-            with(binding) {
-                if (goalCount == 0) {
-                    ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
-                }
-                ivMyPage.setOnClickListener {
-                    changeActivityToMyPage()
-                }
-                ivHomeBackground.setBackground(LocalDateTime.now().hour)
-            }
-        }
-    }
 
     class MyGoalViewHolder(
         private val binding: ItemHomeGoalBinding
@@ -106,9 +86,6 @@ class HomeMyGoalAdapter(
             HomeGoalViewType.ADD_GOAL_TYPE.goalType -> {
                 AddGoalViewHolder(ItemAddGoalBinding.inflate(inflater, parent, false))
             }
-            HomeGoalViewType.HOME_HEADER_TYPE.goalType -> {
-                HomeHeaderHolder(ItemHomeHeaderBinding.inflate(inflater, parent, false))
-            }
             else -> {
                 throw java.lang.ClassCastException("Unknown ViewType Error")
             }
@@ -126,7 +103,6 @@ class HomeMyGoalAdapter(
             }
             // TODO 서버통신 데이터클래스로 변경하면 size 정보 받아온걸로 바꾸기
             is AddGoalViewHolder -> holder.bind(currentList.size - 2)
-            is HomeHeaderHolder -> holder.bind(currentList.size - 2, changeActivityToMyPage)
         }
     }
 
