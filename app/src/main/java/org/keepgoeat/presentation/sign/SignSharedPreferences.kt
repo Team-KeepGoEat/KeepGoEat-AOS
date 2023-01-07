@@ -26,17 +26,19 @@ class SignSharedPreferences @Inject constructor(@ApplicationContext context: Con
         )
 
     var accestToken: String
-        set(value) = dataStore.edit { putString("ACCESS_TOKEN", value) }
+        set(value) = dataStore.edit { putString(ACCESS_TOKEN, value) }
         get() = dataStore.getString(
-            "ACCESS_TOKEN",
+            ACCESS_TOKEN,
             ""
         ) ?: ""
 
     var isLogin: Boolean
-        set(value) = dataStore.edit { putBoolean("IS_LOGIN", value) }
-        get() = dataStore.getBoolean("IS_LOGIN", false)
+        set(value) = dataStore.edit { putBoolean(IS_LOGIN, value) }
+        get() = dataStore.getBoolean(IS_LOGIN, false)
 
     companion object {
         const val FILE_NAME = "SignSharedPreferences"
+        const val ACCESS_TOKEN = "AccessToken"
+        const val IS_LOGIN = "IsLogin"
     }
 }
