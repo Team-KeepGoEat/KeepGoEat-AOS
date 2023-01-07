@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/gray_700">
+
+        <ImageView
+            android:id="@+id/iv_home_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_home_background_night" />
 
         <ImageView
             android:id="@+id/iv_home_snail"
@@ -25,7 +36,7 @@
             android:layout_marginEnd="@dimen/spacing16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_mypage" />
+            app:srcCompat="@drawable/ic_mypage_white" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -68,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing16"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="@dimen/spacing24"
+                android:layout_marginBottom="@dimen/spacing16"
                 android:text="@string/home_today_goal"
                 android:textAppearance="@style/TextAppearance.System2_Bold"
                 app:layout_constraintBottom_toBottomOf="parent"

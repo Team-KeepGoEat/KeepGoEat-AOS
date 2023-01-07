@@ -32,7 +32,10 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     private fun initLayout() {
         goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::changeActivityToDetail, ::changeActivityToMyPage)
-        binding.rvMyGoals.adapter = goalAdapter
+        binding.rvMyGoals.apply {
+            itemAnimator = null
+            adapter = goalAdapter
+        }
     }
 
     private fun addObservers() {
