@@ -1,17 +1,16 @@
-package org.keepgoeat.presentation.keep
+package org.keepgoeat.presentation.detail
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
-import org.keepgoeat.databinding.DialogBottomGoalKeepBinding
-import org.keepgoeat.presentation.detail.GoalDetailViewModel
+import org.keepgoeat.databinding.DialogBottomGoalDeleteBinding
 import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
 @AndroidEntryPoint
-class GoalKeepBottomDialogFragment :
-    BindingBottomSheetDialogFragment<DialogBottomGoalKeepBinding>(R.layout.dialog_bottom_goal_keep) {
+class GoalDeleteBottomDialogFragment :
+    BindingBottomSheetDialogFragment<DialogBottomGoalDeleteBinding>(R.layout.dialog_bottom_goal_delete) {
     private val viewModel: GoalDetailViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,13 +21,11 @@ class GoalKeepBottomDialogFragment :
     }
 
     private fun addListeners() {
-        binding.btnKeep.setOnClickListener {
-            // TODO 화면 전환 처리 구현
-            viewModel.keepGoal()
+        binding.btnNo.setOnClickListener {
+            dismiss()
         }
 
-        binding.tvDelete.setOnClickListener {
-            // TODO 화면 전환 처리 구현
+        binding.btnYes.setOnClickListener {
             viewModel.deleteGoal()
         }
     }
