@@ -6,8 +6,6 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomGoalKeepBinding
-import org.keepgoeat.presentation.detail.GoalDeleteBottomDialogFragment
-import org.keepgoeat.presentation.detail.GoalDetailViewModel
 import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
 @AndroidEntryPoint
