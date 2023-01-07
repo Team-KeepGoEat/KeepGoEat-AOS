@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import coil.load
 import org.keepgoeat.R
+import org.keepgoeat.presentation.type.HomeBackgroundType
 import org.keepgoeat.util.extension.padZero
 import java.time.LocalDate
 
@@ -34,4 +35,17 @@ fun TextView.setDuration(startDate: LocalDate?, endDate: LocalDate?) {
             e.dayOfMonth.padZero(2)
         )
     }
+}
+
+@BindingAdapter("homeBackground")
+fun ImageView.setBackground(hour: Int) {
+    val imgRes = when (hour) {
+        in 7..16 -> HomeBackgroundType.MORNING.sky
+        in 18..24, in 0..5 -> HomeBackgroundType.NIGHT.sky
+        in 5..7, in 16..18 -> HomeBackgroundType.EVENING.sky
+        else -> {
+            HomeBackgroundType.MORNING.sky
+        }
+    }
+    setBackgroundResource(imgRes)
 }
