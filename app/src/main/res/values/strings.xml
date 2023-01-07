@@ -7,6 +7,7 @@
     <string name="complete">완료</string>
     <string name="eating_type_less">덜 먹기</string>
     <string name="eating_type_more">더 먹기</string>
+    <string name="btn_text_no">아니오</string>
 
     <!--  sign  -->
     <string name="kakao_app_key1">5b258b06c6f8e90a646e2675b2f8e8aa</string>
@@ -80,4 +81,5 @@
     <string name="my_total_achievement_day">총 달성일</string>
     <string name="my_duration">진행기간</string>
     <string name="my_goal_duration_format">%s. %s. %s ~ %s. %s. %s</string>
+    <string name="goal_detail_delete_button_text">네, 삭제할래요</string>
 </resources>

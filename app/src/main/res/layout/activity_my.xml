@@ -15,15 +15,26 @@
         android:layout_height="match_parent"
         tools:context=".presentation.my.MyActivity">
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing16"
-            android:layout_marginTop="@dimen/spacing8"
-            android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@color/white"
+            android:elevation="4dp"
+            android:paddingHorizontal="@dimen/spacing16"
+            android:paddingVertical="@dimen/spacing8"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_goal_list"
@@ -31,7 +42,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="6dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
             tools:listitem="@layout/item_my_goal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
