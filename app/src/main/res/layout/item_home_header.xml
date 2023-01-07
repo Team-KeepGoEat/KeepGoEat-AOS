@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing16"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="@dimen/spacing24"
+                android:layout_marginBottom="@dimen/spacing16"
                 android:text="@string/home_today_goal"
                 android:textAppearance="@style/TextAppearance.System2_Bold"
                 app:layout_constraintBottom_toBottomOf="parent"
