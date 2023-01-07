@@ -7,10 +7,12 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_700">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/iv_home_background"
             android:layout_width="match_parent"
-            android:layout_height="245dp"
-            android:background="@drawable/img_home_background_0"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_home_background_0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
