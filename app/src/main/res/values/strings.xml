@@ -2,18 +2,18 @@
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
 
+    <!-- Global -->
+    <string name="keep_go_eat">킵고잇</string>
+    <string name="complete">완료</string>
+    <string name="eating_type_less">덜 먹기</string>
+    <string name="eating_type_more">더 먹기</string>
+
     <!--  sign  -->
     <string name="kakao_app_key1">8023bf5dba44e18383b689f7efcad88c</string>
     <string name="kakao_app_key2">kakao8023bf5dba44e18383b689f7efcad88c</string>
     <string name="signin">카카오톡 로그인</string>
     <string name="sign_description1">식습관 관리,</string>
     <string name="sign_description2">같이 천천히 시작해볼까요?\n먹는 재미는 언제나 소중하니까!</string>
-
-    <string name="keep_go_eat">킵고잇</string>
-    <!-- Global -->
-    <string name="complete">완료</string>
-    <string name="eating_type_less">덜 먹기</string>
-    <string name="eating_type_more">더 먹기</string>
 
     <!-- Goal Detail -->
     <string name="goal_detail_my_goal">나의 목표</string>
@@ -46,6 +46,7 @@
     <!-- Home Bottom -->
     <string name="bottom_home_more_txt">건강한 음식을 더 먹어볼까?</string>
     <string name="bottom_home_less_txt">안 좋은 식습관을 줄여가보자!</string>
+
     <!-- Goal Keep -->
     <string name="goal_keep_dialog_guide">목표 달성이 끝났나요?\n달성 완료된 목표는 보관해서 모아볼 수 있어요.</string>
     <string name="goal_keep_delete_guide">잘못된 목표인가요? 삭제하기</string>
@@ -78,5 +79,5 @@
     <string name="my_achieved_goal">보관한 목표</string>
     <string name="my_total_achievement_day">총 달성일</string>
     <string name="my_duration">진행기간</string>
-
+    <string name="my_goal_duration_format">%s. %s. %s ~ %s. %s. %s</string>
 </resources>
