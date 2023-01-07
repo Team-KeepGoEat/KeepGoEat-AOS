@@ -10,10 +10,13 @@ import org.keepgoeat.databinding.ItemAddGoalBinding
 import org.keepgoeat.databinding.ItemHomeGoalBinding
 import org.keepgoeat.databinding.ItemHomeHeaderBinding
 import org.keepgoeat.presentation.type.EatingType
+import org.keepgoeat.presentation.type.HomeBackgroundType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.ItemDiffCallback
+import org.keepgoeat.util.setImage
 import org.keepgoeat.util.setVisibility
+import java.time.LocalDateTime
 
 class HomeMyGoalAdapter(
     private val changeBtnColor: (MyGoalInfo) -> Unit,
@@ -36,6 +39,11 @@ class HomeMyGoalAdapter(
                 binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
             binding.ivMyPage.setOnClickListener {
                 changeActivityToMyPage()
+            }
+            when (LocalDateTime.now().hour) {
+                in 7..16 -> binding.ivHomeBackground.setImageResource(HomeBackgroundType.MORNING.sky)
+                in 18..24, in 0..5 -> binding.ivHomeBackground.setImageResource(HomeBackgroundType.NIGHT.sky)
+                in 5..7, in 16..18 -> binding.ivHomeBackground.setImageResource(HomeBackgroundType.EVENING.sky)
             }
         }
     }
@@ -101,7 +109,7 @@ class HomeMyGoalAdapter(
                 AddGoalViewHolder(ItemAddGoalBinding.inflate(inflater, parent, false))
             }
             HomeGoalViewType.HOME_HEADER_TYPE.goalType -> {
-                HomeHeaderHolder(ItemHomeHeaderBinding.inflate(inflater, parent, false))
+                HomeMyGoalAdapter.HomeHeaderHolder(ItemHomeHeaderBinding.inflate(inflater, parent, false))
             }
             else -> {
                 throw java.lang.ClassCastException("Unknown ViewType Error")
