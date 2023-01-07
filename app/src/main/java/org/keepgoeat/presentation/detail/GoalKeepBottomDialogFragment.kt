@@ -1,4 +1,4 @@
-package org.keepgoeat.presentation.keep
+package org.keepgoeat.presentation.detail
 
 import android.os.Bundle
 import android.view.View

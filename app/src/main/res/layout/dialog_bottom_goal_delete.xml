@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="79dp"
-        tools:context=".presentation.keep.GoalKeepBottomDialogFragment">
+        tools:context=".presentation.detail.GoalKeepBottomDialogFragment">
 
         <TextView
             android:id="@+id/tv_goal_delete_title"
