@@ -13,43 +13,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing36"
-            android:background="@color/gray_100"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_sign_title"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_texts"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sign_description1"
-                android:textAppearance="@style/TextAppearance.System3_Bold"
-                android:textColor="@color/gray_700"
+                android:background="@drawable/background_sign_box"
+                android:paddingTop="@dimen/spacing16"
+                android:paddingBottom="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_sign_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sign_description2"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.System3"
-                android:textColor="@color/gray_700"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_sign_title" />
+                <TextView
+                    android:id="@+id/tv_sign_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_description1"
+                    android:textAppearance="@style/TextAppearance.System3_Bold"
+                    android:textColor="@color/gray_700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_sign_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_description2"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.System3"
+                    android:textColor="@color/gray_700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_sign_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_snail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="34dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_sign_description">
+                app:layout_constraintTop_toBottomOf="@+id/layout_texts">
 
                 <ImageView
                     android:id="@+id/iv_orange_snail"
