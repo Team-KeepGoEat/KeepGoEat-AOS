@@ -80,10 +80,5 @@
                     android:scheme="@string/kakao_app_key2" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.home.HomeActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
     </application>
 </manifest>
