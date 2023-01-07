@@ -14,7 +14,6 @@ import org.keepgoeat.presentation.type.HomeBackgroundType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.ItemDiffCallback
-import org.keepgoeat.util.setImage
 import org.keepgoeat.util.setVisibility
 import java.time.LocalDateTime
 
