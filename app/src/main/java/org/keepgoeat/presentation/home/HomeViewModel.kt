@@ -4,12 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.keepgoeat.presentation.type.HomeGoalViewType
+import java.time.LocalDateTime
 
 class HomeViewModel : ViewModel() {
     private val _goalList = MutableLiveData<MutableList<MyGoalInfo>>()
     val goalList: LiveData<MutableList<MyGoalInfo>> get() = _goalList
     private val _goalCount = MutableLiveData<Int>()
     val goalCount: LiveData<Int> get() = _goalCount
+    private val _hour = MutableLiveData(LocalDateTime.now().hour)
+    val hour: LiveData<Int> get() = _hour
 
     init {
         fetchGoalList()

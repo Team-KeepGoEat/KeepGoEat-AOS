@@ -9,8 +9,6 @@ import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
-import org.keepgoeat.util.setBackground
-import java.time.LocalDateTime
 
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel: HomeViewModel by viewModels()
@@ -43,7 +41,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             itemAnimator = null
             adapter = goalAdapter
         }
-        binding.ivHomeBackground.setBackground(LocalDateTime.now().hour)
     }
 
     private fun addObservers() {
@@ -51,9 +48,8 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             goalAdapter.submitList(goalList.toMutableList())
         }
         viewModel.goalCount.observe(this) { goalCount ->
-            if (goalCount == 0) {
+            if (goalCount == 0)
                 binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
-            }
         }
     }
 
