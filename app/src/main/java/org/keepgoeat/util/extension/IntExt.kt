@@ -5,3 +5,5 @@ import kotlin.math.roundToInt
 
 val Int.dp: Int
     get() = (this * Resources.getSystem().displayMetrics.density).roundToInt()
+
+fun Int.padZero(length: Int) = toString().padStart(length, '0')
