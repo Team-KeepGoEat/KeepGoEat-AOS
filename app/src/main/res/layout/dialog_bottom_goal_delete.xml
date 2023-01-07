@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.detail.GoalDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="79dp"
+        tools:context=".presentation.keep.GoalKeepBottomDialogFragment">
+
+        <TextView
+            android:id="@+id/tv_goal_delete_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="삭제하시겠어요?"
+            android:textAppearance="@style/TextAppearance.System3_Bold"
+            android:textColor="@color/gray_600"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_goal_delete_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="삭제한 목표는 복구할 수 없어요."
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_600"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_delete_title" />
+
+        <ImageView
+            android:id="@+id/iv_trash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:src="@drawable/ic_trash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_delete_description" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_no"
+            style="@style/Widget.FullButton.Basic"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/spacing16"
+            android:layout_marginTop="31dp"
+            android:backgroundTint="@color/orange_600"
+            android:text="@string/btn_text_no"
+            android:textAppearance="@style/TextAppearance.System5_Bold"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/btn_yes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_trash" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_yes"
+            style="@style/Widget.FullButton.Basic"
+            android:layout_width="0dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="@dimen/spacing16"
+            android:backgroundTint="@color/gray_200"
+            android:text="@string/goal_detail_delete_button_text"
+            android:textAppearance="@style/TextAppearance.System5_Bold"
+            android:textColor="@color/gray_400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_no"
+            app:layout_constraintTop_toTopOf="@id/btn_no"
+            app:rippleColor="@null" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
