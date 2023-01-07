@@ -16,7 +16,7 @@ import org.keepgoeat.util.setVisibility
 
 class HomeMyGoalAdapter(
     private val changeBtnColor: (MyGoalInfo) -> Unit,
-    private val changeActivityToDetail: (EatingType) -> Unit
+    private val moveToDetail: (EatingType) -> Unit
 ) : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
     ItemDiffCallback<MyGoalInfo>(
         onContentsTheSame = { old, new -> old == new },
@@ -30,7 +30,7 @@ class HomeMyGoalAdapter(
         private val binding: ItemHomeGoalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
-        fun bind(myGoal: MyGoalInfo, eatingType: EatingType, changeBtnColor: (MyGoalInfo) -> Unit, changeActivity: (EatingType) -> Unit) {
+        fun bind(myGoal: MyGoalInfo, eatingType: EatingType, changeBtnColor: (MyGoalInfo) -> Unit, moveToDetail: (EatingType) -> Unit) {
             val btnType: HomeBtnType = if (eatingType == EatingType.MORE) { // 더 먹기인 경우
                 if (myGoal.goalAchieved) {
                     HomeBtnType.PLUS_ACHIEVED
@@ -53,7 +53,7 @@ class HomeMyGoalAdapter(
                     changeBtnColor(myGoal)
                 }
                 layoutHomeGoal.setOnClickListener {
-                    changeActivity(eatingType)
+                    moveToDetail(eatingType)
                 }
             }
         }
@@ -96,9 +96,9 @@ class HomeMyGoalAdapter(
         when (holder) {
             is MyGoalViewHolder -> {
                 if (currentList[position].moreGoal) {
-                    holder.bind(currentList[position], EatingType.MORE, changeBtnColor, changeActivityToDetail)
+                    holder.bind(currentList[position], EatingType.MORE, changeBtnColor, moveToDetail)
                 } else {
-                    holder.bind(currentList[position], EatingType.LESS, changeBtnColor, changeActivityToDetail)
+                    holder.bind(currentList[position], EatingType.LESS, changeBtnColor, moveToDetail)
                 }
             }
             // TODO 서버통신 데이터클래스로 변경하면 size 정보 받아온걸로 바꾸기

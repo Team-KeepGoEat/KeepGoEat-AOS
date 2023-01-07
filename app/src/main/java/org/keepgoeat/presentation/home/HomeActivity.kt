@@ -32,13 +32,13 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
                 showMakeGoalDialog()
             }
             ivMyPage.setOnClickListener {
-                changeActivityToMyPage()
+                moveToMy()
             }
         }
     }
 
     private fun initLayout() {
-        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::changeActivityToDetail)
+        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::moveToDetail)
         binding.rvMyGoals.apply {
             itemAnimator = null
             adapter = goalAdapter
@@ -61,13 +61,13 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
     }
 
-    private fun changeActivityToDetail(eatingType: EatingType) {
+    private fun moveToDetail(eatingType: EatingType) {
         val intent = Intent(this@HomeActivity, GoalDetailActivity::class.java)
         intent.putExtra(GoalDetailActivity.ARG_EATING_TYPE, eatingType.name)
         startActivity(intent)
     }
 
-    private fun changeActivityToMyPage() {
+    private fun moveToMy() {
         val intent = Intent(this@HomeActivity, MyActivity::class.java)
         startActivity(intent)
     }
