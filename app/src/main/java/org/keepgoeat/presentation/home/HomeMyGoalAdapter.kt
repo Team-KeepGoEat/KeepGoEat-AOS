@@ -102,7 +102,7 @@ class HomeMyGoalAdapter(
                 }
             }
             // TODO 서버통신 데이터클래스로 변경하면 size 정보 받아온걸로 바꾸기
-            is AddGoalViewHolder -> holder.bind(currentList.size - 2)
+            is AddGoalViewHolder -> holder.bind(currentList.size - 1)
         }
     }
 
