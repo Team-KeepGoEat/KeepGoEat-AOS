@@ -13,7 +13,9 @@ import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.ItemDiffCallback
+import org.keepgoeat.util.setBackground
 import org.keepgoeat.util.setVisibility
+import java.time.LocalDateTime
 
 class HomeMyGoalAdapter(
     private val changeBtnColor: (MyGoalInfo) -> Unit,
@@ -32,10 +34,14 @@ class HomeMyGoalAdapter(
         private val binding: ItemHomeHeaderBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(goalCount: Int, changeActivityToMyPage: () -> Unit) {
-            if (goalCount == 0)
-                binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
-            binding.ivMyPage.setOnClickListener {
-                changeActivityToMyPage()
+            with(binding) {
+                if (goalCount == 0) {
+                    ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
+                }
+                ivMyPage.setOnClickListener {
+                    changeActivityToMyPage()
+                }
+                ivHomeBackground.setBackground(LocalDateTime.now().hour)
             }
         }
     }
