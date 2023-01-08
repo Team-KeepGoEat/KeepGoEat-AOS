@@ -7,14 +7,14 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.keepgoeat.domain.model.HomeMyGoal
-import org.keepgoeat.domain.repository.HomeRepository
+import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homeRepository: HomeRepository
+    private val goalRepository: GoalRepository
 ) : ViewModel() {
     private val _goalList = MutableLiveData<MutableList<HomeMyGoal>>()
     val goalList: LiveData<MutableList<HomeMyGoal>> get() = _goalList
@@ -44,7 +44,7 @@ class HomeViewModel @Inject constructor(
 
     private fun fetchGoalList() {
         viewModelScope.launch {
-            homeRepository.fetchHome()?.let { homeData ->
+            goalRepository.fetchHome()?.let { homeData ->
                 _cheeringMessage.value = homeData.cheeringMessage
                 _goalList.value = homeData.toHomeMyGoal().toMutableList()
             }
