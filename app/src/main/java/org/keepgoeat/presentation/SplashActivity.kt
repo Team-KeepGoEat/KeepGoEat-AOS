@@ -26,6 +26,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
         lifecycleScope.launch {
             delay(1000L)
             moveToNext()
+            finish()
         }
     }
 
