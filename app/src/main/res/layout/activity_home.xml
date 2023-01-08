@@ -71,7 +71,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing12"
-                    android:text="@string/cheer_msg"
+                    android:text="@{viewModel.cheeringMessage}"
                     android:textAppearance="@style/TextAppearance.System4_Bold"
                     android:textColor="@color/gray_700"
                     app:layout_constraintBottom_toBottomOf="parent"
