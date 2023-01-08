@@ -24,7 +24,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
 
     private fun loadSplashScreen() {
         lifecycleScope.launch {
-            delay(2000)
+            delay(1000L)
             moveToNext()
         }
     }
