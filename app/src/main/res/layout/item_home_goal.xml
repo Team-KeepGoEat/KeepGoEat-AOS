@@ -8,7 +8,7 @@
 
         <variable
             name="goal"
-            type="org.keepgoeat.presentation.home.MyGoalInfo" />
+            type="org.keepgoeat.domain.model.HomeMyGoal" />
 
         <variable
             name="goalType"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing16"
             android:layout_marginTop="@dimen/spacing12"
-            android:text="@{goal.goalName}"
+            android:text="@{goal.goalTitle}"
             android:textAppearance="@style/TextAppearance.System4_Bold"
             android:textColor="@color/gray_700"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
                 android:id="@+id/tv_item_goal_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{goal.goalDate}"
+                android:text="@{String.valueOf(goal.thisMonthCount)}"
                 android:textAppearance="@style/TextAppearance.System1_Bold"
                 android:textColor="@{context.getColor(goalType.tagTextColor)}"
                 android:textSize="36dp"

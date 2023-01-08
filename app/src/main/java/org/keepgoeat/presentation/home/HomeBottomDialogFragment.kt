@@ -18,14 +18,16 @@ class HomeBottomDialogFragment :
 
     private fun addListeners() {
         binding.layoutHomeBottomMore.setOnClickListener {
-            changeActivity(EatingType.MORE)
+            moveToSetting(EatingType.MORE)
+            dismiss()
         }
         binding.layoutHomeBottomLess.setOnClickListener {
-            changeActivity(EatingType.LESS)
+            moveToSetting(EatingType.LESS)
+            dismiss()
         }
     }
 
-    private fun changeActivity(eatingType: EatingType) {
+    private fun moveToSetting(eatingType: EatingType) {
         val intent = Intent(requireActivity(), GoalSettingActivity::class.java)
         intent.putExtra(GoalSettingActivity.ARG_EATING_TYPE, eatingType.name)
         startActivity(intent)

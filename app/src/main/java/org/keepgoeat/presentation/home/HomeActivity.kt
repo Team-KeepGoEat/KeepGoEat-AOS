@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
+import org.keepgoeat.domain.model.HomeMyGoal
 import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
@@ -57,9 +58,10 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
     }
 
-    private fun moveToDetail(eatingType: EatingType) {
+    private fun moveToDetail(eatingType: EatingType, goalId: Int) {
         val intent = Intent(this@HomeActivity, GoalDetailActivity::class.java)
         intent.putExtra(GoalDetailActivity.ARG_EATING_TYPE, eatingType.name)
+        intent.putExtra(GoalDetailActivity.ARG_GOAL_ID, goalId)
         startActivity(intent)
     }
 
@@ -68,7 +70,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         startActivity(intent)
     }
 
-    private fun changeGoalItemBtnColor(myGoal: MyGoalInfo) {
+    private fun changeGoalItemBtnColor(myGoal: HomeMyGoal) {
         viewModel.changeGoalAchieved(myGoal)
     }
 }

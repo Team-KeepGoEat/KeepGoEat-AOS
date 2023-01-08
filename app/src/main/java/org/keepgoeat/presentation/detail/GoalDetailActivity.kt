@@ -27,6 +27,10 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
             viewModel.setEatingType(eatingType)
             adapter = GoalStickerListAdapter(eatingType, CELL_COUNT)
         }
+        if (intent.hasExtra(ARG_GOAL_ID)) {
+            val goalId = intent.getIntExtra(ARG_GOAL_ID, -1)
+            viewModel.setGoalId(goalId)
+        }
 
         viewModel.fetchGoalDetailInfo()
 
@@ -66,5 +70,6 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         private const val CARD_MATRIX_ROW = 5
         private const val CARD_MATRIX_COL = 7
         const val ARG_EATING_TYPE = "eatingType"
+        const val ARG_GOAL_ID = "goalId"
     }
 }

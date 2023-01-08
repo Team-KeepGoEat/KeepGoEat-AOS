@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ItemAddGoalBinding
 import org.keepgoeat.databinding.ItemHomeGoalBinding
+import org.keepgoeat.domain.model.HomeMyGoal
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
@@ -15,13 +16,12 @@ import org.keepgoeat.util.ItemDiffCallback
 import org.keepgoeat.util.setVisibility
 
 class HomeMyGoalAdapter(
-    private val changeBtnColor: (MyGoalInfo) -> Unit,
-    private val moveToDetail: (EatingType) -> Unit
-) : ListAdapter<MyGoalInfo, RecyclerView.ViewHolder>(
-    ItemDiffCallback<MyGoalInfo>(
+    private val changeBtnColor: (HomeMyGoal) -> Unit,
+    private val moveToDetail: (EatingType, Int) -> Unit
+) : ListAdapter<HomeMyGoal, RecyclerView.ViewHolder>(
+    ItemDiffCallback<HomeMyGoal>(
         onContentsTheSame = { old, new -> old == new },
-        // TODO Response에서 받아올 때는 목표별 고유 아이디 값으로 바꾸기
-        onItemsTheSame = { old, new -> old.goalName == new.goalName }
+        onItemsTheSame = { old, new -> old.id == new.id }
     )
 ) {
     private lateinit var inflater: LayoutInflater
@@ -30,15 +30,20 @@ class HomeMyGoalAdapter(
         private val binding: ItemHomeGoalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
-        fun bind(myGoal: MyGoalInfo, eatingType: EatingType, changeBtnColor: (MyGoalInfo) -> Unit, moveToDetail: (EatingType) -> Unit) {
+        fun bind(
+            myGoal: HomeMyGoal,
+            eatingType: EatingType,
+            changeBtnColor: (HomeMyGoal) -> Unit,
+            moveToDetail: (EatingType, Int) -> Unit
+        ) {
             val btnType: HomeBtnType = if (eatingType == EatingType.MORE) { // 더 먹기인 경우
-                if (myGoal.goalAchieved) {
+                if (myGoal.isAchieved) {
                     HomeBtnType.PLUS_ACHIEVED
                 } else {
                     HomeBtnType.PLUS_NOT_ACHIEVED
                 }
             } else { // 덜 먹기인 경우
-                if (myGoal.goalAchieved) {
+                if (myGoal.isAchieved) {
                     HomeBtnType.MINUS_ACHIEVED
                 } else {
                     HomeBtnType.MINUS_NOT_ACHIEVED
@@ -53,7 +58,7 @@ class HomeMyGoalAdapter(
                     changeBtnColor(myGoal)
                 }
                 layoutHomeGoal.setOnClickListener {
-                    moveToDetail(eatingType)
+                    moveToDetail(eatingType, myGoal.id)
                 }
             }
         }
@@ -95,7 +100,7 @@ class HomeMyGoalAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is MyGoalViewHolder -> {
-                if (currentList[position].moreGoal) {
+                if (currentList[position].isMore) {
                     holder.bind(currentList[position], EatingType.MORE, changeBtnColor, moveToDetail)
                 } else {
                     holder.bind(currentList[position], EatingType.LESS, changeBtnColor, moveToDetail)
