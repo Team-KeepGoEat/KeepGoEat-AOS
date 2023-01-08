@@ -2,7 +2,6 @@ package org.keepgoeat.presentation.sign
 
 import android.content.Intent
 import android.os.Bundle
-import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.data.service.SignService
@@ -18,7 +17,6 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        KakaoSdk.init(this, this.getString(R.string.kakao_app_key1))
         addListeners()
         // moveMain()
     }
