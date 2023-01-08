@@ -3,12 +3,13 @@ package org.keepgoeat.presentation.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import org.keepgoeat.domain.model.HomeMyGoal
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import java.time.LocalDateTime
 
 class HomeViewModel : ViewModel() {
-    private val _goalList = MutableLiveData<MutableList<MyGoalInfo>>()
-    val goalList: LiveData<MutableList<MyGoalInfo>> get() = _goalList
+    private val _goalList = MutableLiveData<MutableList<HomeMyGoal>>()
+    val goalList: LiveData<MutableList<HomeMyGoal>> get() = _goalList
     private val _goalCount = MutableLiveData<Int>()
     val goalCount: LiveData<Int> get() = _goalCount
     private val _hour = MutableLiveData(LocalDateTime.now().hour)
@@ -18,13 +19,13 @@ class HomeViewModel : ViewModel() {
         fetchGoalList()
     }
 
-    fun changeGoalAchieved(myGoal: MyGoalInfo) {
+    fun changeGoalAchieved(myGoal: HomeMyGoal) {
         val position = goalList.value?.indexOf(myGoal) ?: return
         with(myGoal) {
             _goalList.value?.set(
                 position,
-                MyGoalInfo(
-                    goalName, goalDate, moreGoal, !goalAchieved, type
+                HomeMyGoal(
+                    id, goalTitle, isMore, !isAchieved, thisMonthCount, type
                 )
             )
         }
@@ -33,39 +34,43 @@ class HomeViewModel : ViewModel() {
 
     private fun fetchGoalList() {
         var myGoalList = mutableListOf(
-            MyGoalInfo(
+            HomeMyGoal(
+                1,
                 "하루 1끼 이상 야채 더 먹기",
-                "8",
                 true,
-                false,
+                true,
+                8,
                 HomeGoalViewType.MY_GOAL_TYPE
             ),
-            MyGoalInfo(
+            HomeMyGoal(
+                2,
                 "라면 덜 먹기",
-                "8",
                 false,
                 false,
+                8,
                 HomeGoalViewType.MY_GOAL_TYPE
             ),
-            MyGoalInfo(
+            HomeMyGoal(
+                3,
                 "커피 덜 먹기",
-                "30",
-                false,
                 true,
+                false,
+                30,
                 HomeGoalViewType.MY_GOAL_TYPE
             )
         )
-//        val myGoalList = emptyList<MyGoalInfo>()
+//        val myGoalList = emptyList<HomeMyGoal>()
         val addGoalBtn = mutableListOf(
-            MyGoalInfo(
-                "3",
+            HomeMyGoal(
+                0,
                 "",
                 false,
                 false,
+                0,
                 HomeGoalViewType.ADD_GOAL_TYPE
             )
         )
-        var homeList = mutableListOf<MyGoalInfo>()
+        var homeList = mutableListOf<HomeMyGoal>()
         homeList.addAll(myGoalList)
         if (myGoalList.size > 0)
             homeList.addAll(addGoalBtn)
