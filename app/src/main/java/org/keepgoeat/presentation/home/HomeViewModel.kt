@@ -3,11 +3,19 @@ package org.keepgoeat.presentation.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import org.keepgoeat.data.datasource.remote.HomeDataSource
 import org.keepgoeat.domain.model.HomeMyGoal
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import java.time.LocalDateTime
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val homeDataSource: HomeDataSource
+): ViewModel() {
     private val _goalList = MutableLiveData<MutableList<HomeMyGoal>>()
     val goalList: LiveData<MutableList<HomeMyGoal>> get() = _goalList
     private val _goalCount = MutableLiveData<Int>()
@@ -33,6 +41,10 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun fetchGoalList() {
+        viewModelScope.launch {
+            homeDataSource.fetchHomeEntire()
+        }
+
         var myGoalList = mutableListOf(
             HomeMyGoal(
                 1,
