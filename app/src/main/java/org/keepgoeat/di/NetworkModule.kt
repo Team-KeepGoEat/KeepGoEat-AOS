@@ -10,6 +10,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.keepgoeat.BuildConfig
 import org.keepgoeat.BuildConfig.DEBUG
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
@@ -32,7 +33,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient, json: Json): Retrofit = Retrofit.Builder()
-        .baseUrl("https://reqres.in/") // TODO BaseUrl 변경 및 BuildConfig 변수 사용
+        .baseUrl(BuildConfig.KGE_BASE_URL)
         .client(client)
         .addConverterFactory(json.asConverterFactory(requireNotNull("application/json".toMediaTypeOrNull())))
         .build()

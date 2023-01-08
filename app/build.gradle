@@ -25,6 +25,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "KGE_BASE_URL", properties["KGE_BASE_URL"]
     }
 
     buildTypes {
