@@ -4,7 +4,7 @@ import org.keepgoeat.data.model.response.ResponseHome
 import retrofit2.Response
 import retrofit2.http.GET
 
-interface HomeService {
+interface GoalService {
     @GET("home")
     suspend fun fetchHomeEntire(): Response<ResponseHome>
 }

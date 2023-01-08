@@ -1,20 +1,20 @@
 package org.keepgoeat.data.repository
 
 import org.keepgoeat.data.ApiResult
-import org.keepgoeat.data.datasource.remote.HomeDataSource
+import org.keepgoeat.data.datasource.remote.GoalDataSource
 import org.keepgoeat.data.model.response.ResponseHome
-import org.keepgoeat.domain.repository.HomeRepository
+import org.keepgoeat.domain.repository.GoalRepository
 import timber.log.Timber
 import javax.inject.Inject
 
-class HomeRepositoryImpl @Inject constructor(
-    private val homeDataSource: HomeDataSource,
-) : HomeRepository {
+class GoalRepositoryImpl @Inject constructor(
+    private val goalDataSource: GoalDataSource,
+) : GoalRepository {
     override suspend fun fetchHome(): ResponseHome.HomeData? {
-        val result = homeDataSource.fetchHomeEntire()
+        val result = goalDataSource.fetchHomeEntire()
         return when (result) {
             is ApiResult.Success -> {
-                result.data?.homeData
+                result.data?.data
             }
             is ApiResult.NetworkError -> {
                 Timber.d("Network Error")
