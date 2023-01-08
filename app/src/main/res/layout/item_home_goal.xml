@@ -65,7 +65,7 @@
                 android:id="@+id/tv_item_goal_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{goal.thisMonthCount}"
+                android:text="@{String.valueOf(goal.thisMonthCount)}"
                 android:textAppearance="@style/TextAppearance.System1_Bold"
                 android:textColor="@{context.getColor(goalType.tagTextColor)}"
                 android:textSize="36dp"
