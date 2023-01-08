@@ -34,12 +34,8 @@ class SignService @Inject constructor(
     }
 
     private fun handleLoginError(throwable: Throwable) {
-        Timber.d(
-            "${
-                if (isKakaoTalkLoginAvailable) "카카오톡"
-                else "카카오계정"
-            }으로 로그인 실패"
-        )
+        val kakaoType = if (isKakaoTalkLoginAvailable) "카카오톡" else "카카오계정"
+        Timber.d("$kakaoType 으로 로그인 실패")
     }
 
     private fun handleLoginSuccess(oAuthToken: OAuthToken) {

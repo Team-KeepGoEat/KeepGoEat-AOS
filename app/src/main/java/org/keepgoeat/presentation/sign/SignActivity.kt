@@ -15,6 +15,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign) {
     private val viewModel: SignViewModel by viewModels()
+
     @Inject
     lateinit var signService: SignService
 
@@ -34,7 +35,7 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
         }
     }
 
-    private fun moveToOnBoarding(){
+    private fun moveToOnBoarding() {
         startActivity(Intent(this, OnboardingActivity::class.java))
         finish()
     }
