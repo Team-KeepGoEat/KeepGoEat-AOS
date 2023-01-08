@@ -58,9 +58,10 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
     }
 
-    private fun moveToDetail(eatingType: EatingType) {
+    private fun moveToDetail(eatingType: EatingType, goalId: Int) {
         val intent = Intent(this@HomeActivity, GoalDetailActivity::class.java)
         intent.putExtra(GoalDetailActivity.ARG_EATING_TYPE, eatingType.name)
+        intent.putExtra(GoalDetailActivity.ARG_GOAL_ID, goalId)
         startActivity(intent)
     }
 

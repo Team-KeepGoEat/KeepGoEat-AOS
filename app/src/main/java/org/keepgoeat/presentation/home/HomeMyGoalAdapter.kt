@@ -17,7 +17,7 @@ import org.keepgoeat.util.setVisibility
 
 class HomeMyGoalAdapter(
     private val changeBtnColor: (HomeMyGoal) -> Unit,
-    private val moveToDetail: (EatingType) -> Unit
+    private val moveToDetail: (EatingType, Int) -> Unit
 ) : ListAdapter<HomeMyGoal, RecyclerView.ViewHolder>(
     ItemDiffCallback<HomeMyGoal>(
         onContentsTheSame = { old, new -> old == new },
@@ -30,7 +30,12 @@ class HomeMyGoalAdapter(
         private val binding: ItemHomeGoalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
-        fun bind(myGoal: HomeMyGoal, eatingType: EatingType, changeBtnColor: (HomeMyGoal) -> Unit, moveToDetail: (EatingType) -> Unit) {
+        fun bind(
+            myGoal: HomeMyGoal,
+            eatingType: EatingType,
+            changeBtnColor: (HomeMyGoal) -> Unit,
+            moveToDetail: (EatingType, Int) -> Unit
+        ) {
             val btnType: HomeBtnType = if (eatingType == EatingType.MORE) { // 더 먹기인 경우
                 if (myGoal.isAchieved) {
                     HomeBtnType.PLUS_ACHIEVED
@@ -53,7 +58,7 @@ class HomeMyGoalAdapter(
                     changeBtnColor(myGoal)
                 }
                 layoutHomeGoal.setOnClickListener {
-                    moveToDetail(eatingType)
+                    moveToDetail(eatingType, myGoal.id)
                 }
             }
         }

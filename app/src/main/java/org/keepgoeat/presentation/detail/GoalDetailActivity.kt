@@ -32,7 +32,6 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
             viewModel.setGoalId(goalId)
         }
 
-
         viewModel.fetchGoalDetailInfo()
 
         initLayout()
