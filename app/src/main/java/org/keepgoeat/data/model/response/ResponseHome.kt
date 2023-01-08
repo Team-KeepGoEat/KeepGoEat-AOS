@@ -1,14 +1,12 @@
 package org.keepgoeat.data.model.response
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.keepgoeat.domain.model.HomeMyGoal
 import org.keepgoeat.presentation.type.HomeGoalViewType
 
 @Serializable
 data class ResponseHome(
-    @SerialName("data")
-    val homeData: HomeData,
+    val data: HomeData,
     val message: String,
     val status: Int,
     val success: Boolean
@@ -32,16 +30,17 @@ data class ResponseHome(
             val thisMonthCount: Int,
             val totalCount: Int,
             val writerId: Int
-        ) {
-            fun toHomeMyGoal(goal: Goal): HomeMyGoal =
-                HomeMyGoal(
-                    goal.goalId,
-                    goal.goalContent,
-                    goal.isMore,
-                    goal.isAchieved,
-                    goal.thisMonthCount,
-                    HomeGoalViewType.MY_GOAL_TYPE
-                )
+        )
+
+        fun toHomeMyGoal() = goals.map { goal ->
+            HomeMyGoal(
+                goal.goalId,
+                goal.goalContent,
+                goal.isMore,
+                goal.isAchieved,
+                goal.thisMonthCount,
+                HomeGoalViewType.MY_GOAL_TYPE
+            )
         }
     }
 }
