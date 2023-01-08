@@ -20,6 +20,8 @@ class GoalDetailViewModel @Inject constructor() : ViewModel() {
     val numOfDaysEatenThisMonth: LiveData<Int> get() = _numOfDaysEatenThisMonth
     private var _eatingType = MutableLiveData<EatingType>()
     val eatingType: LiveData<EatingType> get() = _eatingType
+    private var _goalId = MutableLiveData<Int>()
+    val goalId: LiveData<Int> get() = _goalId
 
     // TODO api 연동 후 해당 주석 제거 예정
 //    init {
@@ -48,6 +50,10 @@ class GoalDetailViewModel @Inject constructor() : ViewModel() {
 
     fun setEatingType(eatingType: EatingType) {
         _eatingType.value = eatingType
+    }
+
+    fun setGoalId(id: Int) {
+        _goalId.value = id
     }
 
     companion object {
