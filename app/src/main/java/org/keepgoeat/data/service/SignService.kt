@@ -1,8 +1,6 @@
 package org.keepgoeat.data.service
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -15,39 +13,42 @@ class SignService @Inject constructor(
 ) {
     val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
-    private val _loginState = MutableLiveData<LoginState>(LoginState.Init)
-    val loginState: LiveData<LoginState> get() = _loginState
 
-    private val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        error?.let(::handleLoginError)
-        token?.let(::handleLoginSuccess)
+    fun loginKakao(loginListener: (() -> Unit)? = null) {
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            error?.let(::handleLoginError)
+            token?.let(::handleLoginSuccess)
+        }
+        if (isKakaoTalkLoginAvailable)
+            loginByKakaotalk(loginListener, callback)
+        else
+            loginByKakaoAccount(loginListener, callback)
     }
 
-    fun loginByKakaotalk() {
+    fun loginByKakaotalk(loginListener: (() -> Unit)? = null, callback: (OAuthToken?, Throwable?) -> Unit) {
         client.loginWithKakaoTalk(context, callback = callback)
     }
 
-    fun loginByKakaoAccount() {
+    fun loginByKakaoAccount(loginListener: (() -> Unit)? = null, callback: (OAuthToken?, Throwable?) -> Unit) {
         client.loginWithKakaoAccount(context, callback = callback)
     }
 
     private fun handleLoginError(throwable: Throwable) {
-        _loginState.value = LoginState.Failure(throwable)
+        Timber.d(
+            "${
+                if (isKakaoTalkLoginAvailable) "카카오톡"
+                else "카카오계정"
+            }으로 로그인 실패"
+        )
     }
 
     private fun handleLoginSuccess(oAuthToken: OAuthToken) {
         client.me { user, _ ->
-            _loginState.value = LoginState.Success(oAuthToken.accessToken, user?.id.toString())
+            // TODO 로그인 Api 연결
         }
     }
 
     fun logout() {
         client.logout(Timber::e)
-    }
-
-    sealed class LoginState {
-        object Init : LoginState()
-        data class Success(val token: String, val id: String) : LoginState()
-        data class Failure(val error: Throwable) : LoginState()
     }
 }
