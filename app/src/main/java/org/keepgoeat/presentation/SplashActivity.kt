@@ -2,6 +2,7 @@ package org.keepgoeat.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -16,14 +17,16 @@ import org.keepgoeat.util.binding.BindingActivity
 @AndroidEntryPoint
 class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         loadSplashScreen()
     }
 
     private fun loadSplashScreen() {
         lifecycleScope.launch {
-            delay(2000)
+            delay(1000L)
             moveToNext()
+            finish()
         }
     }
 
