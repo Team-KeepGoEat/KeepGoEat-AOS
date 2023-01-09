@@ -8,7 +8,7 @@
 
         <variable
             name="goal"
-            type="org.keepgoeat.domain.model.HomeMyGoal" />
+            type="org.keepgoeat.domain.model.HomeGoal" />
 
         <variable
             name="goalType"

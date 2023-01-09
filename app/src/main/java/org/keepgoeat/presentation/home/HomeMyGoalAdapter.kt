@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ItemAddGoalBinding
 import org.keepgoeat.databinding.ItemHomeGoalBinding
-import org.keepgoeat.domain.model.HomeMyGoal
+import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
@@ -16,10 +16,10 @@ import org.keepgoeat.util.ItemDiffCallback
 import org.keepgoeat.util.setVisibility
 
 class HomeMyGoalAdapter(
-    private val changeBtnColor: (HomeMyGoal) -> Unit,
+    private val changeBtnColor: (HomeGoal) -> Unit,
     private val moveToDetail: (EatingType, Int) -> Unit
-) : ListAdapter<HomeMyGoal, RecyclerView.ViewHolder>(
-    ItemDiffCallback<HomeMyGoal>(
+) : ListAdapter<HomeGoal, RecyclerView.ViewHolder>(
+    ItemDiffCallback<HomeGoal>(
         onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old.id == new.id }
     )
@@ -31,9 +31,9 @@ class HomeMyGoalAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
         fun bind(
-            myGoal: HomeMyGoal,
+            myGoal: HomeGoal,
             eatingType: EatingType,
-            changeBtnColor: (HomeMyGoal) -> Unit,
+            changeBtnColor: (HomeGoal) -> Unit,
             moveToDetail: (EatingType, Int) -> Unit
         ) {
             val btnType: HomeBtnType = if (eatingType == EatingType.MORE) { // 더 먹기인 경우

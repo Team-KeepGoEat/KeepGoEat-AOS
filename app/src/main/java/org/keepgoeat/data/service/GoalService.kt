@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface GoalService {
     @GET("home")
-    suspend fun fetchHomeEntire(): Response<ResponseHome>
+    suspend fun fetchHomeEntireData(): Response<ResponseHome>
 }

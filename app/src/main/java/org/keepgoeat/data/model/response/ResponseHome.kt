@@ -1,7 +1,7 @@
 package org.keepgoeat.data.model.response
 
 import kotlinx.serialization.Serializable
-import org.keepgoeat.domain.model.HomeMyGoal
+import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.presentation.type.HomeGoalViewType
 
 @Serializable
@@ -32,8 +32,8 @@ data class ResponseHome(
             val writerId: Int
         )
 
-        fun toHomeMyGoal() = goals.map { goal ->
-            HomeMyGoal(
+        fun toHomeGoal() = goals.map { goal ->
+            HomeGoal(
                 goal.goalId,
                 goal.goalContent,
                 goal.isMore,

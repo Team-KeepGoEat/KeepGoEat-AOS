@@ -9,6 +9,6 @@ import javax.inject.Inject
 class GoalDataSource @Inject constructor(
     private val goalService: GoalService
 ) {
-    suspend fun fetchHomeEntire(): ApiResult<ResponseHome?> =
-        safeApiCall { goalService.fetchHomeEntire() }
+    suspend fun fetchHomeEntireData(): ApiResult<ResponseHome?> =
+        safeApiCall { goalService.fetchHomeEntireData() }
 }

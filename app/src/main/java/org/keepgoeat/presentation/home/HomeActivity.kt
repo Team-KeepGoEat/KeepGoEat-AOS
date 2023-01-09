@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
-import org.keepgoeat.domain.model.HomeMyGoal
+import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
@@ -72,7 +72,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         startActivity(intent)
     }
 
-    private fun changeGoalItemBtnColor(myGoal: HomeMyGoal) {
+    private fun changeGoalItemBtnColor(myGoal: HomeGoal) {
         viewModel.changeGoalAchieved(myGoal)
     }
 }

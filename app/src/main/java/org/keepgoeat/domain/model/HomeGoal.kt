@@ -2,7 +2,7 @@ package org.keepgoeat.domain.model
 
 import org.keepgoeat.presentation.type.HomeGoalViewType
 
-data class HomeMyGoal(
+data class HomeGoal(
     val id: Int,
     val goalTitle: String,
     val isMore: Boolean,

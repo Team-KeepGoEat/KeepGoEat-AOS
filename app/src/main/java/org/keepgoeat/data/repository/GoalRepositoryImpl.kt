@@ -10,8 +10,8 @@ import javax.inject.Inject
 class GoalRepositoryImpl @Inject constructor(
     private val goalDataSource: GoalDataSource,
 ) : GoalRepository {
-    override suspend fun fetchHome(): ResponseHome.HomeData? {
-        val result = goalDataSource.fetchHomeEntire()
+    override suspend fun fetchHomeEntireData(): ResponseHome.HomeData? {
+        val result = goalDataSource.fetchHomeEntireData()
         return when (result) {
             is ApiResult.Success -> {
                 result.data?.data
