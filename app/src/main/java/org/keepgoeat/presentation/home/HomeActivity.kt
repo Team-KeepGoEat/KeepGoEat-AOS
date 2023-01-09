@@ -3,14 +3,16 @@ package org.keepgoeat.presentation.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
-import org.keepgoeat.domain.model.HomeMyGoal
+import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
 
+@AndroidEntryPoint
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var goalAdapter: HomeMyGoalAdapter
@@ -45,7 +47,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun addObservers() {
-        viewModel.goalList.observe(this) { goalList ->
+        viewModel.goalList.observe(this) { goalList -> // EventObserver
             goalAdapter.submitList(goalList.toMutableList())
         }
         viewModel.goalCount.observe(this) { goalCount ->
@@ -70,7 +72,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         startActivity(intent)
     }
 
-    private fun changeGoalItemBtnColor(myGoal: HomeMyGoal) {
+    private fun changeGoalItemBtnColor(myGoal: HomeGoal) {
         viewModel.changeGoalAchieved(myGoal)
     }
 }
