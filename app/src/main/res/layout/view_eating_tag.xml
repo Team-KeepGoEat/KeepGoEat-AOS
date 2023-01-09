@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="org.keepgoeat.R" />
+
         <variable
             name="eatingType"
             type="org.keepgoeat.presentation.type.EatingType" />
@@ -15,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_border_radius_4"
-        android:backgroundTint="@{context.getColor(eatingType.tagBackgroundColor)}"
+        android:backgroundTint="@{context.getColor(eatingType == null ? R.color.white : eatingType.tagBackgroundColor)}"
         android:paddingVertical="@dimen/spacing4"
         android:paddingStart="6dp"
         android:paddingEnd="@dimen/spacing4"
@@ -25,7 +27,7 @@
             android:id="@+id/iv_tag_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@{context.getDrawable(eatingType.tagIconRes)}"
+            android:src="@{eatingType == null ? null : context.getDrawable(eatingType.tagIconRes)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,8 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:fontFamily="@font/pretendard_b"
-            android:text="@{eatingType.strRes}"
-            android:textColor="@{context.getColor(eatingType.tagTextColor)}"
+            android:text="@{eatingType == null ? `` : context.getString(eatingType.strRes)}"
+            android:textColor="@{context.getColor(eatingType == null ? R.color.white : eatingType.tagTextColor)}"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_tag_icon"

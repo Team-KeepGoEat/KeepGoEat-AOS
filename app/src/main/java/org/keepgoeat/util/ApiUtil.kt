@@ -12,7 +12,7 @@ suspend inline fun <T> safeApiCall(crossinline apiCall: suspend () -> Response<T
         when (throwable) {
             is IOException -> ApiResult.NetworkError
             is HttpException -> ApiResult.GenericError(throwable.code(), throwable.message)
-            else -> ApiResult.GenericError(null, null)
+            else -> ApiResult.GenericError(null, throwable.message)
         }
     }
 }

@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:src="@{context.getDrawable(viewModel.eatingType.snailCheerInKeepRes)}"
+            android:src="@{context.getDrawable(viewModel.goalDetail.eatingType.snailCheerInKeepRes)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_goal_keep_guide"
@@ -46,11 +46,11 @@
             android:layout_width="match_parent"
             android:layout_marginHorizontal="@dimen/spacing16"
             android:layout_marginTop="12dp"
-            android:backgroundTint="@{context.getColor(viewModel.eatingType.buttonBackgroundColor)}"
+            android:backgroundTint="@{context.getColor(viewModel.goalDetail.eatingType.buttonBackgroundColor)}"
             android:text="목표 보관하기"
-            android:textColor="@{context.getColor(viewModel.eatingType.buttonTextColor)}"
+            android:textColor="@{context.getColor(viewModel.goalDetail.eatingType.buttonTextColor)}"
             app:layout_constraintTop_toBottomOf="@id/iv_snail"
-            app:rippleColor="@{context.getColor(viewModel.eatingType.buttonRippleColor)}"
+            app:rippleColor="@{context.getColor(viewModel.goalDetail.eatingType.buttonRippleColor)}"
             tools:backgroundTint="@color/orange_600" />
 
         <TextView
