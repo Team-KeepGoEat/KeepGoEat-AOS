@@ -10,7 +10,6 @@ import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
-import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
