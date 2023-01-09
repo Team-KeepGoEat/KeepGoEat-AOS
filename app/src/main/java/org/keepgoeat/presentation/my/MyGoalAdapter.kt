@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.databinding.ItemMyGoalBinding
-import org.keepgoeat.domain.model.AchievedGoal
+import org.keepgoeat.domain.model.MyGoal
+import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.ItemDiffCallback
 
 class MyGoalAdapter :
-    ListAdapter<AchievedGoal, MyGoalAdapter.MyGoalViewHolder>(
-        ItemDiffCallback<AchievedGoal>(
+    ListAdapter<MyGoal, MyGoalAdapter.MyGoalViewHolder>(
+        ItemDiffCallback<MyGoal>(
             onContentsTheSame = { old, new -> old == new },
             onItemsTheSame = { old, new -> old.id == new.id }
         )
@@ -19,8 +20,12 @@ class MyGoalAdapter :
 
     class MyGoalViewHolder(private val binding: ItemMyGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: AchievedGoal) {
+        fun onBind(
+            data: MyGoal,
+            eatingType: EatingType
+        ) {
             binding.goal = data
+            binding.eatingType = eatingType
         }
     }
 
@@ -32,6 +37,10 @@ class MyGoalAdapter :
     }
 
     override fun onBindViewHolder(holder: MyGoalViewHolder, position: Int) {
-        holder.onBind(currentList[position])
+        if (currentList[position].isMore) {
+            holder.onBind(currentList[position], EatingType.MORE)
+        } else {
+            holder.onBind(currentList[position], EatingType.LESS)
+        }
     }
 }

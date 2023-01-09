@@ -6,10 +6,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import coil.load
-import org.keepgoeat.R
 import org.keepgoeat.presentation.type.HomeBackgroundType
-import org.keepgoeat.util.extension.padZero
-import java.time.LocalDate
 
 @BindingAdapter("image")
 fun ImageView.setImage(imageUrl: String) {
@@ -22,6 +19,7 @@ fun View.setVisibility(isVisible: Boolean?) {
     this.isVisible = isVisible
 }
 
+/*
 @BindingAdapter(value = ["startDate", "endDate"], requireAll = false)
 fun TextView.setDuration(startDate: LocalDate?, endDate: LocalDate?) {
     safeLet(startDate, endDate) { s, e ->
@@ -34,6 +32,14 @@ fun TextView.setDuration(startDate: LocalDate?, endDate: LocalDate?) {
             e.monthValue.padZero(2),
             e.dayOfMonth.padZero(2)
         )
+    }
+}
+*/
+
+@BindingAdapter(value = ["startDate", "endDate"], requireAll = false)
+fun TextView.setDurationText(startDate: String?, endDate: String?) {
+    safeLet(startDate, endDate) { s, e ->
+        text = "$s ~ $e"
     }
 }
 
