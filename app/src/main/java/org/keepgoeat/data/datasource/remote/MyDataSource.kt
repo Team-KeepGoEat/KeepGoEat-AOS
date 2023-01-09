@@ -1,10 +1,8 @@
 package org.keepgoeat.data.datasource.remote
 
 import org.keepgoeat.data.ApiResult
-import org.keepgoeat.data.model.response.ResponseHome
 import org.keepgoeat.data.model.response.ResponseMy
 import org.keepgoeat.data.service.MyService
-import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.safeApiCall
 import javax.inject.Inject
 
