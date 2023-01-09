@@ -6,6 +6,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalSettingBinding
 import org.keepgoeat.presentation.type.EatingType
+import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showKeyboard
 import org.keepgoeat.util.safeValueOf
@@ -25,6 +26,18 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
         }
 
         addListeners()
+        addObservers()
+    }
+
+    private fun addObservers() {
+        viewModel.uploadState.observe(this) { state ->
+            when (state) {
+                is UiState.Success -> {
+                    finish()
+                }
+                else -> {}
+            }
+        }
     }
 
     private fun addListeners() {
