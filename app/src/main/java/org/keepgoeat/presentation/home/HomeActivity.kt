@@ -10,6 +10,7 @@ import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
+import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
@@ -47,7 +48,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun addObservers() {
-        viewModel.goalList.observe(this) { goalList ->
+        viewModel.goalList.observe(this) { goalList -> // EventObserver
             goalAdapter.submitList(goalList.toMutableList())
         }
         viewModel.goalCount.observe(this) { goalCount ->

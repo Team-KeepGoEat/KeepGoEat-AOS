@@ -112,4 +112,21 @@ class HomeMyGoalAdapter(
     }
 
     override fun getItemViewType(position: Int): Int = currentList[position].type.goalType
+
+    override fun submitList(list: MutableList<HomeGoal>?) {
+        super.submitList(
+            list?.plus(
+                mutableListOf(
+                    HomeGoal(
+                        0,
+                        "",
+                        false,
+                        false,
+                        0,
+                        HomeGoalViewType.ADD_GOAL_TYPE
+                    )
+                )
+            )
+        )
+    }
 }

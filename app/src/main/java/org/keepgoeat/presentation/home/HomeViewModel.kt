@@ -8,7 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
-import org.keepgoeat.presentation.type.HomeGoalViewType
 import java.time.LocalDateTime
 import javax.inject.Inject
 
@@ -16,7 +15,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val goalRepository: GoalRepository
 ) : ViewModel() {
-    private val _goalList = MutableLiveData<MutableList<HomeGoal>>()
+    private var _goalList = MutableLiveData<MutableList<HomeGoal>>()
     val goalList: LiveData<MutableList<HomeGoal>> get() = _goalList
     private val _goalCount = MutableLiveData<Int>()
     val goalCount: LiveData<Int> get() = _goalCount
@@ -47,51 +46,8 @@ class HomeViewModel @Inject constructor(
             goalRepository.fetchHomeEntireData()?.let { homeData ->
                 _cheeringMessage.value = homeData.cheeringMessage
                 _goalList.value = homeData.toHomeGoal().toMutableList()
+                _goalCount.value = homeData.goals.size
             }
         }
-
-        var myGoalList = mutableListOf(
-            HomeGoal(
-                1,
-                "하루 1끼 이상 야채 더 먹기",
-                true,
-                true,
-                8,
-                HomeGoalViewType.MY_GOAL_TYPE
-            ),
-            HomeGoal(
-                2,
-                "라면 덜 먹기",
-                false,
-                false,
-                8,
-                HomeGoalViewType.MY_GOAL_TYPE
-            ),
-            HomeGoal(
-                3,
-                "커피 덜 먹기",
-                true,
-                false,
-                30,
-                HomeGoalViewType.MY_GOAL_TYPE
-            )
-        )
-//        val myGoalList = emptyList<HomeMyGoal>()
-        val addGoalBtn = mutableListOf(
-            HomeGoal(
-                0,
-                "",
-                false,
-                false,
-                0,
-                HomeGoalViewType.ADD_GOAL_TYPE
-            )
-        )
-        var homeList = mutableListOf<HomeGoal>()
-        homeList.addAll(myGoalList)
-        if (myGoalList.size > 0)
-            homeList.addAll(addGoalBtn)
-        _goalList.value = homeList.toMutableList()
-        _goalCount.value = myGoalList.size
     }
 }
