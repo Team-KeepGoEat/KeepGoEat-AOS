@@ -17,7 +17,8 @@ import org.keepgoeat.util.setVisibility
 
 class HomeMyGoalAdapter(
     private val changeBtnColor: (HomeGoal) -> Unit,
-    private val moveToDetail: (EatingType, Int) -> Unit
+    private val moveToDetail: (EatingType, Int) -> Unit,
+    private val showMakeGoalDialog: () -> Unit,
 ) : ListAdapter<HomeGoal, RecyclerView.ViewHolder>(
     ItemDiffCallback<HomeGoal>(
         onContentsTheSame = { old, new -> old == new },
@@ -27,14 +28,14 @@ class HomeMyGoalAdapter(
     private lateinit var inflater: LayoutInflater
 
     class MyGoalViewHolder(
-        private val binding: ItemHomeGoalBinding
+        private val binding: ItemHomeGoalBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
         fun bind(
             myGoal: HomeGoal,
             eatingType: EatingType,
             changeBtnColor: (HomeGoal) -> Unit,
-            moveToDetail: (EatingType, Int) -> Unit
+            moveToDetail: (EatingType, Int) -> Unit,
         ) {
             val btnType: HomeBtnType = if (eatingType == EatingType.MORE) { // 더 먹기인 경우
                 if (myGoal.isAchieved) {
@@ -65,10 +66,10 @@ class HomeMyGoalAdapter(
     }
 
     class AddGoalViewHolder(
-        private val binding: ItemAddGoalBinding
+        private val binding: ItemAddGoalBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         var layout = binding
-        fun bind(goalCount: Int) {
+        fun bind(goalCount: Int, showMakeGoalDialog: () -> Unit) {
             when (goalCount) {
                 0 -> binding.layoutGoalInfo.visibility = View.GONE
                 1 -> binding.tvAddMoreGoal.setText(R.string.home_two_more_goal)
@@ -77,6 +78,10 @@ class HomeMyGoalAdapter(
                     binding.tvAddMoreGoal.setText(R.string.home_no_more_goal)
                     binding.btnMakeGoal.setVisibility(false)
                 }
+            }
+
+            binding.root.setOnClickListener {
+                showMakeGoalDialog()
             }
         }
     }
@@ -107,7 +112,7 @@ class HomeMyGoalAdapter(
                 }
             }
             // TODO 서버통신 데이터클래스로 변경하면 size 정보 받아온걸로 바꾸기
-            is AddGoalViewHolder -> holder.bind(currentList.size - 1)
+            is AddGoalViewHolder -> holder.bind(currentList.size - 1, showMakeGoalDialog)
         }
     }
 
