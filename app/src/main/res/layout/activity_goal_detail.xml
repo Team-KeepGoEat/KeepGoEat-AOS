@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="org.keepgoeat.R" />
+
         <variable
             name="viewModel"
             type="org.keepgoeat.presentation.detail.GoalDetailViewModel" />
@@ -88,14 +90,14 @@
             android:layout_marginTop="@dimen/spacing24"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
-            bind:eatingType="@{viewModel.eatingType}" />
+            bind:eatingType="@{viewModel.goalDetail.eatingType}" />
 
         <TextView
             android:id="@+id/tv_goal_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{@string/goal_detail_title(viewModel.goalTitle, context.getString(viewModel.eatingType.strRes))}"
+            android:text="@{@string/goal_detail_title(viewModel.goalDetail.goalTitle, viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.strRes))}"
             android:textAppearance="@style/TextAppearance.System2_Bold"
             android:textColor="@color/gray_800"
             app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -131,7 +133,7 @@
                 android:layout_marginTop="@dimen/spacing8"
                 android:layout_marginBottom="@dimen/spacing4"
                 android:fontFamily="@font/pretendard_b"
-                android:text="@{viewModel.numOfDaysEatenLastMonth.toString()}"
+                android:text="@{viewModel.goalDetail == null ? `` : Integer.toString(viewModel.goalDetail.lastMonthCount)}"
                 android:textColor="@color/gray_700"
                 android:textSize="48dp"
                 app:layout_constraintBottom_toBottomOf="@id/view_divider"
@@ -168,8 +170,8 @@
                 android:layout_marginTop="@dimen/spacing8"
                 android:layout_marginBottom="@dimen/spacing4"
                 android:fontFamily="@font/pretendard_b"
-                android:text="@{viewModel.numOfDaysEatenThisMonth.toString()}"
-                android:textColor="@{context.getColor(viewModel.eatingType.thisMonthTextColor)}"
+                android:text="@{Integer.toString(viewModel.goalDetail.thisMonthCount)}"
+                android:textColor="@{context.getColor(viewModel.goalDetail == null ? R.color.white : viewModel.goalDetail.eatingType.thisMonthTextColor)}"
                 android:textSize="48dp"
                 app:layout_constraintBottom_toBottomOf="@id/view_divider"
                 app:layout_constraintEnd_toEndOf="@id/tv_num_of_days_eaten_this_month"
