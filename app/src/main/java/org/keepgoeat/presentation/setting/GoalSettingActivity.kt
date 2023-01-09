@@ -1,10 +1,12 @@
 package org.keepgoeat.presentation.setting
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalSettingBinding
+import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
@@ -33,7 +35,7 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
         viewModel.uploadState.observe(this) { state ->
             when (state) {
                 is UiState.Success -> {
-                    finish()
+                    moveToHome()
                 }
                 else -> {}
             }
@@ -48,6 +50,12 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
         binding.ivBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun moveToHome() {
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     companion object {
