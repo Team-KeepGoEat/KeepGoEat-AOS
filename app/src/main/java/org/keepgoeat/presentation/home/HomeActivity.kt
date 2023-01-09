@@ -39,7 +39,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun initLayout() {
-        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::moveToDetail)
+        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::moveToDetail, ::showMakeGoalDialog)
         binding.rvMyGoals.apply {
             itemAnimator = null
             adapter = goalAdapter
