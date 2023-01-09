@@ -7,8 +7,12 @@
     <data>
 
         <variable
+            name="eatingType"
+            type="org.keepgoeat.presentation.type.EatingType" />
+
+        <variable
             name="goal"
-            type="org.keepgoeat.domain.model.AchievedGoal" />
+            type="org.keepgoeat.domain.model.MyGoal" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,19 +34,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing24"
             app:layout_constraintStart_toStartOf="parent"
-            bind:eatingType="@{goal.eatingType}" />
+            bind:eatingType="@{eatingType}" />
 
         <TextView
             android:id="@+id/tv_item_goal_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
-            android:text="@{goal.goalTitle}"
+            android:text="@{String.format(context.getString(eatingType.titleStrRes), goal.goalContent)}"
             android:textAppearance="@style/TextAppearance.System2_Bold"
             android:textColor="@color/gray_800"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_eating_tag"
-            tools:text="하루 1끼 이상 야채 더 먹기기" />
+            tools:text="하루 1끼 이상 야채 더 먹기" />
 
         <TextView
             android:id="@+id/tv_total_achievement_day"
@@ -61,12 +65,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing8"
             android:fontFamily="@font/pretendard_b"
-            android:textColor="@{context.getColor(goal.eatingType.achievedGoalDayTextColor)}"
+            android:textColor="@{context.getColor(eatingType.achievedGoalDayTextColor)}"
             android:textSize="40dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_total_achievement_day"
             app:layout_constraintStart_toEndOf="@+id/tv_total_achievement_day"
             app:layout_constraintTop_toTopOf="@id/tv_total_achievement_day"
-            tools:text="8"
+            tools:text="@{Integer.toString(goal.totalCount)}"
             tools:textColor="@color/orange_500" />
 
         <TextView
@@ -89,11 +93,11 @@
             android:text="@string/my_duration"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_700"
-            app:endDate="@{goal.endAt}"
+            app:endDate="@{goal.keptAt}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_date"
             app:layout_constraintTop_toBottomOf="@id/tv_total_achievement_day"
-            app:startDate="@{goal.startAt}"
+            app:startDate="@{goal.startedAt}"
             tools:text="2022. 09. 01 ~ 2022. 12. 19" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -40,11 +41,32 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClientBuilder(): OkHttpClient =
+    fun providesInterceptor(): Interceptor =
+        Interceptor { chain ->
+            with(chain) {
+                proceed(
+                    request()
+                        .newBuilder()
+                        .addHeader(
+                            "accesstoken",
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoicGFya191YmluQG5hdmVyLmNvbSIsImlhdCI6MTY3MzI2OTU2NywiZXhwIjoxNjczNzczNTY3LCJpc3MiOiJLRUVQR09FQVRfU0VSVkVSIn0.Uk_LjMBfRauozQDEBoq6sIDFEf6k8zAxifXljcToNgk"
+                        )
+                        .addHeader("Content-Type", "Application/json")
+                        .build()
+                )
+            }
+        }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClientBuilder(
+        interceptor: Interceptor
+    ): OkHttpClient =
         OkHttpClient.Builder().apply {
             connectTimeout(10, TimeUnit.SECONDS)
             writeTimeout(10, TimeUnit.SECONDS)
             readTimeout(10, TimeUnit.SECONDS)
+            addInterceptor(interceptor)
             if (DEBUG) addInterceptor(
                 HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY

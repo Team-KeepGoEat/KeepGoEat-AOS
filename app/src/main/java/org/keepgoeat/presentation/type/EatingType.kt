@@ -9,6 +9,7 @@ import org.keepgoeat.R
 
 enum class EatingType(
     @StringRes val strRes: Int,
+    @StringRes val titleStrRes: Int,
     @DrawableRes val snailStickerRes: Int,
     @DrawableRes val defaultStickerRes: Int,
     @DrawableRes val tagIconRes: Int,
@@ -24,6 +25,7 @@ enum class EatingType(
 ) {
     LESS(
         R.string.eating_type_less,
+        R.string.title_less,
         R.drawable.ic_snail_green_sticker,
         R.drawable.ic_default_green_sticker,
         R.drawable.ic_eating_less_tag_minus,
@@ -39,6 +41,7 @@ enum class EatingType(
     ),
     MORE(
         R.string.eating_type_more,
+        R.string.title_more,
         R.drawable.ic_snail_orange_sticker,
         R.drawable.ic_default_orange_sticker,
         R.drawable.ic_eating_more_tag_plus,
@@ -49,7 +52,7 @@ enum class EatingType(
         R.color.orange_600,
         R.color.gray_50,
         R.color.orange_700,
-        R.color.green_500,
+        R.color.orange_500,
         Color.parseColor("#FFF0EB"),
     )
 }

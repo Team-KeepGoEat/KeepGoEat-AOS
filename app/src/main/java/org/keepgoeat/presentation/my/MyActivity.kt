@@ -7,6 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.type.EatingType
+import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
@@ -35,17 +36,9 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
     private fun getFilteredGoalWithEatingType(eatingType: EatingType?) {
         when (eatingType) {
-            null -> goalAdapter.submitList(
-                viewModel.goalList.value?.toMutableList()
-            )
-            EatingType.MORE -> goalAdapter.submitList(
-                viewModel.goalList.value?.filter { it.eatingType == EatingType.MORE }
-                    ?.toMutableList()
-            )
-            EatingType.LESS -> goalAdapter.submitList(
-                viewModel.goalList.value?.filter { it.eatingType == EatingType.LESS }
-                    ?.toMutableList()
-            )
+            null -> viewModel.fetchAchievedGoalBySort(SortType.ALL)
+            EatingType.MORE -> viewModel.fetchAchievedGoalBySort(SortType.MORE)
+            EatingType.LESS -> viewModel.fetchAchievedGoalBySort(SortType.LESS)
         }
     }
 
