@@ -2,14 +2,17 @@ package org.keepgoeat.presentation.detail
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalDetailBinding
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
+import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_GOAL_CONTENT
+import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_IS_UPDATED
 import org.keepgoeat.presentation.type.RecyclerLayoutType
 import org.keepgoeat.util.ItemDecorationUtil
 import org.keepgoeat.util.binding.BindingActivity
@@ -18,15 +21,24 @@ import org.keepgoeat.util.binding.BindingActivity
 class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.activity_goal_detail) {
     private val viewModel: GoalDetailViewModel by viewModels()
     private lateinit var adapter: GoalStickerListAdapter
+    private var isUpdated = false
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            moveToHome()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        if (intent.hasExtra(ARG_GOAL_ID)) {
-            val goalId = intent.getIntExtra(ARG_GOAL_ID, -1)
+        intent.let {
+            val goalId = it.getIntExtra(ARG_GOAL_ID, -1)
             viewModel.fetchGoalDetailInfo(goalId)
+
+            isUpdated = it.getBooleanExtra(ARG_IS_UPDATED, false)
+            if (isUpdated) this.onBackPressedDispatcher.addCallback(this, callback)
         }
 
         initLayout()
@@ -42,7 +54,8 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
 
     private fun addListeners() {
         binding.ivBack.setOnClickListener {
-            finish()
+            if (isUpdated) moveToHome()
+            else finish()
         }
         binding.ivKeep.setOnClickListener {
             showGoalKeepDialog()
@@ -72,6 +85,12 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
 
     private fun showGoalKeepDialog() {
         GoalKeepBottomDialogFragment().show(supportFragmentManager, "goalKeepDialog")
+    }
+
+    private fun moveToHome() {
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     companion object {

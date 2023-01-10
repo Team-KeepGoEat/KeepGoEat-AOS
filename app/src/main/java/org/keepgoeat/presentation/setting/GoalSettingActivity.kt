@@ -6,6 +6,8 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalSettingBinding
+import org.keepgoeat.presentation.detail.GoalDetailActivity
+import org.keepgoeat.presentation.detail.GoalDetailActivity.Companion.ARG_GOAL_ID
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.type.EatingType
@@ -18,6 +20,7 @@ import org.keepgoeat.util.safeValueOf
 @AndroidEntryPoint
 class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout.activity_goal_setting) {
     private val viewModel: GoalSettingViewModel by viewModels()
+    private var isEditMode: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,7 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
             }
 
             it.getParcelable(ARG_GOAL_CONTENT, GoalContent::class.java)?.let { goal ->
+                isEditMode = true
                 viewModel.setGoalContent(goal)
             }
         }
@@ -43,7 +47,8 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
         viewModel.uploadState.observe(this) { state ->
             when (state) {
                 is UiState.Success -> {
-                    moveToHome()
+                    if (isEditMode) moveToDetail()
+                    else moveToHome()
                 }
                 else -> {}
             }
@@ -66,8 +71,18 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
         startActivity(intent)
     }
 
+    private fun moveToDetail() {
+        val intent = Intent(this, GoalDetailActivity::class.java).apply {
+            putExtra(ARG_GOAL_ID, viewModel.goalId)
+            putExtra(ARG_IS_UPDATED, true)
+        }
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
     companion object {
         const val ARG_EATING_TYPE = "eatingType"
         const val ARG_GOAL_CONTENT = "goalContent"
+        const val ARG_IS_UPDATED = "isUpdated"
     }
 }
