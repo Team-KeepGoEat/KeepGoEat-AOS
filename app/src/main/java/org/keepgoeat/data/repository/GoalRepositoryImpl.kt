@@ -127,4 +127,22 @@ class GoalRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteGoal(id: Int): ResponseGoalDeleted.ResponseGoalDeletedData? {
+        val result = goalDataSource.deleteGoal(id)
+
+        return when (result) {
+            is ApiResult.Success -> {
+                result.data?.data
+            }
+            is ApiResult.NetworkError -> {
+                Timber.d("Network Error")
+                null
+            }
+            is ApiResult.GenericError -> {
+                Timber.d("(${result.code}): ${result.message}")
+                null
+            }
+        }
+    }
 }

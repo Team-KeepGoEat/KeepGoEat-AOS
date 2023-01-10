@@ -18,6 +18,7 @@ import org.keepgoeat.presentation.type.RecyclerLayoutType
 import org.keepgoeat.util.ItemDecorationUtil
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.extension.showToast
 
 @AndroidEntryPoint
 class GoalDetailActivity :
@@ -91,6 +92,16 @@ class GoalDetailActivity :
             when (keepState) {
                 is UiState.Success -> {
                     startActivity(Intent(this, MyActivity::class.java))
+                    finish()
+                }
+                else -> {}
+            }
+        }
+        viewModel.deleteState.observe(this) { deleteState ->
+            when (deleteState) {
+                is UiState.Success -> {
+                    showToast(getString(R.string.goal_detail_success_goal_delete_toast_message))
+                    startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }
                 else -> {}

@@ -21,6 +21,7 @@
     <string name="goal_detail_title">%s %s</string>
     <string name="goal_detail_num_of_days_eaten_last_month">지난달 먹은 날</string>
     <string name="goal_detail_num_of_days_eaten_this_month">이번달 먹은 날</string>
+    <string name="goal_detail_success_goal_delete_toast_message">목표가 삭제되었습니다.</string>
 
     <!-- Home View -->
     <string name="home_today_goal">오늘 식습관 목표</string>

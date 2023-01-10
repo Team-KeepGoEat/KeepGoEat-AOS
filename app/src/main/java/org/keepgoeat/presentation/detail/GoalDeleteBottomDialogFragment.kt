@@ -24,9 +24,5 @@ class GoalDeleteBottomDialogFragment :
         binding.btnNo.setOnClickListener {
             dismiss()
         }
-
-        binding.btnYes.setOnClickListener {
-            viewModel.deleteGoal()
-        }
     }
 }
