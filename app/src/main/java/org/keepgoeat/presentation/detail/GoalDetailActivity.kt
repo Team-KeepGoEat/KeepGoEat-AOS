@@ -103,7 +103,7 @@ class GoalDetailActivity :
     private fun showGoalKeepDialog() {
         intent?.let {
             val goalId = it.getIntExtra(ARG_GOAL_ID, -1)
-            GoalKeepBottomDialogFragment(goalId).show(supportFragmentManager, "goalKeepDialog")
+            GoalKeepBottomDialogFragment().show(supportFragmentManager, "goalKeepDialog")
         }
     }
 

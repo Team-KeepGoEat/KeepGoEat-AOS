@@ -9,7 +9,7 @@ import org.keepgoeat.databinding.DialogBottomGoalKeepBinding
 import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
 @AndroidEntryPoint
-class GoalKeepBottomDialogFragment(val goalId: Int) :
+class GoalKeepBottomDialogFragment() :
     BindingBottomSheetDialogFragment<DialogBottomGoalKeepBinding>(R.layout.dialog_bottom_goal_keep) {
     private val viewModel: GoalDetailViewModel by activityViewModels()
 
