@@ -39,7 +39,7 @@ class GoalDetailActivity :
         intent.let {
             val goalId = it.getIntExtra(ARG_GOAL_ID, -1)
             viewModel.fetchGoalDetailInfo(goalId)
-
+            viewModel.setGoalId(goalId)
             isUpdated = it.getBooleanExtra(ARG_IS_UPDATED, false)
             if (isUpdated) this.onBackPressedDispatcher.addCallback(this, callback)
         }

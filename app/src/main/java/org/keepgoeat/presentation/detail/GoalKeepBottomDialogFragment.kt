@@ -21,10 +21,6 @@ class GoalKeepBottomDialogFragment(val goalId: Int) :
     }
 
     private fun addListeners() {
-        binding.btnKeep.setOnClickListener {
-            viewModel.keepGoal(goalId)
-        }
-
         binding.tvDelete.setOnClickListener {
             showGoalDeleteDialog()
         }
