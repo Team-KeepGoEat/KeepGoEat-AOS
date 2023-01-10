@@ -8,6 +8,8 @@
     <string name="eating_type_less">덜 먹기</string>
     <string name="eating_type_more">더 먹기</string>
     <string name="btn_text_no">아니오</string>
+    <string name="title_more">%s 더 먹기</string>
+    <string name="title_less">%s 덜 먹기</string>
 
     <!-- sign -->
     <string name="signin">카카오톡 로그인</string>
@@ -74,8 +76,6 @@
 
     <!-- My -->
     <string name="all">전체</string>
-    <string name="title_more">%s 더 먹기</string>
-    <string name="title_less">%s 덜 먹기</string>
     <string name="my_achieved_goal">보관한 목표</string>
     <string name="my_total_achievement_day">총 달성일</string>
     <string name="my_duration">진행기간</string>

@@ -28,17 +28,21 @@ class HomeViewModel @Inject constructor(
         fetchGoalList()
     }
 
-    fun changeGoalAchieved(myGoal: HomeGoal) {
-        val position = goalList.value?.indexOf(myGoal) ?: return
-        with(myGoal) {
-            _goalList.value?.set(
-                position,
-                HomeGoal(
-                    id, goalTitle, isMore, !isAchieved, thisMonthCount, type
-                )
-            )
+    fun changeGoalAchieved(goal: HomeGoal) {
+        val position = goalList.value?.indexOf(goal) ?: return
+        viewModelScope.launch {
+            goalRepository.achieveGoal(goal.id, !goal.isAchieved)?.let { goalData ->
+                with(goal) {
+                    _goalList.value?.set(
+                        position,
+                        HomeGoal(
+                            id, goalTitle, isMore, goalData.updatedIsAchieved, goalData.thisMonthCount, type
+                        )
+                    )
+                }
+                _goalList.value = _goalList.value?.toMutableList() // TODO 서버쪽에서 api 확인해주면 toMutableList 안붙여도 되는지 확인하기
+            }
         }
-        _goalList.value = _goalList.value
     }
 
     private fun fetchGoalList() {
