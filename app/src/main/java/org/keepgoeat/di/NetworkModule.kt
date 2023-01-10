@@ -20,6 +20,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+    private const val dummyAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoicGFya191YmluQG5hdmVyLmNvbSIsImlhdCI6MTY3MzMyOTE3NSwiZXhwIjoxNjczODMzMTc1LCJpc3MiOiJLRUVQR09FQVRfU0VSVkVSIn0.zPlL2aRxpILrmvJVT298FbeXrKpZUkkYJ4HecPBvh4U"
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
@@ -49,7 +50,7 @@ object NetworkModule {
                         .newBuilder()
                         .addHeader(
                             "accesstoken",
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoicGFya191YmluQG5hdmVyLmNvbSIsImlhdCI6MTY3MzI2OTU2NywiZXhwIjoxNjczNzczNTY3LCJpc3MiOiJLRUVQR09FQVRfU0VSVkVSIn0.Uk_LjMBfRauozQDEBoq6sIDFEf6k8zAxifXljcToNgk"
+                            dummyAccessToken
                         )
                         .addHeader("Content-Type", "Application/json")
                         .build()
@@ -60,7 +61,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClientBuilder(
-        interceptor: Interceptor
+        interceptor: Interceptor,
     ): OkHttpClient =
         OkHttpClient.Builder().apply {
             connectTimeout(10, TimeUnit.SECONDS)
