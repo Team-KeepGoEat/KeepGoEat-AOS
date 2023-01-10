@@ -82,7 +82,7 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         viewModel.goalStickers.observe(this) { stickers ->
             adapter.submitList(stickers)
         }
-        viewModel.goalId.observe(this){
+        viewModel.goalId.observe(this) {
             val intent = Intent(this, MyActivity::class.java)
             startActivity(intent)
             finish()
