@@ -92,8 +92,8 @@ class GoalRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun keepGoalDetail(id: Int): ResponseGoalKeep.Data? {
-        val result = goalDataSource.keepGoalDetail(id)
+    override suspend fun keepGoal(id: Int): ResponseGoalKeep.ResponseGoalKeepData? {
+        val result = goalDataSource.keepGoal(id)
 
         return when (result) {
             is ApiResult.Success -> {

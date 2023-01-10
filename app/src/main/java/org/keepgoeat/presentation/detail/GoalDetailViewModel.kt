@@ -33,7 +33,7 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
 
     fun keepGoal(goalId: Int) {
         viewModelScope.launch {
-            goalRepository.keepGoalDetail(goalId).let { keptData ->
+            goalRepository.keepGoal(goalId).let { keptData ->
                 keptData ?: return@launch
                 _goalId.value = keptData.goalId
             }

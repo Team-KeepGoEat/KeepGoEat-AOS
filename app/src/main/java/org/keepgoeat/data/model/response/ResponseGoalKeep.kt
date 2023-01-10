@@ -4,13 +4,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponseGoalKeep(
-    val data: Data?,
+    val data: ResponseGoalKeepData?,
     val message: String,
     val status: Int,
     val success: Boolean
 ) {
     @Serializable
-    data class Data(
+    data class ResponseGoalKeepData(
         val goalId: Int
     )
 }

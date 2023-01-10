@@ -27,6 +27,6 @@ class GoalDataSource @Inject constructor(
     suspend fun fetchGoalDetail(goalId: Int): ApiResult<ResponseGoalDetail?> =
         safeApiCall { goalService.fetchGoalDetail(goalId) }
 
-    suspend fun keepGoalDetail(id: Int): ApiResult<ResponseGoalKeep?> =
-        safeApiCall { goalService.keepGoalDetail(id) }
+    suspend fun keepGoal(id: Int): ApiResult<ResponseGoalKeep?> =
+        safeApiCall { goalService.keepGoal(id) }
 }
