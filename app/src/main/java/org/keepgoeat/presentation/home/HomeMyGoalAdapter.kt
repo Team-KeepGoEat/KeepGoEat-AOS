@@ -79,9 +79,10 @@ class HomeMyGoalAdapter(
                     binding.btnMakeGoal.setVisibility(false)
                 }
             }
-
-            binding.root.setOnClickListener {
-                showMakeGoalDialog()
+            if (goalCount < 3) {
+                binding.root.setOnClickListener {
+                    showMakeGoalDialog()
+                }
             }
         }
     }
@@ -106,9 +107,19 @@ class HomeMyGoalAdapter(
         when (holder) {
             is MyGoalViewHolder -> {
                 if (currentList[position].isMore) {
-                    holder.bind(currentList[position], EatingType.MORE, changeBtnColor, moveToDetail)
+                    holder.bind(
+                        currentList[position],
+                        EatingType.MORE,
+                        changeBtnColor,
+                        moveToDetail
+                    )
                 } else {
-                    holder.bind(currentList[position], EatingType.LESS, changeBtnColor, moveToDetail)
+                    holder.bind(
+                        currentList[position],
+                        EatingType.LESS,
+                        changeBtnColor,
+                        moveToDetail
+                    )
                 }
             }
             // TODO 서버통신 데이터클래스로 변경하면 size 정보 받아온걸로 바꾸기
