@@ -1,6 +1,8 @@
 package org.keepgoeat.data.service
 
+import org.keepgoeat.data.model.request.RequestGoalCompleted
 import org.keepgoeat.data.model.request.RequestGoalContent
+import org.keepgoeat.data.model.response.ResponseCompletedResult
 import org.keepgoeat.data.model.response.ResponseGoalContent
 import org.keepgoeat.data.model.response.ResponseGoalDetail
 import org.keepgoeat.data.model.response.ResponseHome
@@ -16,4 +18,10 @@ interface GoalService {
 
     @GET("history/{goalId}")
     suspend fun fetchGoalDetail(@Path("goalId") goalId: Int): Response<ResponseGoalDetail>
+
+    @POST("goal/achieve/{goalId}")
+    suspend fun completeGoal(
+        @Path("goalId") goalId: Int,
+        @Body request: RequestGoalCompleted
+    ): Response<ResponseCompletedResult>
 }

@@ -1,7 +1,9 @@
 package org.keepgoeat.data.datasource.remote
 
 import org.keepgoeat.data.ApiResult
+import org.keepgoeat.data.model.request.RequestGoalCompleted
 import org.keepgoeat.data.model.request.RequestGoalContent
+import org.keepgoeat.data.model.response.ResponseCompletedResult
 import org.keepgoeat.data.model.response.ResponseGoalContent
 import org.keepgoeat.data.model.response.ResponseGoalDetail
 import org.keepgoeat.data.model.response.ResponseHome
@@ -20,4 +22,7 @@ class GoalDataSource @Inject constructor(
 
     suspend fun fetchGoalDetail(goalId: Int): ApiResult<ResponseGoalDetail?> =
         safeApiCall { goalService.fetchGoalDetail(goalId) }
+
+    suspend fun completeGoal(goalId: Int, requestGoalCompleted: RequestGoalCompleted): ApiResult<ResponseCompletedResult?> =
+        safeApiCall { goalService.completeGoal(goalId, requestGoalCompleted) }
 }
