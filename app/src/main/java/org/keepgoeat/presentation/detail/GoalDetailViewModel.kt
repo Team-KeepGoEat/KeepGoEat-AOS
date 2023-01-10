@@ -23,6 +23,8 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
     val goalId: LiveData<Int> get() = _goalId
     private val _keepState = MutableLiveData<UiState<Int>>()
     val keepState: LiveData<UiState<Int>> get() = _keepState
+    private val _deleteState = MutableLiveData<UiState<Int>>()
+    val deleteState: LiveData<UiState<Int>> get() = _deleteState
 
     fun fetchGoalDetailInfo(goalId: Int) {
         _goalId.value = goalId
@@ -48,7 +50,14 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
     }
 
     fun deleteGoal() {
-        // TODO api 연동 필요
+        viewModelScope.launch {
+            goalId.value?.let { id ->
+                goalRepository.deleteGoal(id).let { deletedData ->
+                    deletedData ?: return@launch
+                    _deleteState.value = UiState.Success(deletedData.goalId)
+                }
+            }
+        }
     }
 
     companion object {

@@ -71,6 +71,7 @@
             android:layout_marginStart="13dp"
             android:layout_marginEnd="@dimen/spacing16"
             android:backgroundTint="@color/gray_200"
+            android:onClick="@{() -> viewModel.deleteGoal()}"
             android:text="@string/goal_detail_delete_button_text"
             android:textAppearance="@style/TextAppearance.System5_Bold"
             android:textColor="@color/gray_400"
