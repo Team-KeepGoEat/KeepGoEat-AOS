@@ -10,15 +10,18 @@ import org.keepgoeat.databinding.ActivityGoalDetailBinding
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.model.GoalContent
+import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_GOAL_CONTENT
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_IS_UPDATED
 import org.keepgoeat.presentation.type.RecyclerLayoutType
 import org.keepgoeat.util.ItemDecorationUtil
+import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
-class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.activity_goal_detail) {
+class GoalDetailActivity :
+    BindingActivity<ActivityGoalDetailBinding>(R.layout.activity_goal_detail) {
     private val viewModel: GoalDetailViewModel by viewModels()
     private lateinit var adapter: GoalStickerListAdapter
     private var isUpdated = false
@@ -36,7 +39,6 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         intent.let {
             val goalId = it.getIntExtra(ARG_GOAL_ID, -1)
             viewModel.fetchGoalDetailInfo(goalId)
-
             isUpdated = it.getBooleanExtra(ARG_IS_UPDATED, false)
             if (isUpdated) this.onBackPressedDispatcher.addCallback(this, callback)
         }
@@ -48,7 +50,11 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
 
     private fun initLayout() {
         binding.rvGoalCard.addItemDecoration(
-            ItemDecorationUtil(CARD_ITEM_SPACE, Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL), RecyclerLayoutType.GRID)
+            ItemDecorationUtil(
+                CARD_ITEM_SPACE,
+                Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL),
+                RecyclerLayoutType.GRID
+            )
         )
     }
 
@@ -81,10 +87,21 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         viewModel.goalStickers.observe(this) { stickers ->
             adapter.submitList(stickers)
         }
+        viewModel.keepState.observe(this) { keepState ->
+            when (keepState) {
+                is UiState.Success -> {
+                    startActivity(Intent(this, MyActivity::class.java))
+                    finish()
+                }
+                else -> {}
+            }
+        }
     }
 
     private fun showGoalKeepDialog() {
-        GoalKeepBottomDialogFragment().show(supportFragmentManager, "goalKeepDialog")
+        intent?.let {
+            GoalKeepBottomDialogFragment().show(supportFragmentManager, "goalKeepDialog")
+        }
     }
 
     private fun moveToHome() {

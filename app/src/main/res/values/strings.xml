@@ -49,6 +49,7 @@
     <!-- Goal Keep -->
     <string name="goal_keep_dialog_guide">목표 달성이 끝났나요?\n달성 완료된 목표는 보관해서 모아볼 수 있어요.</string>
     <string name="goal_keep_delete_guide">잘못된 목표인가요? 삭제하기</string>
+    <string name="goal_keep">목표 보관하기</string>
 
     <!-- Goal Setting -->
     <string name="goal_setting">목표 입력</string>

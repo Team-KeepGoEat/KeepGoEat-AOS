@@ -5,6 +5,7 @@ import org.keepgoeat.data.model.request.RequestGoalContent
 import org.keepgoeat.data.model.request.RequestGoalContentTitle
 import org.keepgoeat.data.model.response.ResponseGoalContent
 import org.keepgoeat.data.model.response.ResponseGoalDetail
+import org.keepgoeat.data.model.response.ResponseGoalKeep
 import org.keepgoeat.data.model.response.ResponseHome
 import org.keepgoeat.data.service.GoalService
 import org.keepgoeat.util.safeApiCall
@@ -25,4 +26,7 @@ class GoalDataSource @Inject constructor(
     // TODO goalId -> id 로 파라미터명 변경
     suspend fun fetchGoalDetail(goalId: Int): ApiResult<ResponseGoalDetail?> =
         safeApiCall { goalService.fetchGoalDetail(goalId) }
+
+    suspend fun keepGoal(id: Int): ApiResult<ResponseGoalKeep?> =
+        safeApiCall { goalService.keepGoal(id) }
 }
