@@ -26,6 +26,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "KGE_BASE_URL", properties["KGE_BASE_URL"]
+        buildConfigField "String", "KAKAO_NATIVE_KEY", properties["KAKAO_NATIVE_KEY"]
+        manifestPlaceholders["KAKAO_NATIVE_KEY"] = properties["KAKAO_NATIVE_KEY"]
     }
 
     buildTypes {

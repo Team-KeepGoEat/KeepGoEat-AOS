@@ -43,6 +43,11 @@ jobs:
       - name: Touch local properties
         run: touch local.properties
 
+      - name: Access KAKAO_NATIVE_KEY
+        env:
+          KAKAO_NATIVE_KEY: ${{ secrets.KAKAO_NATIVE_KEY }}
+        run: echo "KAKAO_NATIVE_KEY=\"$KAKAO_NATIVE_KEY\"" >> local.properties
+
       - name: Access KGE_BASE_URL
         env:
           HFM_BASE_URL: ${{ secrets.KGE_BASE_URL }}
