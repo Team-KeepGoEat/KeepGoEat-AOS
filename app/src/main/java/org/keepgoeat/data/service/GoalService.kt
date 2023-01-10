@@ -14,6 +14,10 @@ interface GoalService {
     @POST("goal")
     suspend fun uploadGoalContent(@Body request: RequestGoalContent): Response<ResponseGoalContent>
 
+    @FormUrlEncoded
+    @POST("goal/{goalId}")
+    suspend fun editGoalContent(@Path("goalId") id: Int, @Field("goalContent") goalContent: String): Response<ResponseGoalContent>
+
     @GET("history/{goalId}")
     suspend fun fetchGoalDetail(@Path("goalId") goalId: Int): Response<ResponseGoalDetail>
 }

@@ -7,6 +7,7 @@ import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.UiState
+import org.keepgoeat.util.safeLet
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,6 +31,16 @@ class GoalSettingViewModel @Inject constructor(
         viewModelScope.launch {
             goalRepository.uploadGoalContent(goalTitle.value ?: return@launch, eatingType.value == EatingType.MORE).let { result ->
                 _uploadState.value = if (result?.id != null) UiState.Success(result.id) else UiState.Empty
+            }
+        }
+    }
+
+    fun editGoal() {
+        viewModelScope.launch {
+            safeLet(goalId, goalTitle.value) { id, title ->
+                goalRepository.editGoalContent(id, title).let { result ->
+                    _uploadState.value = if (result?.id != null) UiState.Success(result.id) else UiState.Empty
+                }
             }
         }
     }

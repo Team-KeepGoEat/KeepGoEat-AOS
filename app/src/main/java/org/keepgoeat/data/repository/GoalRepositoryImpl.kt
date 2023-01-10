@@ -48,6 +48,24 @@ class GoalRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun editGoalContent(id: Int, title: String): ResponseGoalContent.ResponseGoalContentData? {
+        val result = goalDataSource.editGoalContent(id, title)
+
+        return when (result) {
+            is ApiResult.Success -> {
+                result.data?.data
+            }
+            is ApiResult.NetworkError -> {
+                Timber.d("Network Error")
+                null
+            }
+            is ApiResult.GenericError -> {
+                Timber.d("(${result.code}): ${result.message}")
+                null
+            }
+        }
+    }
+
     override suspend fun fetchGoalDetail(goalId: Int): ResponseGoalDetail.ResponseGoalDetailData? {
         val result = goalDataSource.fetchGoalDetail(goalId)
 

@@ -18,6 +18,10 @@ class GoalDataSource @Inject constructor(
     suspend fun uploadGoalContent(requestGoalContent: RequestGoalContent): ApiResult<ResponseGoalContent?> =
         safeApiCall { goalService.uploadGoalContent(requestGoalContent) }
 
+    suspend fun editGoalContent(id: Int, title: String): ApiResult<ResponseGoalContent?> =
+        safeApiCall { goalService.editGoalContent(id, title) }
+
+    // TODO goalId -> id 로 파라미터명 변경
     suspend fun fetchGoalDetail(goalId: Int): ApiResult<ResponseGoalDetail?> =
         safeApiCall { goalService.fetchGoalDetail(goalId) }
 }
