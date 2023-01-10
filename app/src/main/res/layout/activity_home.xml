@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="org.keepgoeat.presentation.home.HomeViewModel" />
@@ -35,15 +37,40 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/img_home_background_night" />
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="false"
+                app:lottie_fileName="home_background.json"
+                app:lottie_loop="true"
+                app:visibility="@{viewModel.achievedState}" />
+
             <ImageView
                 android:id="@+id/iv_home_snail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing16"
                 android:layout_marginTop="32dp"
+                android:visibility="@{!viewModel.achievedState ? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
                 app:srcCompat="@drawable/img_snail_orange_cheer" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing16"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
+                app:lottie_autoPlay="false"
+                app:lottie_fileName="home_snail.json"
+                app:lottie_loop="true"
+                app:visibility="@{viewModel.achievedState}" />
 
             <ImageView
                 android:id="@+id/iv_my_page"
