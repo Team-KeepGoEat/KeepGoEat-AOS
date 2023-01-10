@@ -39,7 +39,6 @@ class GoalDetailActivity :
         intent.let {
             val goalId = it.getIntExtra(ARG_GOAL_ID, -1)
             viewModel.fetchGoalDetailInfo(goalId)
-            viewModel.setGoalId(goalId)
             isUpdated = it.getBooleanExtra(ARG_IS_UPDATED, false)
             if (isUpdated) this.onBackPressedDispatcher.addCallback(this, callback)
         }
@@ -91,8 +90,7 @@ class GoalDetailActivity :
         viewModel.keepState.observe(this) { keepState ->
             when (keepState) {
                 is UiState.Success -> {
-                    val intent = Intent(this, MyActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, MyActivity::class.java))
                     finish()
                 }
                 else -> {}
@@ -102,7 +100,6 @@ class GoalDetailActivity :
 
     private fun showGoalKeepDialog() {
         intent?.let {
-            val goalId = it.getIntExtra(ARG_GOAL_ID, -1)
             GoalKeepBottomDialogFragment().show(supportFragmentManager, "goalKeepDialog")
         }
     }
