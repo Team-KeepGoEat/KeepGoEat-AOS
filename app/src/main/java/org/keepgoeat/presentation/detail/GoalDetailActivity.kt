@@ -66,7 +66,7 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
                 val content = GoalContent(detail.id, detail.goalTitle)
                 Intent(this, GoalSettingActivity::class.java).apply {
                     putExtra(ARG_GOAL_CONTENT, content)
-                    putExtra(ARG_EATING_TYPE, detail.eatingType)
+                    putExtra(ARG_EATING_TYPE, detail.eatingType.name)
                 }.also {
                     startActivity(it)
                 }

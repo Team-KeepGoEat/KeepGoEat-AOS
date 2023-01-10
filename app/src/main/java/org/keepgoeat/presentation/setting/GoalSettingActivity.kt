@@ -15,10 +15,12 @@ import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.getParcelable
 import org.keepgoeat.util.extension.showKeyboard
+import org.keepgoeat.util.extension.showToast
 import org.keepgoeat.util.safeValueOf
 
 @AndroidEntryPoint
-class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout.activity_goal_setting) {
+class GoalSettingActivity :
+    BindingActivity<ActivityGoalSettingBinding>(R.layout.activity_goal_setting) {
     private val viewModel: GoalSettingViewModel by viewModels()
     private var isEditMode: Boolean = false
 
@@ -47,8 +49,13 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
         viewModel.uploadState.observe(this) { state ->
             when (state) {
                 is UiState.Success -> {
-                    if (isEditMode) moveToDetail()
-                    else moveToHome()
+                    if (isEditMode) {
+                        showToast(getString(R.string.goal_setting_success_edit_toast_message))
+                        moveToDetail()
+                    } else {
+                        showToast(getString(R.string.goal_setting_success_add_toast_message))
+                        moveToHome()
+                    }
                 }
                 else -> {}
             }
