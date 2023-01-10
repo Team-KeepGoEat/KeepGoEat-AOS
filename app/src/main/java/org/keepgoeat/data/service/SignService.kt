@@ -2,45 +2,49 @@ package org.keepgoeat.data.service
 
 import android.content.Context
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.model.ClientError
-import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
-import org.keepgoeat.presentation.sign.SignSharedPreferences
 import timber.log.Timber
 import javax.inject.Inject
 
 class SignService @Inject constructor(
     @ActivityContext private val context: Context,
+    private val client: UserApiClient
 ) {
-    fun loginKakao() {
+    val isKakaoTalkLoginAvailable: Boolean
+        get() = client.isKakaoTalkLoginAvailable(context)
+
+    fun loginKakao(loginListener: (() -> Unit)? = null) {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-            if (error != null) {
-                Timber.e("카카오계정으로 로그인 실패", error)
-            } else if (token != null) {
-                UserApiClient.instance.me { user, error ->
-                    Timber.i("카카오계정으로 로그인 성공 ${token.accessToken}")
-                    SignSharedPreferences(context).isLogin = true
-                    SignSharedPreferences(context).accestToken = token.accessToken
-                }
-            }
+            error?.let(::handleLoginError)
+            token?.let(::handleLoginSuccess)
         }
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
-            UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
-                if (error != null) {
-                    Timber.e("카카오톡으로 로그인 실패", error)
-                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                        return@loginWithKakaoTalk
-                    }
-                    UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
-                } else if (token != null) {
-                    Timber.i("카카오톡으로 로그인 성공 ${token.accessToken}")
-                    SignSharedPreferences(context).isLogin = true
-                    SignSharedPreferences(context).accestToken = token.accessToken
-                }
-            }
-        } else {
-            UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
+        if (isKakaoTalkLoginAvailable)
+            loginByKakaotalk(loginListener, callback)
+        else
+            loginByKakaoAccount(loginListener, callback)
+    }
+
+    fun loginByKakaotalk(loginListener: (() -> Unit)? = null, callback: (OAuthToken?, Throwable?) -> Unit) {
+        client.loginWithKakaoTalk(context, callback = callback)
+    }
+
+    fun loginByKakaoAccount(loginListener: (() -> Unit)? = null, callback: (OAuthToken?, Throwable?) -> Unit) {
+        client.loginWithKakaoAccount(context, callback = callback)
+    }
+
+    private fun handleLoginError(throwable: Throwable) {
+        val kakaoType = if (isKakaoTalkLoginAvailable) "카카오톡" else "카카오계정"
+        Timber.d("$kakaoType 으로 로그인 실패")
+    }
+
+    private fun handleLoginSuccess(oAuthToken: OAuthToken) {
+        client.me { user, _ ->
+            // TODO 로그인 Api 연결
         }
+    }
+
+    fun logout() {
+        client.logout(Timber::e)
     }
 }
