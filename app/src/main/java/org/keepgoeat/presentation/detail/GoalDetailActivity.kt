@@ -1,11 +1,15 @@
 package org.keepgoeat.presentation.detail
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalDetailBinding
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
+import org.keepgoeat.presentation.model.GoalContent
+import org.keepgoeat.presentation.setting.GoalSettingActivity
+import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_GOAL_CONTENT
 import org.keepgoeat.presentation.type.RecyclerLayoutType
 import org.keepgoeat.util.ItemDecorationUtil
 import org.keepgoeat.util.binding.BindingActivity
@@ -42,6 +46,17 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         }
         binding.ivKeep.setOnClickListener {
             showGoalKeepDialog()
+        }
+        binding.ivEdit.setOnClickListener {
+            viewModel.goalDetail.value?.let { detail ->
+                val content = GoalContent(detail.id, detail.goalTitle)
+                Intent(this, GoalSettingActivity::class.java).apply {
+                    putExtra(ARG_GOAL_CONTENT, content)
+                    putExtra(ARG_EATING_TYPE, detail.eatingType)
+                }.also {
+                    startActivity(it)
+                }
+            }
         }
     }
 

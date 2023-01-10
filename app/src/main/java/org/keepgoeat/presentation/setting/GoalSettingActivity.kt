@@ -7,9 +7,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalSettingBinding
 import org.keepgoeat.presentation.home.HomeActivity
+import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.extension.getParcelable
 import org.keepgoeat.util.extension.showKeyboard
 import org.keepgoeat.util.safeValueOf
 
@@ -22,9 +24,15 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        intent.getStringExtra(ARG_EATING_TYPE)?.let { strExtra ->
-            val eatingType = safeValueOf<EatingType>(strExtra) ?: return@let
-            viewModel.setEatingType(eatingType)
+        intent.let {
+            it.getStringExtra(ARG_EATING_TYPE)?.let { strExtra ->
+                val eatingType = safeValueOf<EatingType>(strExtra) ?: return@let
+                viewModel.setEatingType(eatingType)
+            }
+
+            it.getParcelable(ARG_GOAL_CONTENT, GoalContent::class.java)?.let { goal ->
+                viewModel.setGoalContent(goal)
+            }
         }
 
         addListeners()
@@ -60,5 +68,6 @@ class GoalSettingActivity : BindingActivity<ActivityGoalSettingBinding>(R.layout
 
     companion object {
         const val ARG_EATING_TYPE = "eatingType"
+        const val ARG_GOAL_CONTENT = "goalContent"
     }
 }
