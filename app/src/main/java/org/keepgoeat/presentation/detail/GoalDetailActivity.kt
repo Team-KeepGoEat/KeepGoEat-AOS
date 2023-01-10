@@ -96,6 +96,14 @@ class GoalDetailActivity :
                 else -> {}
             }
         }
+        viewModel.deleteState.observe(this) { deleteState ->
+            when (deleteState) {
+                is UiState.Success -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                else -> {}
+            }
+        }
     }
 
     private fun showGoalKeepDialog() {
