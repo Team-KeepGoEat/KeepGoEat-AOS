@@ -1,5 +1,6 @@
 package org.keepgoeat.presentation.detail
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,8 @@ import org.keepgoeat.util.UiState
 import javax.inject.Inject
 
 @HiltViewModel
-class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRepository) : ViewModel() {
+class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRepository) :
+    ViewModel() {
     private val _goalStickers = MutableLiveData<List<GoalSticker>>()
     val goalStickers: LiveData<List<GoalSticker>> get() = _goalStickers
     private val _goalDetail = MutableLiveData<GoalDetail>()
@@ -35,13 +37,19 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
         }
     }
 
-    fun keepGoal(goalId: Int) {
+    fun keepGoal(view: View) {
         viewModelScope.launch {
-            goalRepository.keepGoal(goalId).let { keptData ->
-                keptData ?: return@launch
-                _keepState.value = UiState.Success(keptData)
+            goalId.value?.let { id ->
+                goalRepository.keepGoal(id).let { keptData ->
+                    keptData ?: return@launch
+                    _keepState.value = UiState.Success(keptData)
+                }
             }
         }
+    }
+
+    fun setGoalId(id: Int) {
+        _goalId.value = id
     }
 
     fun deleteGoal() {
