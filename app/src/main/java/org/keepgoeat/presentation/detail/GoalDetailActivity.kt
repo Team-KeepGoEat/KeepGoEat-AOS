@@ -10,6 +10,7 @@ import org.keepgoeat.databinding.ActivityGoalDetailBinding
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.model.GoalContent
+import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_GOAL_CONTENT
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_IS_UPDATED
@@ -81,10 +82,18 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         viewModel.goalStickers.observe(this) { stickers ->
             adapter.submitList(stickers)
         }
+        viewModel.goalId.observe(this){
+            val intent = Intent(this, MyActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun showGoalKeepDialog() {
-        GoalKeepBottomDialogFragment().show(supportFragmentManager, "goalKeepDialog")
+        intent?.let {
+            val goalId = it.getIntExtra(ARG_GOAL_ID, -1)
+            GoalKeepBottomDialogFragment(goalId).show(supportFragmentManager, "goalKeepDialog")
+        }
     }
 
     private fun moveToHome() {

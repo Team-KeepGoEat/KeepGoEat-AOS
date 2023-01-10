@@ -17,6 +17,8 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
     val goalStickers: LiveData<List<GoalSticker>> get() = _goalStickers
     private val _goalDetail = MutableLiveData<GoalDetail>()
     val goalDetail: LiveData<GoalDetail> get() = _goalDetail
+    private val _goalId = MutableLiveData<Int>()
+    val goalId: LiveData<Int> get() = _goalId
 
     fun fetchGoalDetailInfo(goalId: Int) {
         viewModelScope.launch {
@@ -29,8 +31,13 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
         }
     }
 
-    fun keepGoal() {
-        // TODO api 연동 필요
+    fun keepGoal(goalId: Int) {
+        viewModelScope.launch {
+            goalRepository.keepGoalDetail(goalId).let { keptData ->
+                keptData ?: return@launch
+                _goalId.value = keptData.goalId
+            }
+        }
     }
 
     fun deleteGoal() {
