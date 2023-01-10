@@ -9,9 +9,7 @@
     <string name="eating_type_more">더 먹기</string>
     <string name="btn_text_no">아니오</string>
 
-    <!--  sign  -->
-    <string name="kakao_app_key1">5b258b06c6f8e90a646e2675b2f8e8aa</string>
-    <string name="kakao_app_key2">kakao5b258b06c6f8e90a646e2675b2f8e8aa</string>
+    <!-- sign -->
     <string name="signin">카카오톡 로그인</string>
     <string name="sign_description1">식습관 관리,</string>
     <string name="sign_description2">같이 천천히 시작해볼까요?\n먹는 재미는 언제나 소중하니까!</string>
@@ -51,9 +49,10 @@
     <!-- Goal Keep -->
     <string name="goal_keep_dialog_guide">목표 달성이 끝났나요?\n달성 완료된 목표는 보관해서 모아볼 수 있어요.</string>
     <string name="goal_keep_delete_guide">잘못된 목표인가요? 삭제하기</string>
+    <string name="goal_keep">목표 보관하기</string>
 
     <!-- Goal Setting -->
-    <string name="goal_setting">목표 설정</string>
+    <string name="goal_setting">목표 입력</string>
     <string name="goal_setting_title">나의 목표를 입력해볼까요?</string>
     <string name="goal_setting_title_hint_for_more">ex) 하루 1끼 이상 야채</string>
     <string name="goal_setting_title_hint_for_less">ex) 라면</string>
@@ -82,5 +81,7 @@
     <string name="my_duration">진행기간</string>
     <string name="my_goal_duration_format">%s. %s. %s ~ %s. %s. %s</string>
     <string name="goal_detail_delete_button_text">네, 삭제할래요</string>
+    <string name="goal_setting_success_edit_toast_message">목표가 수정되었습니다.</string>
+    <string name="goal_setting_success_add_toast_message">목표가 추가되었습니다.</string>
 
 </resources>

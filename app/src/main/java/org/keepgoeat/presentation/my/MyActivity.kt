@@ -1,11 +1,14 @@
 package org.keepgoeat.presentation.my
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityMyBinding
+import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.binding.BindingActivity
@@ -16,6 +19,11 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
     private val goalAdapter = MyGoalAdapter()
     private val headerAdapter = MyHeaderAdapter(::getFilteredGoalWithEatingType)
     private val goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            moveToHome()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +40,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             adapter = goalConcatAdapter
             itemAnimator = null
         }
+        this.onBackPressedDispatcher.addCallback(this, callback)
     }
 
     private fun getFilteredGoalWithEatingType(eatingType: EatingType?) {
@@ -44,7 +53,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
     private fun addListeners() {
         binding.ivBack.setOnClickListener {
-            finish()
+            moveToHome()
         }
     }
 
@@ -52,5 +61,11 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         viewModel.goalList.observe(this) { goals ->
             goalAdapter.submitList(goals.toMutableList())
         }
+    }
+
+    private fun moveToHome() {
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }

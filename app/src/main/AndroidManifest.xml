@@ -62,6 +62,7 @@
             android:name=".presentation.setting.GoalSettingActivity"
             android:exported="false"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.my.MyActivity"
@@ -75,9 +76,10 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="oauth"
-                    android:scheme="@string/kakao_app_key2" />
+
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakao${KAKAO_NATIVE_KEY}" />
             </intent-filter>
         </activity>
     </application>

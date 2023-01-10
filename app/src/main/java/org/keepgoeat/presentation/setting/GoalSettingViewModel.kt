@@ -4,8 +4,10 @@ import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.UiState
+import org.keepgoeat.util.safeLet
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,6 +17,7 @@ class GoalSettingViewModel @Inject constructor(
     val goalTitle = MutableLiveData<String>()
     private val _eatingType = MutableLiveData<EatingType>()
     val eatingType: LiveData<EatingType> get() = _eatingType
+    var goalId: Int? = null
 
     val isValidTitle: LiveData<Boolean>
         get() = Transformations.map(goalTitle) { title ->
@@ -25,6 +28,11 @@ class GoalSettingViewModel @Inject constructor(
     val uploadState: LiveData<UiState<Int>> get() = _uploadState
 
     fun uploadGoal() {
+        if (goalId == null) addGoal()
+        else editGoal()
+    }
+
+    private fun addGoal() {
         viewModelScope.launch {
             goalRepository.uploadGoalContent(goalTitle.value ?: return@launch, eatingType.value == EatingType.MORE).let { result ->
                 _uploadState.value = if (result?.id != null) UiState.Success(result.id) else UiState.Empty
@@ -32,8 +40,23 @@ class GoalSettingViewModel @Inject constructor(
         }
     }
 
+    private fun editGoal() {
+        viewModelScope.launch {
+            safeLet(goalId, goalTitle.value) { id, title ->
+                goalRepository.editGoalContent(id, title).let { result ->
+                    _uploadState.value = if (result?.id != null) UiState.Success(result.id) else UiState.Empty
+                }
+            }
+        }
+    }
+
     fun setEatingType(eatingType: EatingType) {
         _eatingType.value = eatingType
+    }
+
+    fun setGoalContent(goal: GoalContent) {
+        goalId = goal.id
+        goalTitle.value = goal.goalTitle
     }
 
     companion object {
