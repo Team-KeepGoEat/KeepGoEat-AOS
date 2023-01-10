@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(
     fun changeGoalAchieved(goal: HomeGoal) {
         val position = goalList.value?.indexOf(goal) ?: return
         viewModelScope.launch {
-            goalRepository.achieveGoal(goal.id, goal.isAchieved)?.let { goalData ->
+            goalRepository.achieveGoal(goal.id, !goal.isAchieved)?.let { goalData ->
                 with(goal) {
                     _goalList.value?.set(
                         position,
