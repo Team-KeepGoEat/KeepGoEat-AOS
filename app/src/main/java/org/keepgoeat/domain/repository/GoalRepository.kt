@@ -6,6 +6,7 @@ import org.keepgoeat.data.model.response.ResponseHome
 
 interface GoalRepository {
     suspend fun fetchHomeEntireData(): ResponseHome.HomeData?
+    // TODO update -> add 네이밍 수정 필요
     suspend fun uploadGoalContent(title: String, isMore: Boolean): ResponseGoalContent.ResponseGoalContentData?
     suspend fun editGoalContent(id: Int, title: String): ResponseGoalContent.ResponseGoalContentData?
     suspend fun fetchGoalDetail(goalId: Int): ResponseGoalDetail.ResponseGoalDetailData?
