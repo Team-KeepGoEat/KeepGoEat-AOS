@@ -31,7 +31,7 @@ class GoalDataSource @Inject constructor(
     suspend fun keepGoal(id: Int): ApiResult<ResponseGoalKeep?> =
         safeApiCall { goalService.keepGoal(id) }
 
-    suspend fun completeGoal(
+    suspend fun achievedGoal(
         goalId: Int,
         requestGoalAchievement: RequestGoalAchievement
     ): ApiResult<ResponseGoalAchievement?> =

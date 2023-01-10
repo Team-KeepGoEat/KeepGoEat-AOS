@@ -34,7 +34,7 @@ class GoalRepositoryImpl @Inject constructor(
         goalId: Int,
         isAchieved: Boolean
     ): ResponseGoalAchievement.ResponseGoalAchievementData? {
-        val result = goalDataSource.completeGoal(goalId, RequestGoalAchievement(isAchieved))
+        val result = goalDataSource.achievedGoal(goalId, RequestGoalAchievement(isAchieved))
         return when (result) {
             is ApiResult.Success -> {
                 result.data?.data
