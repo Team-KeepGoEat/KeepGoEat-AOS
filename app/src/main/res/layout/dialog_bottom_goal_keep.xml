@@ -47,7 +47,7 @@
             android:layout_marginHorizontal="@dimen/spacing16"
             android:layout_marginTop="12dp"
             android:backgroundTint="@{context.getColor(viewModel.goalDetail.eatingType.buttonBackgroundColor)}"
-            android:text="목표 보관하기"
+            android:text="@string/goal_keep"
             android:onClick="@{viewModel::keepGoal}"
             android:textColor="@{context.getColor(viewModel.goalDetail.eatingType.buttonTextColor)}"
             app:layout_constraintTop_toBottomOf="@id/iv_snail"
