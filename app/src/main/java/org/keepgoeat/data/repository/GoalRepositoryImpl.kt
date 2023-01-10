@@ -32,7 +32,10 @@ class GoalRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun uploadGoalContent(title: String, isMore: Boolean): ResponseGoalContent.ResponseGoalContentData? {
+    override suspend fun uploadGoalContent(
+        title: String,
+        isMore: Boolean
+    ): ResponseGoalContent.ResponseGoalContentData? {
         val result = goalDataSource.uploadGoalContent(RequestGoalContent(title, isMore))
 
         return when (result) {
@@ -50,7 +53,10 @@ class GoalRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun editGoalContent(id: Int, title: String): ResponseGoalContent.ResponseGoalContentData? {
+    override suspend fun editGoalContent(
+        id: Int,
+        title: String
+    ): ResponseGoalContent.ResponseGoalContentData? {
         val result = goalDataSource.editGoalContent(id, RequestGoalContentTitle(title))
 
         return when (result) {
@@ -89,7 +95,7 @@ class GoalRepositoryImpl @Inject constructor(
     override suspend fun keepGoalDetail(id: Int): ResponseGoalKeep.Data? {
         val result = goalDataSource.keepGoalDetail(id)
 
-        return when(result){
+        return when (result) {
             is ApiResult.Success -> {
                 result.data?.data
             }
