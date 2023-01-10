@@ -100,6 +100,7 @@ class GoalDetailActivity :
             when (deleteState) {
                 is UiState.Success -> {
                     startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
                 }
                 else -> {}
             }
