@@ -16,10 +16,12 @@ import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_GOAL
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_IS_UPDATED
 import org.keepgoeat.presentation.type.RecyclerLayoutType
 import org.keepgoeat.util.ItemDecorationUtil
+import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
-class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.activity_goal_detail) {
+class GoalDetailActivity :
+    BindingActivity<ActivityGoalDetailBinding>(R.layout.activity_goal_detail) {
     private val viewModel: GoalDetailViewModel by viewModels()
     private lateinit var adapter: GoalStickerListAdapter
     private var isUpdated = false
@@ -49,7 +51,11 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
 
     private fun initLayout() {
         binding.rvGoalCard.addItemDecoration(
-            ItemDecorationUtil(CARD_ITEM_SPACE, Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL), RecyclerLayoutType.GRID)
+            ItemDecorationUtil(
+                CARD_ITEM_SPACE,
+                Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL),
+                RecyclerLayoutType.GRID
+            )
         )
     }
 
@@ -82,10 +88,15 @@ class GoalDetailActivity : BindingActivity<ActivityGoalDetailBinding>(R.layout.a
         viewModel.goalStickers.observe(this) { stickers ->
             adapter.submitList(stickers)
         }
-        viewModel.goalId.observe(this) {
-            val intent = Intent(this, MyActivity::class.java)
-            startActivity(intent)
-            finish()
+        viewModel.keepState.observe(this) { keepState ->
+            when (keepState) {
+                is UiState.Success -> {
+                    val intent = Intent(this, MyActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                else -> {}
+            }
         }
     }
 

@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import org.keepgoeat.data.model.response.ResponseGoalKeep
 import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.model.GoalSticker
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.util.UiState
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,6 +21,8 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
     val goalDetail: LiveData<GoalDetail> get() = _goalDetail
     private val _goalId = MutableLiveData<Int>()
     val goalId: LiveData<Int> get() = _goalId
+    private val _keepState = MutableLiveData<UiState<ResponseGoalKeep.ResponseGoalKeepData>>()
+    val keepState: LiveData<UiState<ResponseGoalKeep.ResponseGoalKeepData>> get() = _keepState
 
     fun fetchGoalDetailInfo(goalId: Int) {
         viewModelScope.launch {
@@ -35,7 +39,7 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
         viewModelScope.launch {
             goalRepository.keepGoal(goalId).let { keptData ->
                 keptData ?: return@launch
-                _goalId.value = keptData.goalId
+                _keepState.value = UiState.Success(keptData)
             }
         }
     }
