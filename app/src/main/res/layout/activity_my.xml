@@ -40,11 +40,11 @@
             android:id="@+id/rv_goal_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingTop="6dp"
             android:clipToPadding="false"
+            android:paddingTop="6dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
             tools:listitem="@layout/item_my_goal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
