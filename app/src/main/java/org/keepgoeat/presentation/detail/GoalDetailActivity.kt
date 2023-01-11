@@ -11,6 +11,7 @@ import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUN
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.my.MyActivity
+import org.keepgoeat.presentation.my.MyActivity.Companion.ARG_IS_ENTERED_FROM_KEEP
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_GOAL_CONTENT
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_IS_UPDATED
@@ -50,13 +51,9 @@ class GoalDetailActivity :
     }
 
     private fun initLayout() {
-        binding.rvGoalCard.addItemDecoration(
-            ItemDecorationUtil(
-                CARD_ITEM_SPACE,
-                Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL),
-                RecyclerLayoutType.GRID
-            )
-        )
+        binding.rvGoalCard.addItemDecoration(ItemDecorationUtil(CARD_ITEM_SPACE,
+            Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL),
+            RecyclerLayoutType.GRID))
     }
 
     private fun addListeners() {
@@ -91,8 +88,12 @@ class GoalDetailActivity :
         viewModel.keepState.observe(this) { keepState ->
             when (keepState) {
                 is UiState.Success -> {
-                    startActivity(Intent(this, MyActivity::class.java))
-                    finish()
+                    Intent(this, MyActivity::class.java).apply {
+                        putExtra(ARG_IS_ENTERED_FROM_KEEP, true)
+                    }.also {
+                        startActivity(it)
+                        finish()
+                    }
                 }
                 else -> {}
             }

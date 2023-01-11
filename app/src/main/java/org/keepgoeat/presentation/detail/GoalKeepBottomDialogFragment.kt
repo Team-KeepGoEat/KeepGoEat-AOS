@@ -6,6 +6,7 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomGoalKeepBinding
+import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
 @AndroidEntryPoint
@@ -18,11 +19,23 @@ class GoalKeepBottomDialogFragment :
         binding.viewModel = viewModel
 
         addListeners()
+        addObservers()
     }
 
     private fun addListeners() {
         binding.tvDelete.setOnClickListener {
             showGoalDeleteDialog()
+        }
+    }
+
+    private fun addObservers() {
+        viewModel.keepState.observe(this) { keepState ->
+            when (keepState) {
+                is UiState.Success -> {
+                    dismiss()
+                }
+                else -> {}
+            }
         }
     }
 

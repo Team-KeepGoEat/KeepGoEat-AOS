@@ -19,9 +19,11 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
     private val goalAdapter = MyGoalAdapter()
     private val headerAdapter = MyHeaderAdapter(::getFilteredGoalWithEatingType)
     private val goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
+    private var isEnteredFromKeep: Boolean = false
+
     private val callback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            moveToHome()
+            moveToPrevious()
         }
     }
 
@@ -29,6 +31,8 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        isEnteredFromKeep = intent.getBooleanExtra(ARG_IS_ENTERED_FROM_KEEP, false)
 
         initLayout()
         addListeners()
@@ -53,7 +57,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
     private fun addListeners() {
         binding.ivBack.setOnClickListener {
-            moveToHome()
+            moveToPrevious()
         }
     }
 
@@ -67,5 +71,14 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         val intent = Intent(this, HomeActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+    }
+
+    private fun moveToPrevious() {
+        if (isEnteredFromKeep) moveToHome()
+        else finish()
+    }
+
+    companion object {
+        const val ARG_IS_ENTERED_FROM_KEEP = "isEnteredFromKeep"
     }
 }
