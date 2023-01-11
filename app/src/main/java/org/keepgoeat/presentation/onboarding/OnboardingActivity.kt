@@ -36,18 +36,22 @@ class OnboardingActivity :
                     this@OnboardingActivity.viewModel.setPosition(position)
                 }
             })
-            TabLayoutMediator(binding.indicator, vpViewPager) { _, _ -> }.attach()
+            TabLayoutMediator(indicator, vpViewPager) { _, _ -> }.attach()
         }
     }
 
     private fun addListeners() {
         binding.btnNext.setOnClickListener {
-            if (binding.vpViewPager.currentItem == 2)
-                startActivity(Intent(this, HomeActivity::class.java))
+            if (binding.vpViewPager.currentItem == 2) moveToHome()
             binding.vpViewPager.currentItem++
         }
         binding.tvSkip.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+            moveToHome()
         }
+    }
+
+    private fun moveToHome() {
+        startActivity(Intent(this, HomeActivity::class.java))
+        finish()
     }
 }
