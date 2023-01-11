@@ -8,10 +8,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.keepgoeat.R
+import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.databinding.ActivitySplashBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.sign.SignActivity
-import org.keepgoeat.presentation.sign.SignSharedPreferences
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
@@ -31,7 +31,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun moveToNext() {
-        if (SignSharedPreferences(this).isLogin)
+        if (KGEDataSource(this).isLogin)
             startActivity(Intent(this, HomeActivity::class.java))
         else
             startActivity(Intent(this, SignActivity::class.java))

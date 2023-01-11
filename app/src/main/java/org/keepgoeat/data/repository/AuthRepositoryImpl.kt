@@ -1,7 +1,7 @@
 package org.keepgoeat.data.repository
 
 import org.keepgoeat.data.ApiResult
-import org.keepgoeat.data.datasource.local.SignSharedPreferences
+import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.data.datasource.remote.AuthDataSource
 import org.keepgoeat.data.model.request.RequestAuth
 import org.keepgoeat.data.model.response.ResponseAuth
@@ -11,14 +11,14 @@ import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val authDataSource: AuthDataSource,
-    private val signSharedPreferences: SignSharedPreferences
+    private val localStorage: KGEDataSource
 ) : AuthRepository {
     override suspend fun login(requestAuth: RequestAuth): ResponseAuth.ResponseAuthData? {
         val result = authDataSource.login(requestAuth)
         return when (result) {
             is ApiResult.Success -> {
                 val response = result.data?.data
-                with(signSharedPreferences) {
+                with(localStorage) {
                     isLogin = true
                     response?.let {
                         accestToken = it.accessToken
