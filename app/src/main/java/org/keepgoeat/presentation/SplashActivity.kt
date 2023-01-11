@@ -9,7 +9,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivitySplashBinding
+import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.sign.SignActivity
+import org.keepgoeat.presentation.sign.SignSharedPreferences
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
@@ -29,6 +31,9 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun moveToNext() {
-        startActivity(Intent(this, SignActivity::class.java))
+        if (SignSharedPreferences(this).isLogin)
+            startActivity(Intent(this, HomeActivity::class.java))
+        else
+            startActivity(Intent(this, SignActivity::class.java))
     }
 }
