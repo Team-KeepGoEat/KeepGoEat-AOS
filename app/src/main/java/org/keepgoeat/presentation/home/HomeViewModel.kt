@@ -47,7 +47,8 @@ class HomeViewModel @Inject constructor(
                         )
                     )
                 }
-                _achievedState.value = goalData.updatedIsAchieved
+                if (goalData.updatedIsAchieved)
+                    _achievedState.value = true
                 _goalList.value =
                     _goalList.value?.toMutableList() // TODO 서버쪽에서 api 확인해주면 toMutableList 안붙여도 되는지 확인하기
             }
@@ -58,6 +59,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             goalRepository.fetchHomeEntireData()?.let { homeData ->
                 _cheeringMessage.value = homeData.cheeringMessage
+                _achievedState.value = false
                 _goalList.value = homeData.toHomeGoal().toMutableList()
                 _goalCount.value = homeData.goals.size
             }

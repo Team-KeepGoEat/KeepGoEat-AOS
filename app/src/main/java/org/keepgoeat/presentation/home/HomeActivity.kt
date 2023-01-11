@@ -39,7 +39,8 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun initLayout() {
-        goalAdapter = HomeMyGoalAdapter(::changeGoalItemBtnColor, ::moveToDetail, ::showMakeGoalDialog)
+        goalAdapter =
+            HomeMyGoalAdapter(::changeGoalItemBtnColor, ::moveToDetail, ::showMakeGoalDialog)
         binding.rvMyGoals.apply {
             itemAnimator = null
             adapter = goalAdapter
@@ -53,6 +54,12 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         viewModel.goalCount.observe(this) { goalCount ->
             if (goalCount == 0)
                 binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
+        }
+        viewModel.achievedState.observe(this) { achieved ->
+            if (achieved) {
+                binding.lottieSnail.playAnimation()
+                binding.lottieBackground.playAnimation()
+            }
         }
     }
 
