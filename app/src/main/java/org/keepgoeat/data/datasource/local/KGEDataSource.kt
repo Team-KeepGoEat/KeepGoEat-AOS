@@ -52,9 +52,9 @@ class KGEDataSource @Inject constructor(@ApplicationContext context: Context) {
     }
 
     companion object {
-        const val FILE_NAME = "SignSharedPreferences"
-        const val ACCESS_TOKEN = "AccessToken"
-        const val IS_LOGIN = "IsLogin"
-        const val REFRESH_TOKEN = "RefreshToken"
+        const val FILE_NAME = "signSharedPreferences"
+        const val ACCESS_TOKEN = "accessToken"
+        const val IS_LOGIN = "isLogin"
+        const val REFRESH_TOKEN = "refreshToken"
     }
 }
