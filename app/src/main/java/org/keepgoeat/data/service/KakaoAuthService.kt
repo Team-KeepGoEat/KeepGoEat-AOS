@@ -12,7 +12,7 @@ import org.keepgoeat.domain.repository.AuthRepository
 import timber.log.Timber
 import javax.inject.Inject
 
-class SignService @Inject constructor(
+class KakaoAuthService @Inject constructor(
     @ActivityContext private val context: Context,
     private val client: UserApiClient,
     private val authRepository: AuthRepository,
@@ -32,7 +32,7 @@ class SignService @Inject constructor(
 
     private fun handleLoginError(throwable: Throwable) {
         val kakaoType = if (isKakaoTalkLoginAvailable) "카카오톡" else "카카오 계정"
-        Timber.d("$kakaoType 으로 로그인 실패 (${throwable.message})")
+        Timber.d("${kakaoType}으로 로그인 실패 (${throwable.message})")
     }
 
     private fun handleLoginSuccess(oAuthToken: OAuthToken, loginListener: (() -> Unit)) {

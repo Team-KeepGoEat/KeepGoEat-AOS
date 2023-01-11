@@ -8,7 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.scopes.ActivityScoped
-import org.keepgoeat.data.service.SignService
+import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.domain.repository.AuthRepository
 
 @Module
@@ -23,5 +23,5 @@ object SignModule {
         @ActivityContext context: Context,
         client: UserApiClient,
         authRepository: AuthRepository
-    ) = SignService(context, client, authRepository)
+    ) = KakaoAuthService(context, client, authRepository)
 }
