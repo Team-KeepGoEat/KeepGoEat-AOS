@@ -9,38 +9,31 @@ import javax.inject.Inject
 
 class SignService @Inject constructor(
     @ActivityContext private val context: Context,
-    private val client: UserApiClient
+    private val client: UserApiClient,
 ) {
-    val isKakaoTalkLoginAvailable: Boolean
+    private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
 
-    fun loginKakao(loginListener: (() -> Unit)? = null) {
+    fun loginKakao(loginListener: (() -> Unit)) {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-            error?.let(::handleLoginError)
-            token?.let(::handleLoginSuccess)
+            if (error != null) handleLoginError(error)
+            else if (token != null) handleLoginSuccess(token, loginListener)
         }
-        if (isKakaoTalkLoginAvailable)
-            loginByKakaotalk(loginListener, callback)
-        else
-            loginByKakaoAccount(loginListener, callback)
-    }
 
-    fun loginByKakaotalk(loginListener: (() -> Unit)? = null, callback: (OAuthToken?, Throwable?) -> Unit) {
-        client.loginWithKakaoTalk(context, callback = callback)
-    }
-
-    fun loginByKakaoAccount(loginListener: (() -> Unit)? = null, callback: (OAuthToken?, Throwable?) -> Unit) {
-        client.loginWithKakaoAccount(context, callback = callback)
+        if (isKakaoTalkLoginAvailable) client.loginWithKakaoTalk(context, callback = callback)
+        else client.loginWithKakaoAccount(context, callback = callback)
     }
 
     private fun handleLoginError(throwable: Throwable) {
-        val kakaoType = if (isKakaoTalkLoginAvailable) "카카오톡" else "카카오계정"
-        Timber.d("$kakaoType 으로 로그인 실패")
+        val kakaoType = if (isKakaoTalkLoginAvailable) "카카오톡" else "카카오 계정"
+        Timber.d("$kakaoType 으로 로그인 실패 (${throwable.message})")
     }
 
-    private fun handleLoginSuccess(oAuthToken: OAuthToken) {
+    private fun handleLoginSuccess(oAuthToken: OAuthToken, loginListener: (() -> Unit)) {
         client.me { user, _ ->
             // TODO 로그인 Api 연결
+            Timber.d(oAuthToken.accessToken)
+            loginListener()
         }
     }
 
