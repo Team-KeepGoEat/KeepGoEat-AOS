@@ -15,7 +15,7 @@ import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.ItemDiffCallback
 import org.keepgoeat.util.setVisibility
 
-class HomeMyGoalAdapter(
+class HomeGoalAdapter(
     private val changeBtnColor: (HomeGoal) -> Unit,
     private val moveToDetail: (EatingType, Int) -> Unit,
     private val showMakeGoalDialog: () -> Unit,

@@ -15,7 +15,7 @@ import org.keepgoeat.util.binding.BindingActivity
 @AndroidEntryPoint
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var goalAdapter: HomeMyGoalAdapter
+    private lateinit var goalAdapter: HomeGoalAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     private fun initLayout() {
         goalAdapter =
-            HomeMyGoalAdapter(::changeGoalItemBtnColor, ::moveToDetail, ::showMakeGoalDialog)
+            HomeGoalAdapter(::changeGoalItemBtnColor, ::moveToDetail, ::showMakeGoalDialog)
         binding.rvMyGoals.apply {
             itemAnimator = null
             adapter = goalAdapter
@@ -55,8 +55,8 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             if (goalCount == 0)
                 binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
         }
-        viewModel.achievedState.observe(this) { achieved ->
-            if (achieved) {
+        viewModel.achievedState.observe(this) { isAchieved ->
+            if (isAchieved) {
                 binding.lottieSnail.playAnimation()
                 binding.lottieBackground.playAnimation()
             }

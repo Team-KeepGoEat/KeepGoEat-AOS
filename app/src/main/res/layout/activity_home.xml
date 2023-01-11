@@ -45,7 +45,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:lottie_autoPlay="false"
-                app:lottie_fileName="home_background.json"
+                app:lottie_rawRes="@raw/home_background"
                 app:visibility="@{viewModel.achievedState}" />
 
             <ImageView
@@ -68,7 +68,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
                 app:lottie_autoPlay="false"
-                app:lottie_fileName="home_snail.json"
+                app:lottie_rawRes="@raw/home_snail"
                 app:visibility="@{viewModel.achievedState}" />
 
             <ImageView

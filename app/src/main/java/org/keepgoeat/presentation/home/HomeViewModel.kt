@@ -50,7 +50,7 @@ class HomeViewModel @Inject constructor(
                 if (goalData.updatedIsAchieved)
                     _achievedState.value = true
                 _goalList.value =
-                    _goalList.value?.toMutableList() // TODO 서버쪽에서 api 확인해주면 toMutableList 안붙여도 되는지 확인하기
+                    _goalList.value?.toMutableList()
             }
         }
     }
