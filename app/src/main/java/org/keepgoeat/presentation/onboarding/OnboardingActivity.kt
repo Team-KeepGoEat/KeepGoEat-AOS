@@ -1,5 +1,6 @@
 package org.keepgoeat.presentation.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -7,10 +8,12 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityOnboardingBinding
+import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
-class OnboardingActivity : BindingActivity<ActivityOnboardingBinding>(R.layout.activity_onboarding) {
+class OnboardingActivity :
+    BindingActivity<ActivityOnboardingBinding>(R.layout.activity_onboarding) {
     private val viewModel: OnboardingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +42,12 @@ class OnboardingActivity : BindingActivity<ActivityOnboardingBinding>(R.layout.a
 
     private fun addListeners() {
         binding.btnNext.setOnClickListener {
+            if (binding.vpViewPager.currentItem == 2)
+                startActivity(Intent(this, HomeActivity::class.java))
             binding.vpViewPager.currentItem++
+        }
+        binding.tvSkip.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
         }
     }
 }
