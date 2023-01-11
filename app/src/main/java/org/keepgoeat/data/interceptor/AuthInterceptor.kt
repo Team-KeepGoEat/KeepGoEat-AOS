@@ -3,11 +3,11 @@ package org.keepgoeat.data.interceptor
 import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.Response
-import org.keepgoeat.data.datasource.local.SignSharedPreferences
+import org.keepgoeat.data.datasource.local.KGEDataSource
 import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(
-    private val localStorage: SignSharedPreferences,
+    private val localStorage: KGEDataSource,
     private val gson: Gson,
 ) : Interceptor {
 
