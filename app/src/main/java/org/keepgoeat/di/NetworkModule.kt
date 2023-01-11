@@ -1,5 +1,7 @@
 package org.keepgoeat.di
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -13,6 +15,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.keepgoeat.BuildConfig
 import org.keepgoeat.BuildConfig.DEBUG
+import org.keepgoeat.data.interceptor.AuthInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -20,7 +23,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val dummyAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoicGFya191YmluQG5hdmVyLmNvbSIsImlhdCI6MTY3MzMyOTE3NSwiZXhwIjoxNjczODMzMTc1LCJpc3MiOiJLRUVQR09FQVRfU0VSVkVSIn0.zPlL2aRxpILrmvJVT298FbeXrKpZUkkYJ4HecPBvh4U"
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
@@ -30,6 +32,10 @@ object NetworkModule {
         explicitNulls = false
         ignoreUnknownKeys = true
     }
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
     @ExperimentalSerializationApi
     @Provides
@@ -42,26 +48,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesInterceptor(): Interceptor =
-        Interceptor { chain ->
-            with(chain) {
-                proceed(
-                    request()
-                        .newBuilder()
-                        .addHeader(
-                            "accesstoken",
-                            dummyAccessToken
-                        )
-                        .addHeader("Content-Type", "Application/json")
-                        .build()
-                )
-            }
-        }
+    fun provideAuthInterceptor(interceptor: AuthInterceptor): Interceptor = interceptor
 
     @Provides
     @Singleton
     fun provideOkHttpClientBuilder(
-        interceptor: Interceptor,
+        interceptor: AuthInterceptor,
     ): OkHttpClient =
         OkHttpClient.Builder().apply {
             connectTimeout(10, TimeUnit.SECONDS)
@@ -73,6 +65,5 @@ object NetworkModule {
                     level = HttpLoggingInterceptor.Level.BODY
                 }
             )
-            // TODO AuthInterceptor 추가
         }.build()
 }

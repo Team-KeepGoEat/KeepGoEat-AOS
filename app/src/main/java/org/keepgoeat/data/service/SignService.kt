@@ -15,7 +15,7 @@ import javax.inject.Inject
 class SignService @Inject constructor(
     @ActivityContext private val context: Context,
     private val client: UserApiClient,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
 ) {
     private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
@@ -37,9 +37,8 @@ class SignService @Inject constructor(
 
     private fun handleLoginSuccess(oAuthToken: OAuthToken, loginListener: (() -> Unit)) {
         client.me { user, _ ->
-            // TODO 로그인 Api 연결
             CoroutineScope(Dispatchers.IO).launch {
-                authRepository.login(RequestAuth(oAuthToken.accessToken))
+                authRepository.login(RequestAuth(oAuthToken.accessToken, PLATFORM_KAKAO))
             }
             Timber.d(oAuthToken.accessToken)
             loginListener()
@@ -48,5 +47,9 @@ class SignService @Inject constructor(
 
     fun logout() {
         client.logout(Timber::e)
+    }
+
+    companion object {
+        private const val PLATFORM_KAKAO = "KAKAO"
     }
 }
