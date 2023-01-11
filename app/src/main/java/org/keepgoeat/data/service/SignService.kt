@@ -4,12 +4,18 @@ import android.content.Context
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.keepgoeat.data.model.request.RequestAuth
+import org.keepgoeat.domain.repository.AuthRepository
 import timber.log.Timber
 import javax.inject.Inject
 
 class SignService @Inject constructor(
     @ActivityContext private val context: Context,
     private val client: UserApiClient,
+    private val authRepository: AuthRepository
 ) {
     private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
@@ -32,6 +38,9 @@ class SignService @Inject constructor(
     private fun handleLoginSuccess(oAuthToken: OAuthToken, loginListener: (() -> Unit)) {
         client.me { user, _ ->
             // TODO 로그인 Api 연결
+            CoroutineScope(Dispatchers.IO).launch {
+                authRepository.login(RequestAuth(oAuthToken.accessToken))
+            }
             Timber.d(oAuthToken.accessToken)
             loginListener()
         }
