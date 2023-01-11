@@ -23,6 +23,8 @@ class HomeViewModel @Inject constructor(
     val hour: LiveData<Int> get() = _hour
     private val _cheeringMessage = MutableLiveData<String>()
     val cheeringMessage: LiveData<String> get() = _cheeringMessage
+    private val _achievedState = MutableLiveData<Boolean>()
+    val achievedState: LiveData<Boolean> get() = _achievedState
 
     init {
         fetchGoalList()
@@ -36,11 +38,19 @@ class HomeViewModel @Inject constructor(
                     _goalList.value?.set(
                         position,
                         HomeGoal(
-                            id, goalTitle, isMore, goalData.updatedIsAchieved, goalData.thisMonthCount, type
+                            id,
+                            goalTitle,
+                            isMore,
+                            goalData.updatedIsAchieved,
+                            goalData.thisMonthCount,
+                            type
                         )
                     )
                 }
-                _goalList.value = _goalList.value?.toMutableList() // TODO 서버쪽에서 api 확인해주면 toMutableList 안붙여도 되는지 확인하기
+                if (goalData.updatedIsAchieved)
+                    _achievedState.value = true
+                _goalList.value =
+                    _goalList.value?.toMutableList()
             }
         }
     }
@@ -49,6 +59,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             goalRepository.fetchHomeEntireData()?.let { homeData ->
                 _cheeringMessage.value = homeData.cheeringMessage
+                _achievedState.value = false
                 _goalList.value = homeData.toHomeGoal().toMutableList()
                 _goalCount.value = homeData.goals.size
             }
