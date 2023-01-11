@@ -8,10 +8,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.keepgoeat.R
+import org.keepgoeat.data.datasource.local.SignSharedPreferences
 import org.keepgoeat.databinding.ActivitySplashBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.sign.SignActivity
-import org.keepgoeat.presentation.sign.SignSharedPreferences
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
