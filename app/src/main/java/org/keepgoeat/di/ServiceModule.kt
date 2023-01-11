@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import org.keepgoeat.data.service.AuthService
 import org.keepgoeat.data.service.DummyService
 import org.keepgoeat.data.service.GoalService
 import org.keepgoeat.data.service.MyService
@@ -27,4 +28,9 @@ object ServiceModule {
     @Provides
     fun provideMyService(retrofit: Retrofit): MyService =
         retrofit.create(MyService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideAuthService(retrofit: Retrofit): AuthService =
+        retrofit.create(AuthService::class.java)
 }

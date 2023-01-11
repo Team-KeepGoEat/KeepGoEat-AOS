@@ -1,4 +1,4 @@
-package org.keepgoeat.presentation.sign
+package org.keepgoeat.data.datasource.local
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -32,13 +32,27 @@ class SignSharedPreferences @Inject constructor(@ApplicationContext context: Con
             ""
         ) ?: ""
 
+    var refreshToken: String
+        set(value) = dataStore.edit { putString(REFRESH_TOKEN, value) }
+        get() = dataStore.getString(
+            REFRESH_TOKEN,
+            ""
+        ) ?: ""
+
     var isLogin: Boolean
         set(value) = dataStore.edit { putBoolean(IS_LOGIN, value) }
         get() = dataStore.getBoolean(IS_LOGIN, false)
+
+    fun clear() {
+        dataStore.edit {
+            clear()
+        }
+    }
 
     companion object {
         const val FILE_NAME = "SignSharedPreferences"
         const val ACCESS_TOKEN = "AccessToken"
         const val IS_LOGIN = "IsLogin"
+        const val REFRESH_TOKEN = "RefreshToken"
     }
 }
