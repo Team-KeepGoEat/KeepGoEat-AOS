@@ -17,6 +17,7 @@
             android:id="@+id/tv_onboarding_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing4"
             android:text="@{context.getString(item.titleStrRes)}"
             android:textAppearance="@style/TextAppearance.System3_Bold"
             app:layout_constraintBottom_toTopOf="@+id/tv_onboarding_des"

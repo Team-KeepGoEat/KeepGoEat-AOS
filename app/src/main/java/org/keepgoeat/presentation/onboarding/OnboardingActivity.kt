@@ -23,6 +23,7 @@ class OnboardingActivity :
 
         initLayout()
         addListeners()
+        addObservers()
     }
 
     private fun initLayout() {
@@ -47,6 +48,16 @@ class OnboardingActivity :
         }
         binding.tvSkip.setOnClickListener {
             moveToHome()
+        }
+    }
+
+    private fun addObservers() {
+        viewModel.position.observe(this) {
+            when (it) {
+                0 -> binding.btnNext.setText(R.string.onboarding1_button)
+                1 -> binding.btnNext.setText(R.string.onboarding2_button)
+                2 -> binding.btnNext.setText(R.string.onboarding3_button)
+            }
         }
     }
 
