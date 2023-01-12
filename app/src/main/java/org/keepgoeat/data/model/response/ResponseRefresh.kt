@@ -7,10 +7,10 @@ data class ResponseRefresh(
     val status: Int,
     val success: Boolean,
     val message: String,
-    val data: Token,
+    val data: ResponseToken,
 ) {
     @Serializable
-    data class Token(
+    data class ResponseToken(
         val accessToken: String,
         val refreshToken: String
     )

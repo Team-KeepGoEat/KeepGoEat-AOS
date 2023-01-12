@@ -15,7 +15,7 @@
     <string name="signin">카카오톡 로그인</string>
     <string name="sign_description1">식습관 관리,</string>
     <string name="sign_description2">같이 천천히 시작해볼까요?\n먹는 재미는 언제나 소중하니까!</string>
-    <string name="auto_login_failure">자동 로그인 실패</string>
+    <string name="auto_login_failure">자동 로그인이 만료되었습니다.</string>
 
     <!-- Goal Detail -->
     <string name="goal_detail_my_goal">나의 목표</string>

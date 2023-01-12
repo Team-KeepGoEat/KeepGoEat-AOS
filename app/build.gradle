@@ -82,6 +82,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
+    implementation 'com.google.code.gson:gson:2.10'
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
@@ -103,8 +104,6 @@ dependencies {
 
     // Lottie
     implementation 'com.airbnb.android:lottie:5.2.0'
-
-    implementation 'com.google.code.gson:gson:2.10'
 }
 
 ktlint {
