@@ -27,7 +27,7 @@ class KGEDataSource @Inject constructor(@ApplicationContext context: Context) {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
 
-    var accestToken: String
+    var accessToken: String
         set(value) = dataStore.edit { putString(ACCESS_TOKEN, value) }
         get() = dataStore.getString(
             ACCESS_TOKEN,
