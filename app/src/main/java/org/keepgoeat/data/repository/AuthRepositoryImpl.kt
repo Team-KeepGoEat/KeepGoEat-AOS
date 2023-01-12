@@ -14,7 +14,6 @@ class AuthRepositoryImpl @Inject constructor(
     private val authDataSource: AuthDataSource,
     private val localStorage: KGEDataSource
 ) : AuthRepository {
-
     override suspend fun login(requestAuth: RequestAuth): ResponseAuth.ResponseAuthData? {
         val result = authDataSource.login(requestAuth)
         return when (result) {
