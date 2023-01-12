@@ -15,45 +15,41 @@
         android:layout_height="match_parent"
         tools:context=".presentation.onboarding.OnboardingActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing24"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginTop="21dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabIndicatorHeight="0dp"
+            app:tabPaddingStart="32dp" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tabBackground="@drawable/tab_selector"
-                app:tabIndicatorHeight="0dp"
-                app:tabPaddingStart="32dp" />
-
-            <TextView
-                android:id="@+id/tv_skip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/spacing16"
-                android:text="@string/onboarding_skip"
-                android:textAppearance="@style/TextAppearance.System5"
-                android:textColor="@color/gray_400"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:visibility="@{viewModel.position &lt; 2}" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing8"
+            android:padding="8dp"
+            android:text="@string/onboarding_skip"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="@id/indicator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/indicator"
+            app:visibility="@{viewModel.position &lt; 2}" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spacing16"
+            android:layout_height="0dp"
+            android:layout_marginTop="56dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/indicator" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_next"
@@ -71,5 +67,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
