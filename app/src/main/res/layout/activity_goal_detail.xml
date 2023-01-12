@@ -20,12 +20,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_toolbar"
+            style="@style/Widget.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:elevation="4dp"
-            android:paddingHorizontal="@dimen/spacing16"
-            android:paddingVertical="@dimen/spacing8"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
