@@ -52,7 +52,6 @@ class AuthInterceptor @Inject constructor(
                             .addHeader(ACCESS_TOKEN, localStorage.accessToken)
                             .build()
                     return chain.proceed(newRequest)
-
                 } else {
                     with(context) {
                         CoroutineScope(Dispatchers.Main).launch {
