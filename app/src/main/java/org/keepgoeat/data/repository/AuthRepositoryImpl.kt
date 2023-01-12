@@ -41,7 +41,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun refresh(): ResponseRefresh.Token? {
+    override suspend fun refresh(): ResponseRefresh.ResponseToken? {
         val result = authDataSource.refresh()
         return when (result) {
             is ApiResult.Success -> {
