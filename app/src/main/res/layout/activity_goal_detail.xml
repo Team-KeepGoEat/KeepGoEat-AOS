@@ -120,12 +120,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="@string/goal_detail_num_of_days_eaten_last_month"
+                android:text="@{@string/goal_detail_num_of_days_eaten_last_month(viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.achievementCountTitle))}"
                 android:textAppearance="@style/TextAppearance.System5"
                 android:textColor="@color/gray_600"
                 app:layout_constraintEnd_toEndOf="@id/view_divider"
                 app:layout_constraintStart_toStartOf="@id/layout_day_container"
-                app:layout_constraintTop_toTopOf="@id/layout_day_container" />
+                app:layout_constraintTop_toTopOf="@id/layout_day_container"
+                tools:text="지난달 먹은 날" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -157,12 +158,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="@string/goal_detail_num_of_days_eaten_this_month"
+                android:text="@{@string/goal_detail_num_of_days_eaten_this_month(viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.achievementCountTitle))}"
                 android:textAppearance="@style/TextAppearance.System5"
                 android:textColor="@color/gray_600"
                 app:layout_constraintEnd_toEndOf="@id/layout_day_container"
                 app:layout_constraintStart_toStartOf="@id/view_divider"
-                app:layout_constraintTop_toTopOf="@id/layout_day_container" />
+                app:layout_constraintTop_toTopOf="@id/layout_day_container"
+                tools:text="이번달 먹은 날" />
 
             <TextView
                 android:layout_width="wrap_content"
