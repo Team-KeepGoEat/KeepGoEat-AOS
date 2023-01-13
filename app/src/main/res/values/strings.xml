@@ -22,8 +22,8 @@
     <string name="goal_detail_title">%s %s</string>
     <string name="goal_detail_num_of_days_eaten_last_month">지난달 %s 날</string>
     <string name="goal_detail_num_of_days_eaten_this_month">이번달 %s 날</string>
-    <string name="more">먹은</string>
-    <string name="less">참은</string>
+    <string name="goal_detail_eat">먹은</string>
+    <string name="goal_detail_hold">참은</string>
     <string name="goal_detail_success_goal_delete_toast_message">목표가 삭제되었습니다.</string>
     <string name="goal_detail_success_goal_keep_toast_message">목표가 보관되었습니다.</string>
 
