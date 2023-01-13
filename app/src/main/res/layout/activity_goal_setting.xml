@@ -136,7 +136,6 @@
             android:layout_marginBottom="42dp"
             android:backgroundTint="@color/selector_complete_button_color"
             android:enabled="@{viewModel.isValidTitle}"
-            android:onClick="@{() -> viewModel.uploadGoal()}"
             android:text="@string/complete"
             android:textColor="@color/selector_complete_button_text_color"
             app:layout_constraintBottom_toBottomOf="parent"

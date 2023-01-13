@@ -34,8 +34,12 @@ class GoalSettingViewModel @Inject constructor(
 
     private fun addGoal() {
         viewModelScope.launch {
-            goalRepository.uploadGoalContent(goalTitle.value ?: return@launch, eatingType.value == EatingType.MORE).let { result ->
-                _uploadState.value = if (result?.id != null) UiState.Success(result.id) else UiState.Empty
+            goalRepository.uploadGoalContent(
+                goalTitle.value ?: return@launch,
+                eatingType.value == EatingType.MORE
+            ).let { result ->
+                _uploadState.value =
+                    if (result?.id != null) UiState.Success(result.id) else UiState.Empty
             }
         }
     }
@@ -44,7 +48,8 @@ class GoalSettingViewModel @Inject constructor(
         viewModelScope.launch {
             safeLet(goalId, goalTitle.value) { id, title ->
                 goalRepository.editGoalContent(id, title).let { result ->
-                    _uploadState.value = if (result?.id != null) UiState.Success(result.id) else UiState.Empty
+                    _uploadState.value =
+                        if (result?.id != null) UiState.Success(result.id) else UiState.Empty
                 }
             }
         }
