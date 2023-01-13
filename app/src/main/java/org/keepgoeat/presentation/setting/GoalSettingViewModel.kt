@@ -34,8 +34,10 @@ class GoalSettingViewModel @Inject constructor(
 
     private fun addGoal() {
         viewModelScope.launch {
-            goalRepository.uploadGoalContent(goalTitle.value ?: return@launch,
-                eatingType.value == EatingType.MORE).let { result ->
+            goalRepository.uploadGoalContent(
+                goalTitle.value ?: return@launch,
+                eatingType.value == EatingType.MORE
+            ).let { result ->
                 _uploadState.value =
                     if (result?.id != null) UiState.Success(result.id) else UiState.Empty
             }

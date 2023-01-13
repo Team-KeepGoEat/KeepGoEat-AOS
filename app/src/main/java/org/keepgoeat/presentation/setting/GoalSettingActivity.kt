@@ -70,6 +70,10 @@ class GoalSettingActivity :
         binding.ivBack.setOnClickListener {
             finish()
         }
+        binding.btnComplete.setOnClickListener {
+            showKeyboard(it, false)
+            viewModel.uploadGoal()
+        }
     }
 
     private fun moveToHome() {
