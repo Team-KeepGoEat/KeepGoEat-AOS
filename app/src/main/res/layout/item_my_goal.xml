@@ -38,12 +38,15 @@
 
         <TextView
             android:id="@+id/tv_item_goal_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
             android:text="@{String.format(context.getString(eatingType.titleStrRes), goal.goalContent)}"
             android:textAppearance="@style/TextAppearance.System2_Bold"
             android:textColor="@color/gray_800"
+            android:maxLines="2"
+            android:layout_marginEnd="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_eating_tag"
             tools:text="하루 1끼 이상 야채 더 먹기" />
