@@ -9,7 +9,6 @@ interface GoalRepository {
         isAchieved: Boolean
     ): ResponseGoalAchievement.ResponseGoalAchievementData?
 
-    // TODO update -> add 네이밍 수정 필요
     suspend fun uploadGoalContent(
         title: String,
         isMore: Boolean
