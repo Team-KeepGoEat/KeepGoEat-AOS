@@ -37,7 +37,9 @@
             android:exported="false" />
         <activity
             android:name=".presentation.sign.SignActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.MainActivity"
             android:exported="false"
