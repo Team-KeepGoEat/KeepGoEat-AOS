@@ -14,6 +14,7 @@ import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.getParcelable
+import org.keepgoeat.util.extension.setOnSingleClickListener
 import org.keepgoeat.util.extension.showKeyboard
 import org.keepgoeat.util.extension.showToast
 import org.keepgoeat.util.safeValueOf
@@ -70,7 +71,7 @@ class GoalSettingActivity :
         binding.ivBack.setOnClickListener {
             finish()
         }
-        binding.btnComplete.setOnClickListener {
+        binding.btnComplete.setOnSingleClickListener {
             showKeyboard(it, false)
             viewModel.uploadGoal()
         }
