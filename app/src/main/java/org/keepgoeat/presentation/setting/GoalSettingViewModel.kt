@@ -21,7 +21,7 @@ class GoalSettingViewModel @Inject constructor(
 
     val isValidTitle: LiveData<Boolean>
         get() = Transformations.map(goalTitle) { title ->
-            title.length in 1..20 && title.isNotBlank() && title.matches(TITLE_PATTERN.toRegex())
+            title.length in 1..15 && title.isNotBlank() && title.matches(TITLE_PATTERN.toRegex())
         }
 
     private val _uploadState = MutableLiveData<UiState<Int>>(UiState.Loading)
@@ -65,6 +65,6 @@ class GoalSettingViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TITLE_PATTERN = "^[A-Za-zㄱ-ㅎ가-힣0-9\\s]*\$"
+        private const val TITLE_PATTERN = "^[A-Za-zㄱ-ㅎㅏ-ㅣ가-힣0-9\\s]*\$"
     }
 }
