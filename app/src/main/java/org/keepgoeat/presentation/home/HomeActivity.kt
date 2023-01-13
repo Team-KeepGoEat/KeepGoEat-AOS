@@ -3,7 +3,9 @@ package org.keepgoeat.presentation.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.domain.model.HomeGoal
@@ -11,6 +13,7 @@ import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.extension.repeatOnStarted
 
 @AndroidEntryPoint
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
@@ -48,19 +51,26 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun addObservers() {
-        viewModel.goalList.observe(this) { goalList -> // EventObserver
-            goalAdapter.submitList(goalList.toMutableList())
-        }
-        viewModel.goalCount.observe(this) { goalCount ->
-            if (goalCount == 0)
-                binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
-        }
-        viewModel.achievedState.observe(this) { isAchieved ->
-            if (isAchieved) {
-                binding.lottieSnail.playAnimation()
-                binding.lottieBackground.playAnimation()
+        viewModel.goalCount.flowWithLifecycle(lifecycle)
+            .onEach { goalCount ->
+                if (goalCount == 0)
+                    binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
+            }
+        repeatOnStarted {
+            viewModel.goalList.collect { goalList ->
+                goalAdapter.submitList(goalList.toMutableList())
             }
         }
+        repeatOnStarted {
+            viewModel.achievedState.collect { isAchieved ->
+                if (isAchieved) {
+                    binding.lottieSnail.playAnimation()
+                    binding.lottieBackground.playAnimation()
+                }
+            }
+        }
+
+
     }
 
     private fun showMakeGoalDialog() {
