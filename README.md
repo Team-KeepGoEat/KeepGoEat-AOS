@@ -1,15 +1,19 @@
 # *🐌  Keep Go Eat - AOS 🐌*
 
+<img src="https://user-images.githubusercontent.com/48701368/212340333-16d53383-9700-48a1-ab35-1d5cdce31f83.png" width="100" />
+
 IN SOPT 31st APPJAM 킵고잇 Android 팀 레포입니다.
 
 <br>
 
 ## 🥗 *****Project*****
-
 **킵고잇(Keep-Go-Eat)**
 
-계속 먹어도 괜찮아.
-스트레스 받지 않고 스스로 조절하는 나만의 식습관을 찾아가는 길, 킵고잇
+<img width="1226" alt="image" src="https://user-images.githubusercontent.com/48701368/212341763-60663dba-ddf1-478f-abf2-889fa4ec3770.png">
+
+
+좋은 음식은 더 먹고, 나쁜 음식은 덜 먹는 날을 늘려가도록 돕는
+즐거운 식습관 기록 서비스, 킵고잇
 
 <br>
 
