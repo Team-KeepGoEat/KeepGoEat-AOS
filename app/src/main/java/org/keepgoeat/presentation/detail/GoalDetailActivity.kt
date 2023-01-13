@@ -51,13 +51,16 @@ class GoalDetailActivity :
     }
 
     private fun initLayout() {
-        binding.rvGoalCard.addItemDecoration(
-            ItemDecorationUtil(
-                CARD_ITEM_SPACE,
-                Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL),
-                RecyclerLayoutType.GRID
+        binding.rvGoalCard.apply {
+            addItemDecoration(
+                ItemDecorationUtil(
+                    CARD_ITEM_SPACE,
+                    Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL),
+                    RecyclerLayoutType.GRID
+                )
             )
-        )
+            clipToOutline = true
+        }
     }
 
     private fun addListeners() {
