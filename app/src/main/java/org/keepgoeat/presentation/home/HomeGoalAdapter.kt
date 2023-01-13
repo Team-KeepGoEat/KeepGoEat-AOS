@@ -91,10 +91,10 @@ class HomeGoalAdapter(
         if (!::inflater.isInitialized)
             inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            HomeGoalViewType.MY_GOAL_TYPE.goalType -> {
+            HomeGoalViewType.MY_GOAL_TYPE.ordinal -> {
                 MyGoalViewHolder(ItemHomeGoalBinding.inflate(inflater, parent, false))
             }
-            HomeGoalViewType.ADD_GOAL_TYPE.goalType -> {
+            HomeGoalViewType.ADD_GOAL_TYPE.ordinal -> {
                 AddGoalViewHolder(ItemAddGoalBinding.inflate(inflater, parent, false))
             }
             else -> {
@@ -127,7 +127,7 @@ class HomeGoalAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int = currentList[position].type.goalType
+    override fun getItemViewType(position: Int): Int = currentList[position].type.ordinal
 
     override fun submitList(list: MutableList<HomeGoal>?) {
         super.submitList(
