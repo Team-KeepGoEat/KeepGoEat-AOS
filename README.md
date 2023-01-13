@@ -19,10 +19,10 @@ IN SOPT 31st APPJAM 킵고잇 Android 팀 레포입니다.
 
 ## 📷 *****Screen*****
 | <img width="200" src="https://user-images.githubusercontent.com/74285061/212347381-3aa80850-0a12-4789-b8fd-4e888c73b63c.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212344288-45900975-6e69-4bbe-8ae5-1d8b6fcd0372.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212344512-0e1c4767-3b1d-485e-bb39-afb4c4e794a6.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212344674-5a8eed77-ecbc-4137-9619-f409f402482c.png"/> | 
-| :---: | :---: | :---: | :---: |
-|`LoginView`|`HomeView`|`HomeView`|`GoalDetailView`|
-| <img width="200" src="https://user-images.githubusercontent.com/74285061/212348090-ba59c563-614c-4f31-bdfd-e3921b5721dc.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212345080-57f3df5f-a52b-4bee-860c-e0f2a3dd7447.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212345214-fc5f80c8-0689-4c3b-98f0-c06c91aaca3e.png"/> |
-|`GoalDetailView`|`GoalSettingView`|`MyPageView`|
+| :---: | :---: | :---: |:------------------------------------------------------------------------------------------------------------------------------:|
+|`LoginView`|`HomeView`|`HomeView`|                                                        `GoalDetailView`                                                        |
+| <img width="200" src="https://user-images.githubusercontent.com/74285061/212348090-ba59c563-614c-4f31-bdfd-e3921b5721dc.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212345080-57f3df5f-a52b-4bee-860c-e0f2a3dd7447.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212345214-fc5f80c8-0689-4c3b-98f0-c06c91aaca3e.png"/> |<img width="200" src="https://user-images.githubusercontent.com/48701368/212350472-9c95f8b4-6a5a-43a6-8f77-199ca29b9534.gif">
+|`GoalDetailView`|`GoalSettingView`|`MyPageView`|                                                                                                                                |
 
 <br>
 
