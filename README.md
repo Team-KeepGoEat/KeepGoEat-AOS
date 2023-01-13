@@ -17,7 +17,7 @@ IN SOPT 31st APPJAM 킵고잇 Android 팀 레포입니다.
 
 <br>
 
-## *****Screen*****
+## 📷 *****Screen*****
 | <img width="200" src="https://user-images.githubusercontent.com/74285061/212347381-3aa80850-0a12-4789-b8fd-4e888c73b63c.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212344288-45900975-6e69-4bbe-8ae5-1d8b6fcd0372.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212344512-0e1c4767-3b1d-485e-bb39-afb4c4e794a6.png"/> | <img width="200" src="https://user-images.githubusercontent.com/74285061/212344674-5a8eed77-ecbc-4137-9619-f409f402482c.png"/> | 
 | :---: | :---: | :---: | :---: |
 |`LoginView`|`HomeView`|`HomeView`|`GoalDetailView`|
@@ -28,10 +28,10 @@ IN SOPT 31st APPJAM 킵고잇 Android 팀 레포입니다.
 
 ## 👋 *****Contributors*****
 
-| [@YuBeen-Park](https://github.com/YuBeen-Park) | [@Dani43](https://github.com/Dan2dani) | [@youngjinc](https://github.com/youngjinc) |
-| :---: | :---: | :---: |
-|<img width="540" src="https://user-images.githubusercontent.com/74285061/210170256-288c20b1-f02c-41d8-823a-76e1c045dba3.jpg"/>|<img width="540" src="https://user-images.githubusercontent.com/77060011/210755750-b583720a-550f-4c65-bd07-ac0b9579da5d.png"/>|<img width="540" src="https://user-images.githubusercontent.com/48701368/211861830-bec25687-ceff-4d83-9d69-5176bedb1fc7.jpg"/>|
-|`HomeView`|`LoginView`, `OnBoardingView`|`GoalSettingView`, `GoalDetailView`|
+|                                         [@YuBeen-Park](https://github.com/YuBeen-Park)                                         | [@Dani43](https://github.com/Dan2dani) | [@youngjinc](https://github.com/youngjinc) |
+|:------------------------------------------------------------------------------------------------------------------------------:| :---: | :---: |
+| <img width="540" src="https://user-images.githubusercontent.com/74285061/210170256-288c20b1-f02c-41d8-823a-76e1c045dba3.jpg"/> |<img width="540" src="https://user-images.githubusercontent.com/77060011/210755750-b583720a-550f-4c65-bd07-ac0b9579da5d.png"/>|<img width="540" src="https://user-images.githubusercontent.com/48701368/211861830-bec25687-ceff-4d83-9d69-5176bedb1fc7.jpg"/>|
+|                                                    `HomeView`, `MyPageView`                                                    |`LoginView`, `OnBoardingView`|`GoalSettingView`, `GoalDetailView`|
 
 <br>
 
