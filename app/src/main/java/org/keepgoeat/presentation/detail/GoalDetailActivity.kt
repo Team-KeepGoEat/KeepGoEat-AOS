@@ -95,6 +95,7 @@ class GoalDetailActivity :
         viewModel.keepState.observe(this) { keepState ->
             when (keepState) {
                 is UiState.Success -> {
+                    showToast(getString(R.string.goal_detail_success_goal_keep_toast_message))
                     Intent(this, MyActivity::class.java).apply {
                         putExtra(ARG_IS_ENTERED_FROM_KEEP, true)
                     }.also {

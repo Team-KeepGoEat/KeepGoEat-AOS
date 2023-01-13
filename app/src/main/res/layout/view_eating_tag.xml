@@ -19,7 +19,7 @@
         android:background="@drawable/shape_border_radius_4"
         android:backgroundTint="@{context.getColor(eatingType == null ? R.color.white : eatingType.tagBackgroundColor)}"
         android:paddingVertical="@dimen/spacing4"
-        android:paddingStart="6dp"
+        android:paddingStart="@dimen/spacing4"
         android:paddingEnd="@dimen/spacing4"
         tools:backgroundTint="@color/orange_100">
 
@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="@dimen/spacing4"
             android:fontFamily="@font/pretendard_b"
             android:text="@{eatingType == null ? `` : context.getString(eatingType.strRes)}"
             android:textColor="@{context.getColor(eatingType == null ? R.color.white : eatingType.tagTextColor)}"

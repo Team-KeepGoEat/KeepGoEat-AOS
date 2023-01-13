@@ -20,9 +20,12 @@
     <!-- Goal Detail -->
     <string name="goal_detail_my_goal">나의 목표</string>
     <string name="goal_detail_title">%s %s</string>
-    <string name="goal_detail_num_of_days_eaten_last_month">지난달 먹은 날</string>
-    <string name="goal_detail_num_of_days_eaten_this_month">이번달 먹은 날</string>
+    <string name="goal_detail_num_of_days_eaten_last_month">지난달 %s 날</string>
+    <string name="goal_detail_num_of_days_eaten_this_month">이번달 %s 날</string>
+    <string name="goal_detail_eat">먹은</string>
+    <string name="goal_detail_hold">참은</string>
     <string name="goal_detail_success_goal_delete_toast_message">목표가 삭제되었습니다.</string>
+    <string name="goal_detail_success_goal_keep_toast_message">목표가 보관되었습니다.</string>
 
     <!-- Home View -->
     <string name="home_today_goal">오늘 식습관 목표</string>
@@ -57,7 +60,7 @@
 
     <!-- Goal Setting -->
     <string name="goal_setting">목표 입력</string>
-    <string name="goal_setting_title">나의 목표를 입력해볼까요?</string>
+    <string name="goal_setting_title">나의 목표를 입력해 볼까요?</string>
     <string name="goal_setting_title_hint_for_more">ex) 하루 1끼 이상 야채</string>
     <string name="goal_setting_title_hint_for_less">ex) 라면</string>
     <string name="goal_setting_title_length_guide">목표는 최소 1글자 이상 입력해주세요.</string>
