@@ -7,6 +7,8 @@ import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.data.model.request.RequestAuth
 import org.keepgoeat.domain.repository.AuthRepository
 import timber.log.Timber
@@ -16,11 +18,12 @@ class KakaoAuthService @Inject constructor(
     @ActivityContext private val context: Context,
     private val client: UserApiClient,
     private val authRepository: AuthRepository,
+    private val localStorage: KGEDataSource,
 ) {
     private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
 
-    fun loginKakao(loginListener: (() -> Unit)) {
+    fun loginKakao(loginListener: ((Boolean, Boolean) -> Unit)) {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) handleLoginError(error)
             else if (token != null) handleLoginSuccess(token, loginListener)
@@ -35,13 +38,18 @@ class KakaoAuthService @Inject constructor(
         Timber.d("${kakaoType}으로 로그인 실패 (${throwable.message})")
     }
 
-    private fun handleLoginSuccess(oAuthToken: OAuthToken, loginListener: (() -> Unit)) {
+    private fun handleLoginSuccess(
+        oAuthToken: OAuthToken,
+        loginListener: ((Boolean, Boolean) -> Unit),
+    ) {
         client.me { user, _ ->
-            CoroutineScope(Dispatchers.IO).launch {
-                authRepository.login(RequestAuth(oAuthToken.accessToken, PLATFORM_KAKAO))
+            CoroutineScope(Dispatchers.Main).launch {
+                val result = withContext(Dispatchers.IO) {
+                    authRepository.login(RequestAuth(oAuthToken.accessToken, PLATFORM_KAKAO))
+                }
+                Timber.d(oAuthToken.accessToken)
+                loginListener(result?.type == SIGN_UP, localStorage.isClickedOnboardingButton)
             }
-            Timber.d(oAuthToken.accessToken)
-            loginListener()
         }
     }
 
@@ -51,5 +59,6 @@ class KakaoAuthService @Inject constructor(
 
     companion object {
         private const val PLATFORM_KAKAO = "KAKAO"
+        private const val SIGN_UP = "signup"
     }
 }

@@ -27,11 +27,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "KGE_BASE_URL", properties["KGE_BASE_URL"]
         buildConfigField "String", "KAKAO_NATIVE_KEY", properties["KAKAO_NATIVE_KEY"]
-        manifestPlaceholders["KAKAO_NATIVE_KEY"] = properties["KAKAO_NATIVE_KEY"]
     }
 
     buildTypes {
+        debug {
+            manifestPlaceholders = [KAKAO_NATIVE_KEY: properties["KAKAO_NATIVE_KEY"]]
+        }
         release {
+            manifestPlaceholders = [KAKAO_NATIVE_KEY: properties["KAKAO_NATIVE_KEY"]]
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -100,7 +103,7 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     // Splashscreen
-    implementation 'androidx.core:core-splashscreen:1.0.0-rc01'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 
     // Lottie
     implementation 'com.airbnb.android:lottie:5.2.0'

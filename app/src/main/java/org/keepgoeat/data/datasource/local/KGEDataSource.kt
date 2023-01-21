@@ -45,6 +45,10 @@ class KGEDataSource @Inject constructor(@ApplicationContext context: Context) {
         set(value) = dataStore.edit { putBoolean(IS_LOGIN, value) }
         get() = dataStore.getBoolean(IS_LOGIN, false)
 
+    var isClickedOnboardingButton: Boolean
+        set(value) = dataStore.edit { putBoolean(IS_CLICKED_ONBOARDING_BUTTON, value) }
+        get() = dataStore.getBoolean(IS_CLICKED_ONBOARDING_BUTTON, false)
+
     fun clear() {
         dataStore.edit {
             clear()
@@ -56,5 +60,6 @@ class KGEDataSource @Inject constructor(@ApplicationContext context: Context) {
         const val ACCESS_TOKEN = "accessToken"
         const val IS_LOGIN = "isLogin"
         const val REFRESH_TOKEN = "refreshToken"
+        const val IS_CLICKED_ONBOARDING_BUTTON = "isClickedOnboardingButton"
     }
 }

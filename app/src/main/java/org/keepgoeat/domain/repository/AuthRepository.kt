@@ -6,6 +6,5 @@ import org.keepgoeat.data.model.response.ResponseRefresh
 
 interface AuthRepository {
     suspend fun login(requestAuth: RequestAuth): ResponseAuth.ResponseAuthData?
-
     suspend fun refresh(): ResponseRefresh.ResponseToken?
 }

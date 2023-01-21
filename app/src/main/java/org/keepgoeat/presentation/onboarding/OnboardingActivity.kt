@@ -43,10 +43,14 @@ class OnboardingActivity :
 
     private fun addListeners() {
         binding.btnNext.setOnClickListener {
-            if (binding.vpViewPager.currentItem == 2) moveToHome()
+            if (binding.vpViewPager.currentItem == 2) {
+                viewModel.setClickedOnboardingButton()
+                moveToHome()
+            }
             binding.vpViewPager.currentItem++
         }
         binding.tvSkip.setOnClickListener {
+            viewModel.setClickedOnboardingButton()
             moveToHome()
         }
     }
