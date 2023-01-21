@@ -9,9 +9,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_keepgoeat"
         android:label="@string/keep_go_eat"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_keepgoeat_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KeepGoEat"
         android:usesCleartextTraffic="true"
@@ -33,23 +33,12 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.dummy.DummyActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.sign.SignActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.detail.GoalDetailActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".presentation.detail.GoalDetailTestActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
@@ -81,7 +70,7 @@
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
                 <data
                     android:host="oauth"
-                    android:scheme="kakao${KAKAO_NATIVE_KEY}" />
+                    android:scheme="kakaod799c706c62fb280c279b5befc65116f" />
             </intent-filter>
         </activity>
     </application>

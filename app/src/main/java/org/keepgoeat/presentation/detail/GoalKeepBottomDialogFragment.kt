@@ -41,5 +41,6 @@ class GoalKeepBottomDialogFragment :
 
     private fun showGoalDeleteDialog() {
         GoalDeleteBottomDialogFragment().show(parentFragmentManager, "goalDeleteDialog")
+        dismiss()
     }
 }

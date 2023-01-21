@@ -58,7 +58,7 @@ class HomeViewModel @Inject constructor(
     private fun fetchGoalList() {
         viewModelScope.launch {
             goalRepository.fetchHomeEntireData()?.let { homeData ->
-                _cheeringMessage.value = homeData.cheeringMessage
+                _cheeringMessage.value = homeData.cheeringMessage.replace("\\n", "\n")
                 _achievedState.value = false
                 _goalList.value = homeData.toHomeGoal().toMutableList()
                 _goalCount.value = homeData.goals.size

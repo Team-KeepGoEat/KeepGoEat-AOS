@@ -51,13 +51,16 @@ class GoalDetailActivity :
     }
 
     private fun initLayout() {
-        binding.rvGoalCard.addItemDecoration(
-            ItemDecorationUtil(
-                CARD_ITEM_SPACE,
-                Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL),
-                RecyclerLayoutType.GRID
+        binding.rvGoalCard.apply {
+            addItemDecoration(
+                ItemDecorationUtil(
+                    CARD_ITEM_SPACE,
+                    Pair(CARD_MATRIX_ROW, CARD_MATRIX_COL),
+                    RecyclerLayoutType.GRID
+                )
             )
-        )
+            clipToOutline = true
+        }
     }
 
     private fun addListeners() {
@@ -92,6 +95,7 @@ class GoalDetailActivity :
         viewModel.keepState.observe(this) { keepState ->
             when (keepState) {
                 is UiState.Success -> {
+                    showToast(getString(R.string.goal_detail_success_goal_keep_toast_message))
                     Intent(this, MyActivity::class.java).apply {
                         putExtra(ARG_IS_ENTERED_FROM_KEEP, true)
                     }.also {

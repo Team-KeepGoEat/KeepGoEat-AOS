@@ -21,7 +21,7 @@ class GoalSettingViewModel @Inject constructor(
 
     val isValidTitle: LiveData<Boolean>
         get() = Transformations.map(goalTitle) { title ->
-            title.length in 1..20 && title.isNotBlank() && title.matches(TITLE_PATTERN.toRegex())
+            title.length in 1..15 && title.isNotBlank() && title.matches(TITLE_PATTERN.toRegex())
         }
 
     private val _uploadState = MutableLiveData<UiState<Int>>(UiState.Loading)
@@ -34,8 +34,12 @@ class GoalSettingViewModel @Inject constructor(
 
     private fun addGoal() {
         viewModelScope.launch {
-            goalRepository.uploadGoalContent(goalTitle.value ?: return@launch, eatingType.value == EatingType.MORE).let { result ->
-                _uploadState.value = if (result?.id != null) UiState.Success(result.id) else UiState.Empty
+            goalRepository.uploadGoalContent(
+                goalTitle.value ?: return@launch,
+                eatingType.value == EatingType.MORE
+            ).let { result ->
+                _uploadState.value =
+                    if (result?.id != null) UiState.Success(result.id) else UiState.Empty
             }
         }
     }
@@ -44,7 +48,8 @@ class GoalSettingViewModel @Inject constructor(
         viewModelScope.launch {
             safeLet(goalId, goalTitle.value) { id, title ->
                 goalRepository.editGoalContent(id, title).let { result ->
-                    _uploadState.value = if (result?.id != null) UiState.Success(result.id) else UiState.Empty
+                    _uploadState.value =
+                        if (result?.id != null) UiState.Success(result.id) else UiState.Empty
                 }
             }
         }
@@ -60,6 +65,6 @@ class GoalSettingViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TITLE_PATTERN = "^[A-Za-zㄱ-ㅎ가-힣0-9\\s]*\$"
+        private const val TITLE_PATTERN = "^[A-Za-zㄱ-ㅎㅏ-ㅣ가-힣0-9\\s]*\$"
     }
 }

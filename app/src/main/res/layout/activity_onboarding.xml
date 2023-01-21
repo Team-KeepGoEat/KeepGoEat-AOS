@@ -53,17 +53,13 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_next"
-            style="@style/Widget.Material.Button.Basic"
+            style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing16"
             android:layout_marginBottom="44dp"
             android:backgroundTint="@color/orange_600"
-            android:fontFamily="@font/pretendard_b"
-            android:paddingVertical="@dimen/spacing12"
             android:text="@string/onboarding1_button"
             android:textColor="@color/gray_50"
-            app:cornerRadius="@dimen/spacing8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

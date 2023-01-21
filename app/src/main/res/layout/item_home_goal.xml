@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -38,17 +37,19 @@
             android:layout_marginTop="@dimen/spacing16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:eatingType="@{goalType}" />
+            app:eatingType="@{goalType}" />
 
         <TextView
             android:id="@+id/tv_item_goal_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing16"
+            android:layout_marginHorizontal="@dimen/spacing16"
             android:layout_marginTop="@dimen/spacing12"
+            android:maxLines="2"
             android:text="@{String.format(context.getString(goalType.titleStrRes), goal.goalTitle)}"
             android:textAppearance="@style/TextAppearance.System4_Bold"
             android:textColor="@color/gray_700"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_goal_tag"
             tools:text="물 더 먹기" />
