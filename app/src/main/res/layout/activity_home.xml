@@ -79,7 +79,7 @@
                 android:layout_marginEnd="@dimen/spacing16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_mypage_white" />
+                app:srcCompat="@drawable/ic_my_page_white" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
@@ -224,10 +224,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="14dp"
                         android:layout_marginStart="@dimen/spacing4"
-                        android:fontFamily="@font/pretendard_b"
                         android:text="@string/home_make_goal"
+                        android:textAppearance="@style/TextAppearance.System4_Bold"
                         android:textColor="@color/gray_50"
-                        android:textSize="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/iv_home_btn_plus"
                         app:layout_constraintTop_toTopOf="parent" />

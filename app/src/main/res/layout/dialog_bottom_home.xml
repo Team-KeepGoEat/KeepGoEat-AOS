@@ -99,7 +99,7 @@
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="@dimen/spacing8"
-                android:src="@drawable/ic_snail_green_ribon"
+                android:src="@drawable/ic_snail_green_ribbon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
