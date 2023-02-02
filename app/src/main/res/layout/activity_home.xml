@@ -57,7 +57,7 @@
                 android:visibility="@{!viewModel.achievedState ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
-                app:srcCompat="@drawable/img_snail_orange_cheer" />
+                app:srcCompat="@drawable/ic_snail_orange_cheer_right" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottie_snail"
@@ -162,7 +162,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/img_plate_gray_view" />
+                app:srcCompat="@drawable/ic_plate_gray" />
 
             <TextView
                 android:id="@+id/tv_no_goal_1"

@@ -53,7 +53,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         }
         viewModel.goalCount.observe(this) { goalCount ->
             if (goalCount == 0)
-                binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
+                binding.ivHomeSnail.setImageResource(R.drawable.ic_snail_orange_hungry)
         }
         viewModel.achievedState.observe(this) { isAchieved ->
             if (isAchieved) {
