@@ -91,7 +91,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btn_goal"
+            android:id="@+id/btn_goal_achieved"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/spacing16"

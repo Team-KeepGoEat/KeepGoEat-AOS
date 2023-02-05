@@ -13,6 +13,7 @@ import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.ItemDiffCallback
+import org.keepgoeat.util.extension.setOnSingleClickListener
 import org.keepgoeat.util.setVisibility
 
 class HomeGoalAdapter(
@@ -55,7 +56,7 @@ class HomeGoalAdapter(
             binding.goalBtn = btnType
 
             with(binding) {
-                btnGoal.setOnClickListener {
+                btnGoalAchieved.setOnSingleClickListener {
                     changeBtnColor(myGoal)
                 }
                 layoutHomeGoal.setOnClickListener {
