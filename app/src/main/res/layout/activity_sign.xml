@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing36"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="176dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -94,14 +94,49 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_sign_in"
+            android:id="@+id/layout_naver_sign_in"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing16"
+            android:layout_marginBottom="@dimen/spacing16"
+            android:background="@drawable/shape_border_radius_12"
+            android:backgroundTint="#03C75A"
+            app:layout_constraintBottom_toTopOf="@+id/layout_kakao_sign_in"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_naver_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing8"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_naver"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signin_naver"
+                android:textAppearance="@style/TextAppearance.System4_Bold"
+                android:textColor="@color/gray_50"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_kakao_sign_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing16"
             android:layout_marginBottom="64dp"
-            android:background="@drawable/shape_border_radius_6"
+            android:background="@drawable/shape_border_radius_12"
             android:backgroundTint="#FEE500"
-            android:paddingVertical="@dimen/spacing12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -110,6 +145,7 @@
                 android:id="@+id/iv_kakao_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing8"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_kakao"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -119,7 +155,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/signin"
+                android:text="@string/signin_kakao"
                 android:textAppearance="@style/TextAppearance.System4_Bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
