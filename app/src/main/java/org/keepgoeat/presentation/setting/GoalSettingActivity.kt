@@ -87,6 +87,7 @@ class GoalSettingActivity :
         val intent = Intent(this, GoalDetailActivity::class.java).apply {
             putExtra(ARG_GOAL_ID, viewModel.goalId)
             putExtra(ARG_IS_UPDATED, true)
+            putExtra(ARG_EATING_TYPE, viewModel.eatingType.value?.name)
         }
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
