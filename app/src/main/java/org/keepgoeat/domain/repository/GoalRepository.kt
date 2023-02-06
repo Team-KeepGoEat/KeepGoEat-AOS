@@ -13,12 +13,12 @@ interface GoalRepository {
     suspend fun uploadGoalContent(
         title: String,
         isMore: Boolean
-    ): ResponseGoalContent.ResponseGoalContentData?
+    ): Result<Int>
 
     suspend fun editGoalContent(
         id: Int,
         title: String
-    ): ResponseGoalContent.ResponseGoalContentData?
+    ): Result<Int>
 
     suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail>
     suspend fun keepGoal(id: Int): ResponseGoalKeep.ResponseGoalKeepData?
