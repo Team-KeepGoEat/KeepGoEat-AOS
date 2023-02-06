@@ -6,6 +6,7 @@ import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
 import org.keepgoeat.data.model.request.RequestGoalContentTitle
 import org.keepgoeat.data.model.response.*
+import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.repository.GoalRepository
 import timber.log.Timber
 import javax.inject.Inject
@@ -92,23 +93,10 @@ class GoalRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun fetchGoalDetail(goalId: Int): ResponseGoalDetail.ResponseGoalDetailData? {
-        val result = goalDataSource.fetchGoalDetail(goalId)
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
+    override suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail> =
+        runCatching {
+            goalDataSource.fetchGoalDetail(goalId).data.toGoalDetail()
         }
-    }
 
     override suspend fun keepGoal(id: Int): ResponseGoalKeep.ResponseGoalKeepData? {
         val result = goalDataSource.keepGoal(id)
