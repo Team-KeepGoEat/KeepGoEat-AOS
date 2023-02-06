@@ -80,12 +80,8 @@ class GoalDetailActivity :
         binding.ivKeep.setOnClickListener {
             showGoalKeepDialog()
         }
-    }
-
-    private fun collectData() {
-        viewModel.goalDetail.flowWithLifecycle(lifecycle).onEach { detail ->
-            if (detail == null) return@onEach
-            binding.ivEdit.setOnClickListener { _ ->
+        binding.ivEdit.setOnClickListener {
+            viewModel.goalDetail.value?.let { detail ->
                 val content = GoalContent(detail.id, detail.goalTitle)
                 Intent(this, GoalSettingActivity::class.java).apply {
                     putExtra(ARG_GOAL_CONTENT, content)
@@ -94,7 +90,10 @@ class GoalDetailActivity :
                     startActivity(it)
                 }
             }
-        }.launchIn(lifecycleScope)
+        }
+    }
+
+    private fun collectData() {
         viewModel.goalStickers.flowWithLifecycle(lifecycle).onEach { stickers ->
             adapter.submitList(stickers)
         }.launchIn(lifecycleScope)
