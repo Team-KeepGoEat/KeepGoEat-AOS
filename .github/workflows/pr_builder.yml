@@ -57,6 +57,11 @@ jobs:
         env:
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
         run: echo "NAVER_CLIENT_ID=\"$NAVER_CLIENT_ID\"" >> local.properties
+        
+        - name: Access NAVER_CLIENT_SECRETE
+        env:
+          NAVER_CLIENT_SECRETE: ${{ secrets.NAVER_CLIENT_SECRETE }}
+        run: echo "NAVER_CLIENT_SECRETE=\"$NAVER_CLIENT_SECRETE\"" >> local.properties
 
       - name: Lint Check
         run: ./gradlew ktlintCheck
