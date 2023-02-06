@@ -52,6 +52,11 @@ jobs:
         env:
           HFM_BASE_URL: ${{ secrets.KGE_BASE_URL }}
         run: echo "KGE_BASE_URL=\"$KGE_BASE_URL\"" >> local.properties
+        
+         - name: Access NAVER_CLIENT_ID
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+        run: echo "NAVER_CLIENT_ID=\"$NAVER_CLIENT_ID\"" >> local.properties
 
       - name: Lint Check
         run: ./gradlew ktlintCheck
