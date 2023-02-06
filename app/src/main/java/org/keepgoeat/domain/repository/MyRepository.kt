@@ -1,7 +1,7 @@
 package org.keepgoeat.domain.repository
 
-import org.keepgoeat.data.model.response.ResponseMy
+import org.keepgoeat.domain.model.MyGoal
 
 interface MyRepository {
-    suspend fun fetchMyData(sortType: String): ResponseMy.MyData?
+    suspend fun fetchMyData(sortType: String): Result<List<MyGoal>>
 }
