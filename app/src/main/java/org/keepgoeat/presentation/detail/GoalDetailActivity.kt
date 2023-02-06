@@ -26,7 +26,6 @@ import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showToast
 import org.keepgoeat.util.safeValueOf
-import timber.log.Timber
 
 @AndroidEntryPoint
 class GoalDetailActivity :
