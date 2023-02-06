@@ -3,6 +3,7 @@ package org.keepgoeat.presentation.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
@@ -48,8 +49,10 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun addObservers() {
-        viewModel.goalList.observe(this) { goalList -> // EventObserver
-            goalAdapter.submitList(goalList.toMutableList())
+        lifecycleScope.launchWhenStarted {
+            viewModel.goalList.collect { goalList ->
+                goalAdapter.submitList(goalList.toMutableList())
+            }
         }
         viewModel.goalCount.observe(this) { goalCount ->
             if (goalCount == 0)
@@ -80,6 +83,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun changeGoalItemBtnColor(myGoal: HomeGoal) {
-        viewModel.changeGoalAchieved(myGoal)
+        viewModel.changeGoalAchieved(myGoal, goalAdapter)
     }
 }
