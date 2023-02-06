@@ -67,7 +67,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
     }
 
     private fun collectData() {
-        viewModel.goalList.flowWithLifecycle(lifecycle).onEach {
+        viewModel.achievedGoalUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     goalAdapter.submitList(it.data.toMutableList())

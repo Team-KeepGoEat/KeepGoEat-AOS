@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyViewModel @Inject constructor(private val myRepository: MyRepository) : ViewModel() {
-    private val _goalList = MutableStateFlow<UiState<List<MyGoal>>>(UiState.Loading)
-    val goalList get() = _goalList.asStateFlow()
+    private val _achievedGoalUiState = MutableStateFlow<UiState<List<MyGoal>>>(UiState.Loading)
+    val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
 
     init {
         fetchAchievedGoalBySort(SortType.ALL)
@@ -25,9 +25,9 @@ class MyViewModel @Inject constructor(private val myRepository: MyRepository) : 
         viewModelScope.launch {
             myRepository.fetchMyData(sortType.name.lowercase())
                 .onSuccess {
-                    _goalList.value = UiState.Success(it)
+                    _achievedGoalUiState.value = UiState.Success(it)
                 }.onFailure {
-                    _goalList.value = UiState.Error(it.message)
+                    _achievedGoalUiState.value = UiState.Error(it.message)
                 }
         }
     }
