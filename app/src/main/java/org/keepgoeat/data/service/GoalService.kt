@@ -12,13 +12,13 @@ interface GoalService {
     suspend fun fetchHomeEntireData(): Response<ResponseHome>
 
     @POST("goal")
-    suspend fun uploadGoalContent(@Body request: RequestGoalContent): Response<ResponseGoalContent>
+    suspend fun uploadGoalContent(@Body request: RequestGoalContent): ResponseGoalContent
 
     @POST("goal/{goalId}")
     suspend fun editGoalContent(
         @Path("goalId") id: Int,
         @Body goalContent: RequestGoalContentTitle
-    ): Response<ResponseGoalContent>
+    ): ResponseGoalContent
 
     @GET("history/{goalId}")
     suspend fun fetchGoalDetail(@Path("goalId") goalId: Int): ResponseGoalDetail

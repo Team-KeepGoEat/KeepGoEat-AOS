@@ -3,7 +3,11 @@ package org.keepgoeat.presentation.setting
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalSettingBinding
 import org.keepgoeat.presentation.detail.GoalDetailActivity
@@ -43,12 +47,12 @@ class GoalSettingActivity :
         }
 
         addListeners()
-        addObservers()
+        collectData()
     }
 
-    private fun addObservers() {
-        viewModel.uploadState.observe(this) { state ->
-            when (state) {
+    private fun collectData() {
+        viewModel.uploadState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
                 is UiState.Success -> {
                     if (isEditMode) {
                         showToast(getString(R.string.goal_setting_success_edit_toast_message))
@@ -58,9 +62,10 @@ class GoalSettingActivity :
                         moveToHome()
                     }
                 }
+                is UiState.Error -> {}
                 else -> {}
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun addListeners() {

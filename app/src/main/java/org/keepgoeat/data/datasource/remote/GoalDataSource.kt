@@ -15,14 +15,13 @@ class GoalDataSource @Inject constructor(
     suspend fun fetchHomeEntireData(): ApiResult<ResponseHome?> =
         safeApiCall { goalService.fetchHomeEntireData() }
 
-    suspend fun uploadGoalContent(requestGoalContent: RequestGoalContent): ApiResult<ResponseGoalContent?> =
-        safeApiCall { goalService.uploadGoalContent(requestGoalContent) }
+    suspend fun uploadGoalContent(requestGoalContent: RequestGoalContent): ResponseGoalContent =
+        goalService.uploadGoalContent(requestGoalContent)
 
     suspend fun editGoalContent(
         id: Int,
-        title: RequestGoalContentTitle
-    ): ApiResult<ResponseGoalContent?> =
-        safeApiCall { goalService.editGoalContent(id, title) }
+        title: RequestGoalContentTitle,
+    ): ResponseGoalContent = goalService.editGoalContent(id, title)
 
     suspend fun fetchGoalDetail(id: Int): ResponseGoalDetail = goalService.fetchGoalDetail(id)
 
