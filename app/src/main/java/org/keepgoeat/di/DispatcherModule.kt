@@ -14,7 +14,6 @@ object DispatcherModule {
     @IoDispatcher
     @Provides
     fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
-
 }
 
 @Retention(AnnotationRetention.BINARY)
