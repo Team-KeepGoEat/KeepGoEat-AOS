@@ -5,6 +5,7 @@ import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.data.service.KakaoAuthService
+import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivitySignBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.onboarding.OnboardingActivity
@@ -15,7 +16,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign) {
     @Inject
-    lateinit var signService: KakaoAuthService
+    lateinit var kakaoSignService: KakaoAuthService
+
+    @Inject
+    lateinit var naverSignService: NaverAuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +27,11 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
     }
 
     private fun addListeners() {
-        binding.layoutSignIn.setOnClickListener {
-            signService.loginKakao(::moveToNext)
+        binding.layoutKakaoSignIn.setOnClickListener {
+            kakaoSignService.loginKakao(::moveToNext)
+        }
+        binding.layoutNaverSignIn.setOnClickListener {
+            naverSignService.loginNaver(::moveToNext)
         }
     }
 
