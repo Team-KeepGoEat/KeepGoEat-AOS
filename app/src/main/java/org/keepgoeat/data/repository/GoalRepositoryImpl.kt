@@ -1,12 +1,14 @@
 package org.keepgoeat.data.repository
 
-import kotlinx.coroutines.flow.Flow
 import org.keepgoeat.data.ApiResult
 import org.keepgoeat.data.datasource.remote.GoalDataSource
 import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
 import org.keepgoeat.data.model.request.RequestGoalContentTitle
-import org.keepgoeat.data.model.response.*
+import org.keepgoeat.data.model.response.ResponseGoalAchievement
+import org.keepgoeat.data.model.response.ResponseGoalDeleted
+import org.keepgoeat.data.model.response.ResponseGoalKeep
+import org.keepgoeat.data.model.response.ResponseHome
 import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.repository.GoalRepository
 import timber.log.Timber
@@ -15,8 +17,9 @@ import javax.inject.Inject
 class GoalRepositoryImpl @Inject constructor(
     private val goalDataSource: GoalDataSource,
 ) : GoalRepository {
-    override suspend fun fetchHomeEntireData(): Flow<ApiResult<ResponseHome.HomeData?>> =
-        goalDataSource.fetchHomeEntireData()
+    override suspend fun fetchHomeEntireData(): Result<ResponseHome.HomeData> = runCatching {
+        goalDataSource.fetchHomeEntireData().data
+    }
 
     override suspend fun achieveGoal(
         goalId: Int,

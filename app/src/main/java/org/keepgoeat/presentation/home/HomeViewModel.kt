@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.keepgoeat.data.ApiResult
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
 import timber.log.Timber
@@ -21,7 +20,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
     private var _goalList: MutableStateFlow<MutableList<HomeGoal>> =
         MutableStateFlow(mutableListOf())
-    val goalList get() = _goalList
+    val goalList get() = _goalList.asStateFlow()
     private val _goalCount = MutableLiveData<Int>()
     val goalCount: LiveData<Int> get() = _goalCount
     private val _hour = MutableLiveData(LocalDateTime.now().hour)
@@ -64,28 +63,14 @@ class HomeViewModel @Inject constructor(
 
     private fun fetchGoalList() {
         viewModelScope.launch {
-            goalRepository.fetchHomeEntireData()
-                .collectLatest { result ->
-                    val homeData = when (result) {
-                        is ApiResult.Success -> {
-                            result.data
-                        }
-                        is ApiResult.NetworkError -> {
-                            Timber.d("Network Error")
-                            null
-                        }
-                        is ApiResult.GenericError -> {
-                            Timber.d("(${result.code}): $(result.message}")
-                            null
-                        }
-                    }
-                    if (homeData != null) {
-                        _goalList.value = homeData.toHomeGoal().toMutableList()
-                        _cheeringMessage.value = homeData.cheeringMessage.replace("\\n", "\n")
-                        _achievedState.value = false
-                        _goalCount.value = homeData.goals.size
-                    }
-                }
+            goalRepository.fetchHomeEntireData().onSuccess { homeData ->
+                _goalList.value = homeData.toHomeGoal().toMutableList()
+                _cheeringMessage.value = homeData.cheeringMessage.replace("\\n", "\n")
+                _achievedState.value = false
+                _goalCount.value = homeData.goals.size
+            }.onFailure {
+                Timber.e(it.message)
+            }
         }
     }
 }

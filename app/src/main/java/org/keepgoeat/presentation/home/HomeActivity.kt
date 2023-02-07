@@ -3,8 +3,9 @@ package org.keepgoeat.presentation.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.flowWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.domain.model.HomeGoal
@@ -25,7 +26,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
         initLayout()
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun addListeners() {
@@ -48,11 +49,9 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         }
     }
 
-    private fun addObservers() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.goalList.collect { goalList ->
-                goalAdapter.submitList(goalList.toMutableList())
-            }
+    private fun collectData() {
+        viewModel.goalList.flowWithLifecycle(lifecycle).onEach { goalList ->
+            goalAdapter.submitList(goalList.toMutableList())
         }
         viewModel.goalCount.observe(this) { goalCount ->
             if (goalCount == 0)

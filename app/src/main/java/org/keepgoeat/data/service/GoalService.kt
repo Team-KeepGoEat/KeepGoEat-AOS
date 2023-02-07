@@ -9,7 +9,7 @@ import retrofit2.http.*
 
 interface GoalService {
     @GET("home")
-    suspend fun fetchHomeEntireData(): Response<ResponseHome>
+    suspend fun fetchHomeEntireData(): ResponseHome
 
     @POST("goal")
     suspend fun uploadGoalContent(@Body request: RequestGoalContent): ResponseGoalContent
