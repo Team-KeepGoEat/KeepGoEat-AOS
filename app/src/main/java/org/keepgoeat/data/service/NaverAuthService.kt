@@ -25,13 +25,7 @@ class NaverAuthService @Inject constructor(
     fun loginNaver(loginListener: ((Boolean, Boolean) -> Unit)) {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
-//                val naverToken = NaverIdLoginSDK.getAccessToken()
-//                var naverRefreshToken = NaverIdLoginSDK.getRefreshToken()
-//                var naverExpiresAt = NaverIdLoginSDK.getExpiresAt().toString()
-//                var naverTokenType = NaverIdLoginSDK.getTokenType()
-//                var naverState = NaverIdLoginSDK.getState().toString()
-//
-//                NidOAuthLogin().callProfileApi(profileCallback)
+                // TODO: 네이버 로그인 성공 시 로직 처리
             }
 
             override fun onFailure(httpStatus: Int, message: String) {
@@ -49,6 +43,6 @@ class NaverAuthService @Inject constructor(
     }
 
     companion object {
-        private const val CLIENT_NAME = "KeepGoEat"
+        private const val CLIENT_NAME = "킵고잇"
     }
 }
