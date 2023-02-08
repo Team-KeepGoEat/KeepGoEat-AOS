@@ -24,7 +24,7 @@ interface GoalService {
     suspend fun fetchGoalDetail(@Path("goalId") goalId: Int): ResponseGoalDetail
 
     @POST("goal/keep/{goalId}")
-    suspend fun keepGoal(@Path("goalId") id: Int): Response<ResponseGoalKeep>
+    suspend fun keepGoal(@Path("goalId") id: Int): ResponseGoalKeep
 
     @POST("goal/achieve/{goalId}")
     suspend fun achieveGoal(
