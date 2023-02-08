@@ -16,8 +16,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
 ) : ViewModel() {
-    private var _goalList: MutableStateFlow<MutableList<HomeGoal>> =
-        MutableStateFlow(mutableListOf())
+    private var _goalList = MutableStateFlow<MutableList<HomeGoal>>(mutableListOf())
     val goalList get() = _goalList.asStateFlow()
     private val _goalCount = MutableStateFlow(0)
     val goalCount = _goalCount.asStateFlow()
