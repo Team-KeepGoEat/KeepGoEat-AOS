@@ -97,7 +97,7 @@ class GoalDetailActivity :
         viewModel.goalStickers.flowWithLifecycle(lifecycle).onEach { stickers ->
             adapter.submitList(stickers)
         }.launchIn(lifecycleScope)
-        viewModel.keepState.observe(this) { keepState ->
+        viewModel.keepState.flowWithLifecycle(lifecycle).onEach { keepState ->
             when (keepState) {
                 is UiState.Success -> {
                     showToast(getString(R.string.goal_detail_success_goal_keep_toast_message))
@@ -110,7 +110,7 @@ class GoalDetailActivity :
                 }
                 else -> {}
             }
-        }
+        }.launchIn(lifecycleScope)
         viewModel.deleteState.observe(this) { deleteState ->
             when (deleteState) {
                 is UiState.Success -> {
