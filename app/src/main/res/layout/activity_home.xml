@@ -54,10 +54,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing16"
                 android:layout_marginTop="32dp"
+                android:src="@drawable/img_snail_orange_hungry"
                 android:visibility="@{!viewModel.achievedState ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
-                app:srcCompat="@drawable/img_snail_orange_cheer" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_my_page" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottie_snail"
@@ -69,7 +69,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
                 app:lottie_autoPlay="false"
                 app:lottie_rawRes="@raw/home_snail"
-                app:visibility="@{viewModel.achievedState}" />
+                app:visibility="@{viewModel.achievedState}"
+                tools:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/iv_my_page"

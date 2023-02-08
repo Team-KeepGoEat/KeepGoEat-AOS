@@ -24,21 +24,8 @@ class GoalRepositoryImpl @Inject constructor(
     override suspend fun achieveGoal(
         goalId: Int,
         isAchieved: Boolean
-    ): ResponseGoalAchievement.ResponseGoalAchievementData? {
-        val result = goalDataSource.achievedGoal(goalId, RequestGoalAchievement(isAchieved))
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
-        }
+    ): Result<ResponseGoalAchievement.ResponseGoalAchievementData> = runCatching {
+        goalDataSource.achievedGoal(goalId, RequestGoalAchievement(isAchieved)).data
     }
 
     override suspend fun uploadGoalContent(

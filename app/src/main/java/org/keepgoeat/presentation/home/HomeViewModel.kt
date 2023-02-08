@@ -1,7 +1,5 @@
 package org.keepgoeat.presentation.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,56 +19,58 @@ class HomeViewModel @Inject constructor(
     private var _goalList: MutableStateFlow<MutableList<HomeGoal>> =
         MutableStateFlow(mutableListOf())
     val goalList get() = _goalList.asStateFlow()
-    private val _goalCount = MutableLiveData<Int>()
-    val goalCount: LiveData<Int> get() = _goalCount
-    private val _hour = MutableLiveData(LocalDateTime.now().hour)
-    val hour: LiveData<Int> get() = _hour
-    private val _cheeringMessage = MutableLiveData<String>()
-    val cheeringMessage: LiveData<String> get() = _cheeringMessage
-    private val _achievedState = MutableLiveData<Boolean>() // Lottie 변경을 위한 변수
-    val achievedState: LiveData<Boolean> get() = _achievedState
+    private val _goalCount = MutableStateFlow(0)
+    val goalCount = _goalCount.asStateFlow()
+    private val _hour = MutableStateFlow(LocalDateTime.now().hour)
+    val hour = _hour.asStateFlow()
+    private val _cheeringMessage = MutableStateFlow("")
+    val cheeringMessage = _cheeringMessage.asStateFlow()
+    private val _achievedState = MutableStateFlow(false) // Lottie 변경을 위한 변수
+    val achievedState get() = _achievedState.asStateFlow()
 
     init {
         fetchGoalList()
     }
 
-    fun changeGoalAchieved(goal: HomeGoal, adapter: HomeGoalAdapter) {
+    fun changeGoalAchieved(goal: HomeGoal) {
         val position = goalList.value.indexOf(goal)
         viewModelScope.launch {
-            goalRepository.achieveGoal(goal.id, !goal.isAchieved)?.let { goalData ->
-                with(goal) {
-                    _goalList.value.set(
-                        position,
-                        HomeGoal(
-                            id,
-                            goalTitle,
-                            isMore,
-                            goalData.updatedIsAchieved,
-                            goalData.thisMonthCount,
-                            type
+            goalRepository.achieveGoal(goal.id, !goal.isAchieved)
+                .onSuccess { goalData ->
+                    val list = _goalList.value.toMutableList()
+                    with(goal) {
+                        list.set(
+                            position,
+                            HomeGoal(
+                                id,
+                                goalTitle,
+                                isMore,
+                                goalData.updatedIsAchieved,
+                                goalData.thisMonthCount,
+                                type
+                            )
                         )
-                    )
+                    }
+                    if (goalData.updatedIsAchieved)
+                        _achievedState.value = true
+                    _goalList.value =
+                        list.toMutableList()
                 }
-                if (goalData.updatedIsAchieved)
-                    _achievedState.value = true
-                _goalList.value =
-                    _goalList.value.toMutableList()
-                Timber.d(goalList.value.toString())
-                adapter.submitList(goalList.value.toMutableList())
-            }
         }
     }
 
     private fun fetchGoalList() {
         viewModelScope.launch {
-            goalRepository.fetchHomeEntireData().onSuccess { homeData ->
-                _goalList.value = homeData.toHomeGoal().toMutableList()
-                _cheeringMessage.value = homeData.cheeringMessage.replace("\\n", "\n")
-                _achievedState.value = false
-                _goalCount.value = homeData.goals.size
-            }.onFailure {
-                Timber.e(it.message)
-            }
+            goalRepository.fetchHomeEntireData()
+                .onSuccess { homeData ->
+                    _goalList.value = homeData.toHomeGoal().toMutableList()
+                    _cheeringMessage.value = homeData.cheeringMessage.replace("\\n", "\n")
+                    _achievedState.value = false
+                    _goalCount.value = homeData.goals.size
+                    Timber.d("goalCount : " + goalCount.value)
+                }.onFailure {
+                    Timber.e(it.message)
+                }
         }
     }
 }

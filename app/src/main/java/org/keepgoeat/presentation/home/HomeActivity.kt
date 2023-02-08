@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
@@ -13,6 +15,7 @@ import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
@@ -51,18 +54,21 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     private fun collectData() {
         viewModel.goalList.flowWithLifecycle(lifecycle).onEach { goalList ->
+            Timber.d("goalList collect 중 $goalList")
             goalAdapter.submitList(goalList.toMutableList())
-        }
-        viewModel.goalCount.observe(this) { goalCount ->
-            if (goalCount == 0)
-                binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_hungry)
-        }
-        viewModel.achievedState.observe(this) { isAchieved ->
+        }.launchIn(lifecycleScope)
+        viewModel.goalCount.flowWithLifecycle(lifecycle).onEach { goalCount ->
+            Timber.d("goalCount collect 중 $goalCount")
+            if (goalCount > 0)
+                binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_cheer)
+        }.launchIn(lifecycleScope)
+        viewModel.achievedState.flowWithLifecycle(lifecycle).onEach { isAchieved ->
+            Timber.d("isAchieved collect 중 $isAchieved")
             if (isAchieved) {
                 binding.lottieSnail.playAnimation()
                 binding.lottieBackground.playAnimation()
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showMakeGoalDialog() {
@@ -82,6 +88,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun changeGoalItemBtnColor(myGoal: HomeGoal) {
-        viewModel.changeGoalAchieved(myGoal, goalAdapter)
+        viewModel.changeGoalAchieved(myGoal)
     }
 }

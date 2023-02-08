@@ -1,13 +1,16 @@
 package org.keepgoeat.domain.repository
 
-import org.keepgoeat.data.model.response.*
+import org.keepgoeat.data.model.response.ResponseGoalAchievement
+import org.keepgoeat.data.model.response.ResponseGoalDeleted
+import org.keepgoeat.data.model.response.ResponseGoalKeep
+import org.keepgoeat.data.model.response.ResponseHome
 import org.keepgoeat.domain.model.GoalDetail
 
 interface GoalRepository {
     suspend fun achieveGoal(
         goalId: Int,
         isAchieved: Boolean
-    ): ResponseGoalAchievement.ResponseGoalAchievementData?
+    ): Result<ResponseGoalAchievement.ResponseGoalAchievementData>
 
     suspend fun uploadGoalContent(
         title: String,

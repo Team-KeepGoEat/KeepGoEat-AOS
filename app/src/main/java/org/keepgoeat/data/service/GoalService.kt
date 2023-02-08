@@ -30,7 +30,7 @@ interface GoalService {
     suspend fun achieveGoal(
         @Path("goalId") id: Int,
         @Body goalAchievement: RequestGoalAchievement
-    ): Response<ResponseGoalAchievement>
+    ): ResponseGoalAchievement
 
     @DELETE("goal/{goalId}")
     suspend fun deleteGoal(
