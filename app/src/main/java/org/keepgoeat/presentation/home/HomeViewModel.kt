@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
     val hour = _hour.asStateFlow()
     private val _cheeringMessage = MutableStateFlow("")
     val cheeringMessage = _cheeringMessage.asStateFlow()
-    private val _lottieState = MutableStateFlow(false) // Lottie 변경을 위한 변수
+    private val _lottieState = MutableStateFlow(false)
     val lottieState get() = _lottieState.asStateFlow()
     private val _lottieVisibility = MutableStateFlow(false)
     val lottieVisibility get() = _lottieVisibility.asStateFlow()
@@ -60,6 +60,9 @@ class HomeViewModel @Inject constructor(
                     _goalList.value =
                         list.toMutableList()
                 }
+                .onFailure {
+                    Timber.e(it.message)
+                }
         }
     }
 
@@ -72,7 +75,6 @@ class HomeViewModel @Inject constructor(
                     _lottieState.value = false
                     _lottieVisibility.value = false
                     _goalCount.value = homeData.goals.size
-                    Timber.d("goalCount : " + goalCount.value)
                 }.onFailure {
                     Timber.e(it.message)
                 }

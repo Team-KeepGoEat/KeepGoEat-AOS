@@ -15,7 +15,6 @@ import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
-import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
@@ -53,23 +52,22 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun collectData() {
-        viewModel.goalList.flowWithLifecycle(lifecycle).onEach { goalList ->
-            Timber.d("goalList collect 중 $goalList")
-            goalAdapter.submitList(goalList.toMutableList())
-        }.launchIn(lifecycleScope)
-        viewModel.goalCount.flowWithLifecycle(lifecycle).onEach { goalCount ->
-            Timber.d("goalCount collect 중 $goalCount")
-            if (goalCount > 0)
-                binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_cheer)
-        }.launchIn(lifecycleScope)
-        viewModel.lottieState.flowWithLifecycle(lifecycle).onEach { lottieState ->
-            Timber.d("isAchieved collect 중 $lottieState")
-            if (lottieState) {
-                binding.lottieSnail.playAnimation()
-                binding.lottieBackground.playAnimation()
-                viewModel.changeLottieState(false)
-            }
-        }.launchIn(lifecycleScope)
+        with(viewModel) {
+            goalList.flowWithLifecycle(lifecycle).onEach { goalList ->
+                goalAdapter.submitList(goalList.toMutableList())
+            }.launchIn(lifecycleScope)
+            goalCount.flowWithLifecycle(lifecycle).onEach { goalCount ->
+                if (goalCount > 0)
+                    binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_cheer)
+            }.launchIn(lifecycleScope)
+            lottieState.flowWithLifecycle(lifecycle).onEach { lottieState ->
+                if (lottieState) {
+                    binding.lottieSnail.playAnimation()
+                    binding.lottieBackground.playAnimation()
+                    viewModel.changeLottieState(false)
+                }
+            }.launchIn(lifecycleScope)
+        }
     }
 
     private fun showMakeGoalDialog() {

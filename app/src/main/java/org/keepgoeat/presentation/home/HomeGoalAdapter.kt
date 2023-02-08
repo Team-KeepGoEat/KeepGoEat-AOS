@@ -14,7 +14,6 @@ import org.keepgoeat.presentation.type.HomeBtnType
 import org.keepgoeat.presentation.type.HomeGoalViewType
 import org.keepgoeat.util.ItemDiffCallback
 import org.keepgoeat.util.setVisibility
-import timber.log.Timber
 
 class HomeGoalAdapter(
     private val changeBtnColor: (HomeGoal) -> Unit,
@@ -51,7 +50,6 @@ class HomeGoalAdapter(
                     HomeBtnType.MINUS_NOT_ACHIEVED
                 }
             }
-            Timber.d(myGoal.toString())
             binding.goal = myGoal
             binding.goalType = eatingType
             binding.goalBtn = btnType
@@ -152,6 +150,5 @@ class HomeGoalAdapter(
                 )
             }
         }
-        Timber.d("submitList 완료")
     }
 }
