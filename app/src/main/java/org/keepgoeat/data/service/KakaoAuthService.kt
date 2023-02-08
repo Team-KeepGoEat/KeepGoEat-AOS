@@ -49,7 +49,10 @@ class KakaoAuthService @Inject constructor(
                 }
                 Timber.d(oAuthToken.accessToken)
                 result?.let {
-                    loginListener(result.getOrThrow()?.type == SIGN_UP,  localStorage.isClickedOnboardingButton)
+                    loginListener(
+                        result.getOrThrow()?.type == SIGN_UP,
+                        localStorage.isClickedOnboardingButton
+                    )
                 }
             }
         }
