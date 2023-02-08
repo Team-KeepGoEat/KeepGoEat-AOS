@@ -1,7 +1,5 @@
 package org.keepgoeat.presentation.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,8 +24,8 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
     val goalId get() = _goalId.asStateFlow()
     private val _keepState = MutableStateFlow<UiState<Int>>(UiState.Loading)
     val keepState get() = _keepState.asStateFlow()
-    private val _deleteState = MutableLiveData<UiState<Int>>()
-    val deleteState: LiveData<UiState<Int>> get() = _deleteState
+    private val _deleteState = MutableStateFlow<UiState<Int>>(UiState.Loading)
+    val deleteState get() = _deleteState.asStateFlow()
 
     fun fetchGoalDetailInfo(goalId: Int) {
         _goalId.value = goalId
@@ -45,7 +43,7 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
 
     fun keepGoal() {
         viewModelScope.launch {
-            goalId.value?.let { id ->
+            goalId.value.let { id ->
                 goalRepository.keepGoal(id).onSuccess { goalData ->
                     _keepState.value = UiState.Success(goalData.goalId)
                 }.onFailure {
@@ -57,10 +55,11 @@ class GoalDetailViewModel @Inject constructor(private val goalRepository: GoalRe
 
     fun deleteGoal() {
         viewModelScope.launch {
-            goalId.value?.let { id ->
-                goalRepository.deleteGoal(id).let { deletedData ->
-                    deletedData ?: return@launch
+            goalId.value.let { id ->
+                goalRepository.deleteGoal(id).onSuccess { deletedData ->
                     _deleteState.value = UiState.Success(deletedData.goalId)
+                }.onFailure {
+                    Timber.e(it.message)
                 }
             }
         }

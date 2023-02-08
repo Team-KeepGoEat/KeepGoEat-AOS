@@ -111,7 +111,7 @@ class GoalDetailActivity :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
-        viewModel.deleteState.observe(this) { deleteState ->
+        viewModel.deleteState.flowWithLifecycle(lifecycle).onEach { deleteState ->
             when (deleteState) {
                 is UiState.Success -> {
                     showToast(getString(R.string.goal_detail_success_goal_delete_toast_message))
@@ -120,7 +120,7 @@ class GoalDetailActivity :
                 }
                 else -> {}
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showGoalKeepDialog() {
