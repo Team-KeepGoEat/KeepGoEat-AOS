@@ -48,7 +48,7 @@ class KakaoAuthService @Inject constructor(
                     authRepository.login(RequestAuth(oAuthToken.accessToken, PLATFORM_KAKAO))
                 }
                 Timber.d(oAuthToken.accessToken)
-                loginListener(result?.type == SIGN_UP, localStorage.isClickedOnboardingButton)
+                loginListener(result.isSuccess, localStorage.isClickedOnboardingButton)
             }
         }
     }
