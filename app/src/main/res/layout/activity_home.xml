@@ -46,7 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:lottie_autoPlay="false"
                 app:lottie_rawRes="@raw/home_background"
-                app:visibility="@{viewModel.achievedState}" />
+                app:visibility="@{viewModel.lottieVisibility}" />
 
             <ImageView
                 android:id="@+id/iv_home_snail"
@@ -55,7 +55,7 @@
                 android:layout_marginStart="@dimen/spacing16"
                 android:layout_marginTop="32dp"
                 android:src="@drawable/img_snail_orange_hungry"
-                android:visibility="@{!viewModel.achievedState ? View.VISIBLE : View.INVISIBLE}"
+                android:visibility="@{!viewModel.lottieVisibility ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_my_page" />
 
@@ -69,7 +69,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
                 app:lottie_autoPlay="false"
                 app:lottie_rawRes="@raw/home_snail"
-                app:visibility="@{viewModel.achievedState}"
+                app:visibility="@{viewModel.lottieVisibility}"
                 tools:visibility="invisible" />
 
             <ImageView

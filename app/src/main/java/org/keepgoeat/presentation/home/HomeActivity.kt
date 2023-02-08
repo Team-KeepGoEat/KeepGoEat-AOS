@@ -62,11 +62,12 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             if (goalCount > 0)
                 binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_cheer)
         }.launchIn(lifecycleScope)
-        viewModel.achievedState.flowWithLifecycle(lifecycle).onEach { isAchieved ->
-            Timber.d("isAchieved collect 중 $isAchieved")
-            if (isAchieved) {
+        viewModel.lottieState.flowWithLifecycle(lifecycle).onEach { lottieState ->
+            Timber.d("isAchieved collect 중 $lottieState")
+            if (lottieState) {
                 binding.lottieSnail.playAnimation()
                 binding.lottieBackground.playAnimation()
+                viewModel.changeLottieState(false)
             }
         }.launchIn(lifecycleScope)
     }
