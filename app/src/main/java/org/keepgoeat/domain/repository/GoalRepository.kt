@@ -25,5 +25,5 @@ interface GoalRepository {
 
     suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail>
     suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData>
-    suspend fun deleteGoal(id: Int): ResponseGoalDeleted.ResponseGoalDeletedData?
+    suspend fun deleteGoal(id: Int): Result<ResponseGoalDeleted.ResponseGoalDeletedData>
 }

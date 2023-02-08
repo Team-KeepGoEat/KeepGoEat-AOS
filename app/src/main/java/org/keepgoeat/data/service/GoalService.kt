@@ -35,5 +35,5 @@ interface GoalService {
     @DELETE("goal/{goalId}")
     suspend fun deleteGoal(
         @Path("goalId") id: Int
-    ): Response<ResponseGoalDeleted>
+    ): ResponseGoalDeleted
 }

@@ -35,6 +35,5 @@ class GoalDataSource @Inject constructor(
 
     suspend fun deleteGoal(
         id: Int
-    ): ApiResult<ResponseGoalDeleted?> =
-        safeApiCall { goalService.deleteGoal(id) }
+    ): ResponseGoalDeleted = goalService.deleteGoal(id)
 }
