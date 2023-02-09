@@ -30,26 +30,17 @@ class NaverAuthService @Inject constructor(
     fun loginNaver(loginListener: ((Boolean, Boolean) -> Unit)) {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
+                val accessToken = requireNotNull(NaverIdLoginSDK.getAccessToken())
                 CoroutineScope(Dispatchers.Main).launch {
                     val result = withContext(Dispatchers.IO) {
-                        NaverIdLoginSDK.getAccessToken()?.let { accessToken ->
-                            RequestAuth(
-                                accessToken, PLATFORM_NAVER
-                            )
-                        }?.let {
-                            authRepository.login(
-                                it
-                            )
-                        }
+                        authRepository.login(
+                            RequestAuth(accessToken, PLATFORM_NAVER)
+                        )
                     }
-                    Timber.d(NaverIdLoginSDK.getAccessToken())
-                    loginListener(
-                        result?.type == SIGN_UP,
-                        localStorage.isClickedOnboardingButton
-                    )
+                    Timber.d(accessToken)
+                    loginListener(result.getOrThrow()?.type == SIGN_UP, localStorage.isClickedOnboardingButton)
                 }
             }
-
             override fun onFailure(httpStatus: Int, message: String) {
                 Timber.i(NaverIdLoginSDK.getLastErrorCode().code)
                 Timber.i(NaverIdLoginSDK.getLastErrorDescription())
