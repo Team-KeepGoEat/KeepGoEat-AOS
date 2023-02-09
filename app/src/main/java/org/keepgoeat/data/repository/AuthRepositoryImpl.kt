@@ -6,6 +6,7 @@ import org.keepgoeat.data.model.request.RequestAuth
 import org.keepgoeat.data.model.response.ResponseAuth
 import org.keepgoeat.data.model.response.ResponseRefresh
 import org.keepgoeat.domain.repository.AuthRepository
+import timber.log.Timber
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -23,6 +24,8 @@ class AuthRepositoryImpl @Inject constructor(
                     refreshToken = it.refreshToken
                 }
             }
+        }.onFailure {
+            Timber.e(it.message)
         }
 
     override suspend fun refresh(): Result<ResponseRefresh.ResponseToken?> = runCatching {
