@@ -1,6 +1,9 @@
 package org.keepgoeat.domain.repository
 
-import org.keepgoeat.data.model.response.*
+import org.keepgoeat.data.model.response.ResponseGoalAchievement
+import org.keepgoeat.data.model.response.ResponseGoalDeleted
+import org.keepgoeat.data.model.response.ResponseGoalKeep
+import org.keepgoeat.data.model.response.ResponseHome
 import org.keepgoeat.domain.model.GoalDetail
 
 interface GoalRepository {
@@ -21,6 +24,6 @@ interface GoalRepository {
     ): Result<Int>
 
     suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail>
-    suspend fun keepGoal(id: Int): ResponseGoalKeep.ResponseGoalKeepData?
-    suspend fun deleteGoal(id: Int): ResponseGoalDeleted.ResponseGoalDeletedData?
+    suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData>
+    suspend fun deleteGoal(id: Int): Result<ResponseGoalDeleted.ResponseGoalDeletedData>
 }

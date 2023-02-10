@@ -5,7 +5,10 @@ import org.keepgoeat.data.datasource.remote.GoalDataSource
 import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
 import org.keepgoeat.data.model.request.RequestGoalContentTitle
-import org.keepgoeat.data.model.response.*
+import org.keepgoeat.data.model.response.ResponseGoalAchievement
+import org.keepgoeat.data.model.response.ResponseGoalDeleted
+import org.keepgoeat.data.model.response.ResponseGoalKeep
+import org.keepgoeat.data.model.response.ResponseHome
 import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.repository.GoalRepository
 import timber.log.Timber
@@ -71,39 +74,13 @@ class GoalRepositoryImpl @Inject constructor(
             goalDataSource.fetchGoalDetail(goalId).data.toGoalDetail()
         }
 
-    override suspend fun keepGoal(id: Int): ResponseGoalKeep.ResponseGoalKeepData? {
-        val result = goalDataSource.keepGoal(id)
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
+    override suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData> =
+        runCatching {
+            goalDataSource.keepGoal(id).data
         }
-    }
 
-    override suspend fun deleteGoal(id: Int): ResponseGoalDeleted.ResponseGoalDeletedData? {
-        val result = goalDataSource.deleteGoal(id)
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
+    override suspend fun deleteGoal(id: Int): Result<ResponseGoalDeleted.ResponseGoalDeletedData> =
+        runCatching {
+            goalDataSource.deleteGoal(id).data
         }
-    }
 }
