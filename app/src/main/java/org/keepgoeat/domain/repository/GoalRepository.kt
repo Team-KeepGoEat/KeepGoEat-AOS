@@ -24,6 +24,6 @@ interface GoalRepository {
 
     suspend fun fetchHomeEntireData(): Result<ResponseHome.HomeData>
     suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail>
-    suspend fun keepGoal(id: Int): ResponseGoalKeep.ResponseGoalKeepData?
-    suspend fun deleteGoal(id: Int): ResponseGoalDeleted.ResponseGoalDeletedData?
+    suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData>
+    suspend fun deleteGoal(id: Int): Result<ResponseGoalDeleted.ResponseGoalDeletedData>
 }

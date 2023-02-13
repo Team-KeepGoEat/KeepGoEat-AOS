@@ -48,39 +48,13 @@ class GoalRepositoryImpl @Inject constructor(
             goalDataSource.fetchGoalDetail(goalId).data.toGoalDetail()
         }
 
-    override suspend fun keepGoal(id: Int): ResponseGoalKeep.ResponseGoalKeepData? {
-        val result = goalDataSource.keepGoal(id)
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
+    override suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData> =
+        runCatching {
+            goalDataSource.keepGoal(id).data
         }
-    }
 
-    override suspend fun deleteGoal(id: Int): ResponseGoalDeleted.ResponseGoalDeletedData? {
-        val result = goalDataSource.deleteGoal(id)
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
+    override suspend fun deleteGoal(id: Int): Result<ResponseGoalDeleted.ResponseGoalDeletedData> =
+        runCatching {
+            goalDataSource.deleteGoal(id).data
         }
-    }
 }

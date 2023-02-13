@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponseGoalKeep(
-    val data: ResponseGoalKeepData?,
+    val data: ResponseGoalKeepData,
     val message: String,
     val status: Int,
     val success: Boolean
