@@ -5,7 +5,11 @@ import org.keepgoeat.data.datasource.remote.GoalDataSource
 import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
 import org.keepgoeat.data.model.request.RequestGoalContentTitle
-import org.keepgoeat.data.model.response.*
+import org.keepgoeat.data.model.response.ResponseGoalAchievement
+import org.keepgoeat.data.model.response.ResponseGoalDeleted
+import org.keepgoeat.data.model.response.ResponseGoalKeep
+import org.keepgoeat.data.model.response.ResponseHome
+import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.repository.GoalRepository
 import timber.log.Timber
 import javax.inject.Inject
@@ -52,97 +56,31 @@ class GoalRepositoryImpl @Inject constructor(
 
     override suspend fun uploadGoalContent(
         title: String,
-        isMore: Boolean
-    ): ResponseGoalContent.ResponseGoalContentData? {
-        val result = goalDataSource.uploadGoalContent(RequestGoalContent(title, isMore))
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
+        isMore: Boolean,
+    ): Result<Int> =
+        runCatching {
+            goalDataSource.uploadGoalContent(RequestGoalContent(title, isMore)).data.id
         }
-    }
 
     override suspend fun editGoalContent(
         id: Int,
-        title: String
-    ): ResponseGoalContent.ResponseGoalContentData? {
-        val result = goalDataSource.editGoalContent(id, RequestGoalContentTitle(title))
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
-        }
+        title: String,
+    ): Result<Int> = runCatching {
+        goalDataSource.editGoalContent(id, RequestGoalContentTitle(title)).data.id
     }
 
-    override suspend fun fetchGoalDetail(goalId: Int): ResponseGoalDetail.ResponseGoalDetailData? {
-        val result = goalDataSource.fetchGoalDetail(goalId)
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
+    override suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail> =
+        runCatching {
+            goalDataSource.fetchGoalDetail(goalId).data.toGoalDetail()
         }
-    }
 
-    override suspend fun keepGoal(id: Int): ResponseGoalKeep.ResponseGoalKeepData? {
-        val result = goalDataSource.keepGoal(id)
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
+    override suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData> =
+        runCatching {
+            goalDataSource.keepGoal(id).data
         }
-    }
 
-    override suspend fun deleteGoal(id: Int): ResponseGoalDeleted.ResponseGoalDeletedData? {
-        val result = goalDataSource.deleteGoal(id)
-
-        return when (result) {
-            is ApiResult.Success -> {
-                result.data?.data
-            }
-            is ApiResult.NetworkError -> {
-                Timber.d("Network Error")
-                null
-            }
-            is ApiResult.GenericError -> {
-                Timber.d("(${result.code}): ${result.message}")
-                null
-            }
+    override suspend fun deleteGoal(id: Int): Result<ResponseGoalDeleted.ResponseGoalDeletedData> =
+        runCatching {
+            goalDataSource.deleteGoal(id).data
         }
-    }
 }

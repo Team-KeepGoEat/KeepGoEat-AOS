@@ -4,7 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalDetailBinding
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
@@ -15,11 +19,13 @@ import org.keepgoeat.presentation.my.MyActivity.Companion.ARG_IS_ENTERED_FROM_KE
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_GOAL_CONTENT
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_IS_UPDATED
+import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.RecyclerLayoutType
 import org.keepgoeat.util.ItemDecorationUtil
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showToast
+import org.keepgoeat.util.safeValueOf
 
 @AndroidEntryPoint
 class GoalDetailActivity :
@@ -39,6 +45,8 @@ class GoalDetailActivity :
         binding.lifecycleOwner = this
 
         intent.let {
+            val eatingType = safeValueOf<EatingType>(it.getStringExtra(ARG_EATING_TYPE)) ?: return
+            adapter = GoalStickerListAdapter(eatingType, CELL_COUNT)
             val goalId = it.getIntExtra(ARG_GOAL_ID, -1)
             viewModel.fetchGoalDetailInfo(goalId)
             isUpdated = it.getBooleanExtra(ARG_IS_UPDATED, false)
@@ -47,7 +55,7 @@ class GoalDetailActivity :
 
         initLayout()
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun initLayout() {
@@ -60,6 +68,7 @@ class GoalDetailActivity :
                 )
             )
             clipToOutline = true
+            adapter = this@GoalDetailActivity.adapter
         }
     }
 
@@ -84,15 +93,11 @@ class GoalDetailActivity :
         }
     }
 
-    private fun addObservers() {
-        viewModel.goalDetail.observe(this) { detail -> // TODO 리팩토링 필요
-            adapter = GoalStickerListAdapter(detail.eatingType, CELL_COUNT)
-            binding.rvGoalCard.adapter = adapter
-        }
-        viewModel.goalStickers.observe(this) { stickers ->
+    private fun collectData() {
+        viewModel.goalStickers.flowWithLifecycle(lifecycle).onEach { stickers ->
             adapter.submitList(stickers)
-        }
-        viewModel.keepState.observe(this) { keepState ->
+        }.launchIn(lifecycleScope)
+        viewModel.keepState.flowWithLifecycle(lifecycle).onEach { keepState ->
             when (keepState) {
                 is UiState.Success -> {
                     showToast(getString(R.string.goal_detail_success_goal_keep_toast_message))
@@ -105,8 +110,8 @@ class GoalDetailActivity :
                 }
                 else -> {}
             }
-        }
-        viewModel.deleteState.observe(this) { deleteState ->
+        }.launchIn(lifecycleScope)
+        viewModel.deleteState.flowWithLifecycle(lifecycle).onEach { deleteState ->
             when (deleteState) {
                 is UiState.Success -> {
                     showToast(getString(R.string.goal_detail_success_goal_delete_toast_message))
@@ -115,7 +120,7 @@ class GoalDetailActivity :
                 }
                 else -> {}
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showGoalKeepDialog() {

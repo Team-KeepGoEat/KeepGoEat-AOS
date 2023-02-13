@@ -3,7 +3,11 @@ package org.keepgoeat.presentation.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomGoalKeepBinding
 import org.keepgoeat.util.UiState
@@ -19,7 +23,7 @@ class GoalKeepBottomDialogFragment :
         binding.viewModel = viewModel
 
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun addListeners() {
@@ -28,15 +32,15 @@ class GoalKeepBottomDialogFragment :
         }
     }
 
-    private fun addObservers() {
-        viewModel.keepState.observe(this) { keepState ->
+    private fun collectData() {
+        viewModel.keepState.flowWithLifecycle(lifecycle).onEach { keepState ->
             when (keepState) {
                 is UiState.Success -> {
                     dismiss()
                 }
                 else -> {}
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showGoalDeleteDialog() {

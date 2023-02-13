@@ -47,6 +47,16 @@ jobs:
         env:
           KAKAO_NATIVE_KEY: ${{ secrets.KAKAO_NATIVE_KEY }}
         run: echo "KAKAO_NATIVE_KEY=\"$KAKAO_NATIVE_KEY\"" >> local.properties
+        
+      - name: Access NAVER_CLIENT_ID
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+        run: echo "NAVER_CLIENT_ID=\"$NAVER_CLIENT_ID\"" >> local.properties
+        
+      - name: Access NAVER_CLIENT_SECRETE
+        env:
+          NAVER_CLIENT_SECRETE: ${{ secrets.NAVER_CLIENT_SECRETE }}
+        run: echo "NAVER_CLIENT_SECRETE=\"$NAVER_CLIENT_SECRETE\"" >> local.properties
 
       - name: Access KGE_BASE_URL
         env:

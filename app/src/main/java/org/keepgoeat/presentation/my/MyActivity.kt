@@ -4,13 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.SortType
+import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
@@ -36,7 +41,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
         initLayout()
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun initLayout() {
@@ -61,10 +66,17 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         }
     }
 
-    private fun addObservers() {
-        viewModel.goalList.observe(this) { goals ->
-            goalAdapter.submitList(goals.toMutableList())
-        }
+    private fun collectData() {
+        viewModel.achievedGoalUiState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    goalAdapter.submitList(it.data.toMutableList())
+                }
+                is UiState.Error -> {} // TODO state에 따른 ui 업데이트 필요시 작성
+                is UiState.Loading -> {}
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun moveToHome() {
