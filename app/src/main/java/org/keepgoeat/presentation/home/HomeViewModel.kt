@@ -24,8 +24,8 @@ class HomeViewModel @Inject constructor(
     val hour = _hour.asStateFlow()
     private val _cheeringMessage = MutableStateFlow("")
     val cheeringMessage = _cheeringMessage.asStateFlow()
-    private val _lottieState = MutableStateFlow(false)
-    val lottieState get() = _lottieState.asStateFlow()
+    private val _isLottieMoving = MutableStateFlow(false)
+    val isLottieMoving get() = _isLottieMoving.asStateFlow()
     private val _lottieVisibility = MutableStateFlow(false)
     val lottieVisibility get() = _lottieVisibility.asStateFlow()
 
@@ -53,7 +53,7 @@ class HomeViewModel @Inject constructor(
                         )
                     }
                     if (goalData.updatedIsAchieved) {
-                        _lottieState.value = true
+                        _isLottieMoving.value = true
                         _lottieVisibility.value = true
                     }
                     _goalList.value =
@@ -71,7 +71,7 @@ class HomeViewModel @Inject constructor(
                 .onSuccess { homeData ->
                     _goalList.value = homeData.toHomeGoal().toMutableList()
                     _cheeringMessage.value = homeData.cheeringMessage.replace("\\n", "\n")
-                    _lottieState.value = false
+                    _isLottieMoving.value = false
                     _lottieVisibility.value = false
                     _goalCount.value = homeData.goals.size
                 }.onFailure {
@@ -80,7 +80,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun changeLottieState(state: Boolean) {
-        _lottieState.value = state
+    fun makeLottieMove(state: Boolean) {
+        _isLottieMoving.value = state
     }
 }
