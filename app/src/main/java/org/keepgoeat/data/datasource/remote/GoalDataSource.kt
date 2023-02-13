@@ -1,12 +1,10 @@
 package org.keepgoeat.data.datasource.remote
 
-import org.keepgoeat.data.ApiResult
 import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
 import org.keepgoeat.data.model.request.RequestGoalContentTitle
 import org.keepgoeat.data.model.response.*
 import org.keepgoeat.data.service.GoalService
-import org.keepgoeat.util.safeApiCall
 import javax.inject.Inject
 
 class GoalDataSource @Inject constructor(

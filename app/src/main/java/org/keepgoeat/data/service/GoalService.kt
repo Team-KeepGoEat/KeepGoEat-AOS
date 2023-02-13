@@ -4,7 +4,6 @@ import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
 import org.keepgoeat.data.model.request.RequestGoalContentTitle
 import org.keepgoeat.data.model.response.*
-import retrofit2.Response
 import retrofit2.http.*
 
 interface GoalService {

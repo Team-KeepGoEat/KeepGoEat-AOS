@@ -1,6 +1,5 @@
 package org.keepgoeat.data.repository
 
-import org.keepgoeat.data.ApiResult
 import org.keepgoeat.data.datasource.remote.GoalDataSource
 import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
@@ -11,7 +10,6 @@ import org.keepgoeat.data.model.response.ResponseGoalKeep
 import org.keepgoeat.data.model.response.ResponseHome
 import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.repository.GoalRepository
-import timber.log.Timber
 import javax.inject.Inject
 
 class GoalRepositoryImpl @Inject constructor(
