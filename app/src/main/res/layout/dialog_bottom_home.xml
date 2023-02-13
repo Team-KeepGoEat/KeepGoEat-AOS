@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="11dp"
                 android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_snail_orange_spoon"
+                android:src="@drawable/ic_snail_orange_spoon_left"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -99,7 +99,7 @@
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="@dimen/spacing8"
-                android:src="@drawable/ic_snail_green_ribon"
+                android:src="@drawable/ic_snail_green_ribbon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
