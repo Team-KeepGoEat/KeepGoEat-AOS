@@ -64,6 +64,12 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         binding.ivBack.setOnClickListener {
             moveToPrevious()
         }
+        binding.tvLogout.setOnClickListener {
+            // TODO 로그아웃 로직 연결
+        }
+        binding.tvDeleteAccount.setOnClickListener {
+            // TODO 회원탈퇴 로직 연결
+        }
     }
 
     private fun collectData() {
