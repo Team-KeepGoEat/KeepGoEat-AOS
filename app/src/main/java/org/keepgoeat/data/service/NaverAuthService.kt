@@ -2,6 +2,7 @@ package org.keepgoeat.data.service
 
 import android.content.Context
 import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
 import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.CoroutineScope
@@ -53,6 +54,26 @@ class NaverAuthService @Inject constructor(
         NaverIdLoginSDK.authenticate(
             context, oauthLoginCallback
         )
+    }
+
+    fun logoutNaver() {
+        NaverIdLoginSDK.logout()
+        // TODO 로컬 데이터 삭제
+    }
+
+    fun unlinkNaver() {
+        NidOAuthLogin().callDeleteTokenApi(context, object : OAuthLoginCallback {
+            override fun onSuccess() {
+                // TODO 탈퇴 api 호출 및 로컬 데이터 삭제
+            }
+            override fun onFailure(httpStatus: Int, message: String) {
+                Timber.d("errorCode: ${NaverIdLoginSDK.getLastErrorCode().code}")
+                Timber.d("errorDesc: ${NaverIdLoginSDK.getLastErrorDescription()}")
+            }
+            override fun onError(errorCode: Int, message: String) {
+                onFailure(errorCode, message)
+            }
+        })
     }
 
     companion object {
