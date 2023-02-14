@@ -39,9 +39,8 @@ class AuthRepositoryImpl @Inject constructor(
             Timber.e(it.message)
         }
 
-
-    // TODO 코드 정리 필요
-    override suspend fun refresh(): Result<ResponseRefresh.ResponseToken?> = runCatching {
-        authDataSource.refresh().data
-    }
+    override suspend fun refresh(): Result<ResponseRefresh.ResponseToken?> =
+        runCatching {
+            authDataSource.refresh().data
+        }
 }
