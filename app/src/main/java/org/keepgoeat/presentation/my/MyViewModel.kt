@@ -23,7 +23,7 @@ class MyViewModel @Inject constructor(
     private val _achievedGoalUiState = MutableStateFlow<UiState<List<MyGoal>>>(UiState.Loading)
     val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
     private val _logoutUiState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
-    val logoutUiState get() = _deleteAccountUiState.asStateFlow()
+    val logoutUiState get() = _logoutUiState.asStateFlow()
     private val _deleteAccountUiState =
         MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
