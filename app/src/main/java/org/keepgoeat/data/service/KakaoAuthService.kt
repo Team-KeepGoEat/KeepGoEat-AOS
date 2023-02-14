@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.data.model.request.RequestAuth
 import org.keepgoeat.domain.repository.AuthRepository
+import org.keepgoeat.presentation.type.SocialLoginType
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -48,6 +49,7 @@ class KakaoAuthService @Inject constructor(
                     authRepository.login(RequestAuth(oAuthToken.accessToken, PLATFORM_KAKAO))
                 }
                 Timber.d(oAuthToken.accessToken)
+                localStorage.loginPlatform = SocialLoginType.KAKAO // TODO 리팩토링 필요
                 result?.let {
                     loginListener(
                         result.getOrThrow()?.type == SIGN_UP,

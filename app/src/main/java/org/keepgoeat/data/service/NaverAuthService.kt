@@ -13,6 +13,7 @@ import org.keepgoeat.BuildConfig
 import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.data.model.request.RequestAuth
 import org.keepgoeat.domain.repository.AuthRepository
+import org.keepgoeat.presentation.type.SocialLoginType
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -39,9 +40,12 @@ class NaverAuthService @Inject constructor(
                         )
                     }
                     Timber.d(accessToken)
-                    loginListener(result.getOrThrow()?.type == SIGN_UP, localStorage.isClickedOnboardingButton)
+                    localStorage.loginPlatform = SocialLoginType.NAVER // TODO 리팩토링 필요
+                    loginListener(result.getOrThrow()?.type == SIGN_UP,
+                        localStorage.isClickedOnboardingButton)
                 }
             }
+
             override fun onFailure(httpStatus: Int, message: String) {
                 Timber.i(NaverIdLoginSDK.getLastErrorCode().code)
                 Timber.i(NaverIdLoginSDK.getLastErrorDescription())
@@ -67,10 +71,12 @@ class NaverAuthService @Inject constructor(
                 // TODO 탈퇴 api 호출
                 localStorage.clear()
             }
+
             override fun onFailure(httpStatus: Int, message: String) {
                 Timber.d("errorCode: ${NaverIdLoginSDK.getLastErrorCode().code}")
                 Timber.d("errorDesc: ${NaverIdLoginSDK.getLastErrorDescription()}")
             }
+
             override fun onError(errorCode: Int, message: String) {
                 onFailure(errorCode, message)
             }
