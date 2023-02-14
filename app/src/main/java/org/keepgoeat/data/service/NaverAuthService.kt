@@ -48,21 +48,24 @@ class NaverAuthService @Inject constructor(
     }
 
     fun deleteAccountNaver(deleteAccountListener: (() -> Unit)) {
-        NidOAuthLogin().callDeleteTokenApi(context, object : OAuthLoginCallback {
-            override fun onSuccess() {
-                Timber.d("연결 끊기 성공. SDK에서 토큰 삭제 됨")
-                deleteAccountListener()
-            }
+        NidOAuthLogin().callDeleteTokenApi(
+            context,
+            object : OAuthLoginCallback {
+                override fun onSuccess() {
+                    Timber.d("연결 끊기 성공. SDK에서 토큰 삭제 됨")
+                    deleteAccountListener()
+                }
 
-            override fun onFailure(httpStatus: Int, message: String) {
-                Timber.d("errorCode: ${NaverIdLoginSDK.getLastErrorCode().code}")
-                Timber.d("errorDesc: ${NaverIdLoginSDK.getLastErrorDescription()}")
-            }
+                override fun onFailure(httpStatus: Int, message: String) {
+                    Timber.d("errorCode: ${NaverIdLoginSDK.getLastErrorCode().code}")
+                    Timber.d("errorDesc: ${NaverIdLoginSDK.getLastErrorDescription()}")
+                }
 
-            override fun onError(errorCode: Int, message: String) {
-                onFailure(errorCode, message)
+                override fun onError(errorCode: Int, message: String) {
+                    onFailure(errorCode, message)
+                }
             }
-        })
+        )
     }
 
     companion object {

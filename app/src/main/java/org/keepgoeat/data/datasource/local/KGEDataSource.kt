@@ -53,10 +53,8 @@ class KGEDataSource @Inject constructor(@ApplicationContext context: Context) {
 
     var loginPlatform: SocialLoginType
         set(value) = dataStore.edit { putString(LOGIN_PLATFORM, value.name) }
-        get() = safeValueOf<SocialLoginType>(dataStore.getString(
-            LOGIN_PLATFORM,
-            ""
-        )) ?: SocialLoginType.NONE
+        get() = safeValueOf<SocialLoginType>(dataStore.getString(LOGIN_PLATFORM, ""))
+            ?: SocialLoginType.NONE
 
     fun clear() {
         dataStore.edit {
