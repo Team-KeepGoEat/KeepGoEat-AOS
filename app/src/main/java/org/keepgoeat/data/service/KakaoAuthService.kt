@@ -4,13 +4,6 @@ import android.content.Context
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.keepgoeat.data.datasource.local.KGEDataSource
-import org.keepgoeat.data.model.request.RequestAuth
-import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.presentation.type.SocialLoginType
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,13 +11,11 @@ import javax.inject.Inject
 class KakaoAuthService @Inject constructor(
     @ActivityContext private val context: Context,
     private val client: UserApiClient,
-    private val authRepository: AuthRepository,
-    private val localStorage: KGEDataSource,
 ) {
     private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
 
-    fun loginKakao(loginListener: ((Boolean, Boolean) -> Unit)) {
+    fun loginKakao(loginListener: ((SocialLoginType, String) -> Unit)) {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) handleLoginError(error)
             else if (token != null) handleLoginSuccess(token, loginListener)
@@ -41,22 +32,11 @@ class KakaoAuthService @Inject constructor(
 
     private fun handleLoginSuccess(
         oAuthToken: OAuthToken,
-        loginListener: ((Boolean, Boolean) -> Unit),
+        loginListener: ((SocialLoginType, String) -> Unit),
     ) {
-        client.me { user, _ ->
-            CoroutineScope(Dispatchers.Main).launch {
-                val result = withContext(Dispatchers.IO) {
-                    authRepository.login(RequestAuth(oAuthToken.accessToken, PLATFORM_KAKAO))
-                }
-                Timber.d(oAuthToken.accessToken)
-                localStorage.loginPlatform = SocialLoginType.KAKAO // TODO 리팩토링 필요
-                result?.let {
-                    loginListener(
-                        result.getOrThrow()?.type == SIGN_UP,
-                        localStorage.isClickedOnboardingButton
-                    )
-                }
-            }
+        client.me { _, _ ->
+            Timber.d(oAuthToken.accessToken)
+            loginListener(SocialLoginType.KAKAO, oAuthToken.accessToken)
         }
     }
 
@@ -80,10 +60,5 @@ class KakaoAuthService @Inject constructor(
                 Timber.e("연결 끊기 실패($error)")
             }
         }
-    }
-
-    companion object {
-        private const val PLATFORM_KAKAO = "KAKAO"
-        private const val SIGN_UP = "signup"
     }
 }
