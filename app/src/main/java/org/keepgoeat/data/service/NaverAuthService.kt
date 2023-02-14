@@ -65,11 +65,12 @@ class NaverAuthService @Inject constructor(
         localStorage.clear()
     }
 
-    fun unlinkNaver() {
+    // TODO 함수명 변경
+    fun unlinkNaver(deleteAccountListener: (() -> Unit)) {
         NidOAuthLogin().callDeleteTokenApi(context, object : OAuthLoginCallback {
             override fun onSuccess() {
-                // TODO 탈퇴 api 호출
-                localStorage.clear()
+                Timber.d("연결 끊기 성공. SDK에서 토큰 삭제 됨")
+                deleteAccountListener()
             }
 
             override fun onFailure(httpStatus: Int, message: String) {

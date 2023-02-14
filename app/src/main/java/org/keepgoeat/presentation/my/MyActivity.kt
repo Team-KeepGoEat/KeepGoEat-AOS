@@ -15,6 +15,7 @@ import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.home.HomeActivity
+import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.presentation.type.SortType
@@ -82,8 +83,8 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         }
         binding.tvDeleteAccount.setOnClickListener {
             when (viewModel.loginPlatForm) {
-                SocialLoginType.NAVER -> naverSignService.unlinkNaver() // TODO 회원 탈퇴 성공 시 api 호출
-                SocialLoginType.KAKAO -> kakaoSignService.unlinkKakao()
+                SocialLoginType.NAVER -> naverSignService.unlinkNaver(viewModel::deleteAccount) // TODO 회원 탈퇴 성공 시 api 호출
+                SocialLoginType.KAKAO -> kakaoSignService.unlinkKakao(viewModel::deleteAccount)
                 else -> {}
             }
         }
@@ -97,6 +98,19 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
                 }
                 is UiState.Error -> {} // TODO state에 따른 ui 업데이트 필요시 작성
                 is UiState.Loading -> {}
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+
+        viewModel.isSuccessDeleteAccount.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    startActivity(Intent(this, SignActivity::class.java))
+                    finish()
+                }
+                is UiState.Error -> {
+                    // TODO 회원 탈퇴 실패 시 예외 처리
+                }
                 else -> {}
             }
         }.launchIn(lifecycleScope)

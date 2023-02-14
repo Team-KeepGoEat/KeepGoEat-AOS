@@ -71,12 +71,12 @@ class KakaoAuthService @Inject constructor(
         }
     }
 
-    fun unlinkKakao() {
+    // TODO 함수명 변경
+    fun unlinkKakao(deleteAccountListener: (() -> Unit)) {
         client.unlink { error ->
             if (error == null) {
                 Timber.d("연결 끊기 성공. SDK에서 토큰 삭제 됨")
-                // TODO 탈퇴 api 호출
-                localStorage.clear()
+                deleteAccountListener()
             } else {
                 Timber.e("연결 끊기 실패($error)")
             }

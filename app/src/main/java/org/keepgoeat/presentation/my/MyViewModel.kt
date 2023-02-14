@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.domain.model.MyGoal
+import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.MyRepository
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
@@ -16,10 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class MyViewModel @Inject constructor(
     private val myRepository: MyRepository,
+    private val authRepository: AuthRepository,
     private val localStorage: KGEDataSource,
 ) : ViewModel() {
     private val _achievedGoalUiState = MutableStateFlow<UiState<List<MyGoal>>>(UiState.Loading)
     val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
+    private val _isSuccessDeleteAccount = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val isSuccessDeleteAccount get() = _isSuccessDeleteAccount.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
 
     init {
@@ -33,6 +37,17 @@ class MyViewModel @Inject constructor(
                     _achievedGoalUiState.value = UiState.Success(it)
                 }.onFailure {
                     _achievedGoalUiState.value = UiState.Error(it.message)
+                }
+        }
+    }
+
+    fun deleteAccount() {
+        viewModelScope.launch {
+            authRepository.deleteAccount()
+                .onSuccess {
+                    _isSuccessDeleteAccount.value = UiState.Success(true)
+                }.onFailure {
+                    _isSuccessDeleteAccount.value = UiState.Error(it.message)
                 }
         }
     }
