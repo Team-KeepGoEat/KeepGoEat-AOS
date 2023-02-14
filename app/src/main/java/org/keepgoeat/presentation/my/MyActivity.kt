@@ -76,14 +76,14 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         }
         binding.tvLogout.setOnClickListener {
             when (viewModel.loginPlatForm) {
-                SocialLoginType.NAVER -> naverSignService.logoutNaver()
-                SocialLoginType.KAKAO -> kakaoSignService.logoutKakao()
+                SocialLoginType.NAVER -> naverSignService.logoutNaver(viewModel::logout)
+                SocialLoginType.KAKAO -> kakaoSignService.logoutKakao(viewModel::logout)
                 else -> {}
             }
         }
         binding.tvDeleteAccount.setOnClickListener {
             when (viewModel.loginPlatForm) {
-                SocialLoginType.NAVER -> naverSignService.unlinkNaver(viewModel::deleteAccount) // TODO 회원 탈퇴 성공 시 api 호출
+                SocialLoginType.NAVER -> naverSignService.unlinkNaver(viewModel::deleteAccount)
                 SocialLoginType.KAKAO -> kakaoSignService.unlinkKakao(viewModel::deleteAccount)
                 else -> {}
             }
@@ -98,6 +98,19 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
                 }
                 is UiState.Error -> {} // TODO state에 따른 ui 업데이트 필요시 작성
                 is UiState.Loading -> {}
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+
+        viewModel.logoutUiState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    startActivity(Intent(this, SignActivity::class.java))
+                    finish()
+                }
+                is UiState.Error -> {
+                    // TODO 로그아웃 실패 시 예외 처리
+                }
                 else -> {}
             }
         }.launchIn(lifecycleScope)

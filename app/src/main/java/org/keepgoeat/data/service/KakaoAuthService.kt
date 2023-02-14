@@ -60,11 +60,11 @@ class KakaoAuthService @Inject constructor(
         }
     }
 
-    fun logoutKakao() {
+    fun logoutKakao(logoutListener: (() -> Unit)) {
         client.logout { error ->
             if (error == null) {
                 Timber.i("로그아웃 성공. SDK에서 토큰 삭제됨")
-                localStorage.clear()
+                logoutListener()
             } else {
                 Timber.e("로그아웃 실패. SDK에서 토큰 삭제됨($error)")
             }

@@ -60,9 +60,9 @@ class NaverAuthService @Inject constructor(
         )
     }
 
-    fun logoutNaver() {
+    fun logoutNaver(logoutListener: (() -> Unit)) {
         NaverIdLoginSDK.logout()
-        localStorage.clear()
+        logoutListener()
     }
 
     // TODO 함수명 변경
