@@ -11,15 +11,24 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
+import org.keepgoeat.data.service.KakaoAuthService
+import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.type.EatingType
+import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
+    @Inject
+    lateinit var kakaoSignService: KakaoAuthService
+
+    @Inject
+    lateinit var naverSignService: NaverAuthService
     private val viewModel: MyViewModel by viewModels()
     private val goalAdapter = MyGoalAdapter()
     private val headerAdapter = MyHeaderAdapter(::getFilteredGoalWithEatingType)
@@ -65,10 +74,18 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             moveToPrevious()
         }
         binding.tvLogout.setOnClickListener {
-            // TODO 로그아웃 로직 연결
+            when (viewModel.loginPlatForm) {
+                SocialLoginType.NAVER -> naverSignService.logoutNaver()
+                SocialLoginType.KAKAO -> kakaoSignService.logoutKakao()
+                else -> {}
+            }
         }
         binding.tvDeleteAccount.setOnClickListener {
-            // TODO 회원탈퇴 로직 연결
+            when (viewModel.loginPlatForm) {
+                SocialLoginType.NAVER -> naverSignService.unlinkNaver() // TODO 회원 탈퇴 성공 시 api 호출
+                SocialLoginType.KAKAO -> kakaoSignService.unlinkKakao()
+                else -> {}
+            }
         }
     }
 
