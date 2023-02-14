@@ -23,10 +23,10 @@ class MyViewModel @Inject constructor(
     private val _achievedGoalUiState = MutableStateFlow<UiState<List<MyGoal>>>(UiState.Loading)
     val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
     private val _logoutUiState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
-    val logoutUiState get() = _isSuccessDeleteAccount.asStateFlow()
-    private val _isSuccessDeleteAccount =
-        MutableStateFlow<UiState<Boolean>>(UiState.Loading) // TODO 변수명 수정
-    val isSuccessDeleteAccount get() = _isSuccessDeleteAccount.asStateFlow()
+    val logoutUiState get() = _deleteAccountUiState.asStateFlow()
+    private val _deleteAccountUiState =
+        MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
 
     init {
@@ -53,9 +53,9 @@ class MyViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.deleteAccount()
                 .onSuccess {
-                    _isSuccessDeleteAccount.value = UiState.Success(true)
+                    _deleteAccountUiState.value = UiState.Success(true)
                 }.onFailure {
-                    _isSuccessDeleteAccount.value = UiState.Error(it.message)
+                    _deleteAccountUiState.value = UiState.Error(it.message)
                 }
         }
     }

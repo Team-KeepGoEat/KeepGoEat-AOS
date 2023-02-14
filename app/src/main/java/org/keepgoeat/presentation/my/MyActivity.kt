@@ -83,8 +83,8 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         }
         binding.tvDeleteAccount.setOnClickListener {
             when (viewModel.loginPlatForm) {
-                SocialLoginType.NAVER -> naverSignService.unlinkNaver(viewModel::deleteAccount)
-                SocialLoginType.KAKAO -> kakaoSignService.unlinkKakao(viewModel::deleteAccount)
+                SocialLoginType.NAVER -> naverSignService.deleteAccountNaver(viewModel::deleteAccount)
+                SocialLoginType.KAKAO -> kakaoSignService.deleteAccountKakao(viewModel::deleteAccount)
                 else -> {}
             }
         }
@@ -115,7 +115,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.isSuccessDeleteAccount.flowWithLifecycle(lifecycle).onEach {
+        viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     startActivity(Intent(this, SignActivity::class.java))
