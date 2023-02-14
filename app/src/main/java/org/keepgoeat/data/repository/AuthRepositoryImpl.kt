@@ -14,7 +14,7 @@ class AuthRepositoryImpl @Inject constructor(
     private val localStorage: KGEDataSource
 ) : AuthRepository {
     override suspend fun login(requestAuth: RequestAuth): Result<ResponseAuth.ResponseAuthData?> =
-        kotlin.runCatching {
+        runCatching {
             authDataSource.login(requestAuth).data
         }.onSuccess {
             with(localStorage) {
