@@ -62,7 +62,7 @@ class KakaoAuthService @Inject constructor(
         client.logout { error ->
             if (error == null) {
                 Timber.i("로그아웃 성공. SDK에서 토큰 삭제됨")
-                // TODO 로컬 데이터 삭제
+                localStorage.clear()
             } else {
                 Timber.e("로그아웃 실패. SDK에서 토큰 삭제됨($error)")
             }
@@ -73,7 +73,8 @@ class KakaoAuthService @Inject constructor(
         client.unlink { error ->
             if (error == null) {
                 Timber.d("연결 끊기 성공. SDK에서 토큰 삭제 됨")
-                // TODO 탈퇴 api 호출 및 로컬 데이터 삭제
+                // TODO 탈퇴 api 호출
+                localStorage.clear()
             } else {
                 Timber.e("연결 끊기 실패($error)")
             }

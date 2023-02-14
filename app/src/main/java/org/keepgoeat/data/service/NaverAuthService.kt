@@ -58,13 +58,14 @@ class NaverAuthService @Inject constructor(
 
     fun logoutNaver() {
         NaverIdLoginSDK.logout()
-        // TODO 로컬 데이터 삭제
+        localStorage.clear()
     }
 
     fun unlinkNaver() {
         NidOAuthLogin().callDeleteTokenApi(context, object : OAuthLoginCallback {
             override fun onSuccess() {
-                // TODO 탈퇴 api 호출 및 로컬 데이터 삭제
+                // TODO 탈퇴 api 호출
+                localStorage.clear()
             }
             override fun onFailure(httpStatus: Int, message: String) {
                 Timber.d("errorCode: ${NaverIdLoginSDK.getLastErrorCode().code}")
