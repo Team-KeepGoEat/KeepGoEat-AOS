@@ -59,7 +59,6 @@
                     tools:text="keepgoeat@kakao.com" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_achieved_goal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing16"
@@ -95,6 +94,7 @@
                         tools:text="3" />
 
                     <ImageView
+                        android:id="@+id/iv_achieved_goal_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_detail"

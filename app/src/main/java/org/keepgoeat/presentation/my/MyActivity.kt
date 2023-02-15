@@ -1,5 +1,6 @@
 package org.keepgoeat.presentation.my
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +27,19 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
     }
 
     private fun addListeners() {
+        binding.tvAchievedGoal.setOnClickListener {
+            moveToAchievedGoalDetail()
+        }
+        binding.tvAchievedGoalCount.setOnClickListener {
+            moveToAchievedGoalDetail()
+        }
+        binding.ivAchievedGoalDetail.setOnClickListener {
+            moveToAchievedGoalDetail()
+        }
+    }
 
+    private fun moveToAchievedGoalDetail() {
+        startActivity(Intent(this, AchievedGoalActivity::class.java))
     }
 
     private fun collectData() {
