@@ -11,15 +11,25 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
+import org.keepgoeat.data.service.KakaoAuthService
+import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.home.HomeActivity
+import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.EatingType
+import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
+    @Inject
+    lateinit var kakaoSignService: KakaoAuthService
+
+    @Inject
+    lateinit var naverSignService: NaverAuthService
     private val viewModel: MyViewModel by viewModels()
     private val goalAdapter = MyGoalAdapter()
     private val headerAdapter = MyHeaderAdapter(::getFilteredGoalWithEatingType)
@@ -64,6 +74,20 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         binding.ivBack.setOnClickListener {
             moveToPrevious()
         }
+        binding.tvLogout.setOnClickListener {
+            when (viewModel.loginPlatForm) {
+                SocialLoginType.NAVER -> naverSignService.logoutNaver(viewModel::logout)
+                SocialLoginType.KAKAO -> kakaoSignService.logoutKakao(viewModel::logout)
+                else -> {}
+            }
+        }
+        binding.tvDeleteAccount.setOnClickListener {
+            when (viewModel.loginPlatForm) {
+                SocialLoginType.NAVER -> naverSignService.deleteAccountNaver(viewModel::deleteAccount)
+                SocialLoginType.KAKAO -> kakaoSignService.deleteAccountKakao(viewModel::deleteAccount)
+                else -> {}
+            }
+        }
     }
 
     private fun collectData() {
@@ -74,6 +98,32 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
                 }
                 is UiState.Error -> {} // TODO state에 따른 ui 업데이트 필요시 작성
                 is UiState.Loading -> {}
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+
+        viewModel.logoutUiState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    startActivity(Intent(this, SignActivity::class.java))
+                    finish()
+                }
+                is UiState.Error -> {
+                    // TODO 로그아웃 실패 시 예외 처리
+                }
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+
+        viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    startActivity(Intent(this, SignActivity::class.java))
+                    finish()
+                }
+                is UiState.Error -> {
+                    // TODO 회원 탈퇴 실패 시 예외 처리
+                }
                 else -> {}
             }
         }.launchIn(lifecycleScope)

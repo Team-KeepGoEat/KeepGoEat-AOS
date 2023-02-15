@@ -1,3 +1,5 @@
+package org.keepgoeat.util.extension
+
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

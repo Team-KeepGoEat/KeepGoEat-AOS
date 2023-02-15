@@ -2,15 +2,20 @@ package org.keepgoeat.presentation.sign
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivitySignBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.onboarding.OnboardingActivity
+import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -20,25 +25,41 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
 
     @Inject
     lateinit var naverSignService: NaverAuthService
+    private val viewModel: SignViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         addListeners()
+        collectData()
     }
 
     private fun addListeners() {
         binding.layoutKakaoSignIn.setOnClickListener {
-            kakaoSignService.loginKakao(::moveToNext)
+            kakaoSignService.loginKakao(viewModel::login)
         }
         binding.layoutNaverSignIn.setOnClickListener {
-            naverSignService.loginNaver(::moveToNext)
+            naverSignService.loginNaver(viewModel::login)
         }
     }
 
-    private fun moveToNext(isFirst: Boolean, isClicked: Boolean) {
-        Timber.d("isFirst : $isFirst !isClicked : ${!isClicked}")
+    private fun collectData() {
+        viewModel.loginUiState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    moveToNext(it.data)
+                }
+                is UiState.Error -> {}
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    /** 가입자가 온보딩 모두 확인(생략 포함)하지 않은 경우 온보딩 화면으로 그 외의 경우(가입자가 온보딩에서 중간 이탈 + 로그인한 사용자)는 홈화면으로 이동 */
+    /** @param onboardingFlag : first는 가입자 여부(true: 가입한 사용자, false: 로그인한 사용자), second는 온보딩 완료 버튼을 클릭했는지 여부 */
+    private fun moveToNext(onboardingFlag: Pair<Boolean, Boolean>) {
         val nextScreen =
-            if (isFirst && !isClicked) OnboardingActivity::class.java
+            if (onboardingFlag.first && !onboardingFlag.second) OnboardingActivity::class.java
             else HomeActivity::class.java
         startActivity(Intent(this, nextScreen))
         finish()
