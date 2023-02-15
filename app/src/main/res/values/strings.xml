@@ -27,6 +27,7 @@
     <string name="goal_detail_hold">참은</string>
     <string name="goal_detail_success_goal_delete_toast_message">목표가 삭제되었습니다.</string>
     <string name="goal_detail_success_goal_keep_toast_message">목표가 보관되었습니다.</string>
+    <string name="goal_detail_delete_button_text">네, 삭제할래요</string>
 
     <!-- Home View -->
     <string name="home_today_goal">오늘 식습관 목표</string>
@@ -67,6 +68,8 @@
     <string name="goal_setting_title_length_guide">목표는 최소 1글자 이상 입력해주세요.</string>
     <string name="goal_setting_title_language_guide">한글, 영문, 숫자만 입력 가능합니다.</string>
     <string name="goal_setting_title_length_limit">(%d/15)</string>
+    <string name="goal_setting_success_edit_toast_message">목표가 수정되었습니다.</string>
+    <string name="goal_setting_success_add_toast_message">목표가 추가되었습니다.</string>
 
     <!-- On Boarding -->
     <string name="onboarding1_title">차근차근 식습관 목표를 세워보세요.</string>
@@ -86,8 +89,7 @@
     <string name="my_total_achievement_day">총 달성일</string>
     <string name="my_duration">진행기간</string>
     <string name="my_goal_duration_format">%s. %s. %s ~ %s. %s. %s</string>
-    <string name="goal_detail_delete_button_text">네, 삭제할래요</string>
-    <string name="goal_setting_success_edit_toast_message">목표가 수정되었습니다.</string>
-    <string name="goal_setting_success_add_toast_message">목표가 추가되었습니다.</string>
+    <string name="my_logout">로그아웃</string>
+    <string name="my_delete_account">탈퇴하기</string>
 
 </resources>

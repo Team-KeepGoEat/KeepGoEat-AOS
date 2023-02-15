@@ -35,9 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing16"
             android:layout_marginTop="@dimen/spacing16"
+            app:eatingType="@{goalType}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:eatingType="@{goalType}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_item_goal_name"
@@ -66,8 +66,8 @@
                 android:id="@+id/tv_item_goal_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_b"
                 android:text="@{String.valueOf(goal.thisMonthCount)}"
-                android:textAppearance="@style/TextAppearance.System1_Bold"
                 android:textColor="@{context.getColor(goalType.tagTextColor)}"
                 android:textSize="36dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +91,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btn_goal"
+            android:id="@+id/btn_goal_achieved"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/spacing16"
