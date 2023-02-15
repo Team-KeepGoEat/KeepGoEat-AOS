@@ -11,6 +11,8 @@
     <string name="btn_text_no">아니오</string>
     <string name="title_more">%s 더 먹기</string>
     <string name="title_less">%s 덜 먹기</string>
+    <string name="cancel">취소</string>
+    <string name="yes">네</string>
 
     <!-- sign -->
     <string name="signin_kakao">카카오톡 로그인</string>
@@ -104,4 +106,6 @@
     <string name="my_policy">개인정보처리방침</string>
 
     <string name="my_account_info">계정 정보</string>
+    <string name="my_logout_title">로그아웃 하시겠어요?</string>
+    <string name="my_logout_description">그동안의 기록은 사라지지 않으니\n안심하고 다녀오세요.</string>
 </resources>

@@ -153,4 +153,11 @@
         <item name="android:textAppearance">@style/TextAppearance.System4</item>
         <item name="android:textColor">@color/gray_800</item>
     </style>
+
+    <style name="Style.Dialog.Button" parent="">
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingVertical">@dimen/spacing16</item>
+        <item name="android:textAppearance">@style/TextAppearance.System4</item>
+        <item name="android:textColor">@color/gray_800</item>
+    </style>
 </resources>

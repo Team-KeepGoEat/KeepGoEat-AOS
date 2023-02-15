@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="org.keepgoeat.R" />
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.my.MyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".presentation.my.LogoutDialogFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="72dp"
+            android:background="@drawable/shape_border_radius_12"
+            android:backgroundTint="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_logout_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingVertical="@dimen/spacing4"
+                android:text="@string/my_logout_title"
+                android:textAppearance="@style/TextAppearance.System4_Bold"
+                android:textColor="@color/gray_800"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_logout_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing16"
+                android:paddingVertical="3dp"
+                android:text="@string/my_logout_description"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.System5"
+                android:textColor="@color/gray_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_logout_title" />
+
+            <TextView
+                android:id="@+id/no"
+                style="@style/Style.Dialog.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing12"
+                android:text="@string/cancel"
+                app:layout_constraintEnd_toEndOf="@id/view_divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_logout_description" />
+
+            <View
+                android:id="@+id/view_divider"
+                android:layout_width="1dp"
+                android:layout_height="16dp"
+                android:background="@color/gray_300"
+                app:layout_constraintBottom_toBottomOf="@id/no"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/no" />
+
+            <TextView
+                android:id="@+id/yes"
+                style="@style/Style.Dialog.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/yes"
+                android:textAppearance="@style/TextAppearance.System4"
+                android:textColor="@color/orange_600"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/view_divider"
+                app:layout_constraintTop_toTopOf="@id/no" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
