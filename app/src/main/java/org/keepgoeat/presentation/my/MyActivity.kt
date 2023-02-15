@@ -17,13 +17,8 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        initLayout()
         addListeners()
         collectData()
-    }
-
-    private fun initLayout() {
-
     }
 
     private fun addListeners() {
@@ -46,6 +41,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
     }
 
     private fun collectData() {
-
+        // TODO 보관한 목표 갯수 불러오기
     }
 }
