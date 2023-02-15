@@ -106,8 +106,7 @@
                     android:id="@+id/view_divider_achieved_goal"
                     style="@style/Widget.Divider"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/spacing12"
-                    app:layout_constraintTop_toBottomOf="@id/layout_achieved_goal" />
+                    android:layout_marginTop="@dimen/spacing12" />
 
                 <TextView
                     android:id="@+id/tv_contact_and_feedback"
@@ -136,8 +135,7 @@
                     android:id="@+id/view_divider_feedback"
                     style="@style/Widget.Divider"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/spacing16"
-                    app:layout_constraintTop_toBottomOf="@id/layout_achieved_goal" />
+                    android:layout_marginTop="@dimen/spacing16" />
 
                 <TextView
                     android:id="@+id/tv_app_info"
@@ -184,8 +182,7 @@
                     android:id="@+id/view_divider_app_info"
                     style="@style/Widget.Divider"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/spacing16"
-                    app:layout_constraintTop_toBottomOf="@id/layout_achieved_goal" />
+                    android:layout_marginTop="@dimen/spacing16" />
 
                 <TextView
                     android:id="@+id/tv_terms_and_policy"
