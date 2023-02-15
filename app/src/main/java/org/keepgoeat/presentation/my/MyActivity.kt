@@ -25,6 +25,9 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         binding.viewToolbar.ivBack.setOnClickListener {
             finish()
         }
+        binding.tvUserName.setOnClickListener {
+            startActivity(Intent(this, AccountInfoActivity::class.java))
+        }
         binding.tvAchievedGoal.setOnClickListener {
             moveToAchievedGoalDetail()
         }
