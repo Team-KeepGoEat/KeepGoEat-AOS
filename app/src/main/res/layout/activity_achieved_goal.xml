@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.my.MyActivity">
+        tools:context=".presentation.my.AchievedGoalActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_toolbar"
@@ -64,6 +64,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
-            tools:listitem="@layout/item_my_goal" />
+            tools:listitem="@layout/item_achieved_goal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

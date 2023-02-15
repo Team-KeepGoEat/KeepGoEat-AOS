@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
-import org.keepgoeat.databinding.ActivityMyBinding
+import org.keepgoeat.databinding.ActivityAchievedGoalBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.EatingType
@@ -24,15 +24,15 @@ import org.keepgoeat.util.binding.BindingActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
+class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layout.activity_achieved_goal) {
     @Inject
     lateinit var kakaoSignService: KakaoAuthService
 
     @Inject
     lateinit var naverSignService: NaverAuthService
     private val viewModel: MyViewModel by viewModels()
-    private val goalAdapter = MyGoalAdapter()
-    private val headerAdapter = MyHeaderAdapter(::getFilteredGoalWithEatingType)
+    private val goalAdapter = AchievedGoalAdapter()
+    private val headerAdapter = AchievedGoalHeaderAdapter(::getFilteredGoalWithEatingType)
     private val goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
     private var isEnteredFromKeep: Boolean = false
 
