@@ -9,6 +9,7 @@ import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.AchievedGoalActivity
+import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
 
@@ -75,7 +76,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun moveToMy() {
-        val intent = Intent(this@HomeActivity, AchievedGoalActivity::class.java)
+        val intent = Intent(this@HomeActivity, MyActivity::class.java)
         startActivity(intent)
     }
 
