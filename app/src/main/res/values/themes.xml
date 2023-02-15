@@ -118,6 +118,13 @@
         <item name="android:paddingVertical">8dp</item>
     </style>
 
+    <style name="Widget.Divider" parent="">
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/gray_200</item>
+        <item name="android:paddingHorizontal">@dimen/spacing16</item>
+        <item name="android:paddingVertical">8dp</item>
+    </style>
+
     <!-- Circle Image View -->
     <style name="Style.CircleImageView.Half" parent="">
         <item name="cornerFamily">rounded</item>
@@ -128,5 +135,22 @@
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
         <item name="postSplashScreenTheme">@style/Theme.KeepGoEat</item>
+    </style>
+
+    <!-- My Menu -->
+    <style name="Style.My.Menu.Title" parent="">
+        <item name="android:textAppearance">@style/TextAppearance.System5_Bold</item>
+        <item name="android:textColor">@color/gray_500</item>
+        <item name="android:layout_marginStart">@dimen/spacing16</item>
+        <item name="android:layout_marginTop">@dimen/spacing16</item>
+    </style>
+
+    <style name="Style.My.Menu" parent="TextAppearance.My.Menu">
+        <item name="android:layout_marginStart">@dimen/spacing16</item>
+    </style>
+
+    <style name="TextAppearance.My.Menu" parent="">
+        <item name="android:textAppearance">@style/TextAppearance.System4</item>
+        <item name="android:textColor">@color/gray_800</item>
     </style>
 </resources>
