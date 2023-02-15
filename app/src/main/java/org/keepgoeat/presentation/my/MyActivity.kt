@@ -27,6 +27,9 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
     }
 
     private fun addListeners() {
+        binding.viewToolbar.ivBack.setOnClickListener {
+            finish()
+        }
         binding.tvAchievedGoal.setOnClickListener {
             moveToAchievedGoalDetail()
         }
