@@ -12,7 +12,8 @@ import org.keepgoeat.R
 import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivityAccountInfoBinding
-import org.keepgoeat.presentation.sign.SignActivity
+import org.keepgoeat.presentation.home.HomeActivity
+import org.keepgoeat.presentation.home.HomeActivity.Companion.KILL_HOME_AND_GO_TO_SIGN
 import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
@@ -58,8 +59,7 @@ class AccountInfoActivity :
         viewModel.logoutUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    startActivity(Intent(this, SignActivity::class.java))
-                    finish()
+                    moveToSign()
                 }
                 is UiState.Error -> {
                     // TODO 로그아웃 실패 시 예외 처리
@@ -71,8 +71,7 @@ class AccountInfoActivity :
         viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    startActivity(Intent(this, SignActivity::class.java))
-                    finish()
+                    moveToSign()
                 }
                 is UiState.Error -> {
                     // TODO 회원 탈퇴 실패 시 예외 처리
@@ -80,5 +79,14 @@ class AccountInfoActivity :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun moveToSign() {
+        Intent(this, HomeActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            putExtra(KILL_HOME_AND_GO_TO_SIGN, true)
+        }.also {
+            startActivity(it)
+        }
     }
 }
