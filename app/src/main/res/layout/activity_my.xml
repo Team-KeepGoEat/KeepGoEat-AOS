@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="org.keepgoeat.R" />
+
         <variable
             name="viewModel"
             type="org.keepgoeat.presentation.my.MyViewModel" />
@@ -15,55 +17,196 @@
         android:layout_height="match_parent"
         tools:context=".presentation.my.MyActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:elevation="4dp"
-            android:paddingHorizontal="@dimen/spacing16"
-            android:paddingVertical="@dimen/spacing8"
-            app:layout_constraintTop_toTopOf="parent">
+        <include
+            android:id="@+id/view_toolbar"
+            layout="@layout/view_toolbar"
+            app:title="@{context.getString(R.string.my)}" />
 
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- 계정 상세 뷰 전달받기 전까지 사용할 더미 뷰로, 뷰 전달 받은 이후 삭제 예정 -->
-            <TextView
-                android:id="@+id/tv_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/spacingBase"
-                android:text="@string/my_logout"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_delete_account"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_delete_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/my_delete_account"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_goal_list"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingTop="6dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
-            tools:listitem="@layout/item_my_goal" />
+            app:layout_constraintTop_toBottomOf="@id/view_toolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- TODO 유저 이름 및 이메일 불러오기 -->
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/spacing16"
+                    android:layout_marginTop="28dp"
+                    android:gravity="center_vertical"
+                    android:text="user214"
+                    android:textAppearance="@style/TextAppearance.System3_Bold"
+                    android:textColor="@color/gray_800"
+                    app:drawableEndCompat="@drawable/ic_detail"
+                    tools:text="user214" />
+
+                <TextView
+                    android:id="@+id/tv_user_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing16"
+                    android:text="keepgoeat@kakao.com"
+                    android:textAppearance="@style/TextAppearance.System5"
+                    android:textColor="@color/gray_600"
+                    tools:text="keepgoeat@kakao.com" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing16"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_achieved_goal"
+                        style="@style/TextAppearance.My.Menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/spacing4"
+                        android:paddingEnd="@dimen/spacing4"
+                        android:text="@string/my_achieved_goal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- TODO 보관한 목표 갯수 가져오기 -->
+                    <TextView
+                        android:id="@+id/tv_achieved_goal_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/spacing4"
+                        android:paddingStart="@dimen/spacing4"
+                        android:paddingEnd="9dp"
+                        android:text="3"
+                        android:textAppearance="@style/TextAppearance.System4_Bold"
+                        android:textColor="@color/orange_600"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_achieved_goal"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="3" />
+
+                    <ImageView
+                        android:id="@+id/iv_achieved_goal_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_detail"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view_divider_achieved_goal"
+                    style="@style/Widget.Divider"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/spacing12" />
+
+                <TextView
+                    android:id="@+id/tv_contact_and_feedback"
+                    style="@style/Style.My.Menu.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_contact_and_feedback" />
+
+                <TextView
+                    android:id="@+id/tv_contact_us"
+                    style="@style/Style.My.Menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing16"
+                    android:text="@string/my_contact_us" />
+
+                <TextView
+                    android:id="@+id/tv_feedback"
+                    style="@style/Style.My.Menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing24"
+                    android:text="@string/my_feedback" />
+
+                <View
+                    android:id="@+id/view_divider_feedback"
+                    style="@style/Widget.Divider"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/spacing16" />
+
+                <TextView
+                    android:id="@+id/tv_app_info"
+                    style="@style/Style.My.Menu.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_app_info" />
+
+                <TextView
+                    android:id="@+id/tv_about_service"
+                    style="@style/Style.My.Menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing24"
+                    android:text="@string/my_about_service" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing16"
+                    android:layout_marginTop="@dimen/spacing24">
+
+                    <TextView
+                        android:id="@+id/tv_version_info"
+                        style="@style/TextAppearance.My.Menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_version_info"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_version_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_version"
+                        android:textAppearance="@style/TextAppearance.System4"
+                        android:textColor="@color/gray_400"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view_divider_app_info"
+                    style="@style/Widget.Divider"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/spacing16" />
+
+                <TextView
+                    android:id="@+id/tv_terms_and_policy"
+                    style="@style/Style.My.Menu.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_terms_and_policy" />
+
+                <TextView
+                    android:id="@+id/tv_terms"
+                    style="@style/Style.My.Menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing24"
+                    android:text="@string/my_terms" />
+
+                <TextView
+                    android:id="@+id/tv_policy"
+                    style="@style/Style.My.Menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing24"
+                    android:text="@string/my_policy" />
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

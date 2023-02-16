@@ -14,8 +14,8 @@ import org.keepgoeat.databinding.ActivityGoalDetailBinding
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.model.GoalContent
-import org.keepgoeat.presentation.my.MyActivity
-import org.keepgoeat.presentation.my.MyActivity.Companion.ARG_IS_ENTERED_FROM_KEEP
+import org.keepgoeat.presentation.my.AchievedGoalActivity
+import org.keepgoeat.presentation.my.AchievedGoalActivity.Companion.ARG_IS_ENTERED_FROM_KEEP
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_GOAL_CONTENT
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_IS_UPDATED
@@ -101,7 +101,7 @@ class GoalDetailActivity :
             when (keepState) {
                 is UiState.Success -> {
                     showToast(getString(R.string.goal_detail_success_goal_keep_toast_message))
-                    Intent(this, MyActivity::class.java).apply {
+                    Intent(this, AchievedGoalActivity::class.java).apply {
                         putExtra(ARG_IS_ENTERED_FROM_KEEP, true)
                     }.also {
                         startActivity(it)

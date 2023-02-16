@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
-import org.keepgoeat.databinding.LayoutMyHeaderBinding
+import org.keepgoeat.databinding.LayoutAchievedGoalHeaderBinding
 import org.keepgoeat.presentation.type.EatingType
 
-class MyHeaderAdapter(private val eatingTypeClickListener: ((EatingType?) -> Unit)) :
-    RecyclerView.Adapter<MyHeaderAdapter.MyHeaderViewHolder>() {
+class AchievedGoalHeaderAdapter(private val eatingTypeClickListener: ((EatingType?) -> Unit)) :
+    RecyclerView.Adapter<AchievedGoalHeaderAdapter.MyHeaderViewHolder>() {
     private lateinit var inflater: LayoutInflater
 
     override fun onCreateViewHolder(
@@ -19,7 +19,7 @@ class MyHeaderAdapter(private val eatingTypeClickListener: ((EatingType?) -> Uni
         if (!::inflater.isInitialized)
             inflater = LayoutInflater.from(parent.context)
 
-        return MyHeaderViewHolder(LayoutMyHeaderBinding.inflate(inflater, parent, false))
+        return MyHeaderViewHolder(LayoutAchievedGoalHeaderBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyHeaderViewHolder, position: Int) {
@@ -28,7 +28,11 @@ class MyHeaderAdapter(private val eatingTypeClickListener: ((EatingType?) -> Uni
 
     override fun getItemCount() = 1
 
-    private fun changeTextAppearance(clickedView: TextView, unclickedView1: TextView, unclickedView2: TextView) {
+    private fun changeTextAppearance(
+        clickedView: TextView,
+        unclickedView1: TextView,
+        unclickedView2: TextView,
+    ) {
         clickedView.setTextAppearance(R.style.TextAppearance_System5_Bold)
         unclickedView1.setTextAppearance(R.style.TextAppearance_System5)
         unclickedView2.setTextAppearance(R.style.TextAppearance_System5)
@@ -38,9 +42,12 @@ class MyHeaderAdapter(private val eatingTypeClickListener: ((EatingType?) -> Uni
     }
 
     class MyHeaderViewHolder(
-        private val binding: LayoutMyHeaderBinding,
+        private val binding: LayoutAchievedGoalHeaderBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(eatingTypeClickListener: ((EatingType?) -> Unit), changeTextAppearance: (TextView, TextView, TextView) -> Unit) {
+        fun onBind(
+            eatingTypeClickListener: ((EatingType?) -> Unit),
+            changeTextAppearance: (TextView, TextView, TextView) -> Unit,
+        ) {
             with(binding) {
                 tvAll.setOnClickListener {
                     eatingTypeClickListener(null)

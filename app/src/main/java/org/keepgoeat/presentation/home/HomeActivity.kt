@@ -13,6 +13,7 @@ import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
+import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingActivity
 
@@ -25,6 +26,8 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        if (intent.getBooleanExtra(ARG_KILL_HOME_AND_GO_TO_SIGN, false)) moveToSign()
 
         initLayout()
         addListeners()
@@ -88,5 +91,14 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     private fun changeGoalItemBtnColor(myGoal: HomeGoal) {
         viewModel.changeGoalAchieved(myGoal)
+    }
+
+    private fun moveToSign() {
+        startActivity(Intent(this, SignActivity::class.java))
+        finish()
+    }
+
+    companion object {
+        const val ARG_KILL_HOME_AND_GO_TO_SIGN = "killHomeAndGoToSign"
     }
 }

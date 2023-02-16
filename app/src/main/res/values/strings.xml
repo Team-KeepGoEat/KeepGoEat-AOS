@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
+    <string name="app_version">1.0.0</string>
 
     <!-- Global -->
     <string name="keep_go_eat">킵고잇</string>
@@ -10,6 +11,8 @@
     <string name="btn_text_no">아니오</string>
     <string name="title_more">%s 더 먹기</string>
     <string name="title_less">%s 덜 먹기</string>
+    <string name="cancel">취소</string>
+    <string name="yes">네</string>
 
     <!-- sign -->
     <string name="signin_kakao">카카오톡 로그인</string>
@@ -85,11 +88,24 @@
 
     <!-- My -->
     <string name="all">전체</string>
+    <string name="my">마이페이지</string>
     <string name="my_achieved_goal">보관한 목표</string>
     <string name="my_total_achievement_day">총 달성일</string>
     <string name="my_duration">진행기간</string>
     <string name="my_goal_duration_format">%s. %s. %s ~ %s. %s. %s</string>
     <string name="my_logout">로그아웃</string>
     <string name="my_delete_account">탈퇴하기</string>
+    <string name="my_contact_and_feedback">문의 및 피드백</string>
+    <string name="my_contact_us">문의하기</string>
+    <string name="my_feedback">리뷰 남기기</string>
+    <string name="my_app_info">앱 정보</string>
+    <string name="my_about_service">서비스 소개</string>
+    <string name="my_version_info">버전 정보</string>
+    <string name="my_terms_and_policy">약관 및 정책</string>
+    <string name="my_terms">서비스 이용약관</string>
+    <string name="my_policy">개인정보처리방침</string>
 
+    <string name="my_account_info">계정 정보</string>
+    <string name="my_logout_title">로그아웃 하시겠어요?</string>
+    <string name="my_logout_description">그동안의 기록은 사라지지 않으니\n안심하고 다녀오세요.</string>
 </resources>
