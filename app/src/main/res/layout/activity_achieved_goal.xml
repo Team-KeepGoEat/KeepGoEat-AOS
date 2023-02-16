@@ -15,26 +15,9 @@
         android:layout_height="match_parent"
         tools:context=".presentation.my.AchievedGoalActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:elevation="4dp"
-            android:paddingHorizontal="@dimen/spacing16"
-            android:paddingVertical="@dimen/spacing8"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/view_toolbar"
+            layout="@layout/view_toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_goal_list"
@@ -43,7 +26,7 @@
             android:paddingTop="6dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
+            app:layout_constraintTop_toBottomOf="@id/view_toolbar"
             tools:listitem="@layout/item_achieved_goal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
