@@ -54,10 +54,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing16"
                 android:layout_marginTop="32dp"
+                android:src="@drawable/ic_snail_orange_cheer_right"
                 android:visibility="@{!viewModel.lottieVisibility ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
-                app:src="@drawable/ic_snail_orange_cheer_right" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_my_page" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottie_snail"

@@ -61,7 +61,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             }.launchIn(lifecycleScope)
             goalCount.flowWithLifecycle(lifecycle).onEach { goalCount ->
                 if (goalCount > 0)
-                    binding.ivHomeSnail.setImageResource(R.drawable.img_snail_orange_cheer)
+                    binding.ivHomeSnail.setImageResource(R.drawable.ic_snail_orange_cheer_right)
             }.launchIn(lifecycleScope)
             isLottieMoving.flowWithLifecycle(lifecycle).onEach { isLottieMoving ->
                 if (isLottieMoving) {
