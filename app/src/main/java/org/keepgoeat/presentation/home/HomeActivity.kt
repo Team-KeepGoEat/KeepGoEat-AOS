@@ -15,6 +15,7 @@ import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.EatingType
+import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
@@ -55,26 +56,24 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     private fun collectData() {
-        with(viewModel) {
-            goalList.flowWithLifecycle(lifecycle).onEach { goalList ->
-                goalAdapter.submitList(goalList.toMutableList())
-            }.launchIn(lifecycleScope)
-            goalCount.flowWithLifecycle(lifecycle).onEach { goalCount ->
-                if (goalCount > 0)
-                    binding.ivHomeSnail.setImageResource(R.drawable.ic_snail_orange_cheer_right)
-            }.launchIn(lifecycleScope)
-            lottieState.flowWithLifecycle(lifecycle).onEach { lottieState ->
-                when (lottieState) {
-                    ProcessState.IN_PROGRESS -> {
-                        binding.lottieSnail.playAnimation()
-                        binding.lottieBackground.playAnimation()
-                        viewModel.changeLottieState(ProcessState.DONE)
-                    }
-                    ProcessState.IDLE -> {}
-                    ProcessState.DONE -> {}
+        viewModel.goalList.flowWithLifecycle(lifecycle).onEach { goalList ->
+            goalAdapter.submitList(goalList.toMutableList())
+        }.launchIn(lifecycleScope)
+        viewModel.goalCount.flowWithLifecycle(lifecycle).onEach { goalCount ->
+            if (goalCount > 0)
+                binding.ivHomeSnail.setImageResource(R.drawable.ic_snail_orange_cheer_right)
+        }.launchIn(lifecycleScope)
+        viewModel.lottieState.flowWithLifecycle(lifecycle).onEach { lottieState ->
+            when (lottieState) {
+                ProcessState.IN_PROGRESS -> {
+                    binding.lottieSnail.playAnimation()
+                    binding.lottieBackground.playAnimation()
+                    viewModel.changeLottieState(ProcessState.DONE)
                 }
-            }.launchIn(lifecycleScope)
-        }
+                ProcessState.IDLE -> {}
+                ProcessState.DONE -> {}
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showMakeGoalDialog() {

@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.presentation.type.ProcessState
 import timber.log.Timber
 import java.time.LocalDateTime
 import javax.inject.Inject

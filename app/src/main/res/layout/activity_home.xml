@@ -9,7 +9,7 @@
 
         <variable
             name="processState"
-            type="org.keepgoeat.presentation.home.ProcessState" />
+            type="org.keepgoeat.presentation.type.ProcessState" />
 
         <variable
             name="viewModel"
