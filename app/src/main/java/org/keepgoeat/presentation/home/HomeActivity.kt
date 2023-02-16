@@ -63,11 +63,15 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
                 if (goalCount > 0)
                     binding.ivHomeSnail.setImageResource(R.drawable.ic_snail_orange_cheer_right)
             }.launchIn(lifecycleScope)
-            isLottieMoving.flowWithLifecycle(lifecycle).onEach { isLottieMoving ->
-                if (isLottieMoving) {
-                    binding.lottieSnail.playAnimation()
-                    binding.lottieBackground.playAnimation()
-                    viewModel.makeLottieMove(false)
+            lottieState.flowWithLifecycle(lifecycle).onEach { lottieState ->
+                when (lottieState) {
+                    ProcessState.IN_PROGRESS -> {
+                        binding.lottieSnail.playAnimation()
+                        binding.lottieBackground.playAnimation()
+                        viewModel.changeLottieState(ProcessState.DONE)
+                    }
+                    ProcessState.IDLE -> {}
+                    ProcessState.DONE -> {}
                 }
             }.launchIn(lifecycleScope)
         }
