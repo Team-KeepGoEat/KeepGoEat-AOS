@@ -8,6 +8,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="processState"
+            type="org.keepgoeat.presentation.type.ProcessState" />
+
+        <variable
             name="viewModel"
             type="org.keepgoeat.presentation.home.HomeViewModel" />
     </data>
@@ -46,7 +50,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:lottie_autoPlay="false"
                 app:lottie_rawRes="@raw/home_background"
-                app:visibility="@{viewModel.achievedState}" />
+                app:visibility="@{viewModel.lottieState != processState.IDLE}" />
 
             <ImageView
                 android:id="@+id/iv_home_snail"
@@ -54,10 +58,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing16"
                 android:layout_marginTop="32dp"
-                android:visibility="@{!viewModel.achievedState ? View.VISIBLE : View.INVISIBLE}"
+                android:src="@drawable/ic_snail_orange_cheer_right"
+                android:visibility="@{viewModel.lottieState == processState.IDLE ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
-                app:srcCompat="@drawable/ic_snail_orange_cheer_right" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_my_page" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottie_snail"
@@ -69,7 +73,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_my_page"
                 app:lottie_autoPlay="false"
                 app:lottie_rawRes="@raw/home_snail"
-                app:visibility="@{viewModel.achievedState}" />
+                app:visibility="@{viewModel.lottieState != processState.IDLE}"
+                tools:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/iv_my_page"

@@ -3,7 +3,11 @@ package org.keepgoeat.presentation.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.domain.model.HomeGoal
@@ -11,6 +15,7 @@ import org.keepgoeat.presentation.detail.GoalDetailActivity
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.EatingType
+import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
@@ -27,7 +32,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
         initLayout()
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun addListeners() {
@@ -50,20 +55,25 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         }
     }
 
-    private fun addObservers() {
-        viewModel.goalList.observe(this) { goalList -> // EventObserver
+    private fun collectData() {
+        viewModel.goalList.flowWithLifecycle(lifecycle).onEach { goalList ->
             goalAdapter.submitList(goalList.toMutableList())
-        }
-        viewModel.goalCount.observe(this) { goalCount ->
-            if (goalCount == 0)
-                binding.ivHomeSnail.setImageResource(R.drawable.ic_snail_orange_hungry)
-        }
-        viewModel.achievedState.observe(this) { isAchieved ->
-            if (isAchieved) {
-                binding.lottieSnail.playAnimation()
-                binding.lottieBackground.playAnimation()
+        }.launchIn(lifecycleScope)
+        viewModel.goalCount.flowWithLifecycle(lifecycle).onEach { goalCount ->
+            if (goalCount > 0)
+                binding.ivHomeSnail.setImageResource(R.drawable.ic_snail_orange_cheer_right)
+        }.launchIn(lifecycleScope)
+        viewModel.lottieState.flowWithLifecycle(lifecycle).onEach { lottieState ->
+            when (lottieState) {
+                ProcessState.IN_PROGRESS -> {
+                    binding.lottieSnail.playAnimation()
+                    binding.lottieBackground.playAnimation()
+                    viewModel.changeLottieState(ProcessState.DONE)
+                }
+                ProcessState.IDLE -> {}
+                ProcessState.DONE -> {}
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showMakeGoalDialog() {

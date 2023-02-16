@@ -7,11 +7,10 @@ import org.keepgoeat.data.model.response.ResponseHome
 import org.keepgoeat.domain.model.GoalDetail
 
 interface GoalRepository {
-    suspend fun fetchHomeEntireData(): ResponseHome.HomeData?
     suspend fun achieveGoal(
         goalId: Int,
         isAchieved: Boolean
-    ): ResponseGoalAchievement.ResponseGoalAchievementData?
+    ): Result<ResponseGoalAchievement.ResponseGoalAchievementData>
 
     suspend fun uploadGoalContent(
         title: String,
@@ -23,6 +22,7 @@ interface GoalRepository {
         title: String
     ): Result<Int>
 
+    suspend fun fetchHomeEntireData(): Result<ResponseHome.HomeData>
     suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail>
     suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData>
     suspend fun deleteGoal(id: Int): Result<ResponseGoalDeleted.ResponseGoalDeletedData>
