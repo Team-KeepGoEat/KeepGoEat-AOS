@@ -73,7 +73,7 @@ class GoalSettingActivity :
             showKeyboard(it, false)
             binding.etGoal.clearFocus()
         }
-        binding.ivBack.setOnClickListener {
+        binding.viewToolbar.ivBack.setOnClickListener {
             finish()
         }
         binding.btnComplete.setOnSingleClickListener {

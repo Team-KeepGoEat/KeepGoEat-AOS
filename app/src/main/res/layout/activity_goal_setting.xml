@@ -19,33 +19,10 @@
         android:layout_height="match_parent"
         tools:context=".presentation.setting.GoalSettingActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_toolbar"
-            style="@style/Widget.Toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/goal_setting"
-                android:textAppearance="@style/TextAppearance.System4_Bold"
-                android:textColor="@color/gray_700"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/view_toolbar"
+            layout="@layout/view_toolbar"
+            app:title="@{context.getString(R.string.goal_setting)}" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_start"
@@ -70,7 +47,7 @@
             android:textAppearance="@style/TextAppearance.System2_Bold"
             android:textColor="@color/gray_700"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/view_toolbar" />
 
         <EditText
             android:id="@+id/et_goal"

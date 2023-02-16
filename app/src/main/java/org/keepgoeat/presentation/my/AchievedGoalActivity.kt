@@ -62,7 +62,7 @@ class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layo
     }
 
     private fun addListeners() {
-        binding.ivBack.setOnClickListener {
+        binding.viewToolbar.ivBack.setOnClickListener {
             moveToPrevious()
         }
     }
