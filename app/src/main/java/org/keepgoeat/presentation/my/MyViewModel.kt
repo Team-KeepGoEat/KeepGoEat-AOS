@@ -29,10 +29,6 @@ class MyViewModel @Inject constructor(
     val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
 
-    init {
-        fetchAchievedGoalBySort(SortType.ALL)
-    }
-
     fun fetchAchievedGoalBySort(sortType: SortType) {
         viewModelScope.launch {
             myRepository.fetchMyData(sortType.name.lowercase())

@@ -34,7 +34,7 @@ class AuthRepositoryImpl @Inject constructor(
             authDataSource.deleteAccount()
         }.onSuccess {
             Timber.d("회원 탈퇴 성공")
-            localStorage.clear()
+            localStorage.clear(true)
         }.onFailure {
             Timber.e(it.message)
         }
