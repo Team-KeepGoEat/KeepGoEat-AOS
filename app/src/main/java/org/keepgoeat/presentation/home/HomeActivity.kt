@@ -23,7 +23,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        if (intent.getBooleanExtra(KILL_HOME_AND_GO_TO_SIGN, false)) moveToSign()
+        if (intent.getBooleanExtra(ARG_KILL_HOME_AND_GO_TO_SIGN, false)) moveToSign()
 
         initLayout()
         addListeners()
@@ -92,6 +92,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     companion object {
-        const val KILL_HOME_AND_GO_TO_SIGN = "killHomeAndGoToSign"
+        const val ARG_KILL_HOME_AND_GO_TO_SIGN = "killHomeAndGoToSign"
     }
 }

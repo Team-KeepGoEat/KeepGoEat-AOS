@@ -13,7 +13,7 @@ import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivityAccountInfoBinding
 import org.keepgoeat.presentation.home.HomeActivity
-import org.keepgoeat.presentation.home.HomeActivity.Companion.KILL_HOME_AND_GO_TO_SIGN
+import org.keepgoeat.presentation.home.HomeActivity.Companion.ARG_KILL_HOME_AND_GO_TO_SIGN
 import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
@@ -84,7 +84,7 @@ class AccountInfoActivity :
     private fun moveToSign() {
         Intent(this, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra(KILL_HOME_AND_GO_TO_SIGN, true)
+            putExtra(ARG_KILL_HOME_AND_GO_TO_SIGN, true)
         }.also {
             startActivity(it)
         }
