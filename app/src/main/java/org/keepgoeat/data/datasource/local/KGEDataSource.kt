@@ -56,17 +56,25 @@ class KGEDataSource @Inject constructor(@ApplicationContext context: Context) {
         get() = safeValueOf<SocialLoginType>(dataStore.getString(LOGIN_PLATFORM, ""))
             ?: SocialLoginType.NONE
 
-    fun clear() {
+    /** 로그아웃 및 회원 탈퇴 시 유저의 데이터를 삭제하는 함수 (단, 로그아웃의 경우 IS_CLICKED_ONBOARDING_BUTTON은 제외하고 삭제한다. 재로그인 시 온보딩 띄우기를 방지하기 위함)*/
+    fun clear(isWithdrawal: Boolean = false) {
         dataStore.edit {
-            clear()
+            if (isWithdrawal) {
+                clear()
+            } else {
+                remove(ACCESS_TOKEN)
+                remove(REFRESH_TOKEN)
+                remove(IS_LOGIN)
+                remove(LOGIN_PLATFORM)
+            }
         }
     }
 
     companion object {
         const val FILE_NAME = "signSharedPreferences"
         const val ACCESS_TOKEN = "accessToken"
-        const val IS_LOGIN = "isLogin"
         const val REFRESH_TOKEN = "refreshToken"
+        const val IS_LOGIN = "isLogin"
         const val IS_CLICKED_ONBOARDING_BUTTON = "isClickedOnboardingButton"
         const val LOGIN_PLATFORM = "loginPlatform"
     }
