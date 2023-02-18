@@ -22,6 +22,7 @@ class GoalSettingViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
 ) : ViewModel() {
     val goalTitle = MutableStateFlow<String>("")
+    val goalCriterion = MutableStateFlow<String>("")
     private val _eatingType = MutableStateFlow<EatingType?>(null)
     val eatingType get() = _eatingType.asStateFlow()
     var goalId: Int? = null
@@ -29,6 +30,11 @@ class GoalSettingViewModel @Inject constructor(
     val isValidTitle: StateFlow<Boolean>
         get() = goalTitle.map { title ->
             title.length in 1..15 && title.isNotBlank() && title.matches(TITLE_PATTERN.toRegex())
+        }.toStateFlow(viewModelScope, false)
+
+    val isValidCriterion: StateFlow<Boolean>
+        get() = goalCriterion.map { criterion ->
+            criterion.length in 1..20 && criterion.isNotBlank() && criterion.matches(TITLE_PATTERN.toRegex())
         }.toStateFlow(viewModelScope, false)
 
     private val _uploadState = MutableStateFlow<UiState<Int>>(UiState.Loading)
