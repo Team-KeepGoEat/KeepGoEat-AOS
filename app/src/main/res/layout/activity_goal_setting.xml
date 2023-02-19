@@ -57,8 +57,7 @@
             android:textAppearance="@style/TextAppearance.System2_Bold"
             android:textColor="@color/orange_600"
             app:layout_constraintBottom_toBottomOf="@+id/tv_goal_title"
-            app:layout_constraintStart_toEndOf="@id/tv_goal_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_goal_title" />
+            app:layout_constraintStart_toEndOf="@id/tv_goal_title" />
 
 
         <EditText
