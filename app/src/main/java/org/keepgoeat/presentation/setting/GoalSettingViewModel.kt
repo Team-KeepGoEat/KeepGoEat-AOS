@@ -3,10 +3,7 @@ package org.keepgoeat.presentation.setting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.presentation.model.GoalContent
@@ -36,6 +33,10 @@ class GoalSettingViewModel @Inject constructor(
         get() = goalCriterion.map { criterion ->
             criterion.length in 1..20 && criterion.isNotBlank() && criterion.matches(TITLE_PATTERN.toRegex())
         }.toStateFlow(viewModelScope, false)
+
+    val isEnabledCompleteButton: StateFlow<Boolean> = combine(isValidTitle, isValidCriterion) { title, criterion ->
+        title && criterion
+    }.toStateFlow(viewModelScope, false)
 
     private val _uploadState = MutableStateFlow<UiState<Int>>(UiState.Loading)
     val uploadState: StateFlow<UiState<Int>> get() = _uploadState
