@@ -4,7 +4,7 @@ import android.content.Context
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
-import org.keepgoeat.domain.model.UserInfo
+import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.presentation.type.SocialLoginType
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,7 +16,7 @@ class KakaoAuthService @Inject constructor(
     private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
 
-    fun loginKakao(loginListener: ((SocialLoginType, String, UserInfo) -> Unit)) {
+    fun loginKakao(loginListener: ((SocialLoginType, String, AccountInfo) -> Unit)) {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) handleLoginError(error)
             else if (token != null) handleLoginSuccess(token, loginListener)
@@ -33,7 +33,7 @@ class KakaoAuthService @Inject constructor(
 
     private fun handleLoginSuccess(
         oAuthToken: OAuthToken,
-        loginListener: ((SocialLoginType, String, UserInfo) -> Unit),
+        loginListener: ((SocialLoginType, String, AccountInfo) -> Unit),
     ) {
         client.me { user, error ->
             Timber.d(oAuthToken.accessToken)
@@ -44,7 +44,7 @@ class KakaoAuthService @Inject constructor(
                 loginListener(
                     SocialLoginType.KAKAO,
                     oAuthToken.accessToken,
-                    UserInfo(user.kakaoAccount?.name ?: "", user.kakaoAccount?.email ?: "")
+                    AccountInfo(user.kakaoAccount?.name ?: "", user.kakaoAccount?.email ?: "")
                 )
             }
         }
