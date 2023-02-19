@@ -33,7 +33,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- TODO 유저 이름 및 이메일 불러오기 -->
                 <TextView
                     android:id="@+id/tv_user_name"
                     android:layout_width="wrap_content"
@@ -42,7 +41,7 @@
                     android:layout_marginStart="@dimen/spacing16"
                     android:layout_marginTop="28dp"
                     android:gravity="center_vertical"
-                    android:text="user214"
+                    android:text="@{viewModel.userName}"
                     android:textAppearance="@style/TextAppearance.System3_Bold"
                     android:textColor="@color/gray_800"
                     app:drawableEndCompat="@drawable/ic_detail"
@@ -53,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing16"
-                    android:text="keepgoeat@kakao.com"
+                    android:text="@{viewModel.userEmail}"
                     android:textAppearance="@style/TextAppearance.System5"
                     android:textColor="@color/gray_600"
                     tools:text="keepgoeat@kakao.com" />

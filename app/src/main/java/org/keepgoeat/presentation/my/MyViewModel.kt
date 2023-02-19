@@ -28,6 +28,8 @@ class MyViewModel @Inject constructor(
         MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
+    val userName = localStorage.userName
+    val userEmail = localStorage.userEmail
 
     fun fetchAchievedGoalBySort(sortType: SortType) {
         viewModelScope.launch {

@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.data.model.request.RequestAuth
+import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.util.UiState
@@ -22,8 +23,10 @@ class SignViewModel @Inject constructor(
     private var _loginUiState = MutableStateFlow<UiState<Pair<Boolean, Boolean>>>(UiState.Loading)
     val loginUiState get() = _loginUiState.asStateFlow()
 
-    fun login(loginPlatForm: SocialLoginType, accessToken: String) {
+    fun login(loginPlatForm: SocialLoginType, accessToken: String, accountInfo: AccountInfo) {
         localStorage.loginPlatform = loginPlatForm
+        localStorage.userName = accountInfo.name
+        localStorage.userEmail = accountInfo.email
         viewModelScope.launch {
             authRepository.login(
                 RequestAuth(accessToken, loginPlatForm.name)
