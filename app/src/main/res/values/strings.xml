@@ -66,11 +66,16 @@
     <!-- Goal Setting -->
     <string name="goal_setting">목표 입력</string>
     <string name="goal_setting_title">나의 목표를 입력해 볼까요?</string>
-    <string name="goal_setting_title_hint_for_more">ex) 하루 1끼 이상 야채</string>
-    <string name="goal_setting_title_hint_for_less">ex) 라면</string>
+    <string name="goal_setting_title_hint_for_more">ex) 물</string>
+    <string name="goal_setting_title_hint_for_less">ex) 커피</string>
     <string name="goal_setting_title_length_guide">목표는 최소 1글자 이상 입력해주세요.</string>
     <string name="goal_setting_title_language_guide">한글, 영문, 숫자만 입력 가능합니다.</string>
     <string name="goal_setting_title_length_limit">(%d/15)</string>
+    <string name="goal_setting_criterion">목표 달성 기준을 세워볼까요?</string>
+    <string name="goal_setting_criterion_description">나에게 맞는 달성 기준을 세워요.</string>
+    <string name="goal_setting_criterion_title_hint_for_more">ex) 하루에 2L씩 마시기</string>
+    <string name="goal_setting_criterion_title_hint_for_less">ex) 아침에 딱 1잔만 마시기</string>
+    <string name="goal_setting_criterion_length_limit">(%d/20)</string>
     <string name="goal_setting_success_edit_toast_message">목표가 수정되었습니다.</string>
     <string name="goal_setting_success_add_toast_message">목표가 추가되었습니다.</string>
 
