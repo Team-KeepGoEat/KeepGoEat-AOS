@@ -38,7 +38,7 @@ class KakaoAuthService @Inject constructor(
         client.me { user, error ->
             Timber.d(oAuthToken.accessToken)
             if (error != null) {
-                Timber.e("kakao 사용자 정보 요청 실패 ${error}")
+                Timber.e("kakao 사용자 정보 요청 실패 $error")
             } else if (user != null) {
                 Timber.d("kakao 사용자 정보 요청 성공\n이메일 : ${user.kakaoAccount?.email}\n이름 : ${user.kakaoAccount?.name}")
                 loginListener(

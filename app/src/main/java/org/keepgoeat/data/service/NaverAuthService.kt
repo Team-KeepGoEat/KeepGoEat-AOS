@@ -59,7 +59,7 @@ class NaverAuthService @Inject constructor(
             }
 
             override fun onFailure(httpStatus: Int, message: String) {
-                Timber.i("Error : ${httpStatus}, message : $message")
+                Timber.i("Error : $httpStatus, message : $message")
             }
 
             override fun onError(errorCode: Int, message: String) {
