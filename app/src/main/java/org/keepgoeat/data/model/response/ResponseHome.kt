@@ -20,7 +20,8 @@ data class ResponseHome(
     ) {
         @Serializable
         data class Goal(
-            val goalContent: String,
+            val food: String,
+            val criterion: String,
             val goalId: Int,
             val isAchieved: Boolean,
             val isMore: Boolean,
@@ -35,7 +36,7 @@ data class ResponseHome(
         fun toHomeGoal() = goals.map { goal ->
             HomeGoal(
                 goal.goalId,
-                goal.goalContent,
+                goal.food + " " + goal.criterion,
                 goal.isMore,
                 goal.isAchieved,
                 goal.thisMonthCount,
