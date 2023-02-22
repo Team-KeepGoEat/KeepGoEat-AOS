@@ -23,10 +23,8 @@ class SignViewModel @Inject constructor(
     private var _loginUiState = MutableStateFlow<UiState<Pair<Boolean, Boolean>>>(UiState.Loading)
     val loginUiState get() = _loginUiState.asStateFlow()
 
-    fun login(loginPlatForm: SocialLoginType, accessToken: String, accountInfo: AccountInfo) {
+    fun login(loginPlatForm: SocialLoginType, accessToken: String) {
         localStorage.loginPlatform = loginPlatForm
-        localStorage.userName = accountInfo.name
-        localStorage.userEmail = accountInfo.email
         viewModelScope.launch {
             authRepository.login(
                 RequestAuth(accessToken, loginPlatForm.name)
@@ -38,6 +36,11 @@ class SignViewModel @Inject constructor(
                 _loginUiState.value = UiState.Error(it.message)
             }
         }
+    }
+
+    fun saveAccount(accountInfo: AccountInfo) {
+        localStorage.userName = accountInfo.name
+        localStorage.userEmail = accountInfo.email
     }
 
     companion object {

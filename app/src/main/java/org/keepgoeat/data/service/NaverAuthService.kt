@@ -23,12 +23,16 @@ class NaverAuthService @Inject constructor(
         )
     }
 
-    fun loginNaver(loginListener: ((SocialLoginType, String, AccountInfo) -> Unit)) {
+    fun loginNaver(
+        loginListener: ((SocialLoginType, String) -> Unit),
+        accountListener: (AccountInfo) -> Unit
+    ) {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
                 val accessToken = requireNotNull(NaverIdLoginSDK.getAccessToken())
                 Timber.d(accessToken)
-                getAccountInfo(accessToken, loginListener)
+                loginListener(SocialLoginType.NAVER, accessToken)
+                getAccountInfo(accountListener)
             }
 
             override fun onFailure(httpStatus: Int, message: String) {
@@ -45,16 +49,14 @@ class NaverAuthService @Inject constructor(
         )
     }
 
-    fun getAccountInfo(
-        accessToken: String,
-        loginListener: ((SocialLoginType, String, AccountInfo) -> Unit)
-    ) {
+    fun getAccountInfo(accountListener: (AccountInfo) -> Unit) {
         NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
             override fun onSuccess(result: NidProfileResponse) {
-                loginListener(
-                    SocialLoginType.NAVER,
-                    accessToken,
-                    AccountInfo(result.profile?.name ?: "", result.profile?.email ?: "")
+                accountListener(
+                    AccountInfo(
+                        result.profile?.name ?: "",
+                        result.profile?.email ?: ""
+                    )
                 )
             }
 
