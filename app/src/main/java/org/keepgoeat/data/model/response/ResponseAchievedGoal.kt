@@ -2,6 +2,7 @@ package org.keepgoeat.data.model.response
 
 import kotlinx.serialization.Serializable
 import org.keepgoeat.domain.model.AchievedGoal
+import org.keepgoeat.presentation.type.EatingType
 
 @Serializable
 data class ResponseAchievedGoal(
@@ -33,7 +34,7 @@ data class ResponseAchievedGoal(
             AchievedGoal(
                 goal.goalId,
                 "${goal.food} ${goal.criterion}",
-                goal.isMore,
+                if (goal.isMore) EatingType.MORE else EatingType.LESS,
                 goal.startedAt,
                 goal.keptAt,
                 goal.totalCount

@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="eatingType"
-            type="org.keepgoeat.presentation.type.EatingType" />
-
-        <variable
             name="goal"
             type="org.keepgoeat.domain.model.AchievedGoal" />
     </data>
@@ -32,19 +28,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:eatingType="@{eatingType}" />
+            app:eatingType="@{goal.eatingType}"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tv_item_goal_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
-            android:text="@{String.format(context.getString(eatingType.titleStrRes), goal.goalContent)}"
+            android:layout_marginEnd="60dp"
+            android:maxLines="2"
+            android:text="@{String.format(context.getString(goal.eatingType.titleStrRes), goal.goalContent)}"
             android:textAppearance="@style/TextAppearance.System2_Bold"
             android:textColor="@color/gray_800"
-            android:maxLines="2"
-            android:layout_marginEnd="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_eating_tag"
@@ -67,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing8"
             android:fontFamily="@font/pretendard_b"
-            android:textColor="@{context.getColor(eatingType.achievedGoalDayTextColor)}"
+            android:textColor="@{context.getColor(goal.eatingType.achievedGoalDayTextColor)}"
             android:textSize="40dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_total_achievement_day"
             app:layout_constraintStart_toEndOf="@+id/tv_total_achievement_day"
