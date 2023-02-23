@@ -6,7 +6,7 @@ import org.keepgoeat.data.model.request.RequestGoalContent
 import org.keepgoeat.data.model.request.RequestGoalContentTitle
 import org.keepgoeat.data.model.response.*
 import org.keepgoeat.domain.model.GoalDetail
-import org.keepgoeat.domain.model.MyGoal
+import org.keepgoeat.domain.model.AchievedGoal
 import org.keepgoeat.domain.repository.GoalRepository
 import javax.inject.Inject
 
@@ -44,7 +44,7 @@ class GoalRepositoryImpl @Inject constructor(
             goalDataSource.fetchGoalDetail(goalId).data.toGoalDetail()
         }
 
-    override suspend fun fetchAchievedGoal(sortType: String): Result<List<MyGoal>> =
+    override suspend fun fetchAchievedGoal(sortType: String): Result<List<AchievedGoal>> =
         runCatching {
             goalDataSource.fetchAchievedGoal(sortType).data.toMyGoal()
         }

@@ -15,7 +15,7 @@ class GoalDataSource @Inject constructor(
 
     suspend fun fetchGoalDetail(id: Int): ResponseGoalDetail = goalService.fetchGoalDetail(id)
 
-    suspend fun fetchAchievedGoal(sortType: String): ResponseMy =
+    suspend fun fetchAchievedGoal(sortType: String): ResponseAchievedGoal =
         goalService.fetchAchievedGoal(sortType)
 
     suspend fun uploadGoalContent(requestGoalContent: RequestGoalContent): ResponseGoalContent =

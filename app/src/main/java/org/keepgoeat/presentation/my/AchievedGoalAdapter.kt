@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.databinding.ItemAchievedGoalBinding
-import org.keepgoeat.domain.model.MyGoal
+import org.keepgoeat.domain.model.AchievedGoal
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.ItemDiffCallback
 
 class AchievedGoalAdapter :
-    ListAdapter<MyGoal, AchievedGoalAdapter.MyGoalViewHolder>(
-        ItemDiffCallback<MyGoal>(
+    ListAdapter<AchievedGoal, AchievedGoalAdapter.MyGoalViewHolder>(
+        ItemDiffCallback<AchievedGoal>(
             onContentsTheSame = { old, new -> old == new },
             onItemsTheSame = { old, new -> old.id == new.id }
         )
@@ -21,7 +21,7 @@ class AchievedGoalAdapter :
     class MyGoalViewHolder(private val binding: ItemAchievedGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            data: MyGoal,
+            data: AchievedGoal,
             eatingType: EatingType,
         ) {
             binding.goal = data

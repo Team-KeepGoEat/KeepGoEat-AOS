@@ -2,7 +2,7 @@ package org.keepgoeat.domain.repository
 
 import org.keepgoeat.data.model.response.*
 import org.keepgoeat.domain.model.GoalDetail
-import org.keepgoeat.domain.model.MyGoal
+import org.keepgoeat.domain.model.AchievedGoal
 
 interface GoalRepository {
     suspend fun achieveGoal(
@@ -22,7 +22,7 @@ interface GoalRepository {
 
     suspend fun fetchHomeEntireData(): Result<ResponseHome.HomeData>
     suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail>
-    suspend fun fetchAchievedGoal(sortType: String): Result<List<MyGoal>>
+    suspend fun fetchAchievedGoal(sortType: String): Result<List<AchievedGoal>>
     suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData>
     suspend fun deleteGoal(id: Int): Result<ResponseGoalDeleted.ResponseGoalDeletedData>
 }

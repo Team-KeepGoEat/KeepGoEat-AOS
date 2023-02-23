@@ -11,7 +11,7 @@
 
         <variable
             name="goal"
-            type="org.keepgoeat.domain.model.MyGoal" />
+            type="org.keepgoeat.domain.model.AchievedGoal" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
