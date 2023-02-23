@@ -38,7 +38,6 @@ class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layo
         binding.lifecycleOwner = this
 
         isEnteredFromKeep = intent.getBooleanExtra(ARG_IS_ENTERED_FROM_KEEP, false)
-        viewModel.fetchAchievedGoalBySort(SortType.ALL)
 
         initLayout()
         addListeners()
