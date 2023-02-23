@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class GoalContent(
     val id: Int,
-    val goalTitle: String,
+    val food: String,
+    val criterion: String
 ) : Parcelable

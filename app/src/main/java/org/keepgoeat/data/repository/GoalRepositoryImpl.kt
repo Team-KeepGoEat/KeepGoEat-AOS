@@ -25,18 +25,20 @@ class GoalRepositoryImpl @Inject constructor(
     }
 
     override suspend fun uploadGoalContent(
-        title: String,
+        food: String,
+        criterion: String,
         isMore: Boolean,
     ): Result<Int> =
         runCatching {
-            goalDataSource.uploadGoalContent(RequestGoalContent(title, isMore)).data.id
+            goalDataSource.uploadGoalContent(RequestGoalContent(food, criterion, isMore)).data.id
         }
 
     override suspend fun editGoalContent(
         id: Int,
-        title: String,
+        food: String,
+        criterion: String
     ): Result<Int> = runCatching {
-        goalDataSource.editGoalContent(id, RequestGoalContentTitle(title)).data.id
+        goalDataSource.editGoalContent(id, RequestGoalContentTitle(food, criterion)).data.id
     }
 
     override suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail> =

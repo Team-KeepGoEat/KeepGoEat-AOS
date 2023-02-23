@@ -19,16 +19,18 @@ data class ResponseGoalDetail(
         val isMore: Boolean,
         val thisMonthCount: Int,
         val lastMonthCount: Int,
-        val goalContent: String,
         val blankBoxCount: Int,
         val emptyBoxCount: Int,
+        val food: String,
+        val criterion: String
     ) {
         fun toGoalDetail() = GoalDetail(
             id = id,
             eatingType = if (isMore) EatingType.MORE else EatingType.LESS,
             thisMonthCount = thisMonthCount,
             lastMonthCount = lastMonthCount,
-            goalTitle = goalContent
+            food = food,
+            criterion = criterion
         )
     }
 }

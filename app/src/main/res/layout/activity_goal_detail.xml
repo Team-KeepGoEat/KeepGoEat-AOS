@@ -93,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
-            android:text="@{@string/goal_detail_title(viewModel.goalDetail.goalTitle, viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.strRes))}"
+            android:text="@{@string/goal_detail_title(viewModel.goalDetail.food, viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.strRes))}"
             android:textAppearance="@style/TextAppearance.System2_Bold"
             android:textColor="@color/gray_800"
             app:layout_constraintEnd_toEndOf="@id/gl_end"

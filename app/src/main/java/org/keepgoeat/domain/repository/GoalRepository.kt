@@ -11,13 +11,15 @@ interface GoalRepository {
     ): Result<ResponseGoalAchievement.ResponseGoalAchievementData>
 
     suspend fun uploadGoalContent(
-        title: String,
+        food: String,
+        criterion: String,
         isMore: Boolean
     ): Result<Int>
 
     suspend fun editGoalContent(
         id: Int,
-        title: String
+        food: String,
+        criterion: String
     ): Result<Int>
 
     suspend fun fetchHomeEntireData(): Result<ResponseHome.HomeData>
