@@ -9,7 +9,7 @@ import org.keepgoeat.domain.model.AchievedGoal
 import org.keepgoeat.util.ItemDiffCallback
 
 class AchievedGoalAdapter :
-    ListAdapter<AchievedGoal, AchievedGoalAdapter.MyGoalViewHolder>(
+    ListAdapter<AchievedGoal, AchievedGoalAdapter.AchievedGoalViewHolder>(
         ItemDiffCallback<AchievedGoal>(
             onContentsTheSame = { old, new -> old == new },
             onItemsTheSame = { old, new -> old.id == new.id }
@@ -17,21 +17,21 @@ class AchievedGoalAdapter :
     ) {
     private lateinit var inflater: LayoutInflater
 
-    class MyGoalViewHolder(private val binding: ItemAchievedGoalBinding) :
+    class AchievedGoalViewHolder(private val binding: ItemAchievedGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: AchievedGoal) {
             binding.goal = data
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyGoalViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AchievedGoalViewHolder {
         if (!::inflater.isInitialized)
             inflater = LayoutInflater.from(parent.context)
 
-        return MyGoalViewHolder(ItemAchievedGoalBinding.inflate(inflater, parent, false))
+        return AchievedGoalViewHolder(ItemAchievedGoalBinding.inflate(inflater, parent, false))
     }
 
-    override fun onBindViewHolder(holder: MyGoalViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AchievedGoalViewHolder, position: Int) {
         holder.onBind(currentList[position])
     }
 }
