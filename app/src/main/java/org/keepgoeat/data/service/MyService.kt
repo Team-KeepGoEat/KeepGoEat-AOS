@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MyService {
-    @GET("mypage")
+    @GET("goal/kept")
     suspend fun fetchMyData(
         @Query("sort") value: String,
     ): ResponseMy

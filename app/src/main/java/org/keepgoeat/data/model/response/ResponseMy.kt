@@ -8,30 +8,31 @@ data class ResponseMy(
     val status: Int,
     val success: Boolean,
     val message: String,
-    val data: MyData
+    val data: MyData,
 ) {
     @Serializable
     data class MyData(
         val goals: List<GoalInfo>,
-        val goalCount: Int
+        val goalCount: Int,
     ) {
         @Serializable
         data class GoalInfo(
             val goalId: Int,
-            val goalContent: String,
+            val food: String,
+            val criterion: String,
             val isMore: Boolean,
             val isOngoing: Boolean,
             val writerId: Int,
             val totalCount: Int,
             val startedAt: String,
             val keptAt: String?,
-            val isAchieved: Boolean
+            val isAchieved: Boolean,
         )
 
         fun toMyGoal() = goals.map { goal ->
             MyGoal(
                 goal.goalId,
-                goal.goalContent,
+                "${goal.food} ${goal.criterion}",
                 goal.isMore,
                 goal.startedAt,
                 goal.keptAt,
