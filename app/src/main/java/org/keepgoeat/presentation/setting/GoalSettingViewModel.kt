@@ -50,6 +50,7 @@ class GoalSettingViewModel @Inject constructor(
         viewModelScope.launch {
             goalRepository.uploadGoalContent(
                 goalTitle.value.trim(),
+                goalCriterion.value.trim(),
                 eatingType.value == EatingType.MORE
             ).onSuccess {
                 _uploadState.value = UiState.Success(it)
@@ -80,7 +81,8 @@ class GoalSettingViewModel @Inject constructor(
 
     fun setGoalContent(goal: GoalContent) {
         goalId = goal.id
-        goalTitle.value = goal.goalTitle
+        goalTitle.value = goal.food
+        goalCriterion.value = goal.criterion
     }
 
     companion object {
