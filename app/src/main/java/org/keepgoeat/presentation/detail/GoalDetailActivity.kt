@@ -82,7 +82,7 @@ class GoalDetailActivity :
         }
         binding.ivEdit.setOnClickListener {
             viewModel.goalDetail.value?.let { detail ->
-                val content = GoalContent(detail.id, detail.goalTitle)
+                val content = GoalContent(detail.id, detail.food, detail.criterion)
                 Intent(this, GoalSettingActivity::class.java).apply {
                     putExtra(ARG_GOAL_CONTENT, content)
                     putExtra(ARG_EATING_TYPE, detail.eatingType.name)
