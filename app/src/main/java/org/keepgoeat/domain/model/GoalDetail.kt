@@ -7,5 +7,6 @@ data class GoalDetail(
     val eatingType: EatingType,
     val thisMonthCount: Int,
     val lastMonthCount: Int,
-    val goalTitle: String,
+    val food: String,
+    val criterion: String
 )
