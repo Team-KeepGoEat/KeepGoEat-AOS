@@ -36,10 +36,10 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
 
     private fun addListeners() {
         binding.layoutKakaoSignIn.setOnClickListener {
-            kakaoSignService.loginKakao(viewModel::login)
+            kakaoSignService.loginKakao(viewModel::login, viewModel::saveAccount)
         }
         binding.layoutNaverSignIn.setOnClickListener {
-            naverSignService.loginNaver(viewModel::login)
+            naverSignService.loginNaver(viewModel::login, viewModel::saveAccount)
         }
     }
 

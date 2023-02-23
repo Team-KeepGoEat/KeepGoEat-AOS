@@ -4,8 +4,11 @@ import android.content.Context
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.navercorp.nid.profile.NidProfileCallback
+import com.navercorp.nid.profile.data.NidProfileResponse
 import dagger.hilt.android.qualifiers.ActivityContext
 import org.keepgoeat.BuildConfig
+import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.presentation.type.SocialLoginType
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,12 +23,16 @@ class NaverAuthService @Inject constructor(
         )
     }
 
-    fun loginNaver(loginListener: ((SocialLoginType, String) -> Unit)) {
+    fun loginNaver(
+        loginListener: ((SocialLoginType, String) -> Unit),
+        accountListener: (AccountInfo) -> Unit
+    ) {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
                 val accessToken = requireNotNull(NaverIdLoginSDK.getAccessToken())
                 Timber.d(accessToken)
                 loginListener(SocialLoginType.NAVER, accessToken)
+                getAccountInfo(accountListener)
             }
 
             override fun onFailure(httpStatus: Int, message: String) {
@@ -40,6 +47,27 @@ class NaverAuthService @Inject constructor(
         NaverIdLoginSDK.authenticate(
             context, oauthLoginCallback
         )
+    }
+
+    fun getAccountInfo(accountListener: (AccountInfo) -> Unit) {
+        NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
+            override fun onSuccess(result: NidProfileResponse) {
+                accountListener(
+                    AccountInfo(
+                        result.profile?.name ?: "",
+                        result.profile?.email ?: ""
+                    )
+                )
+            }
+
+            override fun onFailure(httpStatus: Int, message: String) {
+                Timber.i("Error : $httpStatus, message : $message")
+            }
+
+            override fun onError(errorCode: Int, message: String) {
+                onFailure(errorCode, message)
+            }
+        })
     }
 
     fun logoutNaver(logoutListener: (() -> Unit)) {

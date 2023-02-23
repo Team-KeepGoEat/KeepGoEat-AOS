@@ -4,6 +4,7 @@ import android.content.Context
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
+import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.presentation.type.SocialLoginType
 import timber.log.Timber
 import javax.inject.Inject
@@ -15,10 +16,13 @@ class KakaoAuthService @Inject constructor(
     private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
 
-    fun loginKakao(loginListener: ((SocialLoginType, String) -> Unit)) {
+    fun loginKakao(
+        loginListener: ((SocialLoginType, String) -> Unit),
+        accountListener: ((AccountInfo) -> Unit)
+    ) {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) handleLoginError(error)
-            else if (token != null) handleLoginSuccess(token, loginListener)
+            else if (token != null) handleLoginSuccess(token, loginListener, accountListener)
         }
 
         if (isKakaoTalkLoginAvailable) client.loginWithKakaoTalk(context, callback = callback)
@@ -33,10 +37,21 @@ class KakaoAuthService @Inject constructor(
     private fun handleLoginSuccess(
         oAuthToken: OAuthToken,
         loginListener: ((SocialLoginType, String) -> Unit),
+        accountListener: ((AccountInfo) -> Unit),
     ) {
-        client.me { _, _ ->
+        client.me { user, error ->
             Timber.d(oAuthToken.accessToken)
             loginListener(SocialLoginType.KAKAO, oAuthToken.accessToken)
+            if (error != null) Timber.e("kakao 사용자 정보 요청 실패 $error")
+            else if (user != null) {
+                Timber.d("kakao 사용자 정보 요청 성공\n이메일 : ${user.kakaoAccount?.email}\n이름 : ${user.kakaoAccount?.name}")
+                accountListener(
+                    AccountInfo(
+                        user.kakaoAccount?.name ?: "",
+                        user.kakaoAccount?.email ?: ""
+                    )
+                )
+            }
         }
     }
 

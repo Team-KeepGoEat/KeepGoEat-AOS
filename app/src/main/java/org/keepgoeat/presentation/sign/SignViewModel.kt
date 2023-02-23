@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.data.model.request.RequestAuth
+import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.util.UiState
@@ -35,6 +36,11 @@ class SignViewModel @Inject constructor(
                 _loginUiState.value = UiState.Error(it.message)
             }
         }
+    }
+
+    fun saveAccount(accountInfo: AccountInfo) {
+        localStorage.userName = accountInfo.name
+        localStorage.userEmail = accountInfo.email
     }
 
     companion object {
