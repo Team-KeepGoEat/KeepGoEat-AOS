@@ -9,15 +9,15 @@ import kotlinx.coroutines.launch
 import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.domain.model.MyGoal
 import org.keepgoeat.domain.repository.AuthRepository
-import org.keepgoeat.domain.repository.MyRepository
+import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import javax.inject.Inject
 
 @HiltViewModel
 class MyViewModel @Inject constructor(
-    private val myRepository: MyRepository,
     private val authRepository: AuthRepository,
+    private val goalRepository: GoalRepository,
     private val localStorage: KGEDataSource,
 ) : ViewModel() {
     private val _achievedGoalUiState = MutableStateFlow<UiState<List<MyGoal>>>(UiState.Loading)
@@ -39,7 +39,7 @@ class MyViewModel @Inject constructor(
 
     fun fetchAchievedGoalBySort(sortType: SortType) {
         viewModelScope.launch {
-            myRepository.fetchMyData(sortType.name.lowercase())
+            goalRepository.fetchAchievedGoal(sortType.name.lowercase())
                 .onSuccess {
                     _achievedGoalUiState.value = UiState.Success(it)
                     _achievedGoalCount.value = it.size

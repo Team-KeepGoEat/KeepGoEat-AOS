@@ -4,11 +4,9 @@ import org.keepgoeat.data.datasource.remote.GoalDataSource
 import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
 import org.keepgoeat.data.model.request.RequestGoalContentTitle
-import org.keepgoeat.data.model.response.ResponseGoalAchievement
-import org.keepgoeat.data.model.response.ResponseGoalDeleted
-import org.keepgoeat.data.model.response.ResponseGoalKeep
-import org.keepgoeat.data.model.response.ResponseHome
+import org.keepgoeat.data.model.response.*
 import org.keepgoeat.domain.model.GoalDetail
+import org.keepgoeat.domain.model.MyGoal
 import org.keepgoeat.domain.repository.GoalRepository
 import javax.inject.Inject
 
@@ -21,7 +19,7 @@ class GoalRepositoryImpl @Inject constructor(
 
     override suspend fun achieveGoal(
         goalId: Int,
-        isAchieved: Boolean
+        isAchieved: Boolean,
     ): Result<ResponseGoalAchievement.ResponseGoalAchievementData> = runCatching {
         goalDataSource.achievedGoal(goalId, RequestGoalAchievement(isAchieved)).data
     }
@@ -44,6 +42,11 @@ class GoalRepositoryImpl @Inject constructor(
     override suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail> =
         runCatching {
             goalDataSource.fetchGoalDetail(goalId).data.toGoalDetail()
+        }
+
+    override suspend fun fetchAchievedGoal(sortType: String): Result<List<MyGoal>> =
+        runCatching {
+            goalDataSource.fetchAchievedGoal(sortType).data.toMyGoal()
         }
 
     override suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData> =
