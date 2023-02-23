@@ -84,7 +84,7 @@
                         android:paddingVertical="@dimen/spacing4"
                         android:paddingStart="@dimen/spacing4"
                         android:paddingEnd="9dp"
-                        android:text="3"
+                        android:text="@{viewModel.achievedGoalCount.toString()}"
                         android:textAppearance="@style/TextAppearance.System4_Bold"
                         android:textColor="@color/orange_600"
                         app:layout_constraintBottom_toBottomOf="parent"

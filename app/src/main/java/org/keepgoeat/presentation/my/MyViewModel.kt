@@ -24,6 +24,8 @@ class MyViewModel @Inject constructor(
     val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
     private val _logoutUiState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val logoutUiState get() = _logoutUiState.asStateFlow()
+    private val _achievedGoalCount = MutableStateFlow(0)
+    val achievedGoalCount get() = _achievedGoalCount.asStateFlow()
     private val _deleteAccountUiState =
         MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
@@ -31,11 +33,16 @@ class MyViewModel @Inject constructor(
     val userName = localStorage.userName
     val userEmail = localStorage.userEmail
 
+    init {
+        fetchAchievedGoalBySort(SortType.ALL)
+    }
+
     fun fetchAchievedGoalBySort(sortType: SortType) {
         viewModelScope.launch {
             myRepository.fetchMyData(sortType.name.lowercase())
                 .onSuccess {
                     _achievedGoalUiState.value = UiState.Success(it)
+                    _achievedGoalCount.value = it.size
                 }.onFailure {
                     _achievedGoalUiState.value = UiState.Error(null)
                 }
