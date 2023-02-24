@@ -4,5 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RequestGoalContentTitle(
-    val goalContent: String,
+    val food: String,
+    val criterion: String
 )
