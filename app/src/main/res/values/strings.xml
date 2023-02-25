@@ -113,4 +113,9 @@
     <string name="my_account_info">계정 정보</string>
     <string name="my_logout_title">로그아웃 하시겠어요?</string>
     <string name="my_logout_description">그동안의 기록은 사라지지 않으니\n안심하고 다녀오세요.</string>
+
+    <!-- WithDraw -->
+    <string name="withdraw">탈퇴하기</string>
+    <string name="withdraw_title">그동안 함께 해서 기뻤어요.</string>
+    <string name="withdraw_description">떠났던 이유를 모두 알려주시면 더 나은 킵고잇이 될게요.</string>
 </resources>
