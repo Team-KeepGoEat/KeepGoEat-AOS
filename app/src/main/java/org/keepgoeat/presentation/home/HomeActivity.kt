@@ -122,7 +122,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         terminateNetworkCallback()
     }
 
-
     private fun showMakeGoalDialog() {
         HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
     }
