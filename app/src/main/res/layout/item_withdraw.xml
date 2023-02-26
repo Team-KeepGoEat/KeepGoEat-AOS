@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="clickType"
+            type="org.keepgoeat.presentation.type.WithdrawCheckType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_withdraw_reason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/spacing12"
+        android:layout_marginStart="@dimen/spacing16">
+
+        <ImageView
+            android:id="@+id/iv_withdraw_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@{context.getDrawable(clickType.checkBox)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_checkbox_checked" />
+
+        <TextView
+            android:id="@+id/tv_withdraw_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/spacing4"
+            android:layout_marginStart="@dimen/spacing4"
+            android:textAppearance="@{clickType.textStyle}"
+            android:textColor="@{context.getColor(clickType.descriptionTextColor)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_withdraw_checkbox"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="식습관 관리를 그만 뒀어요."
+            tools:textAppearance="@style/TextAppearance.System4_Bold"
+            tools:textColor="@color/orange_600" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

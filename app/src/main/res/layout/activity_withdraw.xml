@@ -50,10 +50,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_title" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_withdraw"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_withdraw"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacing12"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_description" />
@@ -63,9 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing16"
-            android:layout_marginTop="@dimen/spacing24"
+            android:layout_marginTop="@dimen/spacing12"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vp_withdraw">
+            app:layout_constraintTop_toBottomOf="@+id/rv_withdraw">
 
             <ImageView
                 android:id="@+id/iv_other_reason"
@@ -83,11 +88,12 @@
                 android:layout_marginVertical="@dimen/spacing4"
                 android:layout_marginStart="@dimen/spacing4"
                 android:text="@string/withdraw_other_reason"
-                android:textAppearance="@style/TextAppearance.System4"
+                android:textAppearance="@{clickType.textStyle}"
                 android:textColor="@{context.getColor(clickType.descriptionTextColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_other_reason"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:textAppearance="@style/TextAppearance.System4"
                 tools:textColor="@color/gray_700" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

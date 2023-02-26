@@ -120,6 +120,10 @@
     <string name="withdraw_description">떠났던 이유를 모두 알려주시면 더 나은 킵고잇이 될게요.</string>
 
     <string name="withdraw_reason1">식습관 관리를 그만 뒀어요.</string>
+    <string name="withdraw_reason2">자주 사용하지 않아요.</string>
+    <string name="withdraw_reason3">앱 오류가 있어요.</string>
+    <string name="withdraw_reason4">콘텐츠가 만족스럽지 않아요.</string>
+
     <string name="withdraw_other_reason">직접 입력</string>
     <string name="withdraw_other_reason_description">다른 이유가 있다면 알려주세요.</string>
 </resources>
