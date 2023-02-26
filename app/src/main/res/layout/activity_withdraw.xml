@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="org.keepgoeat.R" />
+
+        <variable
+            name="clickType"
+            type="org.keepgoeat.presentation.type.WithdrawCheckType" />
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.withdraw.WithdrawViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_withdraw"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -40,7 +50,64 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_title" />
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_withdraw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_description" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_other_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vp_withdraw">
+
+            <ImageView
+                android:id="@+id/iv_other_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@{context.getDrawable(clickType.checkBox)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_checkbox_default" />
+
+            <TextView
+                android:id="@+id/tv_other_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing4"
+                android:layout_marginStart="@dimen/spacing4"
+                android:text="@string/withdraw_other_reason"
+                android:textAppearance="@style/TextAppearance.System4"
+                android:textColor="@{context.getColor(clickType.descriptionTextColor)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_other_reason"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:textColor="@color/gray_700" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/et_other_reason"
+            android:layout_width="0dp"
+            android:layout_height="104dp"
+            android:layout_marginHorizontal="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing8"
+            android:background="@drawable/selector_edittext_withdraw"
+            android:gravity="top|start"
+            android:hint="@string/withdraw_other_reason_description"
+            android:inputType="textMultiLine|textNoSuggestions"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_800"
+            android:textCursorDrawable="@drawable/shape_cursor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_other_reason" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_withdraw"

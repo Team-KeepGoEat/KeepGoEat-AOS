@@ -118,4 +118,8 @@
     <string name="withdraw">탈퇴하기</string>
     <string name="withdraw_title">그동안 함께 해서 기뻤어요.</string>
     <string name="withdraw_description">떠났던 이유를 모두 알려주시면 더 나은 킵고잇이 될게요.</string>
+
+    <string name="withdraw_reason1">식습관 관리를 그만 뒀어요.</string>
+    <string name="withdraw_other_reason">직접 입력</string>
+    <string name="withdraw_other_reason_description">다른 이유가 있다면 알려주세요.</string>
 </resources>
