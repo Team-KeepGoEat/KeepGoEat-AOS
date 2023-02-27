@@ -1,8 +1,6 @@
 package org.keepgoeat.presentation.my
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +8,7 @@ import org.keepgoeat.databinding.ItemAchievedGoalBinding
 import org.keepgoeat.domain.model.AchievedGoal
 import org.keepgoeat.util.ItemDiffCallback
 
-class AchievedGoalAdapter(val context: Context) :
+class AchievedGoalAdapter :
     ListAdapter<AchievedGoal, AchievedGoalAdapter.AchievedGoalViewHolder>(
         ItemDiffCallback<AchievedGoal>(
             onContentsTheSame = { old, new -> old == new },
@@ -21,7 +19,7 @@ class AchievedGoalAdapter(val context: Context) :
 
     class AchievedGoalViewHolder(private val binding: ItemAchievedGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: AchievedGoal, context: Context) {
+        fun onBind(data: AchievedGoal) {
             binding.goal = data
             binding.ivAchievedGoalDetail.setOnClickListener {
                 if (binding.btnAchievedGoalDelete.visibility == View.GONE)
@@ -43,6 +41,6 @@ class AchievedGoalAdapter(val context: Context) :
     }
 
     override fun onBindViewHolder(holder: AchievedGoalViewHolder, position: Int) {
-        holder.onBind(currentList[position], context)
+        holder.onBind(currentList[position])
     }
 }
