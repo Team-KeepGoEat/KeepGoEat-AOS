@@ -1,6 +1,7 @@
 package org.keepgoeat.presentation.my
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,12 @@ class AchievedGoalAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: AchievedGoal) {
             binding.goal = data
+            binding.ivAchievedGoalDetail.setOnClickListener {
+                if (binding.btnAchievedGoalDelete.visibility == View.GONE)
+                    binding.btnAchievedGoalDelete.visibility = View.VISIBLE
+                else
+                    binding.btnAchievedGoalDelete.visibility = View.GONE
+            }
         }
     }
 
