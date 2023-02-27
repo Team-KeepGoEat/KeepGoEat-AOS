@@ -15,6 +15,7 @@ import org.keepgoeat.databinding.ActivityAccountInfoBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.home.HomeActivity.Companion.ARG_KILL_HOME_AND_GO_TO_SIGN
 import org.keepgoeat.presentation.type.SocialLoginType
+import org.keepgoeat.presentation.withdraw.WithdrawActivity
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 import javax.inject.Inject
@@ -46,12 +47,13 @@ class AccountInfoActivity :
             LogoutDialogFragment().show(supportFragmentManager, "LogoutDialog")
         }
         binding.tvDeleteAccount.setOnClickListener {
-            // TODO 탈퇴 화면으로 이동
             when (viewModel.loginPlatForm) {
                 SocialLoginType.NAVER -> naverSignService.deleteAccountNaver(viewModel::deleteAccount)
                 SocialLoginType.KAKAO -> kakaoSignService.deleteAccountKakao(viewModel::deleteAccount)
                 else -> {}
             }
+            val intent = Intent(this, WithdrawActivity::class.java)
+            startActivity(intent)
         }
     }
 
