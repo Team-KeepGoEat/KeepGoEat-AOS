@@ -14,6 +14,7 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
     private val viewModel: WithdrawViewModel by viewModels()
     private var withdrawAdapter = WithdrawReasonAdapter()
 
+    // TODO 키보드 자판에서 키보드 내리는 경우 recyclerView visibility 조정해주기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
@@ -43,35 +44,46 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
         binding.layoutOtherReason.setOnClickListener {
             when (binding.clickType) {
                 WithdrawCheckType.CLICKED -> {
-                    binding.rvWithdraw.visibility = View.VISIBLE
+                    clearFocus()
                     binding.clickType = WithdrawCheckType.DEFAULT
-                    binding.etOtherReason.clearFocus()
-                    showKeyboard(binding.etOtherReason, false)
+                    binding.tvWithdrawEdittextError.visibility = View.GONE
                 }
                 WithdrawCheckType.DEFAULT -> {
-                    binding.rvWithdraw.visibility = View.GONE
+                    requestFocus()
                     binding.clickType = WithdrawCheckType.CLICKED
-                    binding.etOtherReason.requestFocus()
-                    showKeyboard(binding.etOtherReason, true)
                 }
                 else -> {}
             }
         }
         binding.etOtherReason.setOnFocusChangeListener { _, focused ->
-            if (focused) { // 직접 입력 editText가 focus 상태일 때
+            if (focused) { // '직접 입력' editText가 focus 상태일 때
                 binding.rvWithdraw.visibility = View.GONE
                 if (binding.clickType == WithdrawCheckType.DEFAULT)
                     binding.clickType = WithdrawCheckType.CLICKED
             }
-
         }
         binding.layoutWithdraw.setOnClickListener { // 외부 영역 클릭 했을 때
-            showKeyboard(binding.etOtherReason, false)
-            binding.etOtherReason.clearFocus()
-            binding.rvWithdraw.visibility = View.VISIBLE
+            clearFocus()
         }
         binding.btnWithdraw.setOnClickListener {
-            // TODO
+            if (binding.etOtherReason.text.isNullOrBlank() && binding.clickType == WithdrawCheckType.CLICKED)
+                binding.tvWithdrawEdittextError.visibility = View.VISIBLE
+            else {
+                binding.tvWithdrawEdittextError.visibility = View.GONE
+                WithdrawDialogFragment().show(supportFragmentManager, "withDrawDialog")
+            }
         }
+    }
+
+    private fun clearFocus() {
+        binding.etOtherReason.clearFocus()
+        binding.rvWithdraw.visibility = View.VISIBLE
+        showKeyboard(binding.etOtherReason, false)
+    }
+
+    private fun requestFocus() {
+        binding.etOtherReason.requestFocus()
+        binding.rvWithdraw.visibility = View.GONE
+        showKeyboard(binding.etOtherReason, true)
     }
 }

@@ -115,6 +115,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_other_reason" />
 
+        <TextView
+            android:id="@+id/tv_withdraw_edittext_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/spacing8"
+            android:text="@string/withdraw_edittext_error"
+            android:textAppearance="@style/TextAppearance.System6"
+            android:textColor="@color/orange_400"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_other_reason" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_withdraw"
             android:layout_width="0dp"

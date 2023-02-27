@@ -126,4 +126,10 @@
 
     <string name="withdraw_other_reason">직접 입력</string>
     <string name="withdraw_other_reason_description">다른 이유가 있다면 알려주세요.</string>
+    <string name="withdraw_edittext_error">탈퇴 이유를 작성해주세요.</string>
+
+    <string name="withdraw_dialog_title">탈퇴는 되돌릴 수 없어요.</string>
+    <string name="withdraw_dialog_description">이 계정에서 만든 목표와\n활동 기록이 모두 사라져요.</string>
+    <string name="withdraw_dialog">탈퇴</string>
+    <string name="withdraw_cancel">취소</string>
 </resources>
