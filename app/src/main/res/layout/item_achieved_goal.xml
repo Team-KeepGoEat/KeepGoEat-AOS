@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing12"
             android:layout_marginEnd="15dp"
-            android:src="@drawable/ic_keep_detail"
+            android:src="@drawable/ic_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,19 +57,19 @@
             app:layout_constraintTop_toBottomOf="@+id/view_eating_tag"
             tools:text="하루 1끼 이상 야채 더 먹기" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_achieved_goal_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/background_keep_delete"
-            android:elevation="@dimen/spacing4"
+            android:backgroundTint="@color/gray_50"
+            android:elevation="2dp"
             android:paddingHorizontal="@dimen/spacing24"
             android:paddingVertical="@dimen/spacing12"
             android:text="삭제하기"
             android:textAppearance="@style/TextAppearance.System4"
             android:textColor="@color/gray_600"
-            android:visibility="gone"
+            app:cornerRadius="@dimen/spacing4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_achieved_goal_detail" />
 
