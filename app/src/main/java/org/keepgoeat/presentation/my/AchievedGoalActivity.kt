@@ -51,16 +51,6 @@ class AchievedGoalActivity :
         collectData()
     }
 
-    override fun onTouchEvent(ev: MotionEvent?): Boolean {
-        for (i in 1..goalAdapter.itemCount) {
-            val deleteBtn = binding.rvGoalList.findViewHolderForAdapterPosition(i)?.let {
-                it.itemView.findViewById<Button>(R.id.btn_achieved_goal_delete)
-            }
-            adjustVisibility(deleteBtn)
-        }
-        return super.onTouchEvent(ev)
-    }
-
     private fun initLayout() {
         binding.rvGoalList.apply {
             adapter = goalConcatAdapter
@@ -119,14 +109,6 @@ class AchievedGoalActivity :
     private fun moveToPrevious() {
         if (isEnteredFromKeep) moveToHome()
         else finish()
-    }
-
-    private fun adjustVisibility(view: View?) {
-        view?.let {
-            if (it.visibility == View.VISIBLE) {
-                it.visibility = View.GONE
-            }
-        }
     }
 
     companion object {

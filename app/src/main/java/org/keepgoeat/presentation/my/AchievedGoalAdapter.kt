@@ -2,6 +2,7 @@ package org.keepgoeat.presentation.my
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,9 +22,6 @@ class AchievedGoalAdapter(
     ) {
     private lateinit var inflater: LayoutInflater
 
-    interface updateGoalIdListener {
-        fun updateGoalId(data: AchievedGoal)
-    }
 
     inner class AchievedGoalViewHolder(private val binding: ItemAchievedGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {
