@@ -31,7 +31,7 @@ class GoalSettingViewModel @Inject constructor(
 
     val isValidCriterion: StateFlow<Boolean>
         get() = goalCriterion.map { criterion ->
-            criterion.length in 1..20 && criterion.isNotBlank() && criterion.matches(TITLE_PATTERN.toRegex())
+            criterion.length in 0..20 && criterion.matches(TITLE_PATTERN.toRegex())
         }.toStateFlow(viewModelScope, false)
 
     val isEnabledCompleteButton: StateFlow<Boolean> = combine(isValidTitle, isValidCriterion) { title, criterion ->
