@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityWithdrawBinding
 import org.keepgoeat.domain.model.WithdrawReason
@@ -12,6 +13,7 @@ import org.keepgoeat.presentation.type.WithdrawCheckType
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showKeyboard
 
+@AndroidEntryPoint
 class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activity_withdraw) {
     private val viewModel: WithdrawViewModel by viewModels()
     private var withdrawAdapter = WithdrawReasonAdapter()

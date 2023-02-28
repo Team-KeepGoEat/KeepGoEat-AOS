@@ -14,7 +14,6 @@ import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivityAccountInfoBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.home.HomeActivity.Companion.ARG_KILL_HOME_AND_GO_TO_SIGN
-import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.presentation.withdraw.WithdrawActivity
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
@@ -47,12 +46,8 @@ class AccountInfoActivity :
             LogoutDialogFragment().show(supportFragmentManager, "LogoutDialog")
         }
         binding.tvDeleteAccount.setOnClickListener {
-            when (viewModel.loginPlatForm) {
-                SocialLoginType.NAVER -> naverSignService.deleteAccountNaver(viewModel::deleteAccount)
-                SocialLoginType.KAKAO -> kakaoSignService.deleteAccountKakao(viewModel::deleteAccount)
-                else -> {}
-            }
             val intent = Intent(this, WithdrawActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
     }
@@ -65,18 +60,6 @@ class AccountInfoActivity :
                 }
                 is UiState.Error -> {
                     // TODO 로그아웃 실패 시 예외 처리
-                }
-                else -> {}
-            }
-        }.launchIn(lifecycleScope)
-
-        viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is UiState.Success -> {
-                    moveToSign()
-                }
-                is UiState.Error -> {
-                    // TODO 회원 탈퇴 실패 시 예외 처리
                 }
                 else -> {}
             }
