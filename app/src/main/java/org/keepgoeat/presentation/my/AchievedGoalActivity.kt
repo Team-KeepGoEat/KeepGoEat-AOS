@@ -21,7 +21,7 @@ import org.keepgoeat.util.binding.BindingActivity
 @AndroidEntryPoint
 class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layout.activity_achieved_goal) {
     private val viewModel: MyViewModel by viewModels()
-    private val goalAdapter = AchievedGoalAdapter()
+    private val goalAdapter = AchievedGoalAdapter(this)
     private val headerAdapter = AchievedGoalHeaderAdapter(::getFilteredGoalWithEatingType)
     private val goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
     private var isEnteredFromKeep: Boolean = false
