@@ -10,10 +10,7 @@ import org.keepgoeat.databinding.ItemAchievedGoalBinding
 import org.keepgoeat.domain.model.AchievedGoal
 import org.keepgoeat.util.ItemDiffCallback
 
-class AchievedGoalAdapter(
-    private val context: Context,
-    private val listener: updateGoalIdListener
-) :
+class AchievedGoalAdapter :
     ListAdapter<AchievedGoal, AchievedGoalAdapter.AchievedGoalViewHolder>(
         ItemDiffCallback<AchievedGoal>(
             onContentsTheSame = { old, new -> old == new },
