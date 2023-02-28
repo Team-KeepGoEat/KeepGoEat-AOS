@@ -14,9 +14,6 @@ class KeepDeleteDialogFragment :
     }
 
     private fun addListeners() {
-        binding.yes.setOnClickListener {
-            // TODO 목표 삭제 api 연동
-        }
         binding.no.setOnClickListener {
             dismiss()
         }
