@@ -113,4 +113,7 @@
     <string name="my_account_info">계정 정보</string>
     <string name="my_logout_title">로그아웃 하시겠어요?</string>
     <string name="my_logout_description">그동안의 기록은 사라지지 않으니\n안심하고 다녀오세요.</string>
+
+    <string name="keep_delete_title">삭제 하시겠어요?</string>
+    <string name="keep_delete_description">삭제된 목표와 달성 기록은\n다시 복구할 수 없어요.</string>
 </resources>
