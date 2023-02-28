@@ -175,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
-            android:text="@{viewModel.goalCriterion.length() == 0 || viewModel.goalCriterion.blank ? context.getString(R.string.goal_setting_title_length_guide) : viewModel.isValidCriterion() == false ? context.getString(R.string.goal_setting_title_language_guide) : ``}"
+            android:text="@{viewModel.isValidCriterion() == false ? context.getString(R.string.goal_setting_title_language_guide) : ``}"
             android:textAppearance="@style/TextAppearance.System6"
             android:textColor="@color/orange_400"
             app:layout_constraintStart_toStartOf="@id/gl_start"
