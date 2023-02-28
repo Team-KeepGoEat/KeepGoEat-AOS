@@ -17,7 +17,74 @@
 
         <include
             android:id="@+id/view_toolbar"
-            layout="@layout/view_toolbar" />
+            layout="@layout/view_toolbar"
+            tools:layout_editor_absoluteX="200dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_empty_keep"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_toolbar"
+            app:visibility="@{viewModel.achievedGoalCount == 0}">
+
+            <ImageView
+                android:id="@+id/iv_gray_plate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="128dp"
+                android:src="@drawable/ic_plate_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_no_keep_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:fontFamily="@font/pretendard_b"
+                android:text="더이상 기록하지 않는 목표는 보관해요."
+                android:textAlignment="center"
+                android:textColor="@color/gray_500"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_gray_plate" />
+
+            <TextView
+                android:id="@+id/tv_no_keep_subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_r"
+                android:lineHeight="24dp"
+                android:text="진행하지 않는 목표가 생긴다면,\n그동안의 노력을 지우지 말고 남겨보세요."
+                android:textAlignment="center"
+                android:textColor="@color/gray_500"
+                android:textSize="@dimen/spacing16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_no_keep_title" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_more_keep"
+                style="@style/Widget.FullButton.Basic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing16"
+                android:layout_marginBottom="69dp"
+                android:backgroundTint="@color/orange_600"
+                android:paddingVertical="@dimen/spacing12"
+                android:text="목표 만들러 가기"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_goal_list"
@@ -26,7 +93,6 @@
             android:paddingTop="6dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_toolbar"
-            tools:listitem="@layout/item_achieved_goal" />
+            app:layout_constraintTop_toBottomOf="@id/view_toolbar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
