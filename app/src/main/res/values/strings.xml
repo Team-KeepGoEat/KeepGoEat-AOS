@@ -31,8 +31,8 @@
     <string name="goal_detail_num_of_days_eaten_this_month">이번달 %s 날</string>
     <string name="goal_detail_eat">먹은</string>
     <string name="goal_detail_hold">참은</string>
-    <string name="goal_detail_delete_goal_success_toast_message">목표가 삭제되었습니다.</string>
-    <string name="goal_detail_keep_goal_success_toast_message">목표가 보관되었습니다.</string>
+    <string name="goal_detail_success_goal_delete_toast_message">목표가 삭제되었습니다.</string>
+    <string name="goal_detail_success_goal_keep_toast_message">목표가 보관되었습니다.</string>
     <string name="goal_detail_delete_button_text">네, 삭제할래요</string>
 
     <!-- Home View -->
@@ -120,4 +120,7 @@
     <string name="my_logout_success_toast_message">로그아웃 되었습니다.</string>
     <string name="my_logout_failure_toast_message">로그아웃에 실패하였습니다.</string>
 
+
+    <string name="keep_delete_title">삭제 하시겠어요?</string>
+    <string name="keep_delete_description">삭제된 목표와 달성 기록은\n다시 복구할 수 없어요.</string>
 </resources>
