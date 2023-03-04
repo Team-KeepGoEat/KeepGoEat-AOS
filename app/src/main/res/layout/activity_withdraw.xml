@@ -13,7 +13,7 @@
 
         <variable
             name="viewModel"
-            type="org.keepgoeat.presentation.withdraw.WithdrawViewModel" />
+            type="org.keepgoeat.presentation.my.MyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
