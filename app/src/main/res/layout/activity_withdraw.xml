@@ -134,7 +134,8 @@
             android:layout_height="48dp"
             android:layout_marginHorizontal="@dimen/spacing16"
             android:layout_marginBottom="42dp"
-            android:background="@color/orange_600"
+            android:background="@drawable/shape_border_radius_8"
+            android:backgroundTint="@color/orange_600"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
