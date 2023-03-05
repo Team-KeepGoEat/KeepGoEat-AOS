@@ -39,7 +39,7 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
                 WithdrawCheckType.CLICKED -> {
                     clearFocus()
                     binding.clickType = WithdrawCheckType.DEFAULT
-                    binding.tvOtherReasonErrorMsg.visibility = View.GONE
+                    //binding.tvOtherReasonErrorMsg.setVisibility(false)
                 }
                 WithdrawCheckType.DEFAULT -> {
                     requestFocus()
@@ -65,6 +65,9 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
                 binding.tvOtherReasonErrorMsg.visibility = View.GONE
                 WithdrawDialogFragment().show(supportFragmentManager, "withDrawDialog")
             }
+        }
+        binding.viewWithdrawToolbar.ivBack.setOnClickListener{
+            finish()
         }
     }
 
