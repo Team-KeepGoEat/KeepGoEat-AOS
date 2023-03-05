@@ -10,18 +10,22 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.keepgoeat.R
+import org.keepgoeat.util.KGESnackbar
 import org.keepgoeat.util.NetworkMonitor
 
 abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
     AppCompatActivity() {
     lateinit var binding: B
-    private var snackbar: Snackbar? = null
+    private var snackbar: KGESnackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
-        snackbar = Snackbar.make(binding.root, "네트워크를 연결해 주세요", Snackbar.LENGTH_INDEFINITE)
-
+        snackbar = KGESnackbar(binding.root,
+            getString(R.string.network_error_snackbar_message),
+            Snackbar.LENGTH_INDEFINITE,
+            true)
         collectNetworkState()
     }
 
