@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.domain.model.AchievedGoal
@@ -12,6 +14,7 @@ import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
+import org.keepgoeat.util.extension.toStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +23,8 @@ class MyViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
     private val localStorage: KGEDataSource,
 ) : ViewModel() {
-    private val _achievedGoalUiState = MutableStateFlow<UiState<List<AchievedGoal>>>(UiState.Loading)
+    private val _achievedGoalUiState =
+        MutableStateFlow<UiState<List<AchievedGoal>>>(UiState.Loading)
     val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
     private val _logoutUiState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val logoutUiState get() = _logoutUiState.asStateFlow()
@@ -29,6 +33,11 @@ class MyViewModel @Inject constructor(
     private val _deleteAccountUiState =
         MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
+    val otherReason = MutableStateFlow<String?>("")
+    val isValidOtherReason: StateFlow<Boolean>
+        get() = otherReason.map { reason ->
+            reason.isNullOrBlank()
+        }.toStateFlow(viewModelScope, false)
     val loginPlatForm = localStorage.loginPlatform
     val userName = localStorage.userName
     val userEmail = localStorage.userEmail

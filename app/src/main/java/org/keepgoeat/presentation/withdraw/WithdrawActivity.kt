@@ -1,8 +1,6 @@
 package org.keepgoeat.presentation.withdraw
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,14 +55,6 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
                     binding.clickType = WithdrawCheckType.CLICKED
             }
         }
-        binding.etOtherReason.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun afterTextChanged(p0: Editable?) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (!binding.etOtherReason.text.isNullOrBlank())
-                    binding.tvWithdrawEdittextError.visibility = View.GONE
-            }
-        })
         binding.layoutWithdraw.setOnClickListener { // 외부 영역 클릭 했을 때
             clearFocus()
         }

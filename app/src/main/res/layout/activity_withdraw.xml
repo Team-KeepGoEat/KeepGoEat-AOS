@@ -108,6 +108,7 @@
             android:gravity="top|start"
             android:hint="@string/withdraw_other_reason_description"
             android:inputType="textMultiLine|textNoSuggestions"
+            android:text="@={viewModel.otherReason}"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_800"
             android:textCursorDrawable="@drawable/shape_cursor"
@@ -125,6 +126,7 @@
             android:textAppearance="@style/TextAppearance.System6"
             android:textColor="@color/orange_400"
             android:visibility="gone"
+            app:visibility="@{viewModel.isValidOtherReason}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_other_reason" />
 
