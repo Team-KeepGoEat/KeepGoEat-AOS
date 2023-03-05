@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityWithdrawBinding
-import org.keepgoeat.domain.model.WithdrawReason
 import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.presentation.type.WithdrawCheckType
 import org.keepgoeat.util.binding.BindingActivity
@@ -17,7 +16,6 @@ import org.keepgoeat.util.extension.showKeyboard
 @AndroidEntryPoint
 class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activity_withdraw) {
     private val viewModel: MyViewModel by viewModels()
-    private var withdrawAdapter = WithdrawReasonAdapter()
 
     // TODO 키보드 자판에서 키보드 내리는 경우 recyclerView visibility 조정해주기
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,16 +30,8 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
     private fun initLayout() {
         binding.rvWithdraw.apply {
             itemAnimator = null
-            adapter = withdrawAdapter
+            adapter = WithdrawReasonAdapter(context)
         }
-        withdrawAdapter.submitList(
-            listOf(
-                WithdrawReason(getString(R.string.withdraw_reason1), WithdrawCheckType.DEFAULT),
-                WithdrawReason(getString(R.string.withdraw_reason2), WithdrawCheckType.DEFAULT),
-                WithdrawReason(getString(R.string.withdraw_reason3), WithdrawCheckType.DEFAULT),
-                WithdrawReason(getString(R.string.withdraw_reason4), WithdrawCheckType.DEFAULT)
-            )
-        )
         binding.clickType = WithdrawCheckType.DEFAULT
     }
 
