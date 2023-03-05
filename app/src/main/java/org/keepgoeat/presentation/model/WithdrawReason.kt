@@ -1,4 +1,4 @@
-package org.keepgoeat.domain.model
+package org.keepgoeat.presentation.model
 
 import org.keepgoeat.presentation.type.WithdrawCheckType
 

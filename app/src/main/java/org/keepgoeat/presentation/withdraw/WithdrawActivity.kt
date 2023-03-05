@@ -39,7 +39,7 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
                 WithdrawCheckType.CLICKED -> {
                     clearFocus()
                     binding.clickType = WithdrawCheckType.DEFAULT
-                    binding.tvWithdrawEdittextError.visibility = View.GONE
+                    binding.tvOtherReasonErrorMsg.visibility = View.GONE
                 }
                 WithdrawCheckType.DEFAULT -> {
                     requestFocus()
@@ -60,9 +60,9 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
         }
         binding.btnWithdraw.setOnClickListener {
             if (binding.etOtherReason.text.isNullOrBlank() && binding.clickType == WithdrawCheckType.CLICKED)
-                binding.tvWithdrawEdittextError.visibility = View.VISIBLE
+                binding.tvOtherReasonErrorMsg.visibility = View.VISIBLE
             else {
-                binding.tvWithdrawEdittextError.visibility = View.GONE
+                binding.tvOtherReasonErrorMsg.visibility = View.GONE
                 WithdrawDialogFragment().show(supportFragmentManager, "withDrawDialog")
             }
         }
