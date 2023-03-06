@@ -23,12 +23,11 @@ import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showToast
 
 @AndroidEntryPoint
-class AchievedGoalActivity :
-    BindingActivity<ActivityAchievedGoalBinding>(R.layout.activity_achieved_goal) {
+class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layout.activity_achieved_goal){
     private val viewModel: MyViewModel by viewModels()
-    lateinit var goalAdapter: AchievedGoalAdapter
+    lateinit var goalAdapter : AchievedGoalAdapter
     private val headerAdapter = AchievedGoalHeaderAdapter(::getFilteredGoalWithEatingType)
-    lateinit var goalConcatAdapter: ConcatAdapter
+    lateinit var goalConcatAdapter : ConcatAdapter
     private var isEnteredFromKeep: Boolean = false
 
     private val callback = object : OnBackPressedCallback(true) {
@@ -49,6 +48,16 @@ class AchievedGoalActivity :
         initLayout()
         addListeners()
         collectData()
+    }
+
+    override fun onTouchEvent(ev: MotionEvent?): Boolean {
+        for (i in 1..goalAdapter.itemCount) {
+            val deleteBtn =  binding.rvGoalList.findViewHolderForAdapterPosition(i)?.let {
+                it.itemView.findViewById<Button>(R.id.btn_achieved_goal_delete)
+            }
+            adjustVisibility(deleteBtn)
+        }
+        return super.onTouchEvent(ev)
     }
 
     private fun initLayout() {
@@ -109,6 +118,14 @@ class AchievedGoalActivity :
     private fun moveToPrevious() {
         if (isEnteredFromKeep) moveToHome()
         else finish()
+    }
+
+    private fun adjustVisibility(view: View?){
+        view?.let {
+            if(it.visibility == View.VISIBLE) {
+                it.visibility = View.GONE
+            }
+        }
     }
 
     companion object {
