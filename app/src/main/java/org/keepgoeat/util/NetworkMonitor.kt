@@ -32,12 +32,11 @@ class NetworkMonitor(private val context: Context, private val coroutineScope: C
             }
 
             override fun onLost(network: Network) {
-                trySend(false)
                 super.onLost(network)
+                trySend(false)
             }
         }
 
-        trySend(ConnectedCompat.isConnected(connectivityManager))
         connectivityManager.registerNetworkCallback(request, callback)
 
         awaitClose {
