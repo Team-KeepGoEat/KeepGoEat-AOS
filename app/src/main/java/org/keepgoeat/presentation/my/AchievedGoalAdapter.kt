@@ -10,7 +10,10 @@ import org.keepgoeat.databinding.ItemAchievedGoalBinding
 import org.keepgoeat.domain.model.AchievedGoal
 import org.keepgoeat.util.ItemDiffCallback
 
-class AchievedGoalAdapter(val context: Context) :
+class AchievedGoalAdapter(
+    private val context: Context,
+    private val listener: updateGoalIdListener
+) :
     ListAdapter<AchievedGoal, AchievedGoalAdapter.AchievedGoalViewHolder>(
         ItemDiffCallback<AchievedGoal>(
             onContentsTheSame = { old, new -> old == new },
@@ -19,18 +22,21 @@ class AchievedGoalAdapter(val context: Context) :
     ) {
     private lateinit var inflater: LayoutInflater
 
-    class AchievedGoalViewHolder(private val binding: ItemAchievedGoalBinding) :
+    interface updateGoalIdListener {
+        fun updateGoalId(data: AchievedGoal)
+    }
+
+    inner class AchievedGoalViewHolder(private val binding: ItemAchievedGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: AchievedGoal, context: Context) {
             binding.goal = data
             binding.ivAchievedGoalDetail.setOnClickListener {
                 if (binding.btnAchievedGoalDelete.visibility == View.GONE)
                     binding.btnAchievedGoalDelete.visibility = View.VISIBLE
-                else
-                    binding.btnAchievedGoalDelete.visibility = View.GONE
             }
             binding.btnAchievedGoalDelete.setOnClickListener {
                 KeepDeleteDialogFragment().show((context as AchievedGoalActivity).supportFragmentManager, "KeepDeleteDialog")
+                listener.updateGoalId(data)
             }
         }
     }
