@@ -6,6 +6,11 @@
     <data>
 
         <import type="org.keepgoeat.R" />
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.my.MyViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,6 +79,7 @@
                 style="@style/Style.Dialog.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.deleteGoal()}"
                 android:text="@string/yes"
                 android:textAppearance="@style/TextAppearance.System4"
                 android:textColor="@color/orange_600"
