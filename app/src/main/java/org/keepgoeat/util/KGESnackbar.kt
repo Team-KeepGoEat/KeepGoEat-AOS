@@ -18,14 +18,15 @@ class KGESnackbar(
     private val duration: Int,
     private val isTop: Boolean,
 ) {
-    private val context = view.context
     private val snackbar = Snackbar.make(view, "", duration)
     private val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
     private val snackbarBinding: ViewKgeSnackbarBinding =
-        DataBindingUtil.inflate<ViewKgeSnackbarBinding?>(LayoutInflater.from(context),
+        DataBindingUtil.inflate<ViewKgeSnackbarBinding>(
+            LayoutInflater.from(view.context),
             R.layout.view_kge_snackbar,
             null,
-            false).apply {
+            false
+        ).apply {
             tvMessage.text = message
         }
     private val layoutParams = LinearLayout.LayoutParams(snackbar.view.layoutParams)

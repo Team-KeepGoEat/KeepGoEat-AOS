@@ -26,10 +26,12 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
-        snackbar = KGESnackbar(binding.root,
+        snackbar = KGESnackbar(
+            binding.root,
             getString(R.string.network_error_snackbar_message),
             Snackbar.LENGTH_INDEFINITE,
-            true)
+            true
+        )
         collectNetworkState()
     }
 
