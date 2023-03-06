@@ -7,14 +7,15 @@ import org.keepgoeat.data.model.request.RequestGoalContentTitle
 import org.keepgoeat.data.model.response.*
 import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.model.AchievedGoal
+import org.keepgoeat.domain.model.HomeContent
 import org.keepgoeat.domain.repository.GoalRepository
 import javax.inject.Inject
 
 class GoalRepositoryImpl @Inject constructor(
     private val goalDataSource: GoalDataSource,
 ) : GoalRepository {
-    override suspend fun fetchHomeEntireData(): Result<ResponseHome.HomeData> = runCatching {
-        goalDataSource.fetchHomeEntireData().data
+    override suspend fun fetchHomeEntireData(): Result<HomeContent> = runCatching {
+        goalDataSource.fetchHomeEntireData().data.toHomeGoal()
     }
 
     override suspend fun achieveGoal(

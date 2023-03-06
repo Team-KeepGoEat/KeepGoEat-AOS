@@ -8,6 +8,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
@@ -18,6 +20,8 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
     AppCompatActivity() {
     lateinit var binding: B
     private var snackbar: KGESnackbar? = null
+    private val _isConnectedNetwork = MutableStateFlow(false)
+    val isConnectedNetwork get() = _isConnectedNetwork.asStateFlow()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,7 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
             .onEach { isConnected ->
                 if (isConnected) snackbar?.dismiss()
                 else snackbar?.show()
+                _isConnectedNetwork.value = isConnected
             }.launchIn(lifecycleScope)
     }
 }
