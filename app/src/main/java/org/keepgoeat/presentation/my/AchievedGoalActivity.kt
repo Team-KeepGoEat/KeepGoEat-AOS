@@ -2,6 +2,9 @@ package org.keepgoeat.presentation.my
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
+import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -17,13 +20,14 @@ import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.extension.showToast
 
 @AndroidEntryPoint
-class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layout.activity_achieved_goal) {
+class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layout.activity_achieved_goal){
     private val viewModel: MyViewModel by viewModels()
-    private val goalAdapter = AchievedGoalAdapter(this)
+    lateinit var goalAdapter : AchievedGoalAdapter
     private val headerAdapter = AchievedGoalHeaderAdapter(::getFilteredGoalWithEatingType)
-    private val goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
+    lateinit var goalConcatAdapter : ConcatAdapter
     private var isEnteredFromKeep: Boolean = false
 
     private val callback = object : OnBackPressedCallback(true) {
@@ -37,11 +41,23 @@ class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layo
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        goalAdapter = AchievedGoalAdapter(this, viewModel)
+        goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
         isEnteredFromKeep = intent.getBooleanExtra(ARG_IS_ENTERED_FROM_KEEP, false)
 
         initLayout()
         addListeners()
         collectData()
+    }
+
+    override fun onTouchEvent(ev: MotionEvent?): Boolean {
+        for (i in 1..goalAdapter.itemCount) {
+            val deleteBtn =  binding.rvGoalList.findViewHolderForAdapterPosition(i)?.let {
+                it.itemView.findViewById<Button>(R.id.btn_achieved_goal_delete)
+            }
+            adjustVisibility(deleteBtn)
+        }
+        return super.onTouchEvent(ev)
     }
 
     private fun initLayout() {
@@ -64,6 +80,9 @@ class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layo
         binding.viewToolbar.ivBack.setOnClickListener {
             moveToPrevious()
         }
+        binding.btnMoreKeep.setOnClickListener {
+            // TODO 목표 추가하기 위한 뷰로 연결
+        }
     }
 
     private fun collectData() {
@@ -74,6 +93,17 @@ class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layo
                 }
                 is UiState.Error -> {} // TODO state에 따른 ui 업데이트 필요시 작성
                 is UiState.Loading -> {}
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+
+        viewModel.deleteState.flowWithLifecycle(lifecycle).onEach { deleteState ->
+            when (deleteState) {
+                is UiState.Success -> {
+                    showToast(getString(R.string.goal_detail_success_goal_delete_toast_message))
+                    startActivity(Intent(this, AchievedGoalActivity::class.java))
+                    finish()
+                }
                 else -> {}
             }
         }.launchIn(lifecycleScope)
@@ -88,6 +118,14 @@ class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layo
     private fun moveToPrevious() {
         if (isEnteredFromKeep) moveToHome()
         else finish()
+    }
+
+    private fun adjustVisibility(view: View?){
+        view?.let {
+            if(it.visibility == View.VISIBLE) {
+                it.visibility = View.GONE
+            }
+        }
     }
 
     companion object {
