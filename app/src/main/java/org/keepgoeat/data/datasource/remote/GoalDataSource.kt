@@ -10,8 +10,8 @@ import javax.inject.Inject
 class GoalDataSource @Inject constructor(
     private val goalService: GoalService,
 ) {
-    suspend fun fetchHomeEntireData(): ResponseHome =
-        goalService.fetchHomeEntireData()
+    suspend fun fetchHomeContent(): ResponseHomeContent =
+        goalService.fetchHomeContent()
 
     suspend fun fetchGoalDetail(id: Int): ResponseGoalDetail = goalService.fetchGoalDetail(id)
 

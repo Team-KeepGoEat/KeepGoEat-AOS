@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5B5B5B"
+        android:gravity="center"
+        android:paddingVertical="@dimen/spacing8"
+        android:textAppearance="@style/TextAppearance.System4_Bold"
+        android:textColor="@color/white"
+        tools:text="@string/network_error_snackbar_message" />
+</layout>
