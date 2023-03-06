@@ -31,8 +31,8 @@
     <string name="goal_detail_num_of_days_eaten_this_month">이번달 %s 날</string>
     <string name="goal_detail_eat">먹은</string>
     <string name="goal_detail_hold">참은</string>
-    <string name="goal_detail_success_goal_delete_toast_message">목표가 삭제되었습니다.</string>
-    <string name="goal_detail_success_goal_keep_toast_message">목표가 보관되었습니다.</string>
+    <string name="goal_detail_delete_goal_success_toast_message">목표가 삭제되었습니다.</string>
+    <string name="goal_detail_keep_goal_success_toast_message">목표가 보관되었습니다.</string>
     <string name="goal_detail_delete_button_text">네, 삭제할래요</string>
 
     <!-- Home View -->
@@ -79,8 +79,8 @@
     <string name="goal_setting_criterion_title_hint_for_more">ex) 하루에 2L씩 마시기</string>
     <string name="goal_setting_criterion_title_hint_for_less">ex) 아침에 딱 1잔만 마시기</string>
     <string name="goal_setting_criterion_length_limit">(%d/20)</string>
-    <string name="goal_setting_success_edit_toast_message">목표가 수정되었습니다.</string>
-    <string name="goal_setting_success_add_toast_message">목표가 추가되었습니다.</string>
+    <string name="goal_setting_edit_success_toast_message">목표가 수정되었습니다.</string>
+    <string name="goal_setting_add_success_toast_message">목표가 추가되었습니다.</string>
 
     <!-- On Boarding -->
     <string name="onboarding1_title">차근차근 식습관 목표를 세워보세요.</string>
