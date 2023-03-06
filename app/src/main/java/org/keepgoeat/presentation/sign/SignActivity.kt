@@ -16,6 +16,7 @@ import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.onboarding.OnboardingActivity
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.extension.showToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -47,9 +48,12 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
         viewModel.loginUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    showToast(getString(R.string.signin_success_toast_message))
                     moveToNext(it.data)
                 }
-                is UiState.Error -> {}
+                is UiState.Error -> {
+                    showToast(getString(R.string.signin_failure_toast_message))
+                }
                 else -> {}
             }
         }.launchIn(lifecycleScope)
