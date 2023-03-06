@@ -79,7 +79,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         combine(viewModel.homeDataFetchState, isConnectedNetwork) { fetchState, isConnected ->
             fetchState !is UiState.Success && isConnected
         }.flowWithLifecycle(lifecycle).onEach { shouldFetch ->
-            if (shouldFetch) viewModel.fetchGoalList()
+            if (shouldFetch) viewModel.fetchHomeContent()
         }.launchIn(lifecycleScope)
     }
 

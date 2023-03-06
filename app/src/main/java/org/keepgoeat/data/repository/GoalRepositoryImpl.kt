@@ -14,8 +14,8 @@ import javax.inject.Inject
 class GoalRepositoryImpl @Inject constructor(
     private val goalDataSource: GoalDataSource,
 ) : GoalRepository {
-    override suspend fun fetchHomeEntireData(): Result<HomeContent> = runCatching {
-        goalDataSource.fetchHomeEntireData().data.toHomeGoal()
+    override suspend fun fetchHomeContent(): Result<HomeContent> = runCatching {
+        goalDataSource.fetchHomeContent().data.toHomeContent()
     }
 
     override suspend fun achieveGoal(

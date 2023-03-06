@@ -23,7 +23,7 @@ interface GoalRepository {
         criterion: String
     ): Result<Int>
 
-    suspend fun fetchHomeEntireData(): Result<HomeContent>
+    suspend fun fetchHomeContent(): Result<HomeContent>
     suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail>
     suspend fun fetchAchievedGoal(sortType: String): Result<List<AchievedGoal>>
     suspend fun keepGoal(id: Int): Result<ResponseGoalKeep.ResponseGoalKeepData>

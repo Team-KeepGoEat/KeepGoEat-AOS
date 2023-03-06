@@ -6,7 +6,7 @@ import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.presentation.type.HomeGoalViewType
 
 @Serializable
-data class ResponseHome(
+data class ResponseHomeContent(
     val data: HomeData,
     val message: String,
     val status: Int,
@@ -34,7 +34,7 @@ data class ResponseHome(
             val writerId: Int,
         )
 
-        fun toHomeGoal() = HomeContent(
+        fun toHomeContent() = HomeContent(
             cheeringMessage.replace("\\n", "\n"),
             goals.map { goal ->
                 HomeGoal(

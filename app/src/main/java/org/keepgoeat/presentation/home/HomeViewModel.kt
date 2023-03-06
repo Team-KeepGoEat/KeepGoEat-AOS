@@ -33,10 +33,9 @@ class HomeViewModel @Inject constructor(
     private val _lottieState = MutableStateFlow(ProcessState.IDLE)
     val lottieState get() = _lottieState.asStateFlow()
 
-    // TODO 함수명 변경
-    fun fetchGoalList() {
+    fun fetchHomeContent() {
         viewModelScope.launch {
-            goalRepository.fetchHomeEntireData()
+            goalRepository.fetchHomeContent()
                 .onSuccess { homeContent ->
                     _homeDataFetchState.value = UiState.Success(homeContent)
                     _goalList.value = homeContent.goals.toMutableList()
