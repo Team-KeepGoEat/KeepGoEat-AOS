@@ -125,4 +125,5 @@
     <string name="my_ahcieved_goal_empty_make_goal">목표 만들러 가기</string>
     <string name="my_keep_delete_title">삭제 하시겠어요?</string>
     <string name="my_keep_delete_description">삭제된 목표와 달성 기록은\n다시 복구할 수 없어요.</string>
+
 </resources>

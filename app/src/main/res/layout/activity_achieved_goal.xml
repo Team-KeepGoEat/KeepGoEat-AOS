@@ -17,9 +17,7 @@
 
         <include
             android:id="@+id/view_toolbar"
-            layout="@layout/view_toolbar"
-            tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="144dp" />
+            layout="@layout/view_toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_empty_keep"
