@@ -120,7 +120,9 @@
     <string name="my_logout_success_toast_message">로그아웃 되었습니다.</string>
     <string name="my_logout_failure_toast_message">로그아웃에 실패하였습니다.</string>
 
-
-    <string name="keep_delete_title">삭제 하시겠어요?</string>
-    <string name="keep_delete_description">삭제된 목표와 달성 기록은\n다시 복구할 수 없어요.</string>
+    <string name="my_achieved_goal_empty_title">더이상 기록하지 않는 목표는 보관해요.</string>
+    <string name="my_achieved_goal_empty_description">진행하지 않는 목표가 생긴다면,\n그동안의 노력을 지우지 말고 남겨보세요.</string>
+    <string name="my_ahcieved_goal_empty_make_goal">목표 만들러 가기</string>
+    <string name="my_keep_delete_title">삭제 하시겠어요?</string>
+    <string name="my_keep_delete_description">삭제된 목표와 달성 기록은\n다시 복구할 수 없어요.</string>
 </resources>
