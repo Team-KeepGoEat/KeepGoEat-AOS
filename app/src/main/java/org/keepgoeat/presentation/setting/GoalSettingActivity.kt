@@ -2,7 +2,6 @@ package org.keepgoeat.presentation.setting
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -81,12 +80,6 @@ class GoalSettingActivity :
         binding.btnComplete.setOnSingleClickListener {
             showKeyboard(it, false)
             viewModel.uploadGoal()
-        }
-        binding.etGoal.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus && viewModel.isValidTitle.value)
-                binding.tvGoalTitleLengthGuide.visibility = View.GONE
-            else
-                binding.tvGoalTitleLengthGuide.visibility = View.VISIBLE
         }
     }
 
