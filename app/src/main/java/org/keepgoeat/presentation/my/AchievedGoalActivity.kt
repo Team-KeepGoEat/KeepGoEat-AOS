@@ -75,7 +75,7 @@ class AchievedGoalActivity :
             moveToPrevious()
         }
         binding.btnMoreKeep.setOnClickListener {
-            // TODO 목표 추가하기 위한 뷰로 연결
+            moveToHome()
         }
     }
 
