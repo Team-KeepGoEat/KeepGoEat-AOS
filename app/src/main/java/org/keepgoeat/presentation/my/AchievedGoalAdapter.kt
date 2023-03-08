@@ -31,7 +31,7 @@ class AchievedGoalAdapter(
             binding.ivAchievedGoalDetail.setOnClickListener {
                 if (binding.btnAchievedGoalDelete.visibility == View.INVISIBLE)
                     showDeleteButton(binding.btnAchievedGoalDelete, data)
-                }
+            }
             binding.btnAchievedGoalDelete.setOnClickListener {
                 showKeepDeleteDialog(data.id)
             }
@@ -81,5 +81,4 @@ class AchievedGoalAdapter(
         val goal = keepGoalList.find { it.id == goalId }
         notifyItemRemoved(keepGoalList.indexOf(goal))
     }
-
 }
