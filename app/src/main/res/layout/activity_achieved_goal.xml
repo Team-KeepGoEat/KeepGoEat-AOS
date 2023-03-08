@@ -19,6 +19,15 @@
             android:id="@+id/view_toolbar"
             layout="@layout/view_toolbar" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_goal_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingTop="6dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_toolbar" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_empty_keep"
             android:layout_width="0dp"
@@ -83,14 +92,5 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_goal_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:paddingTop="6dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_toolbar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
