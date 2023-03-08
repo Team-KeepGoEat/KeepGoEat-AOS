@@ -19,6 +19,7 @@ import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingDialogFragment
+import org.keepgoeat.util.extension.showToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -54,10 +55,12 @@ class WithdrawDialogFragment :
         viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    requireActivity().showToast(getString(R.string.withdraw_success))
                     moveToSign()
                 }
                 is UiState.Error -> {
-                    // TODO 회원 탈퇴 실패 시 예외 처리
+                    requireActivity().showToast(getString(R.string.withdraw_fail))
+                    dismiss()
                 }
                 else -> {}
             }

@@ -132,4 +132,7 @@
     <string name="withdraw_dialog_description">이 계정에서 만든 목표와\n활동 기록이 모두 사라져요.</string>
     <string name="withdraw_dialog">탈퇴</string>
     <string name="withdraw_cancel">취소</string>
+
+    <string name="withdraw_success">회원 탈퇴가 완료되었습니다.</string>
+    <string name="withdraw_fail">회원 탈퇴에 실패하였습니다.</string>
 </resources>
