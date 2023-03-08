@@ -100,7 +100,7 @@ class GoalDetailActivity :
         viewModel.keepState.flowWithLifecycle(lifecycle).onEach { keepState ->
             when (keepState) {
                 is UiState.Success -> {
-                    showToast(getString(R.string.goal_detail_keep_goal_success_toast_message))
+                    showToast(getString(R.string.goal_detail_success_goal_keep_toast_message))
                     Intent(this, AchievedGoalActivity::class.java).apply {
                         putExtra(ARG_IS_ENTERED_FROM_KEEP, true)
                     }.also {
@@ -114,7 +114,7 @@ class GoalDetailActivity :
         viewModel.deleteState.flowWithLifecycle(lifecycle).onEach { deleteState ->
             when (deleteState) {
                 is UiState.Success -> {
-                    showToast(getString(R.string.goal_detail_delete_goal_success_toast_message))
+                    showToast(getString(R.string.goal_detail_success_goal_delete_toast_message))
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }
