@@ -82,12 +82,6 @@ class GoalSettingActivity :
             showKeyboard(it, false)
             viewModel.uploadGoal()
         }
-        binding.etGoal.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus && viewModel.isValidTitle.value)
-                binding.tvGoalTitleLengthGuide.visibility = View.GONE
-            else
-                binding.tvGoalTitleLengthGuide.visibility = View.VISIBLE
-        }
     }
 
     private fun moveToHome() {
