@@ -2,6 +2,7 @@ package org.keepgoeat.presentation.my
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -46,6 +47,11 @@ class AchievedGoalActivity :
         initLayout()
         addListeners()
         collectData()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        goalAdapter.checkForVisibleDeleteButton()
+        return super.dispatchTouchEvent(ev)
     }
 
     private fun initLayout() {
