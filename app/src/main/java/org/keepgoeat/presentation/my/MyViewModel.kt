@@ -20,7 +20,7 @@ class MyViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val goalRepository: GoalRepository,
     private val localStorage: KGEDataSource,
-) : ViewModel(), AchievedGoalAdapter.updateGoalIdListener {
+) : ViewModel() {
     private val _goalId = MutableStateFlow(-1)
     val goalId get() = _goalId.asStateFlow()
     private val _achievedGoalUiState =
@@ -43,10 +43,6 @@ class MyViewModel @Inject constructor(
         fetchAchievedGoalBySort(SortType.ALL)
     }
 
-    override fun updateGoalId(data: AchievedGoal) {
-        _goalId.value = data.id
-    }
-
     fun fetchAchievedGoalBySort(sortType: SortType) {
         viewModelScope.launch {
             goalRepository.fetchAchievedGoal(sortType.name.lowercase())
@@ -59,7 +55,8 @@ class MyViewModel @Inject constructor(
         }
     }
 
-    fun deleteGoal() {
+    fun deleteGoal(id: Int) {
+        _goalId.value = id
         viewModelScope.launch {
             goalId.value.let { id ->
                 goalRepository.deleteGoal(id).onSuccess { deletedData ->

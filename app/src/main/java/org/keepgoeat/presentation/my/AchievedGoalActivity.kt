@@ -2,9 +2,6 @@ package org.keepgoeat.presentation.my
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.View
-import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -41,24 +38,14 @@ class AchievedGoalActivity :
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-        goalAdapter = AchievedGoalAdapter(this, viewModel)
-        goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
         isEnteredFromKeep = intent.getBooleanExtra(ARG_IS_ENTERED_FROM_KEEP, false)
+
+        goalAdapter = AchievedGoalAdapter(::showKeepDeleteDialog)
+        goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
 
         initLayout()
         addListeners()
         collectData()
-    }
-
-    override fun onTouchEvent(ev: MotionEvent?): Boolean {
-        for (i in 1..goalAdapter.itemCount) {
-            val deleteBtn = binding.rvGoalList.findViewHolderForAdapterPosition(i)?.let {
-                it.itemView.findViewById<Button>(R.id.btn_achieved_goal_delete)
-            }
-            adjustVisibility(deleteBtn)
-        }
-        return super.onTouchEvent(ev)
     }
 
     private fun initLayout() {
@@ -90,7 +77,7 @@ class AchievedGoalActivity :
         viewModel.achievedGoalUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    goalAdapter.submitList(it.data.toMutableList())
+                    goalAdapter.setList(it.data.toMutableList())
                 }
                 is UiState.Error -> {} // TODO state에 따른 ui 업데이트 필요시 작성
                 is UiState.Loading -> {}
@@ -101,9 +88,8 @@ class AchievedGoalActivity :
         viewModel.deleteState.flowWithLifecycle(lifecycle).onEach { deleteState ->
             when (deleteState) {
                 is UiState.Success -> {
+                    goalAdapter.removeGoal(deleteState.data)
                     showToast(getString(R.string.goal_detail_success_goal_delete_toast_message))
-                    startActivity(Intent(this, AchievedGoalActivity::class.java))
-                    finish()
                 }
                 else -> {}
             }
@@ -121,15 +107,16 @@ class AchievedGoalActivity :
         else finish()
     }
 
-    private fun adjustVisibility(view: View?) {
-        view?.let {
-            if (it.visibility == View.VISIBLE) {
-                it.visibility = View.GONE
+    private fun showKeepDeleteDialog(goalId: Int) {
+        KeepDeleteDialogFragment().apply {
+            arguments = Bundle().apply {
+                putInt(GOAL_ID, goalId)
             }
-        }
+        }.show(supportFragmentManager, "KeepDeleteDialog")
     }
 
     companion object {
         const val ARG_IS_ENTERED_FROM_KEEP = "isEnteredFromKeep"
+        const val GOAL_ID = "goalId"
     }
 }
