@@ -42,7 +42,7 @@ IN SOPT 31st APPJAM 킵고잇 Android 팀 레포입니다.
 | Jetpack Components | encryptedsharedpreferences, LiveData, Lifecycle, ViewModel, DataBinding |
 | Dependency Injection | Hilt |
 | Network | Retrofit, OkHttp |
-| Asynchronous Processing | Coroutine |
+| Asynchronous Processing | Coroutine(+ Flow) |
 | Third Party Library | Coil, Social Login, Firebase, Lottie, Timber, kotlinSerialization |
 | Strategy | Git Flow |
 | CI | GitHub Action(KtLint, Complie Check) |
