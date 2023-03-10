@@ -1,5 +1,6 @@
 package org.keepgoeat.presentation.my
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,6 +41,8 @@ class MyViewModel @Inject constructor(
         }.toStateFlow(viewModelScope, false)
     private val _isKeyboardVisible = MutableStateFlow(false)
     val isKeyboardVisible get() = _isKeyboardVisible.asStateFlow()
+    private val _isOtherReasonSelected = MutableStateFlow(false)
+    val isOtherReasonSelected get() = _isOtherReasonSelected.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
     val userName = localStorage.userName
     val userEmail = localStorage.userEmail
@@ -79,4 +82,13 @@ class MyViewModel @Inject constructor(
     fun setKeyboardVisibility(visible: Boolean) {
         _isKeyboardVisible.value = visible
     }
+
+    fun onCheckBoxClick(view: View) {
+        _isOtherReasonSelected.value = !isOtherReasonSelected.value
+    }
+
+    fun changeCheckboxSelected(isSelected: Boolean) {
+        _isOtherReasonSelected.value = isSelected
+    }
+
 }
