@@ -83,7 +83,7 @@ class AchievedGoalActivity :
         viewModel.achievedGoalUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    goalAdapter.setList(it.data.toMutableList())
+                    goalAdapter.setGoalList(it.data.toMutableList())
                 }
                 is UiState.Error -> {} // TODO state에 따른 ui 업데이트 필요시 작성
                 is UiState.Loading -> {}
@@ -116,13 +116,13 @@ class AchievedGoalActivity :
     private fun showKeepDeleteDialog(goalId: Int) {
         KeepDeleteDialogFragment().apply {
             arguments = Bundle().apply {
-                putInt(GOAL_ID, goalId)
+                putInt(ARG_GOAL_ID, goalId)
             }
         }.show(supportFragmentManager, "KeepDeleteDialog")
     }
 
     companion object {
         const val ARG_IS_ENTERED_FROM_KEEP = "isEnteredFromKeep"
-        const val GOAL_ID = "goalId"
+        const val ARG_GOAL_ID = "goalId"
     }
 }

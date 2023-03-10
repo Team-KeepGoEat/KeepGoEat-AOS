@@ -12,7 +12,7 @@ class AchievedGoalAdapter(
     private val showKeepDeleteDialog: (Int) -> Unit,
 ) : RecyclerView.Adapter<AchievedGoalAdapter.AchievedGoalViewHolder>() {
     private lateinit var inflater: LayoutInflater
-    private var keepGoalList: MutableList<AchievedGoal> = mutableListOf()
+    private var goalLists: MutableList<AchievedGoal> = mutableListOf()
     private var goalWithDeleteViewVisible: AchievedGoal? = null
 
     class AchievedGoalViewHolder(private val binding: ItemAchievedGoalBinding) :
@@ -47,17 +47,17 @@ class AchievedGoalAdapter(
 
     override fun onBindViewHolder(holder: AchievedGoalViewHolder, position: Int) {
         holder.onBind(
-            keepGoalList[position],
+            goalLists[position],
             showKeepDeleteDialog,
             ::showDeleteButton,
             ::hideDeleteButton
         )
     }
 
-    override fun getItemCount() = keepGoalList.size
+    override fun getItemCount() = goalLists.size
 
-    fun setList(goalList: MutableList<AchievedGoal>) {
-        this.keepGoalList = goalList.toMutableList()
+    fun setGoalList(goals: MutableList<AchievedGoal>) {
+        this.goalLists = goals
         notifyDataSetChanged()
     }
 
@@ -74,11 +74,11 @@ class AchievedGoalAdapter(
     fun checkForVisibleDeleteButton() {
         if (goalWithDeleteViewVisible == null) return
         else
-            notifyItemChanged(keepGoalList.indexOf(goalWithDeleteViewVisible))
+            notifyItemChanged(goalLists.indexOf(goalWithDeleteViewVisible))
     }
 
     fun removeGoal(goalId: Int) {
-        val goal = keepGoalList.find { it.id == goalId }
-        notifyItemRemoved(keepGoalList.indexOf(goal))
+        val goal = goalLists.find { it.id == goalId }
+        notifyItemRemoved(goalLists.indexOf(goal))
     }
 }

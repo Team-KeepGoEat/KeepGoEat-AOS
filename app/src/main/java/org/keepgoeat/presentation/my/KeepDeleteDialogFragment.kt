@@ -14,7 +14,7 @@ class KeepDeleteDialogFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        goalId = arguments?.getInt("goalId")
+        goalId = arguments?.getInt(ARG_GOAL_ID)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,5 +33,9 @@ class KeepDeleteDialogFragment :
             }
             dismiss()
         }
+    }
+
+    companion object {
+        const val ARG_GOAL_ID = "goalId"
     }
 }
