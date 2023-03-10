@@ -14,6 +14,10 @@
         <variable
             name="viewModel"
             type="org.keepgoeat.presentation.my.MyViewModel" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,7 +61,7 @@
             android:layout_marginTop="@dimen/spacing12"
             android:orientation="vertical"
             android:overScrollMode="never"
-            android:visibility="visible"
+            android:visibility="@{viewModel.isKeyboardVisible ? view.GONE : view.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,9 +130,9 @@
             android:textAppearance="@style/TextAppearance.System6"
             android:textColor="@color/orange_400"
             android:visibility="gone"
-            app:visibility="@{viewModel.isValidOtherReason}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_other_reason" />
+            app:layout_constraintTop_toBottomOf="@+id/et_other_reason"
+            app:visibility="@{viewModel.isValidOtherReason}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_withdraw"

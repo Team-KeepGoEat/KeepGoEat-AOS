@@ -38,6 +38,8 @@ class MyViewModel @Inject constructor(
         get() = otherReason.map { reason ->
             reason.isNullOrBlank()
         }.toStateFlow(viewModelScope, false)
+    private val _isKeyboardVisible = MutableStateFlow(false)
+    val isKeyboardVisible get() = _isKeyboardVisible.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
     val userName = localStorage.userName
     val userEmail = localStorage.userEmail
@@ -72,5 +74,9 @@ class MyViewModel @Inject constructor(
                     _deleteAccountUiState.value = UiState.Error(it.message)
                 }
         }
+    }
+
+    fun setKeyboardVisibility(visible: Boolean) {
+        _isKeyboardVisible.value = visible
     }
 }

@@ -1,5 +1,6 @@
 package org.keepgoeat.presentation.withdraw
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -9,13 +10,13 @@ import org.keepgoeat.databinding.ActivityWithdrawBinding
 import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.presentation.type.WithdrawCheckType
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.extension.addKeyboardInsetListener
 import org.keepgoeat.util.extension.showKeyboard
 
 @AndroidEntryPoint
 class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activity_withdraw) {
     private val viewModel: MyViewModel by viewModels()
 
-    // TODO 키보드 자판에서 키보드 내리는 경우 recyclerView visibility 조정해주기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
@@ -34,6 +35,10 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
     }
 
     private fun addListeners() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+            binding.layoutWithdraw.addKeyboardInsetListener(viewModel::setKeyboardVisibility)
+        }
         binding.layoutOtherReason.setOnClickListener {
             when (binding.clickType) {
                 WithdrawCheckType.CLICKED -> {
@@ -50,7 +55,6 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
         }
         binding.etOtherReason.setOnFocusChangeListener { _, focused ->
             if (focused) { // '직접 입력' editText가 focus 상태일 때
-                binding.rvWithdraw.visibility = View.GONE
                 if (binding.clickType == WithdrawCheckType.DEFAULT)
                     binding.clickType = WithdrawCheckType.CLICKED
             }
@@ -66,20 +70,18 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
                 WithdrawDialogFragment().show(supportFragmentManager, "withDrawDialog")
             }
         }
-        binding.viewWithdrawToolbar.ivBack.setOnClickListener{
+        binding.viewWithdrawToolbar.ivBack.setOnClickListener {
             finish()
         }
     }
 
     private fun clearFocus() {
         binding.etOtherReason.clearFocus()
-        binding.rvWithdraw.visibility = View.VISIBLE
         showKeyboard(binding.etOtherReason, false)
     }
 
     private fun requestFocus() {
         binding.etOtherReason.requestFocus()
-        binding.rvWithdraw.visibility = View.GONE
         showKeyboard(binding.etOtherReason, true)
     }
 }
