@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="org.keepgoeat.presentation.type.EatingType" />
+
         <variable
             name="viewModel"
             type="org.keepgoeat.presentation.detail.GoalDetailViewModel" />
@@ -13,14 +15,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="79dp"
+        android:paddingBottom="58dp"
         tools:context=".presentation.detail.GoalKeepBottomDialogFragment">
 
         <TextView
             android:id="@+id/tv_goal_delete_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="30dp"
             android:text="삭제하시겠어요?"
             android:textAppearance="@style/TextAppearance.System3_Bold"
             android:textColor="@color/gray_600"
@@ -44,7 +46,7 @@
             android:id="@+id/iv_trash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="@dimen/spacing16"
             android:src="@drawable/ic_trash"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,14 +57,15 @@
             style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/spacing16"
-            android:layout_marginTop="31dp"
-            android:backgroundTint="@color/orange_600"
+            android:layout_marginTop="13dp"
+            android:backgroundTint="@{viewModel.goalDetail.eatingType == EatingType.MORE ? @color/orange_600 : @color/green_600}"
             android:text="@string/btn_text_no"
             android:textAppearance="@style/TextAppearance.System5_Bold"
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@id/btn_yes"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_trash" />
+            app:layout_constraintTop_toBottomOf="@id/iv_trash"
+            tools:backgroundTint="@color/orange_600" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_yes"
