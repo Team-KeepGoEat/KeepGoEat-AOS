@@ -17,6 +17,7 @@ import org.keepgoeat.presentation.home.HomeActivity.Companion.ARG_KILL_HOME_AND_
 import org.keepgoeat.presentation.withdraw.WithdrawActivity
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.extension.showToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -56,10 +57,11 @@ class AccountInfoActivity :
         viewModel.logoutUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    showToast(getString(R.string.my_logout_success_toast_message))
                     moveToSign()
                 }
                 is UiState.Error -> {
-                    // TODO 로그아웃 실패 시 예외 처리
+                    showToast(getString(R.string.my_logout_failure_toast_message))
                 }
                 else -> {}
             }

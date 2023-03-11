@@ -69,14 +69,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/spacingBase" />
+            app:layout_constraintGuide_begin="@dimen/spacing16" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/spacingBase" />
+            app:layout_constraintGuide_end="@dimen/spacing16" />
 
         <include
             android:id="@+id/view_eating_tag"
@@ -89,7 +89,7 @@
             app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
 
         <TextView
-            android:id="@+id/tv_goal_title"
+            android:id="@+id/tv_goal_food"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
@@ -99,24 +99,38 @@
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/view_eating_tag"
-            tools:text="하루 1끼 이상 야채 더 먹기" />
+            tools:text="물 더 먹기" />
+
+        <TextView
+            android:id="@+id/tv_goal_criterion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing4"
+            android:fontFamily="@font/pretendard_b"
+            android:text="@{viewModel.goalDetail.criterion == null ? `` : viewModel.goalDetail.criterion}"
+            android:textColor="#A3A1A1"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_food"
+            tools:text="하루에 2L씩 마시기" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_day_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing12"
+            android:layout_marginTop="@dimen/spacing16"
             android:background="@drawable/shape_border_gray_radius_8"
-            android:paddingVertical="@dimen/spacing36"
+            android:paddingVertical="29dp"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_goal_title">
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_criterion">
 
             <TextView
                 android:id="@+id/tv_num_of_days_eaten_last_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="3dp"
                 android:text="@{@string/goal_detail_num_of_days_eaten_last_month(viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.achievementCountTitle))}"
                 android:textAppearance="@style/TextAppearance.System5"
                 android:textColor="@color/gray_600"
@@ -128,7 +142,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing8"
+                android:layout_marginTop="@dimen/spacing4"
                 android:layout_marginBottom="@dimen/spacing4"
                 android:fontFamily="@font/pretendard_b"
                 android:text="@{viewModel.goalDetail == null ? `` : Integer.toString(viewModel.goalDetail.lastMonthCount)}"
@@ -154,7 +168,7 @@
                 android:id="@+id/tv_num_of_days_eaten_this_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="3dp"
                 android:text="@{@string/goal_detail_num_of_days_eaten_this_month(viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.achievementCountTitle))}"
                 android:textAppearance="@style/TextAppearance.System5"
                 android:textColor="@color/gray_600"
@@ -166,7 +180,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing8"
+                android:layout_marginTop="@dimen/spacing4"
                 android:layout_marginBottom="@dimen/spacing4"
                 android:fontFamily="@font/pretendard_b"
                 android:text="@{Integer.toString(viewModel.goalDetail.thisMonthCount)}"

@@ -55,10 +55,10 @@ class GoalSettingActivity :
             when (it) {
                 is UiState.Success -> {
                     if (isEditMode) {
-                        showToast(getString(R.string.goal_setting_success_edit_toast_message))
+                        showToast(getString(R.string.goal_setting_edit_success_toast_message))
                         moveToDetail()
                     } else {
-                        showToast(getString(R.string.goal_setting_success_add_toast_message))
+                        showToast(getString(R.string.goal_setting_add_success_toast_message))
                         moveToHome()
                     }
                 }
@@ -72,6 +72,7 @@ class GoalSettingActivity :
         binding.root.setOnClickListener {
             showKeyboard(it, false)
             binding.etGoal.clearFocus()
+            binding.etGoalCriterion.clearFocus()
         }
         binding.viewToolbar.ivBack.setOnClickListener {
             finish()

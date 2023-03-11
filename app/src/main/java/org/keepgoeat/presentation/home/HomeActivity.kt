@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
@@ -16,6 +17,7 @@ import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.ProcessState
+import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
@@ -73,6 +75,11 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
                 ProcessState.IDLE -> {}
                 ProcessState.DONE -> {}
             }
+        }.launchIn(lifecycleScope)
+        combine(viewModel.homeDataFetchState, isConnectedNetwork) { fetchState, isConnected ->
+            fetchState !is UiState.Success && isConnected
+        }.flowWithLifecycle(lifecycle).onEach { shouldFetch ->
+            if (shouldFetch) viewModel.fetchHomeContent()
         }.launchIn(lifecycleScope)
     }
 

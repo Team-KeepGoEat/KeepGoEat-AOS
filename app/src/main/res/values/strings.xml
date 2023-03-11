@@ -13,6 +13,7 @@
     <string name="title_less">%s 덜 먹기</string>
     <string name="cancel">취소</string>
     <string name="yes">네</string>
+    <string name="network_error_snackbar_message">네트워크 연결을 확인해주세요.</string>
 
     <!-- sign -->
     <string name="signin_kakao">카카오톡 로그인</string>
@@ -20,6 +21,8 @@
     <string name="sign_description1">식습관 관리,</string>
     <string name="sign_description2">같이 천천히 시작해볼까요?\n먹는 재미는 언제나 소중하니까!</string>
     <string name="auto_login_failure">자동 로그인이 만료되었습니다.</string>
+    <string name="signin_success_toast_message">로그인 되었습니다.</string>
+    <string name="signin_failure_toast_message">로그인에 실패하였습니다.</string>
 
     <!-- Goal Detail -->
     <string name="goal_detail_my_goal">나의 목표</string>
@@ -28,8 +31,8 @@
     <string name="goal_detail_num_of_days_eaten_this_month">이번달 %s 날</string>
     <string name="goal_detail_eat">먹은</string>
     <string name="goal_detail_hold">참은</string>
-    <string name="goal_detail_success_goal_delete_toast_message">목표가 삭제되었습니다.</string>
-    <string name="goal_detail_success_goal_keep_toast_message">목표가 보관되었습니다.</string>
+    <string name="goal_detail_delete_goal_success_toast_message">목표가 삭제되었습니다.</string>
+    <string name="goal_detail_keep_goal_success_toast_message">목표가 보관되었습니다.</string>
     <string name="goal_detail_delete_button_text">네, 삭제할래요</string>
 
     <!-- Home View -->
@@ -76,8 +79,8 @@
     <string name="goal_setting_criterion_title_hint_for_more">ex) 하루에 2L씩 마시기</string>
     <string name="goal_setting_criterion_title_hint_for_less">ex) 아침에 딱 1잔만 마시기</string>
     <string name="goal_setting_criterion_length_limit">(%d/20)</string>
-    <string name="goal_setting_success_edit_toast_message">목표가 수정되었습니다.</string>
-    <string name="goal_setting_success_add_toast_message">목표가 추가되었습니다.</string>
+    <string name="goal_setting_edit_success_toast_message">목표가 수정되었습니다.</string>
+    <string name="goal_setting_add_success_toast_message">목표가 추가되었습니다.</string>
 
     <!-- On Boarding -->
     <string name="onboarding1_title">차근차근 식습관 목표를 세워보세요.</string>
@@ -113,6 +116,10 @@
     <string name="my_account_info">계정 정보</string>
     <string name="my_logout_title">로그아웃 하시겠어요?</string>
     <string name="my_logout_description">그동안의 기록은 사라지지 않으니\n안심하고 다녀오세요.</string>
+
+    <string name="my_logout_success_toast_message">로그아웃 되었습니다.</string>
+    <string name="my_logout_failure_toast_message">로그아웃에 실패하였습니다.</string>
+
 
     <!-- WithDraw -->
     <string name="withdraw">탈퇴하기</string>
