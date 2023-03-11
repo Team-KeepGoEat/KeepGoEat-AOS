@@ -1,26 +1,40 @@
 package org.keepgoeat.presentation.my
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.databinding.ItemAchievedGoalBinding
 import org.keepgoeat.domain.model.AchievedGoal
-import org.keepgoeat.util.ItemDiffCallback
 
-class AchievedGoalAdapter :
-    ListAdapter<AchievedGoal, AchievedGoalAdapter.AchievedGoalViewHolder>(
-        ItemDiffCallback<AchievedGoal>(
-            onContentsTheSame = { old, new -> old == new },
-            onItemsTheSame = { old, new -> old.id == new.id }
-        )
-    ) {
+class AchievedGoalAdapter(
+    private val showKeepDeleteDialog: (Int) -> Unit,
+) : RecyclerView.Adapter<AchievedGoalAdapter.AchievedGoalViewHolder>() {
     private lateinit var inflater: LayoutInflater
+    private var goalLists: MutableList<AchievedGoal> = mutableListOf()
+    private var goalWithDeleteViewVisible: AchievedGoal? = null
 
     class AchievedGoalViewHolder(private val binding: ItemAchievedGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: AchievedGoal) {
+        fun onBind(
+            data: AchievedGoal,
+            showKeepDeleteDialog: (Int) -> Unit,
+            showDeleteButton: (Button, AchievedGoal) -> Unit,
+            hideDeleteButton: (Button) -> Unit
+        ) {
             binding.goal = data
+
+            if (binding.btnAchievedGoalDelete.visibility == View.VISIBLE)
+                hideDeleteButton(binding.btnAchievedGoalDelete)
+
+            binding.ivAchievedGoalDetail.setOnClickListener {
+                if (binding.btnAchievedGoalDelete.visibility == View.INVISIBLE)
+                    showDeleteButton(binding.btnAchievedGoalDelete, data)
+            }
+            binding.btnAchievedGoalDelete.setOnClickListener {
+                showKeepDeleteDialog(data.id)
+            }
         }
     }
 
@@ -32,6 +46,39 @@ class AchievedGoalAdapter :
     }
 
     override fun onBindViewHolder(holder: AchievedGoalViewHolder, position: Int) {
-        holder.onBind(currentList[position])
+        holder.onBind(
+            goalLists[position],
+            showKeepDeleteDialog,
+            ::showDeleteButton,
+            ::hideDeleteButton
+        )
+    }
+
+    override fun getItemCount() = goalLists.size
+
+    fun setGoalList(goals: MutableList<AchievedGoal>) {
+        this.goalLists = goals
+        notifyDataSetChanged()
+    }
+
+    fun hideDeleteButton(deleteButton: Button) {
+        deleteButton.visibility = View.INVISIBLE
+        goalWithDeleteViewVisible = null
+    }
+
+    fun showDeleteButton(deleteButton: Button, goal: AchievedGoal) {
+        deleteButton.visibility = View.VISIBLE
+        goalWithDeleteViewVisible = goal
+    }
+
+    fun checkForVisibleDeleteButton() {
+        if (goalWithDeleteViewVisible == null) return
+        else
+            notifyItemChanged(goalLists.indexOf(goalWithDeleteViewVisible))
+    }
+
+    fun removeGoal(goalId: Int) {
+        val goal = goalLists.find { it.id == goalId }
+        notifyItemRemoved(goalLists.indexOf(goal))
     }
 }
