@@ -90,5 +90,4 @@ class MyViewModel @Inject constructor(
     fun changeCheckboxSelected(isSelected: Boolean) {
         _isOtherReasonSelected.value = isSelected
     }
-
 }
