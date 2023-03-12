@@ -6,8 +6,14 @@
     <data>
 
         <variable
-            name="clickType"
-            type="org.keepgoeat.presentation.type.WithdrawCheckType" />
+            name="isClicked"
+            type="Boolean" />
+
+        <variable
+            name="reason"
+            type="Integer" />
+
+        <import type="org.keepgoeat.R" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +27,7 @@
             android:id="@+id/iv_withdraw_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@{context.getDrawable(clickType.checkBox)}"
+            android:src="@{isClicked? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_default}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_checkbox_checked" />
@@ -32,8 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing4"
             android:layout_marginStart="@dimen/spacing4"
-            android:textAppearance="@{clickType.textStyle}"
-            android:textColor="@{context.getColor(clickType.descriptionTextColor)}"
+            android:text="@{context.getString(reason)}"
+            android:textAppearance="@{isClicked? R.style.TextAppearance_System4_Bold : R.style.TextAppearance_System4}"
+            android:textColor="@{isClicked? @color/orange_600 : @color/gray_700}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_withdraw_checkbox"
             app:layout_constraintTop_toTopOf="parent"

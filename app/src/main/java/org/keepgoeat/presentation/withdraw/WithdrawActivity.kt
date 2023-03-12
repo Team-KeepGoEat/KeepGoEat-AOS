@@ -32,7 +32,7 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
     private fun initLayout() {
         binding.rvWithdraw.apply {
             itemAnimator = null
-            adapter = WithdrawReasonAdapter(context)
+            adapter = WithdrawReasonAdapter()
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
@@ -49,7 +49,7 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             clearFocus()
         }
         binding.btnWithdraw.setOnClickListener {
-            if (!binding.etOtherReason.text.isNullOrBlank() || binding.tvOtherReason.textColors != getColorStateList(R.color.orange_600))
+            if (!binding.etOtherReason.text.isNullOrBlank() || !viewModel.isOtherReasonSelected.value)
                 WithdrawDialogFragment().show(supportFragmentManager, "withDrawDialog")
         }
         binding.viewWithdrawToolbar.ivBack.setOnClickListener {

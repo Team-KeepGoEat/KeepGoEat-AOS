@@ -25,7 +25,7 @@
         <include
             android:id="@+id/view_withdraw_toolbar"
             layout="@layout/view_toolbar"
-            app:title="@{context.getString(R.string.withdraw)}" />
+            app:title="@{@string/withdraw}" />
 
         <TextView
             android:id="@+id/tv_withdraw_title"
@@ -58,11 +58,11 @@
             android:layout_marginTop="@dimen/spacing12"
             android:orientation="vertical"
             android:overScrollMode="never"
-            android:visibility="@{viewModel.isKeyboardVisible ? view.GONE : view.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_description" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_description"
+            app:visibility="@{!viewModel.isKeyboardVisible}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_other_reason"
@@ -78,7 +78,7 @@
                 android:id="@+id/iv_other_reason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@{viewModel.isOtherReasonSelected? context.getDrawable(R.drawable.ic_checkbox_checked) : context.getDrawable(R.drawable.ic_checkbox_default)}"
+                android:src="@{viewModel.isOtherReasonSelected? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_default}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/ic_checkbox_default" />
@@ -91,7 +91,7 @@
                 android:layout_marginStart="@dimen/spacing4"
                 android:text="@string/withdraw_other_reason"
                 android:textAppearance="@{viewModel.isOtherReasonSelected? R.style.TextAppearance_System4_Bold : R.style.TextAppearance_System4}"
-                android:textColor="@{viewModel.isOtherReasonSelected? context.getColor(R.color.orange_600) : context.getColor(R.color.gray_700)}"
+                android:textColor="@{viewModel.isOtherReasonSelected? @color/orange_600 : @color/gray_700}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_other_reason"
                 app:layout_constraintTop_toTopOf="parent"
