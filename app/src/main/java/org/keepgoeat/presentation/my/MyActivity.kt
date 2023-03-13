@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.BuildConfig
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.common.WebViewActivity
 import org.keepgoeat.util.binding.BindingActivity
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
@@ -49,6 +51,9 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
                     Build.VERSION.SDK_INT,
                     Build.VERSION.RELEASE))
         }
+        binding.tvFeedback.setOnClickListener {
+            showReviewDialog()
+        }
         binding.tvAboutService.setOnClickListener {
             startActivity(Intent(this, ServiceIntroActivity::class.java))
         }
@@ -71,6 +76,23 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             putExtra(Intent.EXTRA_SUBJECT, title)
             putExtra(Intent.EXTRA_TEXT, content)
         }.also { startActivity(it) }
+    }
+
+    private fun showReviewDialog() {
+        val manager = ReviewManagerFactory.create(this)
+        val request = manager.requestReviewFlow()
+        request.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                manager.launchReviewFlow(this, task.result)
+                    .addOnCompleteListener {
+                        Timber.d("리뷰 남기기 성공") // TODO 로그 지우기
+                    }.addOnFailureListener {
+                        Timber.e(task.exception?.message)
+                    }
+            } else {
+                Timber.e(task.exception?.message)
+            }
+        }
     }
 
     private fun moveToWebPage(link: String) {
