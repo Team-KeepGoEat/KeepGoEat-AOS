@@ -29,6 +29,7 @@ class WebViewActivity : BindingActivity<ActivityWebViewBinding>(R.layout.activit
                 javaScriptCanOpenWindowsAutomatically = true
                 loadWithOverviewMode = true
                 useWideViewPort = true
+                domStorageEnabled = true
                 setSupportZoom(true)
             }
 
