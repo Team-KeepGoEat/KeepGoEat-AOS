@@ -130,5 +130,5 @@
     <string name="my_service_intro_open_source">오픈소스 라이브러리</string>
 
     <string name="my_contact_us_mail_title">킵고잇 문의사항</string>
-    <string name="my_contact_us_mail_content">%s / %s %s / %d(%s)\n-------------\n내용 :</string>
+    <string name="my_contact_us_mail_content">Device: %s %s\nApp version: %s\nOS Version: %d(%s)\n-------------\n내용 :</string>
 </resources>
