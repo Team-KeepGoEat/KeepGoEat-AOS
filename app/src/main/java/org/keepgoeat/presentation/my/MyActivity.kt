@@ -111,8 +111,8 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
     companion object {
         private const val TERMS_LINK =
-            "https://www.notion.so/68space/7d49b1a8912440cb9ec262392e5583e2?pvs=4" // TODO 링크 변경
+            "https://68space.notion.site/7d49b1a8912440cb9ec262392e5583e2"
         private const val POLICY_LINK =
-            "https://www.notion.so/68space/cd16c9399dfe4c7a867deb59851282e3?pvs=4" // TODO 링크 변경
+            "https://68space.notion.site/9083a018baab42958103596378417c13"
     }
 }

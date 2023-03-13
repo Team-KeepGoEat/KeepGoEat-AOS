@@ -34,6 +34,6 @@ class ServiceIntroActivity :
 
     companion object {
         private const val OPEN_SOURCE_LINK =
-            "https://www.notion.so/68space/cd16c9399dfe4c7a867deb59851282e3?pvs=4" // TODO 링크 변경
+            "https://68space.notion.site/AOS-9d8b169f9108434baca652a9c1dd7c81"
     }
 }
