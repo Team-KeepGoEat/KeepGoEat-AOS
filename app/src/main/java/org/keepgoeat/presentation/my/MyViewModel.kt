@@ -13,6 +13,7 @@ import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.domain.model.AchievedGoal
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.extension.toStateFlow
@@ -43,6 +44,8 @@ class MyViewModel @Inject constructor(
     val isKeyboardVisible get() = _isKeyboardVisible.asStateFlow()
     private val _isOtherReasonSelected = MutableStateFlow(false)
     val isOtherReasonSelected get() = _isOtherReasonSelected.asStateFlow()
+    private val _selectedReasons = MutableStateFlow(arrayListOf(WithdrawReason.REASON5))
+    val selectedReasons get() = _selectedReasons.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
     val userName = localStorage.userName
     val userEmail = localStorage.userEmail
@@ -89,5 +92,13 @@ class MyViewModel @Inject constructor(
 
     fun changeCheckboxSelected(isSelected: Boolean) {
         _isOtherReasonSelected.value = isSelected
+    }
+
+    fun selectReasons(isSelected: WithdrawReason) {
+        if (_selectedReasons.value.contains(isSelected)) {
+            _selectedReasons.value.remove(isSelected)
+            return
+        }
+        _selectedReasons.value.add(isSelected)
     }
 }

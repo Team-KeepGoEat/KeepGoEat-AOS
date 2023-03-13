@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityWithdrawBinding
+import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.addKeyboardInsetListener
@@ -32,12 +33,13 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
     private fun initLayout() {
         binding.rvWithdraw.apply {
             itemAnimator = null
-            adapter = WithdrawReasonAdapter()
+            adapter = WithdrawReasonAdapter(viewModel::selectReasons)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
             binding.layoutWithdraw.addKeyboardInsetListener(viewModel::setKeyboardVisibility)
         }
+        binding.layoutOtherReason.isSelected = false
     }
 
     private fun addListeners() {
@@ -59,6 +61,7 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
 
     private fun collectData() {
         viewModel.isOtherReasonSelected.flowWithLifecycle(lifecycle).onEach { isSelected ->
+            viewModel.selectReasons(WithdrawReason.REASON5)
             if (isSelected) {
                 requestFocus()
             } else {

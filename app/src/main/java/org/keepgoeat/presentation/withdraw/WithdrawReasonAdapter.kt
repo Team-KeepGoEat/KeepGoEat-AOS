@@ -8,7 +8,9 @@ import org.keepgoeat.databinding.ItemWithdrawBinding
 import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.util.ItemDiffCallback
 
-class WithdrawReasonAdapter :
+class WithdrawReasonAdapter(
+    private val selectReasons: (WithdrawReason) -> Unit,
+) :
     ListAdapter<WithdrawReason, WithdrawReasonAdapter.WithdrawViewHolder>(
         ItemDiffCallback<WithdrawReason>(
             onContentsTheSame = { old, new -> old == new },
@@ -33,12 +35,14 @@ class WithdrawReasonAdapter :
         var isClicked: Boolean = false
         fun bind(
             reason: WithdrawReason,
+            selectReasons: (WithdrawReason) -> Unit,
         ) {
             binding.reason = reason.reason
             binding.isClicked = isClicked
             binding.layoutWithdrawReason.setOnClickListener {
                 isClicked = !isClicked
                 binding.isClicked = isClicked
+                selectReasons(reason)
             }
         }
     }
@@ -50,6 +54,6 @@ class WithdrawReasonAdapter :
     }
 
     override fun onBindViewHolder(holder: WithdrawViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position], selectReasons)
     }
 }
