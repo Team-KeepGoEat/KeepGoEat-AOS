@@ -43,13 +43,17 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             moveToAchievedGoalDetail()
         }
         binding.tvContactUs.setOnClickListener {
-            sendMail(getString(R.string.my_contact_us_mail_title),
-                String.format(getString(R.string.my_contact_us_mail_content),
+            sendMail(
+                getString(R.string.my_contact_us_mail_title),
+                String.format(
+                    getString(R.string.my_contact_us_mail_content),
                     BuildConfig.VERSION_NAME,
                     Build.BRAND,
                     Build.DEVICE,
                     Build.VERSION.SDK_INT,
-                    Build.VERSION.RELEASE))
+                    Build.VERSION.RELEASE
+                )
+            )
         }
         binding.tvFeedback.setOnClickListener {
             showReviewDialog()
