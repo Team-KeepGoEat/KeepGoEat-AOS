@@ -2,6 +2,7 @@
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
     <string name="app_version">1.0.0</string>
+    <string name="keep_go_eat_mail">Keepgo2at@gmail.com</string>
 
     <!-- Global -->
     <string name="keep_go_eat">킵고잇</string>
@@ -127,4 +128,7 @@
 
     <string name="my_service_intro_description">킵고잇은\n영양소나 칼로리처럼 복잡한 방법 대신\n가볍고, 지속가능한 식습관 관리를\n돕기 위해 탄생했어요.\n\n늘리거나 줄이고 싶은 식습관 목표를 설정하고,\n목표를 달성한 날이면 킵고잇을 찾아와주세요.\n건강한 하루하루를 기록할 수 있어요.\n\n매일 완벽한 식사만을 하기란 어렵죠.\n대신 건강하지 않은 음식을 덜 먹고,\n건강한 음식을 더 먹은 날을 늘려가볼까요?\n\n먹는 건 원래 즐거운 일이니까.\n완벽한 식사에 대한 부담 없이\n킵고잇에서 건강한 즐거움을 쌓아보세요.</string>
     <string name="my_service_intro_open_source">오픈소스 라이브러리</string>
+
+    <string name="my_contact_us_mail_title">킵고잇 문의사항</string>
+    <string name="my_contact_us_mail_content">%s / %s %s / %d(%s)\n-------------\n내용 :</string>
 </resources>

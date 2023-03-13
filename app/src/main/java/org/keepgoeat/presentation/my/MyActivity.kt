@@ -1,9 +1,11 @@
 package org.keepgoeat.presentation.my
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import org.keepgoeat.BuildConfig
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.common.WebViewActivity
@@ -38,6 +40,15 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         binding.ivAchievedGoalDetail.setOnClickListener {
             moveToAchievedGoalDetail()
         }
+        binding.tvContactUs.setOnClickListener {
+            sendMail(getString(R.string.my_contact_us_mail_title),
+                String.format(getString(R.string.my_contact_us_mail_content),
+                    BuildConfig.VERSION_NAME,
+                    Build.BRAND,
+                    Build.DEVICE,
+                    Build.VERSION.SDK_INT,
+                    Build.VERSION.RELEASE))
+        }
         binding.tvAboutService.setOnClickListener {
             startActivity(Intent(this, ServiceIntroActivity::class.java))
         }
@@ -51,6 +62,15 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
     private fun moveToAchievedGoalDetail() {
         startActivity(Intent(this, AchievedGoalActivity::class.java))
+    }
+
+    private fun sendMail(title: String, content: String) {
+        Intent(Intent.ACTION_SEND).apply {
+            type = "plain/text"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.keep_go_eat_mail)))
+            putExtra(Intent.EXTRA_SUBJECT, title)
+            putExtra(Intent.EXTRA_TEXT, content)
+        }.also { startActivity(it) }
     }
 
     private fun moveToWebPage(link: String) {
