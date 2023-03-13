@@ -37,6 +37,9 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         binding.ivAchievedGoalDetail.setOnClickListener {
             moveToAchievedGoalDetail()
         }
+        binding.tvAboutService.setOnClickListener {
+            startActivity(Intent(this, ServiceIntroActivity::class.java))
+        }
     }
 
     private fun moveToAchievedGoalDetail() {

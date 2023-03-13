@@ -116,7 +116,6 @@
     <string name="my_account_info">계정 정보</string>
     <string name="my_logout_title">로그아웃 하시겠어요?</string>
     <string name="my_logout_description">그동안의 기록은 사라지지 않으니\n안심하고 다녀오세요.</string>
-
     <string name="my_logout_success_toast_message">로그아웃 되었습니다.</string>
     <string name="my_logout_failure_toast_message">로그아웃에 실패하였습니다.</string>
 
@@ -126,4 +125,6 @@
     <string name="my_keep_delete_title">삭제 하시겠어요?</string>
     <string name="my_keep_delete_description">삭제된 목표와 달성 기록은\n다시 복구할 수 없어요.</string>
 
+    <string name="my_service_intro_description">킵고잇은\n영양소나 칼로리처럼 복잡한 방법 대신\n가볍고, 지속가능한 식습관 관리를\n돕기 위해 탄생했어요.\n\n늘리거나 줄이고 싶은 식습관 목표를 설정하고,\n목표를 달성한 날이면 킵고잇을 찾아와주세요.\n건강한 하루하루를 기록할 수 있어요.\n\n매일 완벽한 식사만을 하기란 어렵죠.\n대신 건강하지 않은 음식을 덜 먹고,\n건강한 음식을 더 먹은 날을 늘려가볼까요?\n\n먹는 건 원래 즐거운 일이니까.\n완벽한 식사에 대한 부담 없이\n킵고잇에서 건강한 즐거움을 쌓아보세요.</string>
+    <string name="my_service_intro_open_source">오픈소스 라이브러리</string>
 </resources>
