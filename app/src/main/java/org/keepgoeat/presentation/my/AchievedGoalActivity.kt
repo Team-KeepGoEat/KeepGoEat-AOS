@@ -108,9 +108,14 @@ class AchievedGoalActivity :
         startActivity(intent)
     }
 
+    private fun moveToMy() {
+        startActivity(Intent(this, MyActivity::class.java))
+        finish()
+    }
+
     private fun moveToPrevious() {
         if (isEnteredFromKeep) moveToHome()
-        else finish()
+        else moveToMy()
     }
 
     private fun showKeepDeleteDialog(goalId: Int) {
@@ -124,5 +129,6 @@ class AchievedGoalActivity :
     companion object {
         const val ARG_IS_ENTERED_FROM_KEEP = "isEnteredFromKeep"
         const val ARG_GOAL_ID = "goalId"
+        const val ARG_ALL_GOAL_COUNT = "allGoalCount"
     }
 }

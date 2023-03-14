@@ -18,7 +18,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         binding.lifecycleOwner = this
 
         addListeners()
-        collectData()
     }
 
     private fun addListeners() {
@@ -41,9 +40,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
     private fun moveToAchievedGoalDetail() {
         startActivity(Intent(this, AchievedGoalActivity::class.java))
-    }
-
-    private fun collectData() {
-        // TODO 보관한 목표 갯수 불러오기
+        finish()
     }
 }
