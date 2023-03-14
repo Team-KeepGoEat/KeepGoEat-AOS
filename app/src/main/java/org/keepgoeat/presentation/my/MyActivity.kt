@@ -23,7 +23,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         binding.lifecycleOwner = this
 
         addListeners()
-        collectData()
     }
 
     private fun addListeners() {
@@ -71,6 +70,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
     private fun moveToAchievedGoalDetail() {
         startActivity(Intent(this, AchievedGoalActivity::class.java))
+        finish()
     }
 
     private fun sendMail(title: String, content: String) {
@@ -103,10 +103,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         Intent(this, WebViewActivity::class.java).apply {
             putExtra(WebViewActivity.ARG_WEB_VIEW_LINK, link)
         }.also { startActivity(it) }
-    }
-
-    private fun collectData() {
-        // TODO 보관한 목표 갯수 불러오기
     }
 
     companion object {

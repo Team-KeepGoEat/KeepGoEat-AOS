@@ -48,7 +48,8 @@ class MyViewModel @Inject constructor(
             goalRepository.fetchAchievedGoal(sortType.name.lowercase())
                 .onSuccess {
                     _achievedGoalUiState.value = UiState.Success(it)
-                    _achievedGoalCount.value = it.size
+                    if (sortType == SortType.ALL)
+                        _achievedGoalCount.value = it.size
                 }.onFailure {
                     _achievedGoalUiState.value = UiState.Error(null)
                 }
@@ -61,6 +62,7 @@ class MyViewModel @Inject constructor(
             goalId.value.let { id ->
                 goalRepository.deleteGoal(id).onSuccess { deletedData ->
                     _deleteState.value = UiState.Success(deletedData.goalId)
+                    _achievedGoalCount.value -= 1
                 }.onFailure {
                     Timber.e(it.message)
                 }
