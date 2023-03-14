@@ -2,6 +2,7 @@ package org.keepgoeat.presentation.my
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -17,13 +18,15 @@ import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.util.extension.showToast
 
 @AndroidEntryPoint
-class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layout.activity_achieved_goal) {
+class AchievedGoalActivity :
+    BindingActivity<ActivityAchievedGoalBinding>(R.layout.activity_achieved_goal) {
     private val viewModel: MyViewModel by viewModels()
-    private val goalAdapter = AchievedGoalAdapter()
+    lateinit var goalAdapter: AchievedGoalAdapter
     private val headerAdapter = AchievedGoalHeaderAdapter(::getFilteredGoalWithEatingType)
-    private val goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
+    lateinit var goalConcatAdapter: ConcatAdapter
     private var isEnteredFromKeep: Boolean = false
 
     private val callback = object : OnBackPressedCallback(true) {
@@ -36,12 +39,19 @@ class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layo
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
         isEnteredFromKeep = intent.getBooleanExtra(ARG_IS_ENTERED_FROM_KEEP, false)
+
+        goalAdapter = AchievedGoalAdapter(::showKeepDeleteDialog)
+        goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
 
         initLayout()
         addListeners()
         collectData()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        goalAdapter.checkForVisibleDeleteButton()
+        return super.dispatchTouchEvent(ev)
     }
 
     private fun initLayout() {
@@ -64,16 +74,29 @@ class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layo
         binding.viewToolbar.ivBack.setOnClickListener {
             moveToPrevious()
         }
+        binding.btnMoreKeep.setOnClickListener {
+            moveToHome()
+        }
     }
 
     private fun collectData() {
         viewModel.achievedGoalUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    goalAdapter.submitList(it.data.toMutableList())
+                    goalAdapter.setGoalList(it.data.toMutableList())
                 }
                 is UiState.Error -> {} // TODO state에 따른 ui 업데이트 필요시 작성
                 is UiState.Loading -> {}
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+
+        viewModel.deleteState.flowWithLifecycle(lifecycle).onEach { deleteState ->
+            when (deleteState) {
+                is UiState.Success -> {
+                    goalAdapter.removeGoal(deleteState.data)
+                    showToast(getString(R.string.goal_detail_success_goal_delete_toast_message))
+                }
                 else -> {}
             }
         }.launchIn(lifecycleScope)
@@ -90,7 +113,16 @@ class AchievedGoalActivity : BindingActivity<ActivityAchievedGoalBinding>(R.layo
         else finish()
     }
 
+    private fun showKeepDeleteDialog(goalId: Int) {
+        KeepDeleteDialogFragment().apply {
+            arguments = Bundle().apply {
+                putInt(ARG_GOAL_ID, goalId)
+            }
+        }.show(supportFragmentManager, "KeepDeleteDialog")
+    }
+
     companion object {
         const val ARG_IS_ENTERED_FROM_KEEP = "isEnteredFromKeep"
+        const val ARG_GOAL_ID = "goalId"
     }
 }

@@ -19,8 +19,8 @@
         android:background="@drawable/background_goal_list"
         android:backgroundTint="@color/white"
         android:elevation="2dp"
-        android:paddingHorizontal="@dimen/spacingBase"
-        android:paddingVertical="@dimen/spacing16">
+        android:paddingStart="@dimen/spacingBase"
+        android:paddingBottom="@dimen/spacing16">
 
         <include
             android:id="@+id/view_eating_tag"
@@ -29,11 +29,23 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing24"
             app:eatingType="@{goal.eatingType}"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginTop="18dp" />
+
+        <ImageView
+            android:id="@+id/iv_achieved_goal_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing12"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_more"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_item_goal_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
             android:layout_marginEnd="60dp"
@@ -41,16 +53,32 @@
             android:text="@{String.format(context.getString(goal.eatingType.titleStrRes), goal.goalContent)}"
             android:textAppearance="@style/TextAppearance.System2_Bold"
             android:textColor="@color/gray_800"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_eating_tag"
             tools:text="하루 1끼 이상 야채 더 먹기" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_achieved_goal_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:backgroundTint="@color/gray_50"
+            android:elevation="2dp"
+            android:paddingHorizontal="@dimen/spacing24"
+            android:paddingVertical="@dimen/spacing12"
+            android:text="삭제하기"
+            android:textAppearance="@style/TextAppearance.System4"
+            android:textColor="@color/gray_600"
+            android:visibility="invisible"
+            app:cornerRadius="@dimen/spacing4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_achieved_goal_detail" />
 
         <TextView
             android:id="@+id/tv_total_achievement_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="14dp"
             android:text="@string/my_total_achievement_day"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_500"
@@ -75,7 +103,7 @@
             android:id="@+id/tv_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="18dp"
             android:text="@string/my_duration"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_500"
@@ -87,7 +115,7 @@
             android:id="@+id/tv_duration_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="18dp"
             android:text="@string/my_duration"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_700"

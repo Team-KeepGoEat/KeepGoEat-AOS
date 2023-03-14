@@ -6,10 +6,10 @@
         android:id="@+id/tv_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#5B5B5B"
+        android:background="@color/gray_700"
         android:gravity="center"
-        android:paddingVertical="@dimen/spacing8"
-        android:textAppearance="@style/TextAppearance.System4_Bold"
-        android:textColor="@color/white"
+        android:paddingVertical="12dp"
+        android:textAppearance="@style/TextAppearance.System3_Bold"
+        android:textColor="@color/gray_50"
         tools:text="@string/network_error_snackbar_message" />
 </layout>
