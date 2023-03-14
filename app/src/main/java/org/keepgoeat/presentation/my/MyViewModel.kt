@@ -38,7 +38,7 @@ class MyViewModel @Inject constructor(
     val otherReason = MutableStateFlow<String?>("")
     val isValidOtherReason: StateFlow<Boolean>
         get() = otherReason.map { reason ->
-            reason.isNullOrBlank()
+            !reason.isNullOrBlank()
         }.toStateFlow(viewModelScope, false)
     private val _isKeyboardVisible = MutableStateFlow(false)
     val isKeyboardVisible get() = _isKeyboardVisible.asStateFlow()

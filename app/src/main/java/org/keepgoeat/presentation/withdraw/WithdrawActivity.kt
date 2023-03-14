@@ -15,6 +15,7 @@ import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.addKeyboardInsetListener
 import org.keepgoeat.util.extension.showKeyboard
+import org.keepgoeat.util.setVisibility
 
 @AndroidEntryPoint
 class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activity_withdraw) {
@@ -51,8 +52,10 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             clearFocus()
         }
         binding.btnWithdraw.setOnClickListener {
-            if (!binding.etOtherReason.text.isNullOrBlank() || !viewModel.isOtherReasonSelected.value)
-                WithdrawDialogFragment().show(supportFragmentManager, "withDrawDialog")
+            if (binding.etOtherReason.text.isNullOrBlank() && viewModel.isOtherReasonSelected.value)
+                binding.tvOtherReasonErrorMsg.setVisibility(true)
+            else
+                WithdrawDialogFragment().show(supportFragmentManager, "withdrawDialog")
         }
         binding.viewWithdrawToolbar.ivBack.setOnClickListener {
             finish()
@@ -67,6 +70,10 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             } else {
                 clearFocus()
             }
+        }.launchIn(lifecycleScope)
+        viewModel.isValidOtherReason.flowWithLifecycle(lifecycle).onEach { isValid ->
+            if (isValid)
+                binding.tvOtherReasonErrorMsg.setVisibility(false)
         }.launchIn(lifecycleScope)
     }
 

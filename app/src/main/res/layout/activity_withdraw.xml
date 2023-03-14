@@ -129,8 +129,7 @@
             android:textColor="@color/orange_400"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_other_reason"
-            app:visibility="@{viewModel.isValidOtherReason}" />
+            app:layout_constraintTop_toBottomOf="@+id/et_other_reason" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_withdraw"
@@ -156,7 +155,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
