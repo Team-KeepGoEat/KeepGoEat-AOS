@@ -131,4 +131,26 @@
 
     <string name="my_contact_us_mail_title">킵고잇 문의사항</string>
     <string name="my_contact_us_mail_content">Device: %s %s\nApp version: %s\nOS Version: %d(%s)\n-------------\n내용 :</string>
+
+    <!-- WithDraw -->
+    <string name="withdraw">탈퇴하기</string>
+    <string name="withdraw_title">그동안 함께 해서 기뻤어요.</string>
+    <string name="withdraw_description">떠났던 이유를 모두 알려주시면 더 나은 킵고잇이 될게요.</string>
+
+    <string name="withdraw_reason1">식습관 관리를 그만 뒀어요.</string>
+    <string name="withdraw_reason2">자주 사용하지 않아요.</string>
+    <string name="withdraw_reason3">앱 오류가 있어요.</string>
+    <string name="withdraw_reason4">콘텐츠가 만족스럽지 않아요.</string>
+
+    <string name="withdraw_other_reason">직접 입력</string>
+    <string name="withdraw_other_reason_description">다른 이유가 있다면 알려주세요.</string>
+    <string name="withdraw_edittext_error">탈퇴 이유를 작성해주세요.</string>
+
+    <string name="withdraw_dialog_title">탈퇴는 되돌릴 수 없어요.</string>
+    <string name="withdraw_dialog_description">이 계정에서 만든 목표와\n활동 기록이 모두 사라져요.</string>
+    <string name="withdraw_dialog">탈퇴</string>
+    <string name="withdraw_cancel">취소</string>
+
+    <string name="withdraw_success">회원 탈퇴가 완료되었습니다.</string>
+    <string name="withdraw_fail">회원 탈퇴에 실패하였습니다.</string>
 </resources>

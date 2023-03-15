@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="org.keepgoeat.R" />
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.my.MyViewModel" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_withdraw"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <include
+            android:id="@+id/view_withdraw_toolbar"
+            layout="@layout/view_toolbar"
+            app:title="@{@string/withdraw}" />
+
+        <TextView
+            android:id="@+id/tv_withdraw_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing16"
+            android:layout_marginTop="32dp"
+            android:text="@string/withdraw_title"
+            android:textAppearance="@style/TextAppearance.System2_Bold"
+            android:textColor="@color/gray_800"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_withdraw_toolbar" />
+
+        <TextView
+            android:id="@+id/tv_withdraw_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing8"
+            android:text="@string/withdraw_description"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_600"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_withdraw"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacing12"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_description"
+            app:visibility="@{!viewModel.isKeyboardVisible}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_other_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing12"
+            android:onClick="@{viewModel::onCheckBoxClick}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_withdraw">
+
+            <ImageView
+                android:id="@+id/iv_other_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@{viewModel.isOtherReasonSelected? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_default}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_checkbox_default" />
+
+            <TextView
+                android:id="@+id/tv_other_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing4"
+                android:layout_marginStart="@dimen/spacing4"
+                android:text="@string/withdraw_other_reason"
+                android:textAppearance="@{viewModel.isOtherReasonSelected? R.style.TextAppearance_System4_Bold : R.style.TextAppearance_System4}"
+                android:textColor="@{viewModel.isOtherReasonSelected? @color/orange_600 : @color/gray_700}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_other_reason"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:textAppearance="@style/TextAppearance.System4"
+                tools:textColor="@color/gray_700" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/et_other_reason"
+            android:layout_width="0dp"
+            android:layout_height="104dp"
+            android:layout_marginHorizontal="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing8"
+            android:background="@drawable/selector_edittext_withdraw"
+            android:gravity="top|start"
+            android:hint="@string/withdraw_other_reason_description"
+            android:inputType="textMultiLine|textNoSuggestions"
+            android:text="@={viewModel.otherReason}"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@{viewModel.isOtherReasonSelected? @color/gray_800 : @color/gray_400}"
+            android:textCursorDrawable="@drawable/shape_cursor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_other_reason" />
+
+        <TextView
+            android:id="@+id/tv_other_reason_error_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/spacing8"
+            android:text="@string/withdraw_edittext_error"
+            android:textAppearance="@style/TextAppearance.System6"
+            android:textColor="@color/orange_400"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_other_reason" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_withdraw"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/spacing16"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/shape_border_radius_8"
+            android:backgroundTint="@color/orange_600"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/withdraw"
+                android:textAppearance="@style/TextAppearance.System4_Bold"
+                android:textColor="@color/gray_50"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
