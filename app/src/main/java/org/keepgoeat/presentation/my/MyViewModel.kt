@@ -16,8 +16,8 @@ import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
-import timber.log.Timber
 import org.keepgoeat.util.extension.toStateFlow
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,8 +35,10 @@ class MyViewModel @Inject constructor(
     val logoutUiState get() = _logoutUiState.asStateFlow()
     private val _achievedGoalCount = MutableStateFlow(0)
     private val _deleteState = MutableStateFlow<UiState<Int>>(UiState.Loading)
+    private val _allAchievedGoalCount = MutableStateFlow(0)
     val deleteState get() = _deleteState.asStateFlow()
     val achievedGoalCount get() = _achievedGoalCount.asStateFlow()
+    val allAchievedGoalCount get() = _allAchievedGoalCount.asStateFlow()
     private val _deleteAccountUiState =
         MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
@@ -64,8 +66,9 @@ class MyViewModel @Inject constructor(
             goalRepository.fetchAchievedGoal(sortType.name.lowercase())
                 .onSuccess {
                     _achievedGoalUiState.value = UiState.Success(it)
+                    _achievedGoalCount.value = it.size
                     if (sortType == SortType.ALL)
-                        _achievedGoalCount.value = it.size
+                        _allAchievedGoalCount.value = it.size
                 }.onFailure {
                     _achievedGoalUiState.value = UiState.Error(null)
                 }
@@ -79,6 +82,7 @@ class MyViewModel @Inject constructor(
                 goalRepository.deleteGoal(id).onSuccess { deletedData ->
                     _deleteState.value = UiState.Success(deletedData.goalId)
                     _achievedGoalCount.value -= 1
+                    _allAchievedGoalCount.value -= 1
                 }.onFailure {
                     Timber.e(it.message)
                 }
