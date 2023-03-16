@@ -39,7 +39,7 @@ data class ResponseHomeContent(
             goals.map { goal ->
                 HomeGoal(
                     goal.goalId,
-                    "${goal.food} ${goal.criterion}",
+                    goal.food,
                     goal.isMore,
                     goal.isAchieved,
                     goal.thisMonthCount,
