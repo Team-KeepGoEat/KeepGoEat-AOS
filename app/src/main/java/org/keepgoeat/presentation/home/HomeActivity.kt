@@ -91,11 +91,13 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         val intent = Intent(this@HomeActivity, GoalDetailActivity::class.java)
         intent.putExtra(GoalDetailActivity.ARG_EATING_TYPE, eatingType.name)
         intent.putExtra(GoalDetailActivity.ARG_GOAL_ID, goalId)
+        intent.putExtra(ARG_HOME_GOAL_COUNT, viewModel.goalCount.value)
         startActivity(intent)
     }
 
     private fun moveToMy() {
         val intent = Intent(this@HomeActivity, MyActivity::class.java)
+        intent.putExtra(ARG_HOME_GOAL_COUNT, viewModel.goalCount.value)
         startActivity(intent)
     }
 
@@ -110,5 +112,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     companion object {
         const val ARG_KILL_HOME_AND_GO_TO_SIGN = "killHomeAndGoToSign"
+        const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
     }
 }

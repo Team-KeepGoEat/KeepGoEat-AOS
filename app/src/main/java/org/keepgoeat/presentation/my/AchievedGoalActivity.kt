@@ -3,6 +3,7 @@ package org.keepgoeat.presentation.my
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -100,6 +101,15 @@ class AchievedGoalActivity :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
+
+        viewModel.allAchievedGoalCount.flowWithLifecycle(lifecycle).onEach { allAchievedGoalCount ->
+            val homeGoalCount = intent.getIntExtra(ARG_HOME_GOAL_COUNT, -1)
+            if (homeGoalCount == 0 && allAchievedGoalCount == 0) {
+                binding.btnMoreKeep.visibility = View.VISIBLE
+            } else {
+                binding.btnMoreKeep.visibility = View.INVISIBLE
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun moveToHome() {
@@ -129,6 +139,6 @@ class AchievedGoalActivity :
     companion object {
         const val ARG_IS_ENTERED_FROM_KEEP = "isEnteredFromKeep"
         const val ARG_GOAL_ID = "goalId"
-        const val ARG_ALL_GOAL_COUNT = "allGoalCount"
+        const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
     }
 }

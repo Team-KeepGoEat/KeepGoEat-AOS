@@ -87,6 +87,7 @@
                 android:backgroundTint="@color/orange_600"
                 android:paddingVertical="@dimen/spacing12"
                 android:text="@string/my_ahcieved_goal_empty_make_goal"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

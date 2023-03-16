@@ -103,6 +103,10 @@ class GoalDetailActivity :
                     showToast(getString(R.string.goal_detail_success_goal_keep_toast_message))
                     Intent(this, AchievedGoalActivity::class.java).apply {
                         putExtra(ARG_IS_ENTERED_FROM_KEEP, true)
+                        putExtra(
+                            ARG_HOME_GOAL_COUNT,
+                            intent.getIntExtra(ARG_HOME_GOAL_COUNT, -1) - 1
+                        )
                     }.also {
                         startActivity(it)
                         finish()
@@ -141,5 +145,6 @@ class GoalDetailActivity :
         private const val CARD_MATRIX_COL = 7
         const val ARG_EATING_TYPE = "eatingType"
         const val ARG_GOAL_ID = "goalId"
+        const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
     }
 }

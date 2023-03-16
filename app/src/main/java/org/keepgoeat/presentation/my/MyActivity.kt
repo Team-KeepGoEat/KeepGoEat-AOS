@@ -69,7 +69,10 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
     }
 
     private fun moveToAchievedGoalDetail() {
-        startActivity(Intent(this, AchievedGoalActivity::class.java))
+        val homeGoalCount = intent.getIntExtra(ARG_HOME_GOAL_COUNT, -1)
+        val intent = Intent(this, AchievedGoalActivity::class.java)
+        intent.putExtra(ARG_HOME_GOAL_COUNT, homeGoalCount)
+        startActivity(intent)
         finish()
     }
 
@@ -110,5 +113,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             "https://68space.notion.site/7d49b1a8912440cb9ec262392e5583e2"
         private const val POLICY_LINK =
             "https://68space.notion.site/9083a018baab42958103596378417c13"
+        const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
     }
 }
