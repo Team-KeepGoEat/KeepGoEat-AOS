@@ -15,7 +15,6 @@ import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.DialogWithdrawBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.my.MyViewModel
-import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingDialogFragment
@@ -57,6 +56,7 @@ class WithdrawDialogFragment :
                 is UiState.Success -> {
                     requireActivity().showToast(getString(R.string.withdraw_success))
                     moveToSign()
+                    dismiss()
                 }
                 is UiState.Error -> {
                     requireActivity().showToast(getString(R.string.withdraw_fail))
@@ -68,12 +68,11 @@ class WithdrawDialogFragment :
     }
 
     private fun moveToSign() {
-        Intent(context, SignActivity::class.java).apply {
+        Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra(HomeActivity.ARG_KILL_HOME_AND_GO_TO_SIGN, true)
         }.also {
             startActivity(it)
-            dismiss()
         }
     }
 }
