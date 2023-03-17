@@ -33,7 +33,7 @@ data class ResponseAchievedGoal(
         fun toMyGoal() = goals.map { goal ->
             AchievedGoal(
                 goal.goalId,
-                "${goal.food} ${goal.criterion}",
+                goal.food,
                 if (goal.isMore) EatingType.MORE else EatingType.LESS,
                 goal.startedAt,
                 goal.keptAt,
