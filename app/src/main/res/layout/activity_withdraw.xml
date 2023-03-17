@@ -10,10 +10,6 @@
         <variable
             name="viewModel"
             type="org.keepgoeat.presentation.my.MyViewModel" />
-
-        <variable
-            name="view"
-            type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,18 +66,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing16"
             android:layout_marginTop="@dimen/spacing12"
-            android:onClick="@{viewModel::onCheckBoxClick}"
+            android:onClick="@{() -> viewModel.onCheckBoxClick()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_withdraw">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/iv_other_reason"
+                style="@style/Style.CheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@{viewModel.isOtherReasonSelected? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_default}"
+                android:checked="@{viewModel.isOtherReasonSelected}"
+                android:clickable="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_checkbox_default" />
+                tools:src="@drawable/ic_checkbox_unchecked" />
 
             <TextView
                 android:id="@+id/tv_other_reason"
@@ -155,7 +153,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
