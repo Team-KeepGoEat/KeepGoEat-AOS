@@ -1,6 +1,5 @@
 package org.keepgoeat.presentation.my
 
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -110,7 +109,7 @@ class MyViewModel @Inject constructor(
         _isKeyboardVisible.value = visible
     }
 
-    fun onCheckBoxClick(view: View) {
+    fun onCheckBoxClick() {
         _isOtherReasonSelected.value = !isOtherReasonSelected.value
     }
 

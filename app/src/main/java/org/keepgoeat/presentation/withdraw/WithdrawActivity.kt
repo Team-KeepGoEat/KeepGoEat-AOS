@@ -1,7 +1,9 @@
 package org.keepgoeat.presentation.withdraw
 
-import android.os.Build
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,22 +15,29 @@ import org.keepgoeat.databinding.ActivityWithdrawBinding
 import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.util.binding.BindingActivity
-import org.keepgoeat.util.extension.addKeyboardInsetListener
 import org.keepgoeat.util.extension.showKeyboard
 import org.keepgoeat.util.setVisibility
 
 @AndroidEntryPoint
 class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activity_withdraw) {
     private val viewModel: MyViewModel by viewModels()
+    lateinit var onGlobalListener: ViewTreeObserver.OnGlobalLayoutListener
+    lateinit var rootView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        rootView = binding.root
 
         initLayout()
         addListeners()
         collectData()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        rootView.viewTreeObserver.addOnGlobalLayoutListener(onGlobalListener)
     }
 
     private fun initLayout() {
@@ -36,17 +45,28 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             itemAnimator = null
             adapter = WithdrawReasonAdapter(viewModel::selectReasons)
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false)
-            binding.layoutWithdraw.addKeyboardInsetListener(viewModel::setKeyboardVisibility)
+
+        initGlobalListener()
+    }
+
+    private fun initGlobalListener() {
+        onGlobalListener = ViewTreeObserver.OnGlobalLayoutListener {
+            val rect = Rect()
+            rootView.getWindowVisibleDisplayFrame(rect)
+            val screenHeight = rootView.rootView.height
+            val keypadHeight = screenHeight - rect.bottom
+            viewModel.setKeyboardVisibility(keypadHeight > screenHeight * 0.15)
         }
-        binding.layoutOtherReason.isSelected = false
     }
 
     private fun addListeners() {
         binding.etOtherReason.setOnFocusChangeListener { _, focused ->
-            if (focused) // '직접 입력' editText가 focus 상태일 때
+            if (focused) { // '직접 입력' editText가 focus 상태일 때
+                requestFocus()
                 viewModel.changeCheckboxSelected(true)
+            } else {
+                clearFocus()
+            }
         }
         binding.layoutWithdraw.setOnClickListener { // 외부 영역 클릭 했을 때
             clearFocus()
@@ -79,11 +99,18 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
 
     private fun clearFocus() {
         binding.etOtherReason.clearFocus()
+        viewModel.setKeyboardVisibility(false)
         showKeyboard(binding.etOtherReason, false)
     }
 
     private fun requestFocus() {
         binding.etOtherReason.requestFocus()
+        viewModel.setKeyboardVisibility(true)
         showKeyboard(binding.etOtherReason, true)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        rootView.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalListener)
     }
 }

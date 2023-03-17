@@ -20,13 +20,7 @@ class WithdrawReasonAdapter(
     private lateinit var inflater: LayoutInflater
 
     init {
-        val reasons = mutableListOf(
-            WithdrawReason.REASON1,
-            WithdrawReason.REASON2,
-            WithdrawReason.REASON3,
-            WithdrawReason.REASON4,
-        )
-        submitList(reasons)
+        submitList(WithdrawReason.values().toMutableList())
     }
 
     class WithdrawViewHolder(
@@ -38,7 +32,6 @@ class WithdrawReasonAdapter(
             selectReasons: (WithdrawReason) -> Unit,
         ) {
             binding.reason = reason.reason
-            binding.isClicked = isClicked
             binding.layoutWithdrawReason.setOnClickListener {
                 isClicked = !isClicked
                 binding.isClicked = isClicked
