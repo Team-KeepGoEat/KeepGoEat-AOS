@@ -19,13 +19,15 @@ import javax.inject.Inject
 class AuthInterceptor @Inject constructor(
     private val localStorage: KGEDataSource,
     private val gson: Gson,
-    private val context: Application
+    private val context: Application,
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val authRequest =
-            originalRequest.newBuilder().addHeader(ACCESS_TOKEN, localStorage.accessToken).build()
+            originalRequest.newBuilder()
+                .addHeader(ACCESS_TOKEN, localStorage.accessToken)
+                .addHeader(REFRESH_TOKEN, localStorage.refreshToken).build()
         val response = chain.proceed(authRequest)
 
         when (response.code) {
