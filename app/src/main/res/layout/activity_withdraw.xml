@@ -57,8 +57,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_description"
-            app:visibility="@{!viewModel.isKeyboardVisible}" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_withdraw_description" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_other_reason"

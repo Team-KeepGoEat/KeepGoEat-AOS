@@ -95,17 +95,18 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             if (isValid)
                 binding.tvOtherReasonErrorMsg.setVisibility(false)
         }.launchIn(lifecycleScope)
+        viewModel.isKeyboardVisible.flowWithLifecycle(lifecycle).onEach { isVisible ->
+            binding.rvWithdraw.setVisibility(!isVisible)
+        }.launchIn(lifecycleScope)
     }
 
     private fun clearFocus() {
         binding.etOtherReason.clearFocus()
-        viewModel.setKeyboardVisibility(false)
         showKeyboard(binding.etOtherReason, false)
     }
 
     private fun requestFocus() {
         binding.etOtherReason.requestFocus()
-        viewModel.setKeyboardVisibility(true)
         showKeyboard(binding.etOtherReason, true)
     }
 
