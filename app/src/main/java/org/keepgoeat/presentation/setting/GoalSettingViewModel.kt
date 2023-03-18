@@ -86,6 +86,6 @@ class GoalSettingViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TITLE_PATTERN = "^[A-Za-zㄱ-ㅎㅏ-ㅣ가-힣0-9\\s]*\$"
+        private const val TITLE_PATTERN = "^[A-Za-zㄱ-ㅎㅏ-ㅣ가-힣0-9.,\\s]*\$"
     }
 }
