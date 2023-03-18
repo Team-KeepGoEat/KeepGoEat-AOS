@@ -55,7 +55,7 @@
             style="@style/Style.My.Menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/spacing24"
             android:text="@string/my_logout" />
 
         <TextView
@@ -63,7 +63,7 @@
             style="@style/Style.My.Menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing24"
             android:text="@string/my_delete_account" />
     </LinearLayout>
 </layout>
