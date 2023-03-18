@@ -10,8 +10,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.domain.model.AchievedGoal
+import org.keepgoeat.domain.model.UserInfo
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.domain.repository.UserRepository
 import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
@@ -21,12 +23,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyViewModel @Inject constructor(
+    // TODO need refactoring
     private val authRepository: AuthRepository,
     private val goalRepository: GoalRepository,
+    private val userRepository: UserRepository,
     private val localStorage: KGEDataSource,
 ) : ViewModel() {
-    private val _goalId = MutableStateFlow(-1)
-    val goalId get() = _goalId.asStateFlow()
+    private val _userInfo = MutableStateFlow(UserInfo("", "", 0))
+    val userInfo get() = _userInfo.asStateFlow()
     private val _achievedGoalUiState =
         MutableStateFlow<UiState<List<AchievedGoal>>>(UiState.Loading)
     val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
@@ -35,6 +39,9 @@ class MyViewModel @Inject constructor(
     private val _achievedGoalCount = MutableStateFlow(0)
     private val _deleteState = MutableStateFlow<UiState<Int>>(UiState.Loading)
     private val _allAchievedGoalCount = MutableStateFlow(0)
+    private var _deletedGoalCount = 0
+    val deletedGoalCount get() = _deletedGoalCount
+
     val deleteState get() = _deleteState.asStateFlow()
     val achievedGoalCount get() = _achievedGoalCount.asStateFlow()
     val allAchievedGoalCount get() = _allAchievedGoalCount.asStateFlow()
@@ -53,11 +60,15 @@ class MyViewModel @Inject constructor(
     private val _selectedReasons = MutableStateFlow(arrayListOf(WithdrawReason.REASON5))
     val selectedReasons get() = _selectedReasons.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
-    val userName = localStorage.userName
-    val userEmail = localStorage.userEmail
 
-    init {
-        fetchAchievedGoalBySort(SortType.ALL)
+    fun fetchUserInfo() {
+        viewModelScope.launch {
+            userRepository.fetchUserInfo().onSuccess { userInfo ->
+                userInfo?.let {
+                    _userInfo.value = userInfo
+                }
+            }
+        }
     }
 
     fun fetchAchievedGoalBySort(sortType: SortType) {
@@ -75,16 +86,14 @@ class MyViewModel @Inject constructor(
     }
 
     fun deleteGoal(id: Int) {
-        _goalId.value = id
         viewModelScope.launch {
-            goalId.value.let { id ->
-                goalRepository.deleteGoal(id).onSuccess { deletedData ->
-                    _deleteState.value = UiState.Success(deletedData.goalId)
-                    _achievedGoalCount.value -= 1
-                    _allAchievedGoalCount.value -= 1
-                }.onFailure {
-                    Timber.e(it.message)
-                }
+            goalRepository.deleteGoal(id).onSuccess { deletedData ->
+                _deleteState.value = UiState.Success(deletedData.goalId)
+                _achievedGoalCount.value -= 1
+                _allAchievedGoalCount.value -= 1
+                _deletedGoalCount += 1 // TODO need refactoring
+            }.onFailure {
+                Timber.e(it.message)
             }
         }
     }

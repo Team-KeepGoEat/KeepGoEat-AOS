@@ -42,6 +42,7 @@ class AchievedGoalActivity :
         binding.lifecycleOwner = this
         isEnteredFromKeep = intent.getBooleanExtra(ARG_IS_ENTERED_FROM_KEEP, false)
 
+        viewModel.fetchAchievedGoalBySort(SortType.ALL)
         goalAdapter = AchievedGoalAdapter(::showKeepDeleteDialog)
         goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
 
@@ -119,8 +120,14 @@ class AchievedGoalActivity :
     }
 
     private fun moveToMy() {
-        startActivity(Intent(this, MyActivity::class.java))
-        finish()
+        if (viewModel.deletedGoalCount > 0)
+            Intent(this, MyActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }.also {
+                startActivity(it)
+            }
+        else
+            finish()
     }
 
     private fun moveToPrevious() {

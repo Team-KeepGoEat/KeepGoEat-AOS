@@ -22,6 +22,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        viewModel.fetchUserInfo()
         addListeners()
     }
 
@@ -30,7 +31,11 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             finish()
         }
         binding.tvUserName.setOnClickListener {
-            startActivity(Intent(this, AccountInfoActivity::class.java))
+            Intent(this, AccountInfoActivity::class.java).apply {
+                putExtra(ARG_USER_INFO, viewModel.userInfo.value)
+            }.also {
+                startActivity(it)
+            }
         }
         binding.tvAchievedGoal.setOnClickListener {
             moveToAchievedGoalDetail()
@@ -73,7 +78,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         val intent = Intent(this, AchievedGoalActivity::class.java)
         intent.putExtra(ARG_HOME_GOAL_COUNT, homeGoalCount)
         startActivity(intent)
-        finish()
     }
 
     private fun sendMail(title: String, content: String) {
@@ -114,5 +118,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         private const val POLICY_LINK =
             "https://68space.notion.site/9083a018baab42958103596378417c13"
         const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
+        const val ARG_USER_INFO = "userInfo"
     }
 }
