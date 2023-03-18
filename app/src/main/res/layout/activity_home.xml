@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing16"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/ic_snail_orange_cheer_right"
+                android:src="@drawable/ic_snail_orange_hungry"
                 android:visibility="@{viewModel.lottieState == processState.IDLE ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_my_page" />
