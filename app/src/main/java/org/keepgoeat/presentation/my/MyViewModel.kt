@@ -10,8 +10,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.domain.model.AchievedGoal
+import org.keepgoeat.domain.model.UserInfo
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.domain.repository.UserRepository
 import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
@@ -21,12 +23,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyViewModel @Inject constructor(
+    // TODO need refactoring
     private val authRepository: AuthRepository,
     private val goalRepository: GoalRepository,
+    private val userRepository: UserRepository,
     private val localStorage: KGEDataSource,
 ) : ViewModel() {
-    private val _goalId = MutableStateFlow(-1)
-    val goalId get() = _goalId.asStateFlow()
+    private val _userInfo = MutableStateFlow(UserInfo("", "", 0))
+    val userInfo get() = _userInfo.asStateFlow()
     private val _achievedGoalUiState =
         MutableStateFlow<UiState<List<AchievedGoal>>>(UiState.Loading)
     val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
@@ -53,11 +57,15 @@ class MyViewModel @Inject constructor(
     private val _selectedReasons = MutableStateFlow(arrayListOf(WithdrawReason.REASON5))
     val selectedReasons get() = _selectedReasons.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
-    val userName = localStorage.userName
-    val userEmail = localStorage.userEmail
 
-    init {
-        fetchAchievedGoalBySort(SortType.ALL)
+    fun fetchUserInfo() {
+        viewModelScope.launch {
+            userRepository.fetchUserInfo().onSuccess { userInfo ->
+                userInfo?.let {
+                    _userInfo.value = userInfo
+                }
+            }
+        }
     }
 
     fun fetchAchievedGoalBySort(sortType: SortType) {

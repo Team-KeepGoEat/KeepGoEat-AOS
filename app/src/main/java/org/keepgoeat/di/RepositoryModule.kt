@@ -6,8 +6,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.keepgoeat.data.repository.AuthRepositoryImpl
 import org.keepgoeat.data.repository.GoalRepositoryImpl
+import org.keepgoeat.data.repository.UserRepositoryImpl
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.domain.repository.UserRepository
 import javax.inject.Singleton
 
 @Module
@@ -24,4 +26,10 @@ interface RepositoryModule {
     fun bindAuthRepository(
         authRepositoryImpl: AuthRepositoryImpl,
     ): AuthRepository
+
+    @Binds
+    @Singleton
+    fun bindUserRepository(
+        userRepositoryImpl: UserRepositoryImpl,
+    ): UserRepository
 }
