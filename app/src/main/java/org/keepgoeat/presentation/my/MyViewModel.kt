@@ -39,6 +39,9 @@ class MyViewModel @Inject constructor(
     private val _achievedGoalCount = MutableStateFlow(0)
     private val _deleteState = MutableStateFlow<UiState<Int>>(UiState.Loading)
     private val _allAchievedGoalCount = MutableStateFlow(0)
+    private var _deletedGoalCount = 0
+    val deletedGoalCount get() = _deletedGoalCount
+
     val deleteState get() = _deleteState.asStateFlow()
     val achievedGoalCount get() = _achievedGoalCount.asStateFlow()
     val allAchievedGoalCount get() = _allAchievedGoalCount.asStateFlow()
@@ -83,16 +86,14 @@ class MyViewModel @Inject constructor(
     }
 
     fun deleteGoal(id: Int) {
-        _goalId.value = id
         viewModelScope.launch {
-            goalId.value.let { id ->
-                goalRepository.deleteGoal(id).onSuccess { deletedData ->
-                    _deleteState.value = UiState.Success(deletedData.goalId)
-                    _achievedGoalCount.value -= 1
-                    _allAchievedGoalCount.value -= 1
-                }.onFailure {
-                    Timber.e(it.message)
-                }
+            goalRepository.deleteGoal(id).onSuccess { deletedData ->
+                _deleteState.value = UiState.Success(deletedData.goalId)
+                _achievedGoalCount.value -= 1
+                _allAchievedGoalCount.value -= 1
+                _deletedGoalCount += 1 // TODO need refactoring
+            }.onFailure {
+                Timber.e(it.message)
             }
         }
     }

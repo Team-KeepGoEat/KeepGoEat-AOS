@@ -78,7 +78,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         val intent = Intent(this, AchievedGoalActivity::class.java)
         intent.putExtra(ARG_HOME_GOAL_COUNT, homeGoalCount)
         startActivity(intent)
-        finish()
     }
 
     private fun sendMail(title: String, content: String) {
