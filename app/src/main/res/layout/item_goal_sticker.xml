@@ -7,7 +7,7 @@
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="2dp"
+        android:padding="3dp"
         tools:background="@color/orange_50">
 
         <ImageView

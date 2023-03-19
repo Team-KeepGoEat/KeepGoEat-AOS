@@ -46,6 +46,7 @@ class GoalDetailActivity :
 
         intent.let {
             val eatingType = safeValueOf<EatingType>(it.getStringExtra(ARG_EATING_TYPE)) ?: return
+            binding.eatingType = eatingType
             adapter = GoalStickerListAdapter(eatingType, CELL_COUNT)
             val goalId = it.getIntExtra(ARG_GOAL_ID, -1)
             viewModel.fetchGoalDetailInfo(goalId)

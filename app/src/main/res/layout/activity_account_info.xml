@@ -21,7 +21,7 @@
         <include
             android:id="@+id/view_toolbar"
             layout="@layout/view_toolbar"
-            app:title="@{context.getString(R.string.my_account_info)}" />
+            app:title="@{@string/my_account_info}" />
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -52,18 +52,15 @@
 
         <TextView
             android:id="@+id/tv_logout"
-            style="@style/Style.My.Menu"
-            android:layout_width="wrap_content"
+            style="@style/Style.AccountInfo.Menu"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing24"
+            android:layout_marginTop="@dimen/spacing12"
             android:text="@string/my_logout" />
 
         <TextView
             android:id="@+id/tv_delete_account"
-            style="@style/Style.My.Menu"
-            android:layout_width="wrap_content"
+            style="@style/Style.AccountInfo.Menu"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing24"
             android:text="@string/my_delete_account" />
     </LinearLayout>
 </layout>

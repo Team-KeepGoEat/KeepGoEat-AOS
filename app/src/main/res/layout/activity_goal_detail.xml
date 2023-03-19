@@ -8,6 +8,10 @@
         <import type="org.keepgoeat.R" />
 
         <variable
+            name="eatingType"
+            type="org.keepgoeat.presentation.type.EatingType" />
+
+        <variable
             name="viewModel"
             type="org.keepgoeat.presentation.detail.GoalDetailViewModel" />
     </data>
@@ -84,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing24"
-            app:eatingType="@{viewModel.goalDetail.eatingType}"
+            app:eatingType="@{eatingType}"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
 
@@ -92,8 +96,8 @@
             android:id="@+id/tv_goal_food"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing8"
-            android:text="@{@string/goal_detail_title(viewModel.goalDetail.food, viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.strRes))}"
+            android:layout_marginTop="11dp"
+            android:text="@{viewModel.goalDetail == null ? `` : @string/goal_detail_title(viewModel.goalDetail.food, context.getString(eatingType.strRes))}"
             android:textAppearance="@style/TextAppearance.System2_Bold"
             android:textColor="@color/gray_800"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -105,7 +109,7 @@
             android:id="@+id/tv_goal_criterion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing4"
+            android:layout_marginTop="@dimen/spacing12"
             android:fontFamily="@font/pretendard_b"
             android:text="@{viewModel.goalDetail.criterion == null ? `` : viewModel.goalDetail.criterion}"
             android:textColor="#A3A1A1"
@@ -119,7 +123,7 @@
             android:id="@+id/layout_day_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing16"
+            android:layout_marginTop="21dp"
             android:background="@drawable/shape_border_gray_radius_8"
             android:paddingVertical="29dp"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -130,8 +134,8 @@
                 android:id="@+id/tv_num_of_days_eaten_last_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="@{@string/goal_detail_num_of_days_eaten_last_month(viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.achievementCountTitle))}"
+                android:layout_marginTop="7dp"
+                android:text="@{@string/goal_detail_num_of_days_eaten_last_month(eatingType == null ? `` : context.getString(eatingType.achievementCountTitle))}"
                 android:textAppearance="@style/TextAppearance.System5"
                 android:textColor="@color/gray_600"
                 app:layout_constraintEnd_toEndOf="@id/view_divider"
@@ -140,9 +144,10 @@
                 tools:text="지난달 먹은 날" />
 
             <TextView
+                android:id="@+id/tv_last_month_days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing4"
+                android:layout_marginTop="@dimen/spacing12"
                 android:layout_marginBottom="@dimen/spacing4"
                 android:fontFamily="@font/pretendard_b"
                 android:text="@{viewModel.goalDetail == null ? `` : Integer.toString(viewModel.goalDetail.lastMonthCount)}"
@@ -168,28 +173,26 @@
                 android:id="@+id/tv_num_of_days_eaten_this_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="@{@string/goal_detail_num_of_days_eaten_this_month(viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.achievementCountTitle))}"
+                android:text="@{@string/goal_detail_num_of_days_eaten_this_month(eatingType == null ? `` : context.getString(eatingType.achievementCountTitle))}"
                 android:textAppearance="@style/TextAppearance.System5"
                 android:textColor="@color/gray_600"
                 app:layout_constraintEnd_toEndOf="@id/layout_day_container"
                 app:layout_constraintStart_toStartOf="@id/view_divider"
-                app:layout_constraintTop_toTopOf="@id/layout_day_container"
+                app:layout_constraintTop_toTopOf="@id/tv_num_of_days_eaten_last_month"
                 tools:text="이번달 먹은 날" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing4"
                 android:layout_marginBottom="@dimen/spacing4"
                 android:fontFamily="@font/pretendard_b"
-                android:text="@{Integer.toString(viewModel.goalDetail.thisMonthCount)}"
-                android:textColor="@{context.getColor(viewModel.goalDetail == null ? R.color.white : viewModel.goalDetail.eatingType.thisMonthTextColor)}"
+                android:text="@{viewModel.goalDetail == null ? `` : Integer.toString(viewModel.goalDetail.thisMonthCount)}"
+                android:textColor="@{context.getColor(eatingType == null ? R.color.white : eatingType.thisMonthTextColor)}"
                 android:textSize="48dp"
                 app:layout_constraintBottom_toBottomOf="@id/view_divider"
                 app:layout_constraintEnd_toEndOf="@id/tv_num_of_days_eaten_this_month"
                 app:layout_constraintStart_toStartOf="@id/tv_num_of_days_eaten_this_month"
-                app:layout_constraintTop_toBottomOf="@id/tv_num_of_days_eaten_this_month"
+                app:layout_constraintTop_toTopOf="@id/tv_last_month_days"
                 tools:text="8"
                 tools:textColor="@color/orange_600" />
 
@@ -200,7 +203,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing16"
-            android:background="@drawable/shape_border_radius_8"
+            android:background="@drawable/shape_border_radius_16"
             android:backgroundTint="@color/white"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="@id/gl_end"

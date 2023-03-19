@@ -142,16 +142,24 @@
         <item name="android:textAppearance">@style/TextAppearance.System5_Bold</item>
         <item name="android:textColor">@color/gray_500</item>
         <item name="android:layout_marginStart">@dimen/spacing16</item>
-        <item name="android:layout_marginTop">@dimen/spacing16</item>
+        <item name="android:layout_marginTop">19dp</item>
     </style>
 
-    <style name="Style.My.Menu" parent="TextAppearance.My.Menu">
-        <item name="android:layout_marginStart">@dimen/spacing16</item>
-    </style>
-
-    <style name="TextAppearance.My.Menu" parent="">
+    <style name="Style.Menu" parent="">
+        <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:textAppearance">@style/TextAppearance.System4</item>
         <item name="android:textColor">@color/gray_800</item>
+    </style>
+
+    <style name="Style.My.Menu" parent="Style.Menu">
+        <item name="android:padding">@dimen/spacing16</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="Style.AccountInfo.Menu" parent="Style.Menu">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingStart">@dimen/spacing16</item>
+        <item name="android:paddingVertical">12dp</item>
     </style>
 
     <style name="Style.Dialog.Button" parent="">
