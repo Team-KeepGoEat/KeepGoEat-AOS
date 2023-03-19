@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.my.AccountInfoActivity">
+        tools:context=".presentation.my.ServiceIntroActivity">
 
         <include
             android:id="@+id/view_toolbar"

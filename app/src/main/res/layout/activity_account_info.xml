@@ -21,7 +21,7 @@
         <include
             android:id="@+id/view_toolbar"
             layout="@layout/view_toolbar"
-            app:title="@{context.getString(R.string.my_account_info)}" />
+            app:title="@{@string/my_account_info}" />
 
         <TextView
             android:id="@+id/tv_user_name"

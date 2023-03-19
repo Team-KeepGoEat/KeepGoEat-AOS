@@ -20,7 +20,7 @@
         <include
             android:id="@+id/view_toolbar"
             layout="@layout/view_toolbar"
-            app:title="@{context.getString(R.string.my)}" />
+            app:title="@{@string/my}" />
 
         <ScrollView
             android:layout_width="match_parent"
