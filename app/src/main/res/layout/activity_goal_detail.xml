@@ -127,10 +127,10 @@
             app:layout_constraintTop_toBottomOf="@id/tv_goal_criterion">
 
             <TextView
-                android:layout_marginTop="7dp"
                 android:id="@+id/tv_num_of_days_eaten_last_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
                 android:text="@{@string/goal_detail_num_of_days_eaten_last_month(viewModel.goalDetail == null ? `` : context.getString(viewModel.goalDetail.eatingType.achievementCountTitle))}"
                 android:textAppearance="@style/TextAppearance.System5"
                 android:textColor="@color/gray_600"
