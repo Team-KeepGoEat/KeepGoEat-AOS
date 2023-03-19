@@ -34,6 +34,6 @@ class ServiceIntroActivity :
 
     companion object {
         private const val OPEN_SOURCE_LINK =
-            "https://68space.notion.site/AOS-9d8b169f9108434baca652a9c1dd7c81"
+            "https://68space.notion.site/cd16c9399dfe4c7a867deb59851282e3"
     }
 }
