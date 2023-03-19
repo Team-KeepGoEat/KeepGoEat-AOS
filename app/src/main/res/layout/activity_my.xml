@@ -58,32 +58,31 @@
                     tools:text="keepgoeat@kakao.com" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutAchievedGoal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing16"
                     android:layout_marginTop="28dp"
-                    android:layout_marginEnd="14dp">
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingVertical="@dimen/spacing8"
+                    android:paddingStart="@dimen/spacing16"
+                    android:paddingEnd="@dimen/spacing14">
 
                     <TextView
                         android:id="@+id/tv_achieved_goal"
-                        style="@style/TextAppearance.My.Menu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="@dimen/spacing4"
-                        android:paddingEnd="@dimen/spacing4"
                         android:text="@string/my_achieved_goal"
+                        android:textAppearance="@style/TextAppearance.System4"
+                        android:textColor="@color/gray_800"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <!-- TODO 보관한 목표 갯수 가져오기 -->
                     <TextView
                         android:id="@+id/tv_achieved_goal_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="@dimen/spacing4"
-                        android:paddingStart="@dimen/spacing4"
-                        android:paddingEnd="9dp"
+                        android:layout_marginStart="@dimen/spacing8"
                         android:text="@{Integer.toString(viewModel.userInfo.achievedGoalCount)}"
                         android:textAppearance="@style/TextAppearance.System4_Bold"
                         android:textColor="@color/orange_600"
@@ -105,7 +104,7 @@
                     android:id="@+id/view_divider_achieved_goal"
                     style="@style/Widget.Divider"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/spacing12" />
+                    android:layout_marginTop="@dimen/spacing4" />
 
                 <TextView
                     android:id="@+id/tv_contact_and_feedback"
@@ -117,24 +116,21 @@
                 <TextView
                     android:id="@+id/tv_contact_us"
                     style="@style/Style.My.Menu"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing16"
+                    android:layout_marginTop="@dimen/spacing8"
                     android:text="@string/my_contact_us" />
 
                 <TextView
                     android:id="@+id/tv_feedback"
                     style="@style/Style.My.Menu"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing24"
                     android:text="@string/my_feedback" />
 
                 <View
                     android:id="@+id/view_divider_feedback"
                     style="@style/Widget.Divider"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/spacing16" />
+                    android:layout_marginTop="@dimen/spacing4" />
 
                 <TextView
                     android:id="@+id/tv_app_info"
@@ -146,22 +142,19 @@
                 <TextView
                     android:id="@+id/tv_about_service"
                     style="@style/Style.My.Menu"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing24"
+                    android:layout_marginTop="@dimen/spacing8"
                     android:text="@string/my_about_service" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/spacing16"
-                    android:layout_marginTop="@dimen/spacing24">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tv_version_info"
-                        style="@style/TextAppearance.My.Menu"
-                        android:layout_width="wrap_content"
+                        style="@style/Style.My.Menu"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
                         android:text="@string/my_version_info"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -170,9 +163,11 @@
                         android:id="@+id/tv_version_code"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing16"
                         android:text="@string/app_version"
                         android:textAppearance="@style/TextAppearance.System4"
                         android:textColor="@color/gray_400"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -181,7 +176,7 @@
                     android:id="@+id/view_divider_app_info"
                     style="@style/Widget.Divider"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/spacing16" />
+                    android:layout_marginTop="@dimen/spacing4" />
 
                 <TextView
                     android:id="@+id/tv_terms_and_policy"
@@ -193,17 +188,14 @@
                 <TextView
                     android:id="@+id/tv_terms"
                     style="@style/Style.My.Menu"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing24"
+                    android:layout_marginTop="@dimen/spacing8"
                     android:text="@string/my_terms" />
 
                 <TextView
                     android:id="@+id/tv_policy"
                     style="@style/Style.My.Menu"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing24"
                     android:text="@string/my_policy" />
             </LinearLayout>
         </ScrollView>

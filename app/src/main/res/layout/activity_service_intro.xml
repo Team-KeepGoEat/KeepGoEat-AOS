@@ -60,14 +60,13 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_text_logo" />
 
                 <TextView
+                    style="@style/Style.Menu"
                     android:id="@+id/tv_open_source"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="@dimen/spacing16"
                     android:text="@string/my_service_intro_open_source"
-                    android:textAppearance="@style/TextAppearance.System4"
-                    android:textColor="@color/gray_800"
                     app:drawableEndCompat="@drawable/ic_detail_large"
                     app:layout_constraintTop_toBottomOf="@id/iv_background" />
             </androidx.constraintlayout.widget.ConstraintLayout>

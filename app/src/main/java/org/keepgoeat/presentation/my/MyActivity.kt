@@ -37,13 +37,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
                 startActivity(it)
             }
         }
-        binding.tvAchievedGoal.setOnClickListener {
-            moveToAchievedGoalDetail()
-        }
-        binding.tvAchievedGoalCount.setOnClickListener {
-            moveToAchievedGoalDetail()
-        }
-        binding.ivAchievedGoalDetail.setOnClickListener {
+        binding.layoutAchievedGoal.setOnClickListener {
             moveToAchievedGoalDetail()
         }
         binding.tvContactUs.setOnClickListener {
