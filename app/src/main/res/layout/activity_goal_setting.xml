@@ -114,6 +114,7 @@
             android:text="@{viewModel.goalFood.length() == 0 || viewModel.goalFood.blank ? @string/goal_setting_title_length_guide : viewModel.isValidFood() == false ? @string/goal_setting_title_language_guide : ``}"
             android:textAppearance="@style/TextAppearance.System6"
             android:textColor="@color/orange_400"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@+id/et_goal"
             tools:text="@string/goal_setting_title_length_guide" />

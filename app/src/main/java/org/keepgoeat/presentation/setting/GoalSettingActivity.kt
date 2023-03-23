@@ -2,6 +2,7 @@ package org.keepgoeat.presentation.setting
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -65,6 +66,11 @@ class GoalSettingActivity :
                 is UiState.Error -> {}
                 else -> {}
             }
+        }.launchIn(lifecycleScope)
+
+        viewModel.goalFood.flowWithLifecycle(lifecycle).onEach { goalFood ->
+            if (goalFood.length > 0)
+                binding.tvGoalTitleLengthGuide.visibility = View.VISIBLE
         }.launchIn(lifecycleScope)
     }
 
