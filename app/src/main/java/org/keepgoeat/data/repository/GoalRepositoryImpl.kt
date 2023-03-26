@@ -26,7 +26,7 @@ class GoalRepositoryImpl @Inject constructor(
     }
 
     override suspend fun uploadGoalContent(
-        food: String,
+        food: String?,
         criterion: String,
         isMore: Boolean,
     ): Result<Int> =
