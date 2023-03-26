@@ -111,10 +111,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
-            android:text="@{viewModel.goalFood.length() == 0 || viewModel.goalFood.blank ? @string/goal_setting_title_length_guide : viewModel.isValidFood() == false ? @string/goal_setting_title_language_guide : ``}"
+            android:text="@{(viewModel.goalFood.length() == 0 || viewModel.goalFood.blank) &amp; viewModel.goalFood != null ? @string/goal_setting_title_length_guide : ``}"
             android:textAppearance="@style/TextAppearance.System6"
             android:textColor="@color/orange_400"
-            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@+id/et_goal"
             tools:text="@string/goal_setting_title_length_guide" />
@@ -172,24 +171,13 @@
             app:layout_constraintTop_toBottomOf="@id/et_goal_criterion"
             tools:text="(0/20)" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing8"
-            android:text="@{viewModel.isValidCriterion() == false ? @string/goal_setting_title_language_guide : ``}"
-            android:textAppearance="@style/TextAppearance.System6"
-            android:textColor="@color/orange_400"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/et_goal_criterion"
-            tools:text="@string/goal_setting_title_language_guide" />
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_complete"
             style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
             android:layout_marginBottom="42dp"
             android:backgroundTint="@{viewModel.eatingType == EatingType.MORE ? @colorStateList/selector_more_complete_button_color : @colorStateList/selector_less_complete_button_color}"
-            android:enabled="@{viewModel.isEnabledCompleteButton}"
+            android:enabled="@{viewModel.goalFood != null &amp; viewModel.goalFood.length() > 0}"
             android:text="@string/complete"
             android:textColor="@color/selector_complete_button_text_color"
             app:layout_constraintBottom_toBottomOf="parent"
