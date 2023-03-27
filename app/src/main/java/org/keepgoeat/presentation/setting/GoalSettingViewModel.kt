@@ -36,7 +36,7 @@ class GoalSettingViewModel @Inject constructor(
     private fun addGoal() {
         viewModelScope.launch {
             goalRepository.uploadGoalContent(
-                goalFood.value?.trim(),
+                goalFood.value?.trim()?:return@launch,
                 goalCriterion.value.trim(),
                 eatingType.value == EatingType.MORE
             ).onSuccess {

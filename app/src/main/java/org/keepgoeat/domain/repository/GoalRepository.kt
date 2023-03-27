@@ -12,7 +12,7 @@ interface GoalRepository {
     ): Result<ResponseGoalAchievement.ResponseGoalAchievementData>
 
     suspend fun uploadGoalContent(
-        food: String?,
+        food: String,
         criterion: String,
         isMore: Boolean
     ): Result<Int>
