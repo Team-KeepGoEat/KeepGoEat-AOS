@@ -29,9 +29,9 @@ class AuthRepositoryImpl @Inject constructor(
             Timber.e(it.message)
         }
 
-    override suspend fun deleteAccount(): Result<ResponseWithdraw> =
+    override suspend fun deleteAccount(platform: String): Result<ResponseWithdraw> =
         runCatching {
-            authDataSource.deleteAccount()
+            authDataSource.deleteAccount(platform)
         }.onSuccess {
             Timber.d("회원 탈퇴 성공")
             localStorage.clear(true)

@@ -105,7 +105,7 @@ class MyViewModel @Inject constructor(
 
     fun deleteAccount() {
         viewModelScope.launch {
-            authRepository.deleteAccount()
+            authRepository.deleteAccount(localStorage.loginPlatform.name)
                 .onSuccess {
                     _deleteAccountUiState.value = UiState.Success(true)
                 }.onFailure {

@@ -14,5 +14,6 @@ class AuthDataSource @Inject constructor(
 
     suspend fun refresh(): ResponseRefresh = authService.refresh()
 
-    suspend fun deleteAccount(): ResponseWithdraw = authService.deleteAccount()
+    suspend fun deleteAccount(platform: String): ResponseWithdraw =
+        authService.deleteAccount(platform)
 }
