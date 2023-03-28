@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import okhttp3.Interceptor
+import okhttp3.Request
 import okhttp3.Response
 import org.keepgoeat.BuildConfig
 import org.keepgoeat.R
@@ -24,10 +25,7 @@ class AuthInterceptor @Inject constructor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
-        val authRequest =
-            originalRequest.newBuilder()
-                .addHeader(ACCESS_TOKEN, localStorage.accessToken)
-                .addHeader(REFRESH_TOKEN, localStorage.refreshToken).build()
+        val authRequest = originalRequest.newAuthBuilder().build()
         val response = chain.proceed(authRequest)
 
         when (response.code) {
@@ -49,10 +47,7 @@ class AuthInterceptor @Inject constructor(
                         accessToken = responseRefresh.data.accessToken
                         refreshToken = responseRefresh.data.refreshToken
                     }
-                    val newRequest =
-                        originalRequest.newBuilder()
-                            .addHeader(ACCESS_TOKEN, localStorage.accessToken)
-                            .build()
+                    val newRequest = originalRequest.newAuthBuilder().build()
                     return chain.proceed(newRequest)
                 } else {
                     with(context) {
@@ -72,6 +67,11 @@ class AuthInterceptor @Inject constructor(
         }
         return response
     }
+
+    private fun Request.newAuthBuilder() =
+        this.newBuilder()
+            .addHeader(ACCESS_TOKEN, localStorage.accessToken)
+            .addHeader(REFRESH_TOKEN, localStorage.refreshToken)
 
     companion object {
         private const val ACCESS_TOKEN = "accesstoken"
