@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".presentation.home.HomeActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:background="@drawable/shape_border_radius_8"
+            android:backgroundTint="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_force_update_title"
+                style="@style/TextAppearance.System3_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/force_update_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_force_update_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing16"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:lineHeight="24dp"
+                android:textAppearance="@style/TextAppearance.System4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_force_update_title"
+                tools:text="더 좋아진 킵고잇 앱을 사용하시기 위해서는 새로운 버전 2.0으로 업데이트가 필요합니다. 현재 버전은 1.01 입니다." />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_force_update"
+                style="@style/Widget.Material.Button.Basic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing16"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="@dimen/spacing16"
+                android:backgroundTint="@color/orange_600"
+                android:fontFamily="@font/pretendard_b"
+                android:paddingVertical="@dimen/spacing12"
+                android:text="@string/force_update"
+                android:textSize="16dp"
+                app:cornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_force_update_description" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
