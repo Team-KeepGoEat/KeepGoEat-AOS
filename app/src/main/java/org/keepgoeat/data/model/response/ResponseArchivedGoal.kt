@@ -26,8 +26,8 @@ data class ResponseArchivedGoal(
             val writerId: Int,
             val totalCount: Int,
             val startedAt: String,
-            val archivedAt: String?,
-            val isArchived: Boolean,
+            val keptAt: String?,
+            val isAchieved: Boolean,
         )
 
         fun toMyGoal() = goals.map { goal ->
@@ -36,7 +36,7 @@ data class ResponseArchivedGoal(
                 goal.food,
                 if (goal.isMore) EatingType.MORE else EatingType.LESS,
                 goal.startedAt,
-                goal.archivedAt,
+                goal.keptAt,
                 goal.totalCount
             )
         }
