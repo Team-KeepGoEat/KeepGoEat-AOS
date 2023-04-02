@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.keepgoeat.data.datasource.local.KGEDataSource
-import org.keepgoeat.domain.model.AchievedGoal
+import org.keepgoeat.domain.model.ArchivedGoal
 import org.keepgoeat.domain.model.UserInfo
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
@@ -31,20 +31,24 @@ class MyViewModel @Inject constructor(
 ) : ViewModel() {
     private val _userInfo = MutableStateFlow(UserInfo("", "", 0))
     val userInfo get() = _userInfo.asStateFlow()
-    private val _achievedGoalUiState =
-        MutableStateFlow<UiState<List<AchievedGoal>>>(UiState.Loading)
-    val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
+
+    private val _archivedGoalFetchUiState =
+        MutableStateFlow<UiState<List<ArchivedGoal>>>(UiState.Loading)
+    val archivedGoalUiState get() = _archivedGoalFetchUiState.asStateFlow()
+    private val _archivedGoalCount = MutableStateFlow(0)
+    private val _allArchivedGoalCount = MutableStateFlow(0)
+
     private val _logoutUiState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val logoutUiState get() = _logoutUiState.asStateFlow()
-    private val _achievedGoalCount = MutableStateFlow(0)
+
     private val _deleteState = MutableStateFlow<UiState<Int>>(UiState.Loading)
-    private val _allAchievedGoalCount = MutableStateFlow(0)
+    val deleteState get() = _deleteState.asStateFlow()
     private var _deletedGoalCount = 0
     val deletedGoalCount get() = _deletedGoalCount
 
-    val deleteState get() = _deleteState.asStateFlow()
-    val achievedGoalCount get() = _achievedGoalCount.asStateFlow()
-    val allAchievedGoalCount get() = _allAchievedGoalCount.asStateFlow()
+    val archivedGoalCount get() = _archivedGoalCount.asStateFlow()
+    val allArchivedGoalCount get() = _allArchivedGoalCount.asStateFlow()
+
     private val _deleteAccountUiState =
         MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
@@ -71,16 +75,16 @@ class MyViewModel @Inject constructor(
         }
     }
 
-    fun fetchAchievedGoalBySort(sortType: SortType) {
+    fun fetchArchivedGoalBySort(sortType: SortType) {
         viewModelScope.launch {
-            goalRepository.fetchAchievedGoal(sortType.name.lowercase())
+            goalRepository.fetchArchivedGoal(sortType.name.lowercase())
                 .onSuccess {
-                    _achievedGoalUiState.value = UiState.Success(it)
-                    _achievedGoalCount.value = it.size
+                    _archivedGoalFetchUiState.value = UiState.Success(it)
+                    _archivedGoalCount.value = it.size
                     if (sortType == SortType.ALL)
-                        _allAchievedGoalCount.value = it.size
+                        _allArchivedGoalCount.value = it.size
                 }.onFailure {
-                    _achievedGoalUiState.value = UiState.Error(null)
+                    _archivedGoalFetchUiState.value = UiState.Error(null)
                 }
         }
     }
@@ -89,8 +93,8 @@ class MyViewModel @Inject constructor(
         viewModelScope.launch {
             goalRepository.deleteGoal(id).onSuccess { deletedData ->
                 _deleteState.value = UiState.Success(deletedData.goalId)
-                _achievedGoalCount.value -= 1
-                _allAchievedGoalCount.value -= 1
+                _archivedGoalCount.value -= 1
+                _allArchivedGoalCount.value -= 1
                 _deletedGoalCount += 1 // TODO need refactoring
             }.onFailure {
                 Timber.e(it.message)

@@ -23,9 +23,9 @@ interface GoalService {
     suspend fun fetchGoalDetail(@Path("goalId") goalId: Int): ResponseGoalDetail
 
     @GET("goal/kept")
-    suspend fun fetchAchievedGoal(
+    suspend fun fetchArchivedGoal(
         @Query("sort") value: String,
-    ): ResponseAchievedGoal
+    ): ResponseArchivedGoal
 
     @POST("goal/keep/{goalId}")
     suspend fun keepGoal(@Path("goalId") id: Int): ResponseGoalKeep

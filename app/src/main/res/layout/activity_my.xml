@@ -58,7 +58,7 @@
                     tools:text="keepgoeat@kakao.com" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layoutAchievedGoal"
+                    android:id="@+id/layout_archived_goal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -68,10 +68,10 @@
                     android:paddingEnd="@dimen/spacing14">
 
                     <TextView
-                        android:id="@+id/tv_achieved_goal"
+                        android:id="@+id/tv_archived_goal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/my_achieved_goal"
+                        android:text="@string/my_archived_goal"
                         android:textAppearance="@style/TextAppearance.System4"
                         android:textColor="@color/gray_800"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,16 +83,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing8"
-                        android:text="@{Integer.toString(viewModel.userInfo.achievedGoalCount)}"
+                        android:text="@{Integer.toString(viewModel.userInfo.archivedGoalCount)}"
                         android:textAppearance="@style/TextAppearance.System4_Bold"
                         android:textColor="@color/orange_600"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tv_achieved_goal"
+                        app:layout_constraintStart_toEndOf="@id/tv_archived_goal"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="3" />
 
                     <ImageView
-                        android:id="@+id/iv_achieved_goal_detail"
+                        android:id="@+id/iv_archived_goal_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_detail"

@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
-import org.keepgoeat.databinding.ActivityAchievedGoalBinding
+import org.keepgoeat.databinding.ActivityArchivedGoalBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.SortType
@@ -22,11 +22,11 @@ import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showToast
 
 @AndroidEntryPoint
-class AchievedGoalActivity :
-    BindingActivity<ActivityAchievedGoalBinding>(R.layout.activity_achieved_goal) {
+class ArchivedGoalActivity :
+    BindingActivity<ActivityArchivedGoalBinding>(R.layout.activity_archived_goal) {
     private val viewModel: MyViewModel by viewModels()
-    lateinit var goalAdapter: AchievedGoalAdapter
-    private val headerAdapter = AchievedGoalHeaderAdapter(::getFilteredGoalWithEatingType)
+    lateinit var goalAdapter: ArchivedGoalAdapter
+    private val headerAdapter = ArchivedGoalHeaderAdapter(::getFilteredGoalWithEatingType)
     lateinit var goalConcatAdapter: ConcatAdapter
     private var isEnteredFromKeep: Boolean = false
 
@@ -42,8 +42,8 @@ class AchievedGoalActivity :
         binding.lifecycleOwner = this
         isEnteredFromKeep = intent.getBooleanExtra(ARG_IS_ENTERED_FROM_KEEP, false)
 
-        viewModel.fetchAchievedGoalBySort(SortType.ALL)
-        goalAdapter = AchievedGoalAdapter(::showKeepDeleteDialog)
+        viewModel.fetchArchivedGoalBySort(SortType.ALL)
+        goalAdapter = ArchivedGoalAdapter(::showKeepDeleteDialog)
         goalConcatAdapter = ConcatAdapter(headerAdapter, goalAdapter)
 
         initLayout()
@@ -66,9 +66,9 @@ class AchievedGoalActivity :
 
     private fun getFilteredGoalWithEatingType(eatingType: EatingType?) {
         when (eatingType) {
-            null -> viewModel.fetchAchievedGoalBySort(SortType.ALL)
-            EatingType.MORE -> viewModel.fetchAchievedGoalBySort(SortType.MORE)
-            EatingType.LESS -> viewModel.fetchAchievedGoalBySort(SortType.LESS)
+            null -> viewModel.fetchArchivedGoalBySort(SortType.ALL)
+            EatingType.MORE -> viewModel.fetchArchivedGoalBySort(SortType.MORE)
+            EatingType.LESS -> viewModel.fetchArchivedGoalBySort(SortType.LESS)
         }
     }
 
@@ -82,7 +82,7 @@ class AchievedGoalActivity :
     }
 
     private fun collectData() {
-        viewModel.achievedGoalUiState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.archivedGoalUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     goalAdapter.setGoalList(it.data.toMutableList())
@@ -103,7 +103,7 @@ class AchievedGoalActivity :
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.allAchievedGoalCount.flowWithLifecycle(lifecycle).onEach { allAchievedGoalCount ->
+        viewModel.allArchivedGoalCount.flowWithLifecycle(lifecycle).onEach { allAchievedGoalCount ->
             val homeGoalCount = intent.getIntExtra(ARG_HOME_GOAL_COUNT, -1)
             if (homeGoalCount == 0 && allAchievedGoalCount == 0) {
                 binding.btnMoreKeep.visibility = View.VISIBLE
