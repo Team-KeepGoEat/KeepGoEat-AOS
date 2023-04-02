@@ -7,6 +7,7 @@ import org.keepgoeat.data.model.response.ResponseWithdraw
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface AuthService {
     @POST("auth")
@@ -16,5 +17,5 @@ interface AuthService {
     suspend fun refresh(): ResponseRefresh
 
     @GET("auth/withdraw")
-    suspend fun deleteAccount(): ResponseWithdraw
+    suspend fun deleteAccount(@Query("code") platform: String): ResponseWithdraw
 }
