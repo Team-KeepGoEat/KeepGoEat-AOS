@@ -82,7 +82,7 @@ class ArchivedGoalActivity :
     }
 
     private fun collectData() {
-        viewModel.archivedGoalUiState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.archivedGoalFetchUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     goalAdapter.setGoalList(it.data.toMutableList())

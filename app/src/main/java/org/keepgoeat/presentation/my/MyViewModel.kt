@@ -34,7 +34,7 @@ class MyViewModel @Inject constructor(
 
     private val _archivedGoalFetchUiState =
         MutableStateFlow<UiState<List<ArchivedGoal>>>(UiState.Loading)
-    val archivedGoalUiState get() = _archivedGoalFetchUiState.asStateFlow()
+    val archivedGoalFetchUiState get() = _archivedGoalFetchUiState.asStateFlow()
     private val _archivedGoalCount = MutableStateFlow(0)
     private val _allArchivedGoalCount = MutableStateFlow(0)
 
