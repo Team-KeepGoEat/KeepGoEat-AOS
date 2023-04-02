@@ -19,9 +19,9 @@ class ArchivedGoalHeaderAdapter(private val eatingTypeClickListener: ((EatingTyp
         if (!::inflater.isInitialized)
             inflater = LayoutInflater.from(parent.context)
 
-        return ArchivedGoalHeaderViewHolder(LayoutArchivedGoalHeaderBinding.inflate(inflater,
-            parent,
-            false))
+        return ArchivedGoalHeaderViewHolder(
+            LayoutArchivedGoalHeaderBinding.inflate(inflater, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ArchivedGoalHeaderViewHolder, position: Int) {
