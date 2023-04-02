@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import org.keepgoeat.R
-import org.keepgoeat.databinding.DialogKeepDeleteBinding
+import org.keepgoeat.databinding.DialogGoalDeleteBinding
 import org.keepgoeat.util.binding.BindingDialogFragment
 
-class KeepDeleteDialogFragment :
-    BindingDialogFragment<DialogKeepDeleteBinding>(R.layout.dialog_keep_delete) {
+class GoalDeleteDialogFragment :
+    BindingDialogFragment<DialogGoalDeleteBinding>(R.layout.dialog_goal_delete) {
     private val viewModel: MyViewModel by activityViewModels()
     private var goalId: Int? = null
 
@@ -29,7 +29,7 @@ class KeepDeleteDialogFragment :
         }
         binding.yes.setOnClickListener {
             goalId?.let { goalId ->
-                viewModel.deleteGoal(goalId)
+                viewModel.deleteArchivedGoal(goalId)
             }
             dismiss()
         }

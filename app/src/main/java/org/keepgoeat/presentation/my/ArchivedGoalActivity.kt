@@ -93,7 +93,7 @@ class ArchivedGoalActivity :
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.deleteState.flowWithLifecycle(lifecycle).onEach { deleteState ->
+        viewModel.goalDeleteState.flowWithLifecycle(lifecycle).onEach { deleteState ->
             when (deleteState) {
                 is UiState.Success -> {
                     goalAdapter.removeGoal(deleteState.data)
@@ -136,11 +136,11 @@ class ArchivedGoalActivity :
     }
 
     private fun showKeepDeleteDialog(goalId: Int) {
-        KeepDeleteDialogFragment().apply {
+        GoalDeleteDialogFragment().apply {
             arguments = Bundle().apply {
                 putInt(ARG_GOAL_ID, goalId)
             }
-        }.show(supportFragmentManager, "KeepDeleteDialog")
+        }.show(supportFragmentManager, "archivedGoalDeleteDialog")
     }
 
     companion object {

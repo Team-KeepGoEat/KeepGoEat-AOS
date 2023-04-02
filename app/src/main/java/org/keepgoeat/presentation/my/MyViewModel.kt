@@ -41,8 +41,8 @@ class MyViewModel @Inject constructor(
     private val _logoutUiState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val logoutUiState get() = _logoutUiState.asStateFlow()
 
-    private val _deleteState = MutableStateFlow<UiState<Int>>(UiState.Loading)
-    val deleteState get() = _deleteState.asStateFlow()
+    private val _goalDeleteState = MutableStateFlow<UiState<Int>>(UiState.Loading)
+    val goalDeleteState get() = _goalDeleteState.asStateFlow()
     private var _deletedGoalCount = 0
     val deletedGoalCount get() = _deletedGoalCount
 
@@ -89,10 +89,10 @@ class MyViewModel @Inject constructor(
         }
     }
 
-    fun deleteGoal(id: Int) {
+    fun deleteArchivedGoal(id: Int) {
         viewModelScope.launch {
             goalRepository.deleteGoal(id).onSuccess { deletedData ->
-                _deleteState.value = UiState.Success(deletedData.goalId)
+                _goalDeleteState.value = UiState.Success(deletedData.goalId)
                 _archivedGoalCount.value -= 1
                 _allArchivedGoalCount.value -= 1
                 _deletedGoalCount += 1 // TODO need refactoring
