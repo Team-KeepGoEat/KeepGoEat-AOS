@@ -8,5 +8,5 @@ import org.keepgoeat.data.model.response.ResponseWithdraw
 interface AuthRepository {
     suspend fun login(requestAuth: RequestAuth): Result<ResponseAuth.ResponseAuthData?>
     suspend fun refresh(): Result<ResponseRefresh.ResponseToken?>
-    suspend fun deleteAccount(platform: String): Result<ResponseWithdraw>
+    suspend fun deleteAccount(): Result<ResponseWithdraw>
 }
