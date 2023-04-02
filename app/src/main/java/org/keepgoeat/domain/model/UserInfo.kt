@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class UserInfo(
     val name: String,
     val email: String,
-    val achievedGoalCount: Int,
+    val archivedGoalCount: Int,
 ) : Parcelable

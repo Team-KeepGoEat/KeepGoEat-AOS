@@ -37,8 +37,8 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
                 startActivity(it)
             }
         }
-        binding.layoutAchievedGoal.setOnClickListener {
-            moveToAchievedGoalDetail()
+        binding.layoutArchivedGoal.setOnClickListener {
+            moveToArchivedGoalDetail()
         }
         binding.tvContactUs.setOnClickListener {
             sendMail(
@@ -67,9 +67,9 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         }
     }
 
-    private fun moveToAchievedGoalDetail() {
+    private fun moveToArchivedGoalDetail() {
         val homeGoalCount = intent.getIntExtra(ARG_HOME_GOAL_COUNT, -1)
-        val intent = Intent(this, AchievedGoalActivity::class.java)
+        val intent = Intent(this, ArchivedGoalActivity::class.java)
         intent.putExtra(ARG_HOME_GOAL_COUNT, homeGoalCount)
         startActivity(intent)
     }

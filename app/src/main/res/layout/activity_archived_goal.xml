@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.my.AchievedGoalActivity">
+        tools:context=".presentation.my.ArchivedGoalActivity">
 
         <include
             android:id="@+id/view_toolbar"
@@ -36,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_toolbar"
-            app:visibility="@{viewModel.achievedGoalCount == 0}">
+            app:visibility="@{viewModel.archivedGoalCount == 0}">
 
             <ImageView
                 android:id="@+id/iv_gray_plate"
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
                 android:fontFamily="@font/pretendard_b"
-                android:text="@string/my_achieved_goal_empty_title"
+                android:text="@string/my_archived_goal_empty_title"
                 android:textAlignment="center"
                 android:textColor="@color/gray_500"
                 android:textSize="18dp"
@@ -69,7 +69,7 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/pretendard_r"
                 android:lineHeight="24dp"
-                android:text="@string/my_achieved_goal_empty_description"
+                android:text="@string/my_archived_goal_empty_description"
                 android:textAlignment="center"
                 android:textColor="@color/gray_500"
                 android:textSize="@dimen/spacing16"
@@ -86,7 +86,7 @@
                 android:layout_marginBottom="69dp"
                 android:backgroundTint="@color/orange_600"
                 android:paddingVertical="@dimen/spacing12"
-                android:text="@string/my_ahcieved_goal_empty_make_goal"
+                android:text="@string/my_archived_goal_empty_make_goal"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

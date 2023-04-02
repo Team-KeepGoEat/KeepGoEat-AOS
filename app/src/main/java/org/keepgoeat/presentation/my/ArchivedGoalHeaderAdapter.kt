@@ -5,24 +5,26 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.R
-import org.keepgoeat.databinding.LayoutAchievedGoalHeaderBinding
+import org.keepgoeat.databinding.LayoutArchivedGoalHeaderBinding
 import org.keepgoeat.presentation.type.EatingType
 
-class AchievedGoalHeaderAdapter(private val eatingTypeClickListener: ((EatingType?) -> Unit)) :
-    RecyclerView.Adapter<AchievedGoalHeaderAdapter.MyHeaderViewHolder>() {
+class ArchivedGoalHeaderAdapter(private val eatingTypeClickListener: ((EatingType?) -> Unit)) :
+    RecyclerView.Adapter<ArchivedGoalHeaderAdapter.ArchivedGoalHeaderViewHolder>() {
     private lateinit var inflater: LayoutInflater
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): MyHeaderViewHolder {
+    ): ArchivedGoalHeaderViewHolder {
         if (!::inflater.isInitialized)
             inflater = LayoutInflater.from(parent.context)
 
-        return MyHeaderViewHolder(LayoutAchievedGoalHeaderBinding.inflate(inflater, parent, false))
+        return ArchivedGoalHeaderViewHolder(
+            LayoutArchivedGoalHeaderBinding.inflate(inflater, parent, false)
+        )
     }
 
-    override fun onBindViewHolder(holder: MyHeaderViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArchivedGoalHeaderViewHolder, position: Int) {
         holder.onBind(eatingTypeClickListener, ::changeTextAppearance)
     }
 
@@ -41,8 +43,8 @@ class AchievedGoalHeaderAdapter(private val eatingTypeClickListener: ((EatingTyp
         unclickedView2.setTextColor(clickedView.context.getColor(R.color.gray_400))
     }
 
-    class MyHeaderViewHolder(
-        private val binding: LayoutAchievedGoalHeaderBinding,
+    class ArchivedGoalHeaderViewHolder(
+        private val binding: LayoutArchivedGoalHeaderBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             eatingTypeClickListener: ((EatingType?) -> Unit),
