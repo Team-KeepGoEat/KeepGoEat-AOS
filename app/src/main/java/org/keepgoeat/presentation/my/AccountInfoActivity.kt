@@ -52,7 +52,7 @@ class AccountInfoActivity :
             finish()
         }
         binding.tvLogout.setOnClickListener {
-            LogoutDialogFragment().show(supportFragmentManager, "LogoutDialog")
+            LogoutDialogFragment().show(supportFragmentManager, "logoutDialog")
         }
         binding.tvDeleteAccount.setOnClickListener {
             val intent = Intent(this, WithdrawActivity::class.java)
