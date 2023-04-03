@@ -9,7 +9,7 @@ import com.navercorp.nid.profile.data.NidProfileResponse
 import dagger.hilt.android.qualifiers.ActivityContext
 import org.keepgoeat.BuildConfig
 import org.keepgoeat.domain.model.AccountInfo
-import org.keepgoeat.presentation.type.SocialLoginType
+import org.keepgoeat.presentation.type.LoginPlatformType
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,14 +24,14 @@ class NaverAuthService @Inject constructor(
     }
 
     fun loginNaver(
-        loginListener: ((SocialLoginType, String) -> Unit),
+        loginListener: ((LoginPlatformType, String) -> Unit),
         accountListener: (AccountInfo) -> Unit
     ) {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
                 val accessToken = requireNotNull(NaverIdLoginSDK.getAccessToken())
                 Timber.d(accessToken)
-                loginListener(SocialLoginType.NAVER, accessToken)
+                loginListener(LoginPlatformType.NAVER, accessToken)
                 getAccountInfo(accountListener)
             }
 
