@@ -12,9 +12,8 @@ import timber.log.Timber
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-
-        if (BuildConfig.DEBUG) Timber.plant(KGEDebugTree())
         KakaoSdk.init(this, KAKAO_NATIVE_KEY)
+        if (BuildConfig.DEBUG) Timber.plant(KGEDebugTree())
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }
