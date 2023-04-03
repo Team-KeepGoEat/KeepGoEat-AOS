@@ -15,7 +15,7 @@ import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.DialogWithdrawBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.my.MyViewModel
-import org.keepgoeat.presentation.type.SocialLoginType
+import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingDialogFragment
 import org.keepgoeat.util.extension.showToast
@@ -43,8 +43,8 @@ class WithdrawDialogFragment :
         }
         binding.tvWithdraw.setOnClickListener {
             when (viewModel.loginPlatForm) {
-                SocialLoginType.NAVER -> naverSignService.deleteAccountNaver(viewModel::deleteAccount)
-                SocialLoginType.KAKAO -> kakaoSignService.deleteAccountKakao(viewModel::deleteAccount)
+                LoginPlatformType.NAVER -> naverSignService.deleteAccountNaver(viewModel::deleteAccount)
+                LoginPlatformType.KAKAO -> kakaoSignService.deleteAccountKakao(viewModel::deleteAccount)
                 else -> {}
             }
         }

@@ -63,6 +63,11 @@ jobs:
           HFM_BASE_URL: ${{ secrets.KGE_BASE_URL }}
         run: echo "KGE_BASE_URL=\"$KGE_BASE_URL\"" >> local.properties
 
+      - name: Access MIXPANEL_PROJECT_TOKEN
+        env:
+          HFM_BASE_URL: ${{ secrets.MIXPANEL_PROJECT_TOKEN }}
+        run: echo "MIXPANEL_PROJECT_TOKEN=\"$MIXPANEL_PROJECT_TOKEN\"" >> local.properties
+
       - name: Lint Check
         run: ./gradlew ktlintCheck
 

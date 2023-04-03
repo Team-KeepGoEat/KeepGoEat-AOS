@@ -8,7 +8,7 @@ import org.keepgoeat.R
 import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.DialogLogoutBinding
-import org.keepgoeat.presentation.type.SocialLoginType
+import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.binding.BindingDialogFragment
 import javax.inject.Inject
 
@@ -34,8 +34,8 @@ class LogoutDialogFragment : BindingDialogFragment<DialogLogoutBinding>(R.layout
     private fun addListeners() {
         binding.yes.setOnClickListener {
             when (viewModel.loginPlatForm) {
-                SocialLoginType.NAVER -> naverSignService.logoutNaver(viewModel::logout)
-                SocialLoginType.KAKAO -> kakaoSignService.logoutKakao(viewModel::logout)
+                LoginPlatformType.NAVER -> naverSignService.logoutNaver(viewModel::logout)
+                LoginPlatformType.KAKAO -> kakaoSignService.logoutKakao(viewModel::logout)
                 else -> {}
             }
             dismiss()
