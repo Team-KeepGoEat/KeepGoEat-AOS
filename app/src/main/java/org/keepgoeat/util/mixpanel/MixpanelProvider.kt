@@ -2,6 +2,7 @@ package org.keepgoeat.util.mixpanel
 
 import android.content.Context
 import com.mixpanel.android.mpmetrics.MixpanelAPI
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONObject
 import org.keepgoeat.BuildConfig
 import org.keepgoeat.data.datasource.local.KGEDataSource
@@ -10,12 +11,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MixpanelProvider @Inject constructor(private val localStorage: KGEDataSource) {
-    private lateinit var instance: MixpanelAPI
-
-    fun initialize(context: Context) {
-        instance = MixpanelAPI.getInstance(context, BuildConfig.MIXPANEL_PROJECT_TOKEN, true)
-    }
+class MixpanelProvider @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val localStorage: KGEDataSource,
+) {
+    private var instance: MixpanelAPI =
+        MixpanelAPI.getInstance(context, BuildConfig.MIXPANEL_PROJECT_TOKEN, true)
 
     fun setUser() {
         instance.identify(localStorage.userEmail)
