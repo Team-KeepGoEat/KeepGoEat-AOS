@@ -12,10 +12,8 @@ import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.mixpanel.MixPanelEvents
 import org.keepgoeat.util.mixpanel.MixpanelProvider
-import org.keepgoeat.util.mixpanel.completeLogin
-import org.keepgoeat.util.mixpanel.completeSignUp
+import org.keepgoeat.util.mixpanel.SignEvent
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,10 +51,10 @@ class SignViewModel @Inject constructor(
         when (signType) {
             SIGN_UP -> {
                 mixpanelProvider.setUser()
-                mixpanelProvider.sendEvent(MixPanelEvents.Sign.completeSignUp(platform))
+                mixpanelProvider.sendEvent(SignEvent.completeSignUp(platform))
             }
             SIGN_IN -> {
-                mixpanelProvider.sendEvent(MixPanelEvents.Sign.completeLogin())
+                mixpanelProvider.sendEvent(SignEvent.completeLogin())
             }
         }
     }
