@@ -29,6 +29,7 @@ android {
         buildConfigField "String", "KAKAO_NATIVE_KEY", properties["KAKAO_NATIVE_KEY"]
         buildConfigField "String", "NAVER_CLIENT_ID", properties["NAVER_CLIENT_ID"]
         buildConfigField "String", "NAVER_CLIENT_SECRETE", properties["NAVER_CLIENT_SECRETE"]
+        buildConfigField "String", "MIXPANEL_PROJECT_TOKEN", properties["MIXPANEL_PROJECT_TOKEN"]
     }
 
     buildTypes {
