@@ -12,12 +12,17 @@ import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.presentation.type.SocialLoginType
 import org.keepgoeat.util.UiState
+import org.keepgoeat.util.mixpanel.MixPanelEvents
+import org.keepgoeat.util.mixpanel.MixpanelProvider
+import org.keepgoeat.util.mixpanel.completeLogin
+import org.keepgoeat.util.mixpanel.completeSignUp
 import javax.inject.Inject
 
 @HiltViewModel
 class SignViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val localStorage: KGEDataSource,
+    private val mixpanelProvider: MixpanelProvider,
 ) :
     ViewModel() {
     private var _loginUiState = MutableStateFlow<UiState<Pair<Boolean, Boolean>>>(UiState.Loading)
@@ -32,6 +37,7 @@ class SignViewModel @Inject constructor(
                 _loginUiState.value = UiState.Success(
                     Pair(it?.type == SIGN_UP, localStorage.isClickedOnboardingButton)
                 )
+                sendSignEventLog(it?.type, loginPlatForm)
             }.onFailure {
                 _loginUiState.value = UiState.Error(it.message)
             }
@@ -43,7 +49,20 @@ class SignViewModel @Inject constructor(
         localStorage.userEmail = accountInfo.email
     }
 
+    private fun sendSignEventLog(signType: String?, platform: SocialLoginType) {
+        when (signType) {
+            SIGN_UP -> {
+                mixpanelProvider.setUser()
+                mixpanelProvider.sendEvent(MixPanelEvents.Sign.completeSignUp(platform))
+            }
+            SIGN_IN -> {
+                mixpanelProvider.sendEvent(MixPanelEvents.Sign.completeLogin())
+            }
+        }
+    }
+
     companion object {
         private const val SIGN_UP = "signup"
+        private const val SIGN_IN = "signin"
     }
 }
