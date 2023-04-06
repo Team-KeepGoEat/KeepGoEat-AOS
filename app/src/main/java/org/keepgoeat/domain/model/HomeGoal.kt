@@ -5,6 +5,7 @@ import org.keepgoeat.presentation.type.HomeGoalViewType
 data class HomeGoal(
     val id: Int,
     val goalTitle: String,
+    val goalCriterion: String,
     val isMore: Boolean,
     val isAchieved: Boolean,
     val thisMonthCount: Int,

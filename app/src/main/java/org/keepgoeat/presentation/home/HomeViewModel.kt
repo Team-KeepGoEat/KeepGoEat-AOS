@@ -64,6 +64,7 @@ class HomeViewModel @Inject constructor(
                             HomeGoal(
                                 id,
                                 goalTitle,
+                                goalCriterion,
                                 isMore,
                                 goalData.updatedIsAchieved,
                                 goalData.thisMonthCount,

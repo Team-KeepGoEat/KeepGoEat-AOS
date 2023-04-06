@@ -141,6 +141,7 @@ class HomeGoalAdapter(
                             HomeGoal(
                                 0,
                                 "",
+                                "",
                                 false,
                                 false,
                                 0,
