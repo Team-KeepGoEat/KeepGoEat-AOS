@@ -16,7 +16,7 @@ import org.keepgoeat.domain.model.UserInfo
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.home.HomeActivity.Companion.ARG_KILL_HOME_AND_GO_TO_SIGN
 import org.keepgoeat.presentation.my.MyActivity.Companion.ARG_USER_INFO
-import org.keepgoeat.presentation.withdraw.WithdrawActivity
+import org.keepgoeat.presentation.my.withdraw.WithdrawActivity
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.getParcelable

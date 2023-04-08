@@ -1,4 +1,4 @@
-package org.keepgoeat.presentation.withdraw
+package org.keepgoeat.presentation.my.withdraw
 
 import android.graphics.Rect
 import android.os.Bundle
