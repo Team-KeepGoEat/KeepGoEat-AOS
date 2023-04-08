@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityWithdrawBinding
-import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showKeyboard
@@ -75,7 +74,10 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             if (binding.etOtherReason.text.isNullOrBlank() && viewModel.isOtherReasonSelected.value)
                 binding.tvOtherReasonErrorMsg.setVisibility(true)
             else
-                WithdrawDialogFragment().show(supportFragmentManager, "withdrawDialog")
+                WithdrawDialogFragment(viewModel.getWithdrawReasons()).show(
+                    supportFragmentManager,
+                    "withdrawDialog"
+                )
         }
         binding.viewWithdrawToolbar.ivBack.setOnClickListener {
             finish()
@@ -84,7 +86,6 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
 
     private fun collectData() {
         viewModel.isOtherReasonSelected.flowWithLifecycle(lifecycle).onEach { isSelected ->
-            viewModel.selectReasons(WithdrawReason.REASON5)
             if (isSelected) {
                 requestFocus()
             } else {
