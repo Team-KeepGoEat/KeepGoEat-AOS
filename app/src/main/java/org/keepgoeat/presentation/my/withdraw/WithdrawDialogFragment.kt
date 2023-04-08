@@ -24,8 +24,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class WithdrawDialogFragment(
     private val withdrawReasons: MutableMap<String, Any>
-) :
-    BindingDialogFragment<DialogWithdrawBinding>(R.layout.dialog_withdraw) {
+) : BindingDialogFragment<DialogWithdrawBinding>(R.layout.dialog_withdraw) {
     @Inject
     lateinit var kakaoSignService: KakaoAuthService
 
