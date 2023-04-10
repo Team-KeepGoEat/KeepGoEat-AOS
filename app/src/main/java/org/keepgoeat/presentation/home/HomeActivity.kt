@@ -9,6 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.keepgoeat.BuildConfig
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.domain.model.HomeGoal
@@ -24,6 +25,7 @@ import org.keepgoeat.util.binding.BindingActivity
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var goalAdapter: HomeGoalAdapter
+    private val currentVersion = BuildConfig.VERSION_NAME
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,10 +83,18 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         }.flowWithLifecycle(lifecycle).onEach { shouldFetch ->
             if (shouldFetch) viewModel.fetchHomeContent()
         }.launchIn(lifecycleScope)
+        viewModel.updateVersion.flowWithLifecycle(lifecycle).onEach { updateVersion ->
+            if (currentVersion < updateVersion)
+                showForceUpdateDialog()
+        }.launchIn(lifecycleScope)
     }
 
     private fun showMakeGoalDialog() {
         HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
+    }
+
+    private fun showForceUpdateDialog() {
+        HomeForceUpdateDialogFragment().show(supportFragmentManager, "forceUpdateDialog")
     }
 
     private fun moveToDetail(eatingType: EatingType, goalId: Int) {
