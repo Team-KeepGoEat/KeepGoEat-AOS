@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import org.keepgoeat.data.service.AuthService
 import org.keepgoeat.data.service.GoalService
 import org.keepgoeat.data.service.UserService
+import org.keepgoeat.data.service.VersionService
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
@@ -27,4 +28,9 @@ object ServiceModule {
     @Provides
     fun provideUserService(retrofit: Retrofit): UserService =
         retrofit.create(UserService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideVersionService(retrofit: Retrofit): VersionService =
+        retrofit.create(VersionService::class.java)
 }

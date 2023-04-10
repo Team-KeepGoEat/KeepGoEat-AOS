@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import org.keepgoeat.domain.model.HomeContent
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.domain.repository.VersionRepository
 import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.UiState
 import timber.log.Timber
@@ -19,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
+    private val versionRepository: VersionRepository
 ) : ViewModel() {
     private var _homeDataFetchState = MutableStateFlow<UiState<HomeContent>>(UiState.Loading)
     val homeDataFetchState get() = _homeDataFetchState.asStateFlow()
@@ -32,6 +34,12 @@ class HomeViewModel @Inject constructor(
     val cheeringMessage = _cheeringMessage.asStateFlow()
     private val _lottieState = MutableStateFlow(ProcessState.IDLE)
     val lottieState get() = _lottieState.asStateFlow()
+    private val _updateVersion = MutableStateFlow("")
+    val updateVersion get() = _updateVersion.asStateFlow()
+
+    init {
+        fetchVersion(CLIENT_TYPE)
+    }
 
     fun fetchHomeContent() {
         viewModelScope.launch {
@@ -85,5 +93,22 @@ class HomeViewModel @Inject constructor(
 
     fun changeLottieState(state: ProcessState) {
         _lottieState.value = state
+    }
+
+    private fun fetchVersion(clientType: String) {
+        viewModelScope.launch {
+            versionRepository.fetchVersion(clientType)
+                .onSuccess {
+                    _updateVersion.value = it.version
+                }
+                .onFailure {
+                    Timber.e(it.message)
+                }
+        }
+
+    }
+
+    companion object {
+        private val CLIENT_TYPE = "AOS"
     }
 }

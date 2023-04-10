@@ -7,9 +7,11 @@ import dagger.hilt.components.SingletonComponent
 import org.keepgoeat.data.repository.AuthRepositoryImpl
 import org.keepgoeat.data.repository.GoalRepositoryImpl
 import org.keepgoeat.data.repository.UserRepositoryImpl
+import org.keepgoeat.data.repository.VersionRepositoryImpl
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.domain.repository.UserRepository
+import org.keepgoeat.domain.repository.VersionRepository
 import javax.inject.Singleton
 
 @Module
@@ -32,4 +34,10 @@ interface RepositoryModule {
     fun bindUserRepository(
         userRepositoryImpl: UserRepositoryImpl,
     ): UserRepository
+
+    @Binds
+    @Singleton
+    fun bindVersionRepository(
+        versionRepositoryImpl: VersionRepositoryImpl
+    ): VersionRepository
 }
