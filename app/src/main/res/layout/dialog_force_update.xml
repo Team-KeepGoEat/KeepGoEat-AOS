@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.home.HomeViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,11 +42,12 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:lineHeight="24dp"
+                android:text="@{@string/force_update_message(viewModel.updateVersion)}"
                 android:textAppearance="@style/TextAppearance.System4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_force_update_title"
-                tools:text="더 좋아진 킵고잇 앱을 사용하시기 위해서는 새로운 버전 2.0으로 업데이트가 필요합니다. 현재 버전은 1.01 입니다." />
+                tools:text="더 좋아진 킵고잇 앱을 사용하시기 위해서는 새로운 버전 1.0.1으로 업데이트가 필요합니다. 현재 버전은 1.0.0 입니다."/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_force_update"
