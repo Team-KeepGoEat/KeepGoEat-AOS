@@ -105,7 +105,6 @@ class HomeViewModel @Inject constructor(
                     Timber.e(it.message)
                 }
         }
-
     }
 
     companion object {
