@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".presentation.home.HomeActivity">
+        tools:context=".presentation.home.HomeForceUpdateDialog">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_force_update_title"
-                tools:text="더 좋아진 킵고잇 앱을 사용하시기 위해서는 새로운 버전 1.0.1으로 업데이트가 필요합니다. 현재 버전은 1.0.0 입니다."/>
+                tools:text="더 좋아진 킵고잇 앱을 사용하시기 위해서는 새로운 버전 1.0.1으로 업데이트가 필요합니다. 현재 버전은 1.0.0 입니다." />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_force_update"
