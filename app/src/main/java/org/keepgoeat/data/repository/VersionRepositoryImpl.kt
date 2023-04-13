@@ -8,8 +8,8 @@ import javax.inject.Inject
 class VersionRepositoryImpl @Inject constructor(
     private val versionDataSource: VersionDataSource
 ) : VersionRepository {
-    override suspend fun fetchVersion(clientType: String): Result<ResponseVersion.VersionData> =
-        kotlin.runCatching {
-            versionDataSource.fetchVersion(clientType).data
+    override suspend fun getForcedUpdateVersion(clientType: String): Result<ResponseVersion.VersionData> =
+        runCatching {
+            versionDataSource.getForcedUpdateVersion(clientType).data
         }
 }

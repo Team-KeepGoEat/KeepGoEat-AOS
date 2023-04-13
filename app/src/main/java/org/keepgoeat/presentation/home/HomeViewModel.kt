@@ -34,11 +34,11 @@ class HomeViewModel @Inject constructor(
     val cheeringMessage = _cheeringMessage.asStateFlow()
     private val _lottieState = MutableStateFlow(ProcessState.IDLE)
     val lottieState get() = _lottieState.asStateFlow()
-    private val _updateVersion = MutableStateFlow("")
+    private val _updateVersion = MutableStateFlow("1.0.0")
     val updateVersion get() = _updateVersion.asStateFlow()
 
     init {
-        fetchVersion(CLIENT_TYPE)
+        getForcedUpdateVersion(CLIENT_TYPE)
     }
 
     fun fetchHomeContent() {
@@ -95,9 +95,9 @@ class HomeViewModel @Inject constructor(
         _lottieState.value = state
     }
 
-    private fun fetchVersion(clientType: String) {
+    private fun getForcedUpdateVersion(clientType: String) {
         viewModelScope.launch {
-            versionRepository.fetchVersion(clientType)
+            versionRepository.getForcedUpdateVersion(clientType)
                 .onSuccess {
                     _updateVersion.value = it.version
                 }

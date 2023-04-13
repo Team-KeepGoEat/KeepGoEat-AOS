@@ -7,6 +7,6 @@ import javax.inject.Inject
 class VersionDataSource @Inject constructor(
     private val versionService: VersionService,
 ) {
-    suspend fun fetchVersion(clientType: String): ResponseVersion =
-        versionService.fetchVersion(clientType)
+    suspend fun getForcedUpdateVersion(clientType: String): ResponseVersion =
+        versionService.getForcedUpdateVersion(clientType)
 }
