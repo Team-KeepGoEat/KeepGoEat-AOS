@@ -84,7 +84,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         }.launchIn(lifecycleScope)
         viewModel.updateVersion.flowWithLifecycle(lifecycle).onEach { updateVersion ->
             val currentVersion = BuildConfig.VERSION_NAME
-            if (currentVersion < updateVersion)
+            if (compareVersion(currentVersion, updateVersion))
                 showForceUpdateDialog(updateVersion, currentVersion)
         }.launchIn(lifecycleScope)
     }
@@ -123,6 +123,17 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     private fun moveToSign() {
         startActivity(Intent(this, SignActivity::class.java))
         finish()
+    }
+
+    private fun compareVersion(currentVersion: String, updateVersion: String): Boolean {
+        val splitCurrent = currentVersion.split(".")
+        val splitUpdate = updateVersion.split(".")
+
+        for (i in 0..2) {
+            if (splitCurrent[i].toInt() < splitUpdate[i].toInt())
+                return true
+        }
+        return false
     }
 
     companion object {
