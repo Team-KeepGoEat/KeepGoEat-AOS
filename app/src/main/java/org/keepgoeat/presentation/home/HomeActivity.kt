@@ -25,7 +25,6 @@ import org.keepgoeat.util.binding.BindingActivity
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var goalAdapter: HomeGoalAdapter
-    private val currentVersion = BuildConfig.VERSION_NAME
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,8 +83,9 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             if (shouldFetch) viewModel.fetchHomeContent()
         }.launchIn(lifecycleScope)
         viewModel.updateVersion.flowWithLifecycle(lifecycle).onEach { updateVersion ->
+            val currentVersion = BuildConfig.VERSION_NAME
             if (currentVersion < updateVersion)
-                showForceUpdateDialog()
+                showForceUpdateDialog(updateVersion, currentVersion)
         }.launchIn(lifecycleScope)
     }
 
@@ -93,8 +93,13 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
     }
 
-    private fun showForceUpdateDialog() {
-        HomeForceUpdateDialogFragment().show(supportFragmentManager, "forceUpdateDialog")
+    private fun showForceUpdateDialog(updateVersion: String, currentVersion: String) {
+        HomeForceUpdateDialogFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_UPDATE_VERSION, updateVersion)
+                putString(ARG_CURRENT_VERSION, currentVersion)
+            }
+        }.show(supportFragmentManager, "forceUpdateDialog")
     }
 
     private fun moveToDetail(eatingType: EatingType, goalId: Int) {
@@ -123,5 +128,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     companion object {
         const val ARG_KILL_HOME_AND_GO_TO_SIGN = "killHomeAndGoToSign"
         const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
+        const val ARG_UPDATE_VERSION = "updateVersion"
+        const val ARG_CURRENT_VERSION = "currentVersion"
     }
 }

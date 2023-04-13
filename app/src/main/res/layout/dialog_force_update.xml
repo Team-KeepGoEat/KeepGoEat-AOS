@@ -6,8 +6,12 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="org.keepgoeat.presentation.home.HomeViewModel" />
+            name="currentVersion"
+            type="String" />
+
+        <variable
+            name="updateVersion"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +46,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:lineHeight="24dp"
-                android:text="@{@string/force_update_message(viewModel.updateVersion)}"
+                android:text="@{@string/force_update_message(updateVersion, currentVersion)}"
                 android:textAppearance="@style/TextAppearance.System4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
