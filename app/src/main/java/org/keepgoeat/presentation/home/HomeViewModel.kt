@@ -81,7 +81,8 @@ class HomeViewModel @Inject constructor(
                             GoalEvent.completeGoal(
                                 goal.goalTitle,
                                 goal.goalCriterion
-                            ), true
+                            ),
+                            true
                         )
                     }
                     _goalList.value =
