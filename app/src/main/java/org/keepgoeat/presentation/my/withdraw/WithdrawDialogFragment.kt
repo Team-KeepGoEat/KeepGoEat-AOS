@@ -22,9 +22,8 @@ import org.keepgoeat.util.extension.showToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class WithdrawDialogFragment(
-    private val withdrawReasons: MutableMap<String, Any>
-) : BindingDialogFragment<DialogWithdrawBinding>(R.layout.dialog_withdraw) {
+class WithdrawDialogFragment :
+    BindingDialogFragment<DialogWithdrawBinding>(R.layout.dialog_withdraw) {
     @Inject
     lateinit var kakaoSignService: KakaoAuthService
 
@@ -55,7 +54,6 @@ class WithdrawDialogFragment(
         viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    sendDeleteAccountEvent()
                     requireActivity().showToast(getString(R.string.withdraw_success))
                     moveToSign()
                     dismiss()
@@ -76,21 +74,5 @@ class WithdrawDialogFragment(
         }.also {
             startActivity(it)
         }
-    }
-
-    private fun sendDeleteAccountEvent() {
-        val reasons: MutableMap<String, Any> = mutableMapOf()
-        withdrawReasons.map {
-            if (it.key == SUBJECTIVE_ISSUE) {
-                reasons[it.key] = it.value
-            } else {
-                reasons[it.key] = getString(it.value as Int)
-            }
-        }
-        viewModel.sendDeleteAccountEvent(reasons)
-    }
-
-    companion object {
-        private const val SUBJECTIVE_ISSUE = "SUBJECTIVE_ISSUE"
     }
 }
