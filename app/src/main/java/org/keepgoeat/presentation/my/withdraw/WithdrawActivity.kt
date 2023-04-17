@@ -114,7 +114,7 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             if (it.key == SUBJECTIVE_ISSUE) {
                 reasons[it.key] = it.value
             } else {
-                reasons[it.key] = getString(it.value as Int)
+                reasons[it.key] = (it.value as? Int)?.let { value -> getString(value) } ?: ""
             }
         }
         viewModel.sendDeleteAccountEvent(reasons)
