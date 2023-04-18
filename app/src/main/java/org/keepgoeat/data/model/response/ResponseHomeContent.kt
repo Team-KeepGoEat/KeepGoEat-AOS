@@ -40,6 +40,7 @@ data class ResponseHomeContent(
                 HomeGoal(
                     goal.goalId,
                     goal.food,
+                    goal.criterion,
                     goal.isMore,
                     goal.isAchieved,
                     goal.thisMonthCount,

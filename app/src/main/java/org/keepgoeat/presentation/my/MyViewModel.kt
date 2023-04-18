@@ -18,6 +18,8 @@ import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.extension.toStateFlow
+import org.keepgoeat.util.mixpanel.MixpanelProvider
+import org.keepgoeat.util.mixpanel.SignEvent
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -28,6 +30,7 @@ class MyViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
     private val userRepository: UserRepository,
     private val localStorage: KGEDataSource,
+    private val mixpanelProvider: MixpanelProvider,
 ) : ViewModel() {
     private val _userInfo = MutableStateFlow(UserInfo("", "", 0))
     val userInfo get() = _userInfo.asStateFlow()
@@ -52,16 +55,17 @@ class MyViewModel @Inject constructor(
     private val _deleteAccountUiState =
         MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
-    val otherReason = MutableStateFlow<String?>("")
+    val otherReason = MutableStateFlow("")
     val isValidOtherReason: StateFlow<Boolean>
         get() = otherReason.map { reason ->
-            !reason.isNullOrBlank()
+            reason.isNotBlank()
         }.toStateFlow(viewModelScope, false)
     private val _isKeyboardVisible = MutableStateFlow(false)
     val isKeyboardVisible get() = _isKeyboardVisible.asStateFlow()
     private val _isOtherReasonSelected = MutableStateFlow(false)
     val isOtherReasonSelected get() = _isOtherReasonSelected.asStateFlow()
-    private val _selectedReasons = MutableStateFlow(arrayListOf(WithdrawReason.REASON5))
+    private val _selectedReasons: MutableStateFlow<ArrayList<WithdrawReason>> =
+        MutableStateFlow(arrayListOf())
     val selectedReasons get() = _selectedReasons.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
 
@@ -136,5 +140,17 @@ class MyViewModel @Inject constructor(
             return
         }
         _selectedReasons.value.add(isSelected)
+    }
+
+    fun sendDeleteAccountEvent(reasons: Map<String, Any>?) {
+        mixpanelProvider.sendEvent(SignEvent.deleteAccount(reasons))
+    }
+
+    fun getWithdrawReasons(): MutableMap<String, Any> {
+        val reasons: MutableMap<String, Any> =
+            selectedReasons.value.associate { it.name to it.reason }.toMutableMap()
+        if (isOtherReasonSelected.value)
+            reasons["SUBJECTIVE_ISSUE"] = otherReason.value
+        return reasons
     }
 }

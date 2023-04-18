@@ -8,4 +8,6 @@ object SignEvent {
         MixPanelEvent("Sign Up", mapOf("Platform" to platform.label))
 
     fun completeLogin() = MixPanelEvent("Login", null)
+
+    fun deleteAccount(reasons: Map<String, Any>?) = MixPanelEvent("Delete Account", reasons)
 }

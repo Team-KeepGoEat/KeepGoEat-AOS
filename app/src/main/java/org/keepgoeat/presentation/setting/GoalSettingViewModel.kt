@@ -11,6 +11,8 @@ import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.UiState
+import org.keepgoeat.util.mixpanel.GoalEvent
+import org.keepgoeat.util.mixpanel.MixpanelProvider
 import org.keepgoeat.util.safeLet
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GoalSettingViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
+    private val mixpanelProvider: MixpanelProvider,
 ) : ViewModel() {
     val goalFood = MutableStateFlow<String?>(null)
     val goalCriterion = MutableStateFlow<String>("")
@@ -41,6 +44,7 @@ class GoalSettingViewModel @Inject constructor(
                 eatingType.value == EatingType.MORE
             ).onSuccess {
                 _uploadState.value = UiState.Success(it)
+                sendGoalAddEvent()
             }.onFailure {
                 _uploadState.value = UiState.Error(it.message)
                 Timber.e(it.message)
@@ -70,5 +74,10 @@ class GoalSettingViewModel @Inject constructor(
         goalId = goal.id
         goalFood.value = goal.food
         goalCriterion.value = goal.criterion
+    }
+
+    fun sendGoalAddEvent() {
+        val goalType = if (eatingType.value == EatingType.MORE) "더먹기" else "덜먹기"
+        mixpanelProvider.sendEvent(GoalEvent.addGoal(goalType))
     }
 }
