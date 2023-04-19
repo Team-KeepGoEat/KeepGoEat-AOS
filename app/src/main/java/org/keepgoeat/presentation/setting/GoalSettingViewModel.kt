@@ -37,14 +37,20 @@ class GoalSettingViewModel @Inject constructor(
     }
 
     private fun addGoal() {
+        val title = goalFood.value?.trim() ?: return
+        val criterion = goalCriterion.value.trim()
+
         viewModelScope.launch {
             goalRepository.uploadGoalContent(
-                goalFood.value?.trim() ?: return@launch,
-                goalCriterion.value.trim(),
+                title,
+                criterion,
                 eatingType.value == EatingType.MORE
             ).onSuccess {
                 _uploadState.value = UiState.Success(it)
-                sendGoalAddEvent()
+                with(mixpanelProvider) {
+                    createGoal()
+                    sendEvent(GoalEvent.createGoal(title, criterion))
+                }
             }.onFailure {
                 _uploadState.value = UiState.Error(it.message)
                 Timber.e(it.message)
@@ -76,7 +82,7 @@ class GoalSettingViewModel @Inject constructor(
         goalCriterion.value = goal.criterion
     }
 
-    fun sendGoalAddEvent() {
+    fun sendGoalAddEvent() { // TODO 목표 추가 버튼 클릭 시 찍기, HomeViewModel로 이동
         val goalType = if (eatingType.value == EatingType.MORE) "더먹기" else "덜먹기"
         mixpanelProvider.sendEvent(GoalEvent.addGoal(goalType))
     }

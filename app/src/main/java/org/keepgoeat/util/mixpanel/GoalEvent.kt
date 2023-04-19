@@ -12,4 +12,11 @@ object GoalEvent {
         "Add Goal",
         mapOf("Goal Type" to eatingType)
     )
+
+    fun createGoal(title: String, criterion: String) = MixPanelEvent(
+        "Create Goal",
+        mapOf("Goal Name" to title, "Goal Standard" to criterion)
+    )
+
+    fun deleteGoal() = MixPanelEvent("Delete Goal", null)
 }

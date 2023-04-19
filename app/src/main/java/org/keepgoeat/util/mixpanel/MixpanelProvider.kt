@@ -36,6 +36,14 @@ class MixpanelProvider @Inject constructor(
         put(PROPERTY_EMAIL, localStorage.userEmail)
     }
 
+    fun createGoal() {
+        instance.people.increment(PROPERTY_GOAL_NUMBER, 1.0)
+    }
+
+    fun deleteGoal() {
+        instance.people.increment(PROPERTY_GOAL_NUMBER, -1.0)
+    }
+
     /** 믹스패널에 이벤트를 전송하는 함수. 유저 프로퍼티를 함께 전송해야하는 경우, isRequiredUserProps를 false로 설정 필요 */
     fun sendEvent(event: MixPanelEvent, isRequiredUserProps: Boolean = true) {
         val props = if (isRequiredUserProps) getUserProperties() else JSONObject()
