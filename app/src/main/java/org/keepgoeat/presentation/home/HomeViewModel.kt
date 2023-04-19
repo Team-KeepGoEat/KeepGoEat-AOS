@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import org.keepgoeat.domain.model.HomeContent
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.mixpanel.GoalEvent
@@ -96,5 +97,10 @@ class HomeViewModel @Inject constructor(
 
     fun changeLottieState(state: ProcessState) {
         _lottieState.value = state
+    }
+
+    fun sendGoalAddEvent(eatingType: EatingType) {
+        val goalType = if (eatingType == EatingType.MORE) "더먹기" else "덜먹기"
+        mixpanelProvider.sendEvent(GoalEvent.addGoal(goalType), false)
     }
 }

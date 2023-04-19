@@ -81,9 +81,4 @@ class GoalSettingViewModel @Inject constructor(
         goalFood.value = goal.food
         goalCriterion.value = goal.criterion
     }
-
-    fun sendGoalAddEvent() { // TODO 목표 추가 버튼 클릭 시 찍기, HomeViewModel로 이동
-        val goalType = if (eatingType.value == EatingType.MORE) "더먹기" else "덜먹기"
-        mixpanelProvider.sendEvent(GoalEvent.addGoal(goalType))
-    }
 }
