@@ -20,7 +20,15 @@ class MixpanelProvider @Inject constructor(
 
     fun setUser() {
         instance.identify(localStorage.userEmail)
-        instance.people.set(getUserProperties())
+
+        val props = JSONObject().apply {
+            put(PROPERTY_NICKNAME, localStorage.userName)
+            put(PROPERTY_EMAIL, localStorage.userEmail)
+            put(PROPERTY_PLATFORM, localStorage.loginPlatform)
+            put(PROPERTY_GOAL_NUMBER, 0)
+        }
+
+        instance.people.set(props)
     }
 
     private fun getUserProperties() = JSONObject().apply {
@@ -43,5 +51,7 @@ class MixpanelProvider @Inject constructor(
     companion object {
         private const val PROPERTY_NICKNAME = "\$name"
         private const val PROPERTY_EMAIL = "\$email"
+        private const val PROPERTY_PLATFORM = "Platform"
+        private const val PROPERTY_GOAL_NUMBER = "Goal Number"
     }
 }

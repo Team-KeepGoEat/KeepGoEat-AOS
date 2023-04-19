@@ -35,7 +35,7 @@ class SignViewModel @Inject constructor(
                 _loginUiState.value = UiState.Success(
                     Pair(it?.type == SIGN_UP, localStorage.isClickedOnboardingButton)
                 )
-                sendSignEventLog(it?.type, loginPlatForm)
+                sendSignEventLog(it?.type)
             }.onFailure {
                 _loginUiState.value = UiState.Error(it.message)
             }
@@ -47,11 +47,10 @@ class SignViewModel @Inject constructor(
         localStorage.userEmail = accountInfo.email
     }
 
-    private fun sendSignEventLog(signType: String?, platform: LoginPlatformType) {
+    private fun sendSignEventLog(signType: String?) {
         when (signType) {
             SIGN_UP -> {
                 mixpanelProvider.setUser()
-                mixpanelProvider.sendEvent(SignEvent.completeSignUp(platform))
             }
             SIGN_IN -> {
                 mixpanelProvider.sendEvent(SignEvent.completeLogin())
