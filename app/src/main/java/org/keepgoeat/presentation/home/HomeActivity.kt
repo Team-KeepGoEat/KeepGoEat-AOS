@@ -81,10 +81,22 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         }.flowWithLifecycle(lifecycle).onEach { shouldFetch ->
             if (shouldFetch) viewModel.fetchHomeContent()
         }.launchIn(lifecycleScope)
+        viewModel.updateVersion.flowWithLifecycle(lifecycle).onEach { updateVersion ->
+            if (!updateVersion.isNullOrBlank() && viewModel.compareVersion(updateVersion))
+                showForceUpdateDialog(updateVersion)
+        }.launchIn(lifecycleScope)
     }
 
     private fun showMakeGoalDialog() {
         HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
+    }
+
+    private fun showForceUpdateDialog(updateVersion: String) {
+        HomeForceUpdateDialogFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_UPDATE_VERSION, updateVersion)
+            }
+        }.show(supportFragmentManager, "forceUpdateDialog")
     }
 
     private fun moveToDetail(eatingType: EatingType, goalId: Int) {
@@ -113,5 +125,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     companion object {
         const val ARG_KILL_HOME_AND_GO_TO_SIGN = "killHomeAndGoToSign"
         const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
+        const val ARG_UPDATE_VERSION = "updateVersion"
     }
 }
