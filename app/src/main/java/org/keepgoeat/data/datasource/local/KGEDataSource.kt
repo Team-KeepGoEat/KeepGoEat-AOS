@@ -7,7 +7,7 @@ import androidx.databinding.ktx.BuildConfig
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import dagger.hilt.android.qualifiers.ApplicationContext
-import org.keepgoeat.presentation.type.SocialLoginType
+import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.safeValueOf
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -51,10 +51,10 @@ class KGEDataSource @Inject constructor(@ApplicationContext context: Context) {
         set(value) = dataStore.edit { putBoolean(IS_CLICKED_ONBOARDING_BUTTON, value) }
         get() = dataStore.getBoolean(IS_CLICKED_ONBOARDING_BUTTON, false)
 
-    var loginPlatform: SocialLoginType
+    var loginPlatform: LoginPlatformType
         set(value) = dataStore.edit { putString(LOGIN_PLATFORM, value.name) }
-        get() = safeValueOf<SocialLoginType>(dataStore.getString(LOGIN_PLATFORM, ""))
-            ?: SocialLoginType.NONE
+        get() = safeValueOf<LoginPlatformType>(dataStore.getString(LOGIN_PLATFORM, ""))
+            ?: LoginPlatformType.NONE
 
     var userEmail: String
         set(value) = dataStore.edit { putString(USER_EMAIL, value) }

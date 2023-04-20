@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.keepgoeat.data.datasource.local.KGEDataSource
-import org.keepgoeat.domain.model.AchievedGoal
+import org.keepgoeat.domain.model.ArchivedGoal
 import org.keepgoeat.domain.model.UserInfo
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
@@ -18,6 +18,8 @@ import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.extension.toStateFlow
+import org.keepgoeat.util.mixpanel.MixpanelProvider
+import org.keepgoeat.util.mixpanel.SignEvent
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -28,36 +30,42 @@ class MyViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
     private val userRepository: UserRepository,
     private val localStorage: KGEDataSource,
+    private val mixpanelProvider: MixpanelProvider,
 ) : ViewModel() {
     private val _userInfo = MutableStateFlow(UserInfo("", "", 0))
     val userInfo get() = _userInfo.asStateFlow()
-    private val _achievedGoalUiState =
-        MutableStateFlow<UiState<List<AchievedGoal>>>(UiState.Loading)
-    val achievedGoalUiState get() = _achievedGoalUiState.asStateFlow()
+
+    private val _archivedGoalFetchUiState =
+        MutableStateFlow<UiState<List<ArchivedGoal>>>(UiState.Loading)
+    val archivedGoalFetchUiState get() = _archivedGoalFetchUiState.asStateFlow()
+    private val _archivedGoalCount = MutableStateFlow(0)
+    private val _allArchivedGoalCount = MutableStateFlow(0)
+
     private val _logoutUiState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val logoutUiState get() = _logoutUiState.asStateFlow()
-    private val _achievedGoalCount = MutableStateFlow(0)
-    private val _deleteState = MutableStateFlow<UiState<Int>>(UiState.Loading)
-    private val _allAchievedGoalCount = MutableStateFlow(0)
+
+    private val _goalDeleteState = MutableStateFlow<UiState<Int>>(UiState.Loading)
+    val goalDeleteState get() = _goalDeleteState.asStateFlow()
     private var _deletedGoalCount = 0
     val deletedGoalCount get() = _deletedGoalCount
 
-    val deleteState get() = _deleteState.asStateFlow()
-    val achievedGoalCount get() = _achievedGoalCount.asStateFlow()
-    val allAchievedGoalCount get() = _allAchievedGoalCount.asStateFlow()
+    val archivedGoalCount get() = _archivedGoalCount.asStateFlow()
+    val allArchivedGoalCount get() = _allArchivedGoalCount.asStateFlow()
+
     private val _deleteAccountUiState =
         MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val deleteAccountUiState get() = _deleteAccountUiState.asStateFlow()
-    val otherReason = MutableStateFlow<String?>("")
+    val otherReason = MutableStateFlow("")
     val isValidOtherReason: StateFlow<Boolean>
         get() = otherReason.map { reason ->
-            !reason.isNullOrBlank()
+            reason.isNotBlank()
         }.toStateFlow(viewModelScope, false)
     private val _isKeyboardVisible = MutableStateFlow(false)
     val isKeyboardVisible get() = _isKeyboardVisible.asStateFlow()
     private val _isOtherReasonSelected = MutableStateFlow(false)
     val isOtherReasonSelected get() = _isOtherReasonSelected.asStateFlow()
-    private val _selectedReasons = MutableStateFlow(arrayListOf(WithdrawReason.REASON5))
+    private val _selectedReasons: MutableStateFlow<ArrayList<WithdrawReason>> =
+        MutableStateFlow(arrayListOf())
     val selectedReasons get() = _selectedReasons.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
 
@@ -71,26 +79,26 @@ class MyViewModel @Inject constructor(
         }
     }
 
-    fun fetchAchievedGoalBySort(sortType: SortType) {
+    fun fetchArchivedGoalBySort(sortType: SortType) {
         viewModelScope.launch {
-            goalRepository.fetchAchievedGoal(sortType.name.lowercase())
+            goalRepository.fetchArchivedGoal(sortType.name.lowercase())
                 .onSuccess {
-                    _achievedGoalUiState.value = UiState.Success(it)
-                    _achievedGoalCount.value = it.size
+                    _archivedGoalFetchUiState.value = UiState.Success(it)
+                    _archivedGoalCount.value = it.size
                     if (sortType == SortType.ALL)
-                        _allAchievedGoalCount.value = it.size
+                        _allArchivedGoalCount.value = it.size
                 }.onFailure {
-                    _achievedGoalUiState.value = UiState.Error(null)
+                    _archivedGoalFetchUiState.value = UiState.Error(null)
                 }
         }
     }
 
-    fun deleteGoal(id: Int) {
+    fun deleteArchivedGoal(id: Int) {
         viewModelScope.launch {
             goalRepository.deleteGoal(id).onSuccess { deletedData ->
-                _deleteState.value = UiState.Success(deletedData.goalId)
-                _achievedGoalCount.value -= 1
-                _allAchievedGoalCount.value -= 1
+                _goalDeleteState.value = UiState.Success(deletedData.goalId)
+                _archivedGoalCount.value -= 1
+                _allArchivedGoalCount.value -= 1
                 _deletedGoalCount += 1 // TODO need refactoring
             }.onFailure {
                 Timber.e(it.message)
@@ -132,5 +140,17 @@ class MyViewModel @Inject constructor(
             return
         }
         _selectedReasons.value.add(isSelected)
+    }
+
+    fun sendDeleteAccountEvent(reasons: Map<String, Any>?) {
+        mixpanelProvider.sendEvent(SignEvent.deleteAccount(reasons))
+    }
+
+    fun getWithdrawReasons(): MutableMap<String, Any> {
+        val reasons: MutableMap<String, Any> =
+            selectedReasons.value.associate { it.name to it.reason }.toMutableMap()
+        if (isOtherReasonSelected.value)
+            reasons["SUBJECTIVE_ISSUE"] = otherReason.value
+        return reasons
     }
 }

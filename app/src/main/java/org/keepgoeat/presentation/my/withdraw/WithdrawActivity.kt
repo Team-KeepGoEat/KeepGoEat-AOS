@@ -1,4 +1,4 @@
-package org.keepgoeat.presentation.withdraw
+package org.keepgoeat.presentation.my.withdraw
 
 import android.graphics.Rect
 import android.os.Bundle
@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityWithdrawBinding
-import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.my.MyViewModel
+import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showKeyboard
 import org.keepgoeat.util.setVisibility
@@ -75,7 +75,10 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             if (binding.etOtherReason.text.isNullOrBlank() && viewModel.isOtherReasonSelected.value)
                 binding.tvOtherReasonErrorMsg.setVisibility(true)
             else
-                WithdrawDialogFragment().show(supportFragmentManager, "withdrawDialog")
+                WithdrawDialogFragment().show(
+                    supportFragmentManager,
+                    "withdrawDialog"
+                )
         }
         binding.viewWithdrawToolbar.ivBack.setOnClickListener {
             finish()
@@ -84,7 +87,6 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
 
     private fun collectData() {
         viewModel.isOtherReasonSelected.flowWithLifecycle(lifecycle).onEach { isSelected ->
-            viewModel.selectReasons(WithdrawReason.REASON5)
             if (isSelected) {
                 requestFocus()
             } else {
@@ -98,6 +100,24 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
         viewModel.isKeyboardVisible.flowWithLifecycle(lifecycle).onEach { isVisible ->
             binding.rvWithdraw.setVisibility(!isVisible)
         }.launchIn(lifecycleScope)
+        viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> sendDeleteAccountEvent()
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun sendDeleteAccountEvent() {
+        val reasons: MutableMap<String, Any> = mutableMapOf()
+        viewModel.getWithdrawReasons().map {
+            if (it.key == SUBJECTIVE_ISSUE) {
+                reasons[it.key] = it.value
+            } else {
+                reasons[it.key] = (it.value as? Int)?.let { value -> getString(value) } ?: ""
+            }
+        }
+        viewModel.sendDeleteAccountEvent(reasons)
     }
 
     private fun clearFocus() {
@@ -113,5 +133,9 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
     override fun onStop() {
         super.onStop()
         rootView.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalListener)
+    }
+
+    companion object {
+        private const val SUBJECTIVE_ISSUE = "SUBJECTIVE_ISSUE"
     }
 }

@@ -14,6 +14,8 @@ import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.domain.repository.VersionRepository
 import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.UiState
+import org.keepgoeat.util.mixpanel.GoalEvent
+import org.keepgoeat.util.mixpanel.MixpanelProvider
 import timber.log.Timber
 import java.io.IOException
 import java.time.LocalDateTime
@@ -23,6 +25,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
     private val versionRepository: VersionRepository,
+    private val mixpanelProvider: MixpanelProvider,
 ) : ViewModel() {
     private var _homeDataFetchState = MutableStateFlow<UiState<HomeContent>>(UiState.Loading)
     val homeDataFetchState get() = _homeDataFetchState.asStateFlow()
@@ -74,6 +77,7 @@ class HomeViewModel @Inject constructor(
                             HomeGoal(
                                 id,
                                 goalTitle,
+                                goalCriterion,
                                 isMore,
                                 goalData.updatedIsAchieved,
                                 goalData.thisMonthCount,
@@ -83,6 +87,13 @@ class HomeViewModel @Inject constructor(
                     }
                     if (goalData.updatedIsAchieved) {
                         _lottieState.value = ProcessState.IN_PROGRESS
+                        mixpanelProvider.sendEvent(
+                            GoalEvent.completeGoal(
+                                goal.goalTitle,
+                                goal.goalCriterion
+                            ),
+                            true
+                        )
                     }
                     _goalList.value =
                         list.toMutableList()

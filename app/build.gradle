@@ -29,6 +29,7 @@ android {
         buildConfigField "String", "KAKAO_NATIVE_KEY", properties["KAKAO_NATIVE_KEY"]
         buildConfigField "String", "NAVER_CLIENT_ID", properties["NAVER_CLIENT_ID"]
         buildConfigField "String", "NAVER_CLIENT_SECRETE", properties["NAVER_CLIENT_SECRETE"]
+        buildConfigField "String", "MIXPANEL_PROJECT_TOKEN", properties["MIXPANEL_PROJECT_TOKEN"]
     }
 
     buildTypes {
@@ -92,7 +93,9 @@ dependencies {
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
-    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Mixpanel
+    implementation 'com.mixpanel.android:mixpanel-android:7.+'
 
     // KakaoSignIn
     implementation "com.kakao.sdk:v2-user:2.12.0"

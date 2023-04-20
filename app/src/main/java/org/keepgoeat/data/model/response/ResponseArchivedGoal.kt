@@ -1,18 +1,18 @@
 package org.keepgoeat.data.model.response
 
 import kotlinx.serialization.Serializable
-import org.keepgoeat.domain.model.AchievedGoal
+import org.keepgoeat.domain.model.ArchivedGoal
 import org.keepgoeat.presentation.type.EatingType
 
 @Serializable
-data class ResponseAchievedGoal(
+data class ResponseArchivedGoal(
     val status: Int,
     val success: Boolean,
     val message: String,
-    val data: ResponseAchievedGoalData,
+    val data: ResponseArchivedGoalData,
 ) {
     @Serializable
-    data class ResponseAchievedGoalData(
+    data class ResponseArchivedGoalData(
         val goals: List<GoalInfo>,
         val goalCount: Int,
     ) {
@@ -31,7 +31,7 @@ data class ResponseAchievedGoal(
         )
 
         fun toMyGoal() = goals.map { goal ->
-            AchievedGoal(
+            ArchivedGoal(
                 goal.goalId,
                 goal.food,
                 if (goal.isMore) EatingType.MORE else EatingType.LESS,
