@@ -9,7 +9,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.keepgoeat.BuildConfig
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityHomeBinding
 import org.keepgoeat.domain.model.HomeGoal
@@ -83,9 +82,8 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             if (shouldFetch) viewModel.fetchHomeContent()
         }.launchIn(lifecycleScope)
         viewModel.updateVersion.flowWithLifecycle(lifecycle).onEach { updateVersion ->
-            val currentVersion = BuildConfig.VERSION_NAME
-            if (compareVersion(currentVersion, updateVersion))
-                showForceUpdateDialog(updateVersion, currentVersion)
+            if (!updateVersion.isNullOrBlank() && viewModel.compareVersion(updateVersion))
+                showForceUpdateDialog(updateVersion)
         }.launchIn(lifecycleScope)
     }
 
@@ -93,11 +91,10 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         HomeBottomDialogFragment().show(supportFragmentManager, "homeDialog")
     }
 
-    private fun showForceUpdateDialog(updateVersion: String, currentVersion: String) {
+    private fun showForceUpdateDialog(updateVersion: String) {
         HomeForceUpdateDialogFragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_UPDATE_VERSION, updateVersion)
-                putString(ARG_CURRENT_VERSION, currentVersion)
             }
         }.show(supportFragmentManager, "forceUpdateDialog")
     }
@@ -125,21 +122,9 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         finish()
     }
 
-    private fun compareVersion(currentVersion: String, updateVersion: String): Boolean {
-        val splitCurrent = currentVersion.split(".")
-        val splitUpdate = updateVersion.split(".")
-
-        for (i in 0..2) {
-            if (splitCurrent[i].toInt() < splitUpdate[i].toInt())
-                return true
-        }
-        return false
-    }
-
     companion object {
         const val ARG_KILL_HOME_AND_GO_TO_SIGN = "killHomeAndGoToSign"
         const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
         const val ARG_UPDATE_VERSION = "updateVersion"
-        const val ARG_CURRENT_VERSION = "currentVersion"
     }
 }
