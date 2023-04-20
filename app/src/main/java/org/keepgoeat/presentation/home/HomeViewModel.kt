@@ -1,11 +1,13 @@
 package org.keepgoeat.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.keepgoeat.BuildConfig
 import org.keepgoeat.domain.model.HomeContent
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
@@ -20,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
-    private val versionRepository: VersionRepository
+    private val versionRepository: VersionRepository,
 ) : ViewModel() {
     private var _homeDataFetchState = MutableStateFlow<UiState<HomeContent>>(UiState.Loading)
     val homeDataFetchState get() = _homeDataFetchState.asStateFlow()
@@ -34,7 +36,7 @@ class HomeViewModel @Inject constructor(
     val cheeringMessage = _cheeringMessage.asStateFlow()
     private val _lottieState = MutableStateFlow(ProcessState.IDLE)
     val lottieState get() = _lottieState.asStateFlow()
-    private val _updateVersion = MutableStateFlow("1.0.0")
+    private val _updateVersion = MutableStateFlow("")
     val updateVersion get() = _updateVersion.asStateFlow()
 
     init {
@@ -107,7 +109,18 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    // TODO 로직 수정
+    fun compareVersion(updateVersion: String): Boolean {
+        val splitCurrent = BuildConfig.VERSION_NAME.split(".")
+        val splitUpdate = updateVersion.split(".")
+        for (i in 0..splitCurrent.size - 1) {
+            if (splitCurrent[i].toInt() < splitUpdate[i].toInt())
+                return true
+        }
+        return false
+    }
+
     companion object {
-        private val CLIENT_TYPE = "AOS"
+        private const val CLIENT_TYPE = "AOS"
     }
 }
