@@ -1,6 +1,5 @@
 package org.keepgoeat.presentation.sign
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +12,6 @@ import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.presentation.common.MixpanelViewModel
 import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.mixpanel.MixpanelProvider
 import org.keepgoeat.util.mixpanel.SignEvent
 import javax.inject.Inject
 
@@ -34,7 +32,7 @@ class SignViewModel @Inject constructor(
                 _loginUiState.value = UiState.Success(
                     Pair(it?.type == SIGN_UP, localStorage.isClickedOnboardingButton)
                 )
-                sendSignEventLog(it?.type)
+                sendSignEventLog(it?.type, loginPlatForm.label)
             }.onFailure {
                 _loginUiState.value = UiState.Error(it.message)
             }
@@ -46,10 +44,11 @@ class SignViewModel @Inject constructor(
         localStorage.userEmail = accountInfo.email
     }
 
-    private fun sendSignEventLog(signType: String?) {
+    private fun sendSignEventLog(signType: String?, platform: String) {
         when (signType) {
             SIGN_UP -> {
                 mixpanelProvider.setUser()
+                mixpanelProvider.sendEvent(SignEvent.completeSignUp(platform))
             }
             SIGN_IN -> {
                 mixpanelProvider.sendEvent(SignEvent.completeLogin())

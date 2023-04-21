@@ -15,7 +15,7 @@ class MixpanelProvider @Inject constructor(
     @ApplicationContext private val context: Context,
     private val localStorage: KGEDataSource,
 ) {
-    private var instance: MixpanelAPI =
+    private val instance: MixpanelAPI =
         MixpanelAPI.getInstance(context, BuildConfig.MIXPANEL_PROJECT_TOKEN, true)
 
     fun setUser() {
@@ -24,7 +24,7 @@ class MixpanelProvider @Inject constructor(
         val props = JSONObject().apply {
             put(PROPERTY_NICKNAME, localStorage.userName)
             put(PROPERTY_EMAIL, localStorage.userEmail)
-            put(PROPERTY_PLATFORM, localStorage.loginPlatform)
+            put(PROPERTY_PLATFORM, localStorage.loginPlatform.label)
             put(PROPERTY_GOAL_NUMBER, 0)
         }
 
