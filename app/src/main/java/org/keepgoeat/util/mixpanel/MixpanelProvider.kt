@@ -56,10 +56,26 @@ class MixpanelProvider @Inject constructor(
         instance.track(event.name, props)
     }
 
+    fun startRecodingScreenTime() {
+        instance.timeEvent(EVENT_VIEW_PAGE)
+    }
+
+    fun stopRecodingScreenTime(screenName: String) {
+        val props = JSONObject().apply {
+            put(PROPERTY_PAGE_NAME, screenName)
+        }
+        instance.track(EVENT_VIEW_PAGE, props)
+    }
+
     companion object {
+        // User Property
         private const val PROPERTY_NICKNAME = "\$name"
         private const val PROPERTY_EMAIL = "\$email"
         private const val PROPERTY_PLATFORM = "Platform"
         private const val PROPERTY_GOAL_NUMBER = "Goal Number"
+
+        // Event Property
+        private const val EVENT_VIEW_PAGE = "View Page"
+        private const val PROPERTY_PAGE_NAME = "Page Name"
     }
 }
