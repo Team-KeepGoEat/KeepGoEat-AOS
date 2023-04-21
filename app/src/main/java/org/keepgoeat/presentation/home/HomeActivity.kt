@@ -81,9 +81,8 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         }.flowWithLifecycle(lifecycle).onEach { shouldFetch ->
             if (shouldFetch) viewModel.fetchHomeContent()
         }.launchIn(lifecycleScope)
-        viewModel.updateVersion.flowWithLifecycle(lifecycle).onEach { updateVersion ->
-            if (!updateVersion.isNullOrBlank() && viewModel.compareVersion(updateVersion))
-                showForceUpdateDialog(updateVersion)
+        viewModel.updateVersion.flowWithLifecycle(lifecycle).onEach { version ->
+            if (viewModel.compareVersion(version)) showForceUpdateDialog(version)
         }.launchIn(lifecycleScope)
     }
 

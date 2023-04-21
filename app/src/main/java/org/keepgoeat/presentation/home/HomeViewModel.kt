@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
     val updateVersion get() = _updateVersion.asStateFlow()
 
     init {
-        getForcedUpdateVersion(CLIENT_TYPE)
+        getForcedUpdateVersion()
     }
 
     fun fetchHomeContent() {
@@ -113,9 +113,9 @@ class HomeViewModel @Inject constructor(
         mixpanelProvider.sendEvent(GoalEvent.addGoal(goalType), false)
     }
 
-    private fun getForcedUpdateVersion(clientType: String) {
+    private fun getForcedUpdateVersion() {
         viewModelScope.launch {
-            versionRepository.getForcedUpdateVersion(clientType)
+            versionRepository.getForcedUpdateVersion(CLIENT_TYPE)
                 .onSuccess {
                     _updateVersion.value = it.version
                 }
@@ -125,14 +125,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    // TODO 로직 수정
     fun compareVersion(updateVersion: String): Boolean {
+        if (updateVersion.isBlank()) return false
+
         val splitCurrent = BuildConfig.VERSION_NAME.split(".")
         val splitUpdate = updateVersion.split(".")
-        for (i in 0..splitCurrent.size - 1) {
-            if (splitCurrent[i].toInt() < splitUpdate[i].toInt())
-                return true
+        if (splitCurrent.size > 1 && splitUpdate.size > 1) {
+            if (splitCurrent[1] != splitUpdate[1]) return true
         }
+
         return false
     }
 

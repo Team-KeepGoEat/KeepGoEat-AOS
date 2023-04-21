@@ -12,11 +12,17 @@ import org.keepgoeat.util.binding.BindingDialogFragment
 class HomeForceUpdateDialogFragment :
     BindingDialogFragment<DialogForceUpdateBinding>(R.layout.dialog_force_update) {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        isCancelable = false
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.updateVersion = arguments?.getString(ARG_UPDATE_VERSION)
         binding.currentVersion = BuildConfig.VERSION_NAME
+
         addListeners()
     }
 
