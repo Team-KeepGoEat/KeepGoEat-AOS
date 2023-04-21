@@ -6,9 +6,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.keepgoeat.BuildConfig
 import org.keepgoeat.domain.model.HomeContent
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.domain.repository.VersionRepository
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.UiState
@@ -22,6 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
+    private val versionRepository: VersionRepository,
     private val mixpanelProvider: MixpanelProvider,
 ) : ViewModel() {
     private var _homeDataFetchState = MutableStateFlow<UiState<HomeContent>>(UiState.Loading)
@@ -36,6 +39,12 @@ class HomeViewModel @Inject constructor(
     val cheeringMessage = _cheeringMessage.asStateFlow()
     private val _lottieState = MutableStateFlow(ProcessState.IDLE)
     val lottieState get() = _lottieState.asStateFlow()
+    private val _updateVersion = MutableStateFlow("")
+    val updateVersion get() = _updateVersion.asStateFlow()
+
+    init {
+        getForcedUpdateVersion(CLIENT_TYPE)
+    }
 
     fun fetchHomeContent() {
         viewModelScope.launch {
@@ -102,5 +111,32 @@ class HomeViewModel @Inject constructor(
     fun sendGoalAddEvent(eatingType: EatingType) {
         val goalType = if (eatingType == EatingType.MORE) "더먹기" else "덜먹기"
         mixpanelProvider.sendEvent(GoalEvent.addGoal(goalType), false)
+    }
+
+    private fun getForcedUpdateVersion(clientType: String) {
+        viewModelScope.launch {
+            versionRepository.getForcedUpdateVersion(clientType)
+                .onSuccess {
+                    _updateVersion.value = it.version
+                }
+                .onFailure {
+                    Timber.e(it.message)
+                }
+        }
+    }
+
+    // TODO 로직 수정
+    fun compareVersion(updateVersion: String): Boolean {
+        val splitCurrent = BuildConfig.VERSION_NAME.split(".")
+        val splitUpdate = updateVersion.split(".")
+        for (i in 0..splitCurrent.size - 1) {
+            if (splitCurrent[i].toInt() < splitUpdate[i].toInt())
+                return true
+        }
+        return false
+    }
+
+    companion object {
+        private const val CLIENT_TYPE = "AOS"
     }
 }
