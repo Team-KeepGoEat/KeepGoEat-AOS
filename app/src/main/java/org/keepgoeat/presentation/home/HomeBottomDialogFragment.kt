@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomHomeBinding
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
+@AndroidEntryPoint
 class HomeBottomDialogFragment :
     BindingBottomSheetDialogFragment<DialogBottomHomeBinding>(R.layout.dialog_bottom_home) {
     private val viewModel: HomeViewModel by viewModels()
