@@ -50,6 +50,16 @@ class GoalSettingActivity :
         collectData()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.startRecodingScreenTime()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime(viewModel.eatingType.value?.name?.lowercase() ?: "")
+    }
+
     private fun collectData() {
         viewModel.uploadState.flowWithLifecycle(lifecycle).onEach {
             when (it) {

@@ -35,6 +35,16 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
         collectData()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.startRecodingScreenTime()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime(SCREEN_NAME)
+    }
+
     private fun addListeners() {
         binding.layoutKakaoSignIn.setOnClickListener {
             kakaoSignService.loginKakao(viewModel::login, viewModel::saveAccount)
@@ -67,5 +77,9 @@ class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign
             else HomeActivity::class.java
         startActivity(Intent(this, nextScreen))
         finish()
+    }
+
+    companion object {
+        private const val SCREEN_NAME = "signup"
     }
 }

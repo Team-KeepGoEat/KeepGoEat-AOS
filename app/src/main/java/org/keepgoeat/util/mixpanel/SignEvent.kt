@@ -1,11 +1,9 @@
 package org.keepgoeat.util.mixpanel
 
 import org.keepgoeat.presentation.model.MixPanelEvent
-import org.keepgoeat.presentation.type.LoginPlatformType
 
 object SignEvent {
-    fun completeSignUp(platform: LoginPlatformType) =
-        MixPanelEvent("Sign Up", mapOf("Platform" to platform.label))
+    fun completeSignUp(platForm: String) = MixPanelEvent("Sign Up", mapOf("Platform" to platForm))
 
     fun completeLogin() = MixPanelEvent("Login", null)
 

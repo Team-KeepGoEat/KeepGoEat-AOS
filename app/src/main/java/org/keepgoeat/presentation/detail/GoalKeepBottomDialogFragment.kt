@@ -14,7 +14,7 @@ import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
 @AndroidEntryPoint
-class GoalKeepBottomDialogFragment :
+class GoalKeepBottomDialogFragment : // TODO 네이밍 수정 keep -> archive
     BindingBottomSheetDialogFragment<DialogBottomGoalKeepBinding>(R.layout.dialog_bottom_goal_keep) {
     private val viewModel: GoalDetailViewModel by activityViewModels()
 
@@ -24,6 +24,16 @@ class GoalKeepBottomDialogFragment :
 
         addListeners()
         collectData()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.startRecodingScreenTime()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime(SCREEN_NAME)
     }
 
     private fun addListeners() {
@@ -46,5 +56,9 @@ class GoalKeepBottomDialogFragment :
     private fun showGoalDeleteDialog() {
         GoalDeleteBottomDialogFragment().show(parentFragmentManager, "goalDeleteDialog")
         dismiss()
+    }
+
+    companion object {
+        private const val SCREEN_NAME = "goal archive"
     }
 }

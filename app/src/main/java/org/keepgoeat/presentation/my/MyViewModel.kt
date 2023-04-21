@@ -1,6 +1,5 @@
 package org.keepgoeat.presentation.my
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,11 +13,11 @@ import org.keepgoeat.domain.model.UserInfo
 import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.domain.repository.UserRepository
+import org.keepgoeat.presentation.common.MixpanelViewModel
 import org.keepgoeat.presentation.model.WithdrawReason
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.extension.toStateFlow
-import org.keepgoeat.util.mixpanel.MixpanelProvider
 import org.keepgoeat.util.mixpanel.SignEvent
 import timber.log.Timber
 import javax.inject.Inject
@@ -30,8 +29,7 @@ class MyViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
     private val userRepository: UserRepository,
     private val localStorage: KGEDataSource,
-    private val mixpanelProvider: MixpanelProvider,
-) : ViewModel() {
+) : MixpanelViewModel() {
     private val _userInfo = MutableStateFlow(UserInfo("", "", 0))
     val userInfo get() = _userInfo.asStateFlow()
 

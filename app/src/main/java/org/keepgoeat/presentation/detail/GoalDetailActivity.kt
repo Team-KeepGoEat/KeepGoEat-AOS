@@ -59,6 +59,16 @@ class GoalDetailActivity :
         collectData()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.startRecodingScreenTime()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime(SCREEN_NAME)
+    }
+
     private fun initLayout() {
         binding.rvGoalCard.apply {
             addItemDecoration(
@@ -147,5 +157,6 @@ class GoalDetailActivity :
         const val ARG_EATING_TYPE = "eatingType"
         const val ARG_GOAL_ID = "goalId"
         const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
+        private const val SCREEN_NAME = "goal detail"
     }
 }
