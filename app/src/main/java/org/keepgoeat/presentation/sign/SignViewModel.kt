@@ -10,6 +10,7 @@ import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.data.model.request.RequestAuth
 import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.domain.repository.AuthRepository
+import org.keepgoeat.presentation.common.MixpanelViewModel
 import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.mixpanel.MixpanelProvider
@@ -20,9 +21,7 @@ import javax.inject.Inject
 class SignViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val localStorage: KGEDataSource,
-    private val mixpanelProvider: MixpanelProvider,
-) :
-    ViewModel() {
+) : MixpanelViewModel() {
     private var _loginUiState = MutableStateFlow<UiState<Pair<Boolean, Boolean>>>(UiState.Loading)
     val loginUiState get() = _loginUiState.asStateFlow()
 

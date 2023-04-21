@@ -30,9 +30,13 @@ class OnboardingActivity :
         collectData()
     }
 
+    override fun onStop() {
+        super.onStop()
+        stopRecodingScreenTime(viewModel.position.value)
+    }
+
     private fun initLayout() {
         val adapter = OnboardingAdapter(this)
-        viewModel.setPosition(1)
         with(binding) {
             vpViewPager.adapter = adapter
             vpViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -59,18 +63,35 @@ class OnboardingActivity :
         }
     }
 
-    private fun collectData() {
-        viewModel.position.flowWithLifecycle(lifecycle).onEach { position ->
-            when (position) {
-                0 -> binding.btnNext.setText(R.string.onboarding1_button)
-                1 -> binding.btnNext.setText(R.string.onboarding2_button)
-                2 -> binding.btnNext.setText(R.string.onboarding3_button)
-            }
-        }.launchIn(lifecycleScope)
-    }
-
     private fun moveToHome() {
         startActivity(Intent(this, HomeActivity::class.java))
         finish()
+    }
+
+    private fun collectData() {
+        var prevPos = viewModel.position.value
+        viewModel.position.flowWithLifecycle(lifecycle).onEach { position ->
+            when (position) {
+                0 -> binding.btnNext.setText(R.string.onboarding1_button) // TODO 리팩토링 필요
+                1 -> binding.btnNext.setText(R.string.onboarding2_button)
+                2 -> binding.btnNext.setText(R.string.onboarding3_button)
+            }
+            recodeScreenTime(prevPos, position)
+            prevPos = position
+        }.launchIn(lifecycleScope)
+    }
+
+    /** 이전 포지션 온보딩 뷰의 스크린타임 기록을 중단, 현재 포지션 온보딩 뷰의 스크린타임을을 기록하는 함수 (단, 초기 포지션이 0인 경우, if문을 실행하지 않음.) */
+    private fun recodeScreenTime(prevPos: Int, curPos: Int) {
+        if (prevPos != curPos) stopRecodingScreenTime(prevPos)
+        viewModel.startRecodingScreenTime()
+    }
+
+    private fun stopRecodingScreenTime(pos: Int) {
+        viewModel.stopRecodingScreenTime("$SCREEN_NAME ${pos + 1}")
+    }
+
+    companion object {
+        private const val SCREEN_NAME = "onboarding"
     }
 }

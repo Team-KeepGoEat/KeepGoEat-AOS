@@ -1,6 +1,5 @@
 package org.keepgoeat.presentation.setting
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -8,11 +7,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.presentation.common.MixpanelViewModel
 import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.mixpanel.GoalEvent
-import org.keepgoeat.util.mixpanel.MixpanelProvider
 import org.keepgoeat.util.safeLet
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,8 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GoalSettingViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
-    private val mixpanelProvider: MixpanelProvider,
-) : ViewModel() {
+) : MixpanelViewModel() {
     val goalFood = MutableStateFlow<String?>(null)
     val goalCriterion = MutableStateFlow<String>("")
     private val _eatingType = MutableStateFlow<EatingType?>(null)

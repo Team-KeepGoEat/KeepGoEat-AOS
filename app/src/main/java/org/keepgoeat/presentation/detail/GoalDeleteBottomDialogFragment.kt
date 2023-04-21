@@ -20,9 +20,23 @@ class GoalDeleteBottomDialogFragment :
         addListeners()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.startRecodingScreenTime()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime(SCREEN_NAME)
+    }
+
     private fun addListeners() {
         binding.btnNo.setOnClickListener {
             dismiss()
         }
+    }
+
+    companion object {
+        private const val SCREEN_NAME = "goal delete"
     }
 }

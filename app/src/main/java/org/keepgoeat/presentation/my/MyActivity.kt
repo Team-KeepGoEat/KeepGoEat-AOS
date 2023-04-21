@@ -10,6 +10,7 @@ import org.keepgoeat.BuildConfig
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.common.WebViewActivity
+import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.util.binding.BindingActivity
 import timber.log.Timber
 
@@ -24,6 +25,16 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
         viewModel.fetchUserInfo()
         addListeners()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.startRecodingScreenTime()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime(SCREEN_NAME)
     }
 
     private fun addListeners() {
@@ -113,5 +124,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             "https://68space.notion.site/9083a018baab42958103596378417c13"
         const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
         const val ARG_USER_INFO = "userInfo"
+        private const val SCREEN_NAME = "mypage"
     }
 }

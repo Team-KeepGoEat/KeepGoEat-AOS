@@ -1,6 +1,5 @@
 package org.keepgoeat.presentation.detail
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,18 +8,16 @@ import kotlinx.coroutines.launch
 import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.model.GoalSticker
 import org.keepgoeat.domain.repository.GoalRepository
+import org.keepgoeat.presentation.common.MixpanelViewModel
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.mixpanel.GoalEvent
-import org.keepgoeat.util.mixpanel.MixpanelProvider
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class GoalDetailViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
-    private val mixpanelProvider: MixpanelProvider,
-) :
-    ViewModel() {
+) : MixpanelViewModel() {
     private val _goalStickers = MutableStateFlow<List<GoalSticker>>(emptyList())
     val goalStickers get() = _goalStickers.asStateFlow()
     private val _goalDetail = MutableStateFlow<GoalDetail?>(null)
