@@ -125,14 +125,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    // TODO 로직 수정
     fun compareVersion(updateVersion: String): Boolean {
+        if (updateVersion.isBlank()) return false
+
         val splitCurrent = BuildConfig.VERSION_NAME.split(".")
         val splitUpdate = updateVersion.split(".")
-        for (i in 0..splitCurrent.size - 1) {
-            if (splitCurrent[i].toInt() < splitUpdate[i].toInt())
-                return true
+        if (splitCurrent.size > 1 && splitUpdate.size > 1) {
+            if (splitCurrent[1] != splitUpdate[1]) return true
         }
+
         return false
     }
 
