@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
     val updateVersion get() = _updateVersion.asStateFlow()
 
     init {
-        getForcedUpdateVersion(CLIENT_TYPE)
+        getForcedUpdateVersion()
     }
 
     fun fetchHomeContent() {
@@ -113,9 +113,9 @@ class HomeViewModel @Inject constructor(
         mixpanelProvider.sendEvent(GoalEvent.addGoal(goalType), false)
     }
 
-    private fun getForcedUpdateVersion(clientType: String) {
+    private fun getForcedUpdateVersion() {
         viewModelScope.launch {
-            versionRepository.getForcedUpdateVersion(clientType)
+            versionRepository.getForcedUpdateVersion(CLIENT_TYPE)
                 .onSuccess {
                     _updateVersion.value = it.version
                 }
