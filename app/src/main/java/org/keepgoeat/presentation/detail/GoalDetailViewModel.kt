@@ -48,6 +48,12 @@ class GoalDetailViewModel @Inject constructor(
             goalId.value.let { id ->
                 goalRepository.keepGoal(id).onSuccess { goalData ->
                     _keepState.value = UiState.Success(goalData.goalId)
+                    mixpanelProvider.sendEvent(
+                        GoalEvent.archiveGoal(
+                            goalDetail.value?.food ?: "",
+                            goalDetail.value?.criterion ?: ""
+                        ), true
+                    )
                 }.onFailure {
                     Timber.e(it.message)
                 }
