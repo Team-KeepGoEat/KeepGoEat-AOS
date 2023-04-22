@@ -51,6 +51,16 @@ class ArchivedGoalActivity :
         collectData()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.startRecodingScreenTime()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime(SCREEN_NAME)
+    }
+
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         goalAdapter.checkForVisibleDeleteButton()
         return super.dispatchTouchEvent(ev)
@@ -147,5 +157,6 @@ class ArchivedGoalActivity :
         const val ARG_IS_ENTERED_FROM_KEEP = "isEnteredFromKeep"
         const val ARG_GOAL_ID = "goalId"
         const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
+        const val SCREEN_NAME = "archived goal"
     }
 }
