@@ -54,6 +54,7 @@ class WithdrawDialogFragment :
         viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    sendDeleteAccountEvent()
                     requireActivity().showToast(getString(R.string.withdraw_success))
                     moveToSign()
                     dismiss()
@@ -67,6 +68,18 @@ class WithdrawDialogFragment :
         }.launchIn(lifecycleScope)
     }
 
+    private fun sendDeleteAccountEvent() {
+        val reasons: MutableMap<String, Any> = mutableMapOf()
+        viewModel.getWithdrawReasons().map {
+            if (it.key == SUBJECTIVE_ISSUE) {
+                reasons[it.key] = it.value
+            } else {
+                reasons[it.key] = (it.value as? Int)?.let { value -> getString(value) } ?: ""
+            }
+        }
+        viewModel.sendDeleteAccountEvent(reasons)
+    }
+
     private fun moveToSign() {
         Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -74,5 +87,9 @@ class WithdrawDialogFragment :
         }.also {
             startActivity(it)
         }
+    }
+
+    companion object {
+        private const val SUBJECTIVE_ISSUE = "SUBJECTIVE_ISSUE"
     }
 }

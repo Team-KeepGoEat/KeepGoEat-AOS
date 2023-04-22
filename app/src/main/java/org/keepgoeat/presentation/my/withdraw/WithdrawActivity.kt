@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityWithdrawBinding
 import org.keepgoeat.presentation.my.MyViewModel
-import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showKeyboard
 import org.keepgoeat.util.setVisibility
@@ -107,25 +106,8 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
         viewModel.isKeyboardVisible.flowWithLifecycle(lifecycle).onEach { isVisible ->
             binding.rvWithdraw.setVisibility(!isVisible)
         }.launchIn(lifecycleScope)
-        viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is UiState.Success -> sendDeleteAccountEvent()
-                else -> {}
-            }
-        }.launchIn(lifecycleScope)
     }
 
-    private fun sendDeleteAccountEvent() {
-        val reasons: MutableMap<String, Any> = mutableMapOf()
-        viewModel.getWithdrawReasons().map {
-            if (it.key == SUBJECTIVE_ISSUE) {
-                reasons[it.key] = it.value
-            } else {
-                reasons[it.key] = (it.value as? Int)?.let { value -> getString(value) } ?: ""
-            }
-        }
-        viewModel.sendDeleteAccountEvent(reasons)
-    }
 
     private fun clearFocus() {
         binding.etOtherReason.clearFocus()
@@ -138,7 +120,6 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
     }
 
     companion object {
-        private const val SUBJECTIVE_ISSUE = "SUBJECTIVE_ISSUE"
         private const val SCREEN_NAME = "account_delete"
     }
 }
