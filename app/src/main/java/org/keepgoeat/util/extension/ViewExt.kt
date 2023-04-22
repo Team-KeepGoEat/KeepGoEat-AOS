@@ -1,10 +1,6 @@
 package org.keepgoeat.util.extension
 
-import android.os.Build
 import android.view.View
-import android.view.WindowInsets
-import androidx.annotation.RequiresApi
-import androidx.core.view.doOnLayout
 import com.google.android.material.snackbar.Snackbar
 
 fun View.showSnackbar(message: String, isShort: Boolean = true) {
@@ -22,22 +18,6 @@ inline fun View.setOnSingleClickListener(
         if (clickedTime - previousClickedTime >= delay) {
             block(view)
             previousClickedTime = clickedTime
-        }
-    }
-}
-
-@RequiresApi(Build.VERSION_CODES.R)
-fun View.addKeyboardInsetListener(keyboardCallback: ((Boolean) -> Unit)) {
-    doOnLayout {
-        var keyboardVisible = rootWindowInsets?.isVisible(WindowInsets.Type.ime()) == true
-        setOnApplyWindowInsetsListener { _, windowInsets ->
-            val keyboardUpdateCheck =
-                rootWindowInsets?.isVisible(WindowInsets.Type.ime()) == true
-            if (keyboardUpdateCheck != keyboardVisible) {
-                keyboardCallback(keyboardUpdateCheck)
-                keyboardVisible = keyboardUpdateCheck
-            }
-            windowInsets
         }
     }
 }
