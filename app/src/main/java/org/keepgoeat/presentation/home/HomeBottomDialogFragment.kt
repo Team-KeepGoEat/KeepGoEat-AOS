@@ -21,6 +21,16 @@ class HomeBottomDialogFragment :
         addListeners()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.startRecodingScreenTime()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime(SCREEN_NAME)
+    }
+
     private fun addListeners() {
         binding.layoutHomeBottomMore.setOnClickListener {
             moveToSetting(EatingType.MORE)
@@ -37,5 +47,9 @@ class HomeBottomDialogFragment :
         intent.putExtra(GoalSettingActivity.ARG_EATING_TYPE, eatingType.name)
         startActivity(intent)
         dismiss()
+    }
+
+    companion object {
+        const val SCREEN_NAME = "main_add"
     }
 }
