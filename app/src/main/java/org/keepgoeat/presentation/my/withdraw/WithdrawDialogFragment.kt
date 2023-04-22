@@ -3,7 +3,7 @@ package org.keepgoeat.presentation.my.withdraw
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +29,7 @@ class WithdrawDialogFragment :
 
     @Inject
     lateinit var naverSignService: NaverAuthService
-    private val viewModel: MyViewModel by viewModels()
+    private val viewModel: MyViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +54,6 @@ class WithdrawDialogFragment :
         viewModel.deleteAccountUiState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    sendDeleteAccountEvent()
                     requireActivity().showToast(getString(R.string.withdraw_success))
                     moveToSign()
                     dismiss()
@@ -68,18 +67,6 @@ class WithdrawDialogFragment :
         }.launchIn(lifecycleScope)
     }
 
-    private fun sendDeleteAccountEvent() {
-        val reasons: MutableMap<String, Any> = mutableMapOf()
-        viewModel.getWithdrawReasons().map {
-            if (it.key == SUBJECTIVE_ISSUE) {
-                reasons[it.key] = it.value
-            } else {
-                reasons[it.key] = (it.value as? Int)?.let { value -> getString(value) } ?: ""
-            }
-        }
-        viewModel.sendDeleteAccountEvent(reasons)
-    }
-
     private fun moveToSign() {
         Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -87,9 +74,5 @@ class WithdrawDialogFragment :
         }.also {
             startActivity(it)
         }
-    }
-
-    companion object {
-        private const val SUBJECTIVE_ISSUE = "SUBJECTIVE_ISSUE"
     }
 }
