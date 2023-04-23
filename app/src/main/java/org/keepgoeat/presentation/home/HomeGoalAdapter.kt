@@ -31,7 +31,6 @@ class HomeGoalAdapter(
     class MyGoalViewHolder(
         private val binding: ItemHomeGoalBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        var layout = binding
         fun bind(
             myGoal: HomeGoal,
             eatingType: EatingType,
@@ -69,7 +68,6 @@ class HomeGoalAdapter(
     class AddGoalViewHolder(
         private val binding: ItemAddGoalBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        var layout = binding
         fun bind(goalCount: Int, showMakeGoalDialog: () -> Unit) {
             when (goalCount) {
                 0 -> binding.layoutGoalInfo.visibility = View.GONE
