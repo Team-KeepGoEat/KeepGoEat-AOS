@@ -18,6 +18,13 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <!-- Splash -->
+    <style name="Theme.KeepGoEat.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
+        <item name="postSplashScreenTheme">@style/Theme.KeepGoEat</item>
+    </style>
+
     <!-- Widget -->
     <style name="Style.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Style.BottomSheet</item>
@@ -68,12 +75,6 @@
     <style name="Style.CircleImageView.Half" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
-    </style>
-
-    <style name="Theme.KeepGoEat.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
-        <item name="postSplashScreenTheme">@style/Theme.KeepGoEat</item>
     </style>
 
     <!-- My Menu -->
