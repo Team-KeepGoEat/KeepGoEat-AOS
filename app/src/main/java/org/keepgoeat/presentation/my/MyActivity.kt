@@ -1,6 +1,7 @@
 package org.keepgoeat.presentation.my
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -12,7 +13,7 @@ import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.common.WebViewActivity
 import org.keepgoeat.presentation.my.archive.ArchivedGoalActivity
 import org.keepgoeat.util.binding.BindingActivity
-import timber.log.Timber
+import org.keepgoeat.util.extension.showToast
 
 @AndroidEntryPoint
 class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
@@ -65,7 +66,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             )
         }
         binding.tvFeedback.setOnClickListener {
-            showReviewDialog()
+            moveToPlayStore()
         }
         binding.tvAboutService.setOnClickListener {
             startActivity(Intent(this, ServiceIntroActivity::class.java))
@@ -96,17 +97,14 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
     private fun showReviewDialog() {
         val manager = ReviewManagerFactory.create(this)
-        val request = manager.requestReviewFlow()
-        request.addOnCompleteListener { task ->
+        manager.requestReviewFlow().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 manager.launchReviewFlow(this, task.result)
                     .addOnCompleteListener {
-                        Timber.d("리뷰 남기기 성공") // TODO 로그 지우기
-                    }.addOnFailureListener {
-                        Timber.e(task.exception?.message)
+                        showToast(getString(R.string.my_feedback_success_toast_message))
                     }
             } else {
-                Timber.e(task.exception?.message)
+                moveToPlayStore()
             }
         }
     }
@@ -115,6 +113,14 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         Intent(this, WebViewActivity::class.java).apply {
             putExtra(WebViewActivity.ARG_WEB_VIEW_LINK, link)
         }.also { startActivity(it) }
+    }
+
+    private fun moveToPlayStore() {
+        Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(getString(R.string.play_store_detail_url) + packageName)
+        }.also {
+            startActivity(it)
+        }
     }
 
     companion object {
