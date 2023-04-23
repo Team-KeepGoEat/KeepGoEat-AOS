@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
 interface AuthService {
     @POST("auth")
-    suspend fun login(@Body request: RequestAuth): ResponseAuth
+    suspend fun login(@Body authInfo: RequestAuth): ResponseAuth
 
     @GET("auth/refresh")
     suspend fun refresh(): ResponseRefresh

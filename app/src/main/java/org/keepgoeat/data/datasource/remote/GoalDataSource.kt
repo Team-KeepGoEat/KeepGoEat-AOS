@@ -2,7 +2,7 @@ package org.keepgoeat.data.datasource.remote
 
 import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
-import org.keepgoeat.data.model.request.RequestGoalContentTitle
+import org.keepgoeat.data.model.request.RequestEditedGoalContent
 import org.keepgoeat.data.model.response.*
 import org.keepgoeat.data.service.GoalService
 import javax.inject.Inject
@@ -18,13 +18,13 @@ class GoalDataSource @Inject constructor(
     suspend fun fetchArchivedGoal(sortType: String): ResponseArchivedGoal =
         goalService.fetchArchivedGoal(sortType)
 
-    suspend fun uploadGoalContent(requestGoalContent: RequestGoalContent): ResponseGoalContent =
-        goalService.uploadGoalContent(requestGoalContent)
+    suspend fun uploadGoalContent(content: RequestGoalContent): ResponseGoalContent =
+        goalService.uploadGoalContent(content)
 
     suspend fun editGoalContent(
         id: Int,
-        title: RequestGoalContentTitle,
-    ): ResponseGoalContent = goalService.editGoalContent(id, title)
+        content: RequestEditedGoalContent,
+    ): ResponseGoalContent = goalService.editGoalContent(id, content)
 
     suspend fun keepGoal(id: Int): ResponseGoalKeep = goalService.keepGoal(id)
 
