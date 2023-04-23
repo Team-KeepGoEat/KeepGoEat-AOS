@@ -14,7 +14,7 @@ https://developer.android.com/training/basics/network-ops/reading-network-state
 https://medium.com/@bazzairvine/observing-your-network-connection-with-flow-1cdedf31780c */
 
 class NetworkMonitor(private val context: Context, private val coroutineScope: CoroutineScope) {
-    private var connectivityManager: ConnectivityManager =
+    private val connectivityManager: ConnectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     val isConnected: StateFlow<Boolean> = callbackFlow {

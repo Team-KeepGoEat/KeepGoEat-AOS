@@ -20,7 +20,7 @@ class SignViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val localStorage: KGEDataSource,
 ) : MixpanelViewModel() {
-    private var _loginUiState = MutableStateFlow<UiState<Pair<Boolean, Boolean>>>(UiState.Loading)
+    private val _loginUiState = MutableStateFlow<UiState<Pair<Boolean, Boolean>>>(UiState.Loading)
     val loginUiState get() = _loginUiState.asStateFlow()
 
     fun login(loginPlatForm: LoginPlatformType, accessToken: String) {

@@ -12,7 +12,7 @@ class ArchivedGoalAdapter(
     private val showKeepDeleteDialog: (Int) -> Unit,
 ) : RecyclerView.Adapter<ArchivedGoalAdapter.ArchivedGoalViewHolder>() {
     private lateinit var inflater: LayoutInflater
-    private var goalLists: MutableList<ArchivedGoal> = mutableListOf()
+    private val goalLists: MutableList<ArchivedGoal> = mutableListOf()
     private var goalWithDeleteViewVisible: ArchivedGoal? = null
 
     class ArchivedGoalViewHolder(private val binding: ItemArchivedGoalBinding) :
@@ -57,7 +57,8 @@ class ArchivedGoalAdapter(
     override fun getItemCount() = goalLists.size
 
     fun setGoalList(goals: MutableList<ArchivedGoal>) {
-        this.goalLists = goals
+        goalLists.clear()
+        goalLists.addAll(goals)
         notifyDataSetChanged()
     }
 
