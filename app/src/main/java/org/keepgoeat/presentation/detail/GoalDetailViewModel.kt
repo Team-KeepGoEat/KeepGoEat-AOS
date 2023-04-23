@@ -52,8 +52,7 @@ class GoalDetailViewModel @Inject constructor(
                         GoalEvent.archiveGoal(
                             goalDetail.value?.food ?: "",
                             goalDetail.value?.criterion ?: ""
-                        ),
-                        true
+                        )
                     )
                 }.onFailure {
                     Timber.e(it.message)
