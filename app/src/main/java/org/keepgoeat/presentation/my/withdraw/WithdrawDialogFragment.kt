@@ -3,7 +3,7 @@ package org.keepgoeat.presentation.my.withdraw
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +29,7 @@ class WithdrawDialogFragment :
 
     @Inject
     lateinit var naverSignService: NaverAuthService
-    private val viewModel: MyViewModel by viewModels()
+    private val viewModel: MyViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

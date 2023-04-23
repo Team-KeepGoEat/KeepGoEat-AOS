@@ -19,4 +19,9 @@ object GoalEvent {
     )
 
     fun deleteGoal() = MixPanelEvent("Delete Goal", null)
+
+    fun archiveGoal(goalName: String, goalStandard: String) = MixPanelEvent(
+        "Archive",
+        mapOf("Goal Name" to goalName, "Goal Standard" to goalStandard)
+    )
 }

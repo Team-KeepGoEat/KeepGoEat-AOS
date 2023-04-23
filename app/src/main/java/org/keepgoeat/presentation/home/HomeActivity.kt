@@ -37,6 +37,16 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         collectData()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.startRecodingScreenTime()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime("$SCREEN_NAME${viewModel.goalCount.value}")
+    }
+
     private fun addListeners() {
         with(binding) {
             btnNoGoal.setOnClickListener {
@@ -125,5 +135,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         const val ARG_KILL_HOME_AND_GO_TO_SIGN = "killHomeAndGoToSign"
         const val ARG_HOME_GOAL_COUNT = "homeGoalCount"
         const val ARG_UPDATE_VERSION = "updateVersion"
+        const val SCREEN_NAME = "main_goalnum"
     }
 }

@@ -22,7 +22,7 @@ class GoalRepositoryImpl @Inject constructor(
         goalId: Int,
         isAchieved: Boolean,
     ): Result<ResponseGoalAchievement.ResponseGoalAchievementData> = runCatching {
-        goalDataSource.achievedGoal(goalId, RequestGoalAchievement(isAchieved)).data
+        goalDataSource.achieveGoal(goalId, RequestGoalAchievement(isAchieved)).data
     }
 
     override suspend fun uploadGoalContent(

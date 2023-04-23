@@ -37,7 +37,14 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
 
     override fun onStart() {
         super.onStart()
+        viewModel.startRecodingScreenTime()
         rootView.viewTreeObserver.addOnGlobalLayoutListener(onGlobalListener)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopRecodingScreenTime(SCREEN_NAME)
+        rootView.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalListener)
     }
 
     private fun initLayout() {
@@ -130,12 +137,8 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
         showKeyboard(binding.etOtherReason, true)
     }
 
-    override fun onStop() {
-        super.onStop()
-        rootView.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalListener)
-    }
-
     companion object {
         private const val SUBJECTIVE_ISSUE = "SUBJECTIVE_ISSUE"
+        private const val SCREEN_NAME = "account_delete"
     }
 }

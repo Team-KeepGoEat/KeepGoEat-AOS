@@ -28,7 +28,7 @@ class GoalDataSource @Inject constructor(
 
     suspend fun keepGoal(id: Int): ResponseGoalKeep = goalService.keepGoal(id)
 
-    suspend fun achievedGoal(
+    suspend fun achieveGoal(
         id: Int,
         requestGoalAchievement: RequestGoalAchievement
     ): ResponseGoalAchievement =

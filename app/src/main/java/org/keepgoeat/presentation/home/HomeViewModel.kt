@@ -1,6 +1,5 @@
 package org.keepgoeat.presentation.home
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,11 +10,11 @@ import org.keepgoeat.domain.model.HomeContent
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.domain.repository.VersionRepository
+import org.keepgoeat.presentation.common.MixpanelViewModel
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.mixpanel.GoalEvent
-import org.keepgoeat.util.mixpanel.MixpanelProvider
 import timber.log.Timber
 import java.io.IOException
 import java.time.LocalDateTime
@@ -25,8 +24,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
     private val versionRepository: VersionRepository,
-    private val mixpanelProvider: MixpanelProvider,
-) : ViewModel() {
+) : MixpanelViewModel() {
     private var _homeDataFetchState = MutableStateFlow<UiState<HomeContent>>(UiState.Loading)
     val homeDataFetchState get() = _homeDataFetchState.asStateFlow()
     private var _goalList = MutableStateFlow<MutableList<HomeGoal>>(mutableListOf())
