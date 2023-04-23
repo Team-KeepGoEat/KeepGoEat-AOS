@@ -1,4 +1,4 @@
-package org.keepgoeat.presentation.my
+package org.keepgoeat.presentation.my.archive
 
 import android.view.LayoutInflater
 import android.view.View

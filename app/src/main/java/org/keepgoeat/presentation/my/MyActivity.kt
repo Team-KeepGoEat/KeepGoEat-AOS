@@ -10,6 +10,7 @@ import org.keepgoeat.BuildConfig
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityMyBinding
 import org.keepgoeat.presentation.common.WebViewActivity
+import org.keepgoeat.presentation.my.archive.ArchivedGoalActivity
 import org.keepgoeat.util.binding.BindingActivity
 import timber.log.Timber
 

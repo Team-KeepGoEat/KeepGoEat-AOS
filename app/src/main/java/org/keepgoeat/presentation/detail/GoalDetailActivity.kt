@@ -14,8 +14,8 @@ import org.keepgoeat.databinding.ActivityGoalDetailBinding
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.model.GoalContent
-import org.keepgoeat.presentation.my.ArchivedGoalActivity
-import org.keepgoeat.presentation.my.ArchivedGoalActivity.Companion.ARG_IS_ENTERED_FROM_KEEP
+import org.keepgoeat.presentation.my.archive.ArchivedGoalActivity
+import org.keepgoeat.presentation.my.archive.ArchivedGoalActivity.Companion.ARG_IS_ENTERED_FROM_KEEP
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_GOAL_CONTENT
 import org.keepgoeat.presentation.setting.GoalSettingActivity.Companion.ARG_IS_UPDATED
