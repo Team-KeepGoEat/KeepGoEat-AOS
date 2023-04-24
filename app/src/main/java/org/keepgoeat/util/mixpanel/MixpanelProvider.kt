@@ -19,6 +19,7 @@ class MixpanelProvider @Inject constructor(
         MixpanelAPI.getInstance(context, BuildConfig.MIXPANEL_PROJECT_TOKEN, true)
 
     fun setUser() {
+        if (BuildConfig.DEBUG) return
         instance.identify(localStorage.userEmail)
 
         val props = JSONObject().apply {
@@ -37,15 +38,18 @@ class MixpanelProvider @Inject constructor(
     }
 
     fun createGoal() {
+        if (BuildConfig.DEBUG) return
         instance.people.increment(PROPERTY_GOAL_NUMBER, 1.0)
     }
 
     fun deleteGoal() {
+        if (BuildConfig.DEBUG) return
         instance.people.increment(PROPERTY_GOAL_NUMBER, -1.0)
     }
 
     /** 믹스패널에 이벤트를 전송하는 함수. 유저 프로퍼티를 함께 전송해야하는 경우, isRequiredUserProps를 false로 설정 필요 */
     fun sendEvent(event: MixPanelEvent, isRequiredUserProps: Boolean = true) {
+        if (BuildConfig.DEBUG) return
         val props = if (isRequiredUserProps) getUserProperties() else JSONObject()
 
         event.params?.let {
@@ -57,10 +61,12 @@ class MixpanelProvider @Inject constructor(
     }
 
     fun startRecodingScreenTime() {
+        if (BuildConfig.DEBUG) return
         instance.timeEvent(EVENT_VIEW_PAGE)
     }
 
     fun stopRecodingScreenTime(screenName: String) {
+        if (BuildConfig.DEBUG) return
         val props = JSONObject().apply {
             put(PROPERTY_PAGE_NAME, screenName)
         }
