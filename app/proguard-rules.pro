@@ -22,3 +22,7 @@
 
 -keep class com.kakao.sdk.**.model.* { <fields>; }
 -keep class * extends com.google.gson.TypeAdapter
+
+-keepnames class * extends android.os.Parcelable
+-keepnames class * extends java.io.Serializable
+-keep class org.keepgoeat.data.model.** { *; }

@@ -35,10 +35,11 @@ android {
     buildTypes {
         debug {
             manifestPlaceholders = [KAKAO_NATIVE_KEY: properties["KAKAO_NATIVE_KEY"]]
+            minifyEnabled false
         }
         release {
             manifestPlaceholders = [KAKAO_NATIVE_KEY: properties["KAKAO_NATIVE_KEY"]]
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
