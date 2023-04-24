@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.my.ArchivedGoalActivity">
+        tools:context=".presentation.my.archive.ArchivedGoalActivity">
 
         <include
             android:id="@+id/view_toolbar"

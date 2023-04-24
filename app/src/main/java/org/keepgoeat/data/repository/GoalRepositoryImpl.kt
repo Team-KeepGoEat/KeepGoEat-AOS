@@ -3,7 +3,7 @@ package org.keepgoeat.data.repository
 import org.keepgoeat.data.datasource.remote.GoalDataSource
 import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
-import org.keepgoeat.data.model.request.RequestGoalContentTitle
+import org.keepgoeat.data.model.request.RequestEditedGoalContent
 import org.keepgoeat.data.model.response.*
 import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.model.ArchivedGoal
@@ -39,7 +39,7 @@ class GoalRepositoryImpl @Inject constructor(
         food: String,
         criterion: String
     ): Result<Int> = runCatching {
-        goalDataSource.editGoalContent(id, RequestGoalContentTitle(food, criterion)).data.id
+        goalDataSource.editGoalContent(id, RequestEditedGoalContent(food, criterion)).data.id
     }
 
     override suspend fun fetchGoalDetail(goalId: Int): Result<GoalDetail> =

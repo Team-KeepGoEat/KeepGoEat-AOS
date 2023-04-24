@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
     private val versionRepository: VersionRepository,
 ) : MixpanelViewModel() {
-    private var _homeDataFetchState = MutableStateFlow<UiState<HomeContent>>(UiState.Loading)
+    private val _homeDataFetchState = MutableStateFlow<UiState<HomeContent>>(UiState.Loading)
     val homeDataFetchState get() = _homeDataFetchState.asStateFlow()
     private var _goalList = MutableStateFlow<MutableList<HomeGoal>>(mutableListOf())
     val goalList get() = _goalList.asStateFlow()

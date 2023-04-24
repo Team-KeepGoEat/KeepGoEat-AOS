@@ -2,7 +2,7 @@ package org.keepgoeat.data.service
 
 import org.keepgoeat.data.model.request.RequestGoalAchievement
 import org.keepgoeat.data.model.request.RequestGoalContent
-import org.keepgoeat.data.model.request.RequestGoalContentTitle
+import org.keepgoeat.data.model.request.RequestEditedGoalContent
 import org.keepgoeat.data.model.response.*
 import retrofit2.http.*
 
@@ -11,20 +11,20 @@ interface GoalService {
     suspend fun fetchHomeContent(): ResponseHomeContent
 
     @POST("goal")
-    suspend fun uploadGoalContent(@Body request: RequestGoalContent): ResponseGoalContent
+    suspend fun uploadGoalContent(@Body goalContent: RequestGoalContent): ResponseGoalContent
 
     @POST("goal/{goalId}")
     suspend fun editGoalContent(
         @Path("goalId") id: Int,
-        @Body goalContent: RequestGoalContentTitle
+        @Body goalContent: RequestEditedGoalContent
     ): ResponseGoalContent
 
     @GET("history/{goalId}")
-    suspend fun fetchGoalDetail(@Path("goalId") goalId: Int): ResponseGoalDetail
+    suspend fun fetchGoalDetail(@Path("goalId") id: Int): ResponseGoalDetail
 
     @GET("goal/kept")
     suspend fun fetchArchivedGoal(
-        @Query("sort") value: String,
+        @Query("sort") sortType: String,
     ): ResponseArchivedGoal
 
     @POST("goal/keep/{goalId}")

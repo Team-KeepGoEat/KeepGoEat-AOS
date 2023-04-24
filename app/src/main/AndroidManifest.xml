@@ -66,7 +66,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.my.ArchivedGoalActivity"
+            android:name=".presentation.my.archive.ArchivedGoalActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

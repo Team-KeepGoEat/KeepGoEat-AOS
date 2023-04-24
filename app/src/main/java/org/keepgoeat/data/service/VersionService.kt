@@ -8,6 +8,6 @@ interface VersionService {
     /** 최신 강제 업데이트 버전을 불러오는 함수 */
     @GET("ver")
     suspend fun getForcedUpdateVersion(
-        @Query("client") value: String,
+        @Query("client") client: String,
     ): ResponseVersion
 }
