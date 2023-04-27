@@ -19,7 +19,7 @@
         android:background="@drawable/background_goal_list"
         android:backgroundTint="@color/white"
         android:elevation="2dp"
-        android:paddingStart="@dimen/spacingBase"
+        android:paddingStart="@dimen/spacing_base"
         android:paddingBottom="@dimen/spacing16">
 
         <include

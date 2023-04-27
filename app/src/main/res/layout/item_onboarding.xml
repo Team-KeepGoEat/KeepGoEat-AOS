@@ -31,8 +31,8 @@
             android:id="@+id/tv_onboarding_des"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing4"
-            android:lineSpacingExtra="4sp"
+            android:layout_marginTop="@dimen/spacing10"
+            android:lineSpacingExtra="4dp"
             android:text="@{context.getString(item.desStrRes)}"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.System5"
@@ -47,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="59dp"
+            android:adjustViewBounds="true"
             android:src="@{context.getDrawable(item.imageRes)}"
             app:layout_constraintTop_toBottomOf="@id/tv_onboarding_des"
             tools:src="@drawable/img_onboarding_1" />

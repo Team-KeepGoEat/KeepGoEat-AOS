@@ -11,22 +11,20 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_des"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing36"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="26dp"
             android:layout_marginTop="176dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_naver_sign_in"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_texts"
+                android:id="@+id/layout_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing10"
                 android:background="@drawable/background_sign_box"
                 android:paddingTop="@dimen/spacing16"
                 android:paddingBottom="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
@@ -44,6 +42,8 @@
                     android:id="@+id/tv_sign_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:lineSpacingExtra="3dp"
                     android:text="@string/sign_description2"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.System3"
@@ -56,24 +56,26 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_snail"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_texts">
+                app:layout_constraintTop_toBottomOf="@+id/layout_text">
 
                 <ImageView
                     android:id="@+id/iv_orange_snail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing8"
+                    android:adjustViewBounds="true"
                     android:src="@drawable/snail_orange_spoon"
+                    app:layout_constraintEnd_toStartOf="@id/iv_green_snail"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/iv_green_snail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
                     android:src="@drawable/snail_green_spoon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_orange_snail"

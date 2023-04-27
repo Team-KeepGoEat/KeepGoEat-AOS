@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.databinding.ItemOnboardingBinding
 import org.keepgoeat.presentation.type.OnBoardingViewType
 
-class OnboardingAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OnboardingAdapter(context: Context) :
+    RecyclerView.Adapter<OnboardingAdapter.OnBoardingViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
     private val onBoardingList = OnBoardingViewType.values()
 
@@ -22,16 +23,11 @@ class OnboardingAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnBoardingViewHolder {
-        return OnBoardingViewHolder(ItemOnboardingBinding.inflate(inflater, parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnBoardingViewHolder =
+        OnBoardingViewHolder(ItemOnboardingBinding.inflate(inflater, parent, false))
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is OnBoardingViewHolder -> {
-                holder.bind(onBoardingList[position])
-            }
-        }
+    override fun onBindViewHolder(holder: OnBoardingViewHolder, position: Int) {
+        holder.bind(onBoardingList[position])
     }
 
     override fun getItemCount(): Int = onBoardingList.size

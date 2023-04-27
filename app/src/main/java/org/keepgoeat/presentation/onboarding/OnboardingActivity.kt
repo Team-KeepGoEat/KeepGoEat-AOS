@@ -3,13 +3,9 @@ package org.keepgoeat.presentation.onboarding
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityOnboardingBinding
 import org.keepgoeat.presentation.home.HomeActivity
@@ -27,31 +23,37 @@ class OnboardingActivity :
 
         initLayout()
         addListeners()
-        collectData()
     }
 
     override fun onStop() {
         super.onStop()
-        stopRecodingScreenTime(viewModel.position.value)
+        stopRecodingScreenTime(viewModel.onboardingType.value.ordinal)
     }
 
     private fun initLayout() {
-        val adapter = OnboardingAdapter(this)
         with(binding) {
-            vpViewPager.adapter = adapter
-            vpViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    this@OnboardingActivity.viewModel.setPosition(position)
-                }
-            })
+            vpViewPager.adapter = OnboardingAdapter(this@OnboardingActivity)
+            vpViewPager.registerOnPageChangeCallback(getPageChangeCallback())
             TabLayoutMediator(indicator, vpViewPager) { _, _ -> }.attach()
         }
     }
 
+    private fun getPageChangeCallback() =
+        object : ViewPager2.OnPageChangeCallback() {
+            var prevPos = viewModel.onboardingType.value.ordinal
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                viewModel.setOnboardingType(position)
+                recodeScreenTime(prevPos, position)
+                prevPos = position
+            }
+        }
+
     private fun addListeners() {
         binding.btnNext.setOnClickListener {
-            if (binding.vpViewPager.currentItem == 2) {
+            if (binding.vpViewPager.currentItem == viewModel.onboardingLastPos) {
                 viewModel.setClickedOnboardingButton()
                 moveToHome()
             }
@@ -66,19 +68,6 @@ class OnboardingActivity :
     private fun moveToHome() {
         startActivity(Intent(this, HomeActivity::class.java))
         finish()
-    }
-
-    private fun collectData() {
-        var prevPos = viewModel.position.value
-        viewModel.position.flowWithLifecycle(lifecycle).onEach { position ->
-            when (position) {
-                0 -> binding.btnNext.setText(R.string.onboarding1_button) // TODO 리팩토링 필요
-                1 -> binding.btnNext.setText(R.string.onboarding2_button)
-                2 -> binding.btnNext.setText(R.string.onboarding3_button)
-            }
-            recodeScreenTime(prevPos, position)
-            prevPos = position
-        }.launchIn(lifecycleScope)
     }
 
     /** 이전 포지션 온보딩 뷰의 스크린타임 기록을 중단, 현재 포지션 온보딩 뷰의 스크린타임을을 기록하는 함수 (단, 초기 포지션이 0인 경우, if문을 실행하지 않음.) */
