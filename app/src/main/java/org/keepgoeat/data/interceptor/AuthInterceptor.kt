@@ -30,7 +30,6 @@ class AuthInterceptor @Inject constructor(
 
         when (response.code) {
             401 -> {
-                // TODO 토큰 재발급 api 연동
                 val refreshTokenRequest = originalRequest.newBuilder().get()
                     .url("${BuildConfig.KGE_BASE_URL}auth/refresh")
                     .addHeader(ACCESS_TOKEN, localStorage.accessToken)

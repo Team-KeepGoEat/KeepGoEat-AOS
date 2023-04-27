@@ -100,7 +100,7 @@ class ArchivedGoalActivity :
                 is UiState.Success -> {
                     goalAdapter.setGoalList(it.data.toMutableList())
                 }
-                is UiState.Error -> {} // TODO state에 따른 ui 업데이트 필요시 작성
+                is UiState.Error -> {}
                 is UiState.Loading -> {}
                 else -> {}
             }
