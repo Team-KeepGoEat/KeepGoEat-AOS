@@ -64,7 +64,7 @@ class MyViewModel @Inject constructor(
     val isOtherReasonSelected get() = _isOtherReasonSelected.asStateFlow()
     private val _selectedReasons: MutableStateFlow<ArrayList<WithdrawReason>> =
         MutableStateFlow(arrayListOf())
-    val selectedReasons get() = _selectedReasons.asStateFlow()
+    private val selectedReasons get() = _selectedReasons.asStateFlow()
     val loginPlatForm = localStorage.loginPlatform
 
     fun fetchUserInfo() {
