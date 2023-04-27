@@ -39,7 +39,7 @@
             app:layout_constraintBottom_toBottomOf="@id/indicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/indicator"
-            app:visibility="@{viewModel.position &lt; 2}" />
+            app:visibility="@{viewModel.onboardingType.ordinal &lt; viewModel.onboardingLastPos}" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_view_pager"
@@ -58,11 +58,12 @@
             android:layout_marginHorizontal="@dimen/spacing16"
             android:layout_marginBottom="44dp"
             android:backgroundTint="@color/orange_600"
-            android:text="@string/onboarding1_button"
+            android:text="@{context.getString(viewModel.onboardingType.btnTextRes)}"
             android:textColor="@color/gray_50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/onboarding1_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
