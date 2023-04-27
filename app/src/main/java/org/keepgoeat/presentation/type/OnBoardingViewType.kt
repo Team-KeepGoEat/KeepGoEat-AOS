@@ -10,16 +10,22 @@ enum class OnBoardingViewType(
     @StringRes val btnTextRes: Int,
     @DrawableRes val imageRes: Int,
 ) {
-    FIRST(R.string.onboarding1_title,
+    FIRST(
+        R.string.onboarding1_title,
         R.string.onboarding1_des,
         R.string.onboarding1_button,
-        R.drawable.img_onboarding_1),
-    SECOND(R.string.onboarding2_title,
+        R.drawable.img_onboarding_1
+    ),
+    SECOND(
+        R.string.onboarding2_title,
         R.string.onboarding2_des,
         R.string.onboarding2_button,
-        R.drawable.img_onboarding_2),
-    THIRD(R.string.onboarding3_title,
+        R.drawable.img_onboarding_2
+    ),
+    THIRD(
+        R.string.onboarding3_title,
         R.string.onboarding3_des,
         R.string.onboarding3_button,
-        R.drawable.img_onboarding_3)
+        R.drawable.img_onboarding_3
+    )
 }
