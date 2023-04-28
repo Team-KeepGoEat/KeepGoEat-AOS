@@ -35,7 +35,6 @@
     <string name="goal_detail_hold">참은</string>
     <string name="goal_detail_success_goal_delete_toast_message">목표가 삭제되었습니다.</string>
     <string name="goal_detail_success_goal_keep_toast_message">목표가 보관되었습니다.</string>
-    <string name="goal_detail_delete_button_text">네, 삭제할래요</string>
 
     <!-- Home View -->
     <string name="home_today_goal">오늘 식습관 목표</string>
@@ -64,9 +63,15 @@
     <string name="bottom_home_less_txt">안 좋은 식습관을 줄여가보자!</string>
 
     <!-- Goal Keep -->
-    <string name="goal_keep_dialog_guide">목표 달성이 끝났나요?\n달성 완료된 목표는 보관해서 모아볼 수 있어요.</string>
+    <string name="goal_keep_dialog_title">목표를 보관하시겠어요?</string>
+    <string name="goal_keep_dialog_guide">달성을 완료한 목표는 보관해서 모아볼 수 있어요.</string>
     <string name="goal_keep_delete_guide">잘못된 목표인가요? 삭제하기</string>
     <string name="goal_keep">목표 보관하기</string>
+
+    <!-- Goal Delete -->
+    <string name="goal_delete_dialog_guide">삭제한 목표는 복구할 수 없어요.</string>
+    <string name="goal_delete_dialog_title">삭제하시겠어요?</string>
+    <string name="goal_delete_button_text">네, 삭제할래요</string>
 
     <!-- Goal Setting -->
     <string name="goal_setting">목표 입력</string>

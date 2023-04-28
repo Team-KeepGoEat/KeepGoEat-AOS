@@ -3,15 +3,12 @@ package org.keepgoeat.presentation.common
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebChromeClient
-import android.webkit.WebView
 import android.webkit.WebViewClient
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityWebViewBinding
 import org.keepgoeat.util.binding.BindingActivity
 
 class WebViewActivity : BindingActivity<ActivityWebViewBinding>(R.layout.activity_web_view) {
-    private lateinit var webView: WebView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -20,7 +17,7 @@ class WebViewActivity : BindingActivity<ActivityWebViewBinding>(R.layout.activit
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initView() {
-        webView = binding.webView.apply {
+        binding.webView.apply {
             webViewClient = WebViewClient()
             webChromeClient = WebChromeClient()
 
