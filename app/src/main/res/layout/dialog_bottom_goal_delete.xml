@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="58dp"
+        android:paddingBottom="61dp"
         tools:context=".presentation.detail.GoalKeepBottomDialogFragment">
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="삭제하시겠어요?"
+            android:text="@string/goal_delete_dialog_title"
             android:textAppearance="@style/TextAppearance.System3_Bold"
             android:textColor="@color/gray_600"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +34,8 @@
             android:id="@+id/tv_goal_delete_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:text="삭제한 목표는 복구할 수 없어요."
+            android:layout_marginTop="@dimen/spacing10"
+            android:text="@string/goal_delete_dialog_guide"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_600"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
             style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/spacing16"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:backgroundTint="@{viewModel.goalDetail.eatingType == EatingType.MORE ? @color/orange_600 : @color/green_600}"
             android:text="@string/btn_text_no"
             android:textAppearance="@style/TextAppearance.System5_Bold"
@@ -75,7 +75,7 @@
             android:layout_marginEnd="@dimen/spacing16"
             android:backgroundTint="@color/gray_200"
             android:onClick="@{() -> viewModel.deleteGoal()}"
-            android:text="@string/goal_detail_delete_button_text"
+            android:text="@string/goal_delete_button_text"
             android:textAppearance="@style/TextAppearance.System5_Bold"
             android:textColor="@color/gray_400"
             app:layout_constraintEnd_toEndOf="parent"
