@@ -9,6 +9,8 @@
 
         <import type="org.keepgoeat.presentation.type.EatingType" />
 
+        <import type="org.keepgoeat.util.extension.StringExtKt" />
+
         <variable
             name="viewModel"
             type="org.keepgoeat.presentation.setting.GoalSettingViewModel" />
@@ -99,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
-            android:text="@{@string/goal_setting_title_length_limit(viewModel.goalFood.length())}"
+            android:text="@{@string/goal_setting_title_length_limit(StringExtKt.getGraphemeLength(viewModel.goalFood))}"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_400"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
@@ -164,7 +166,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
-            android:text="@{@string/goal_setting_criterion_length_limit(viewModel.goalCriterion.length())}"
+            android:text="@{@string/goal_setting_criterion_length_limit(StringExtKt.getGraphemeLength(viewModel.goalCriterion))}"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_400"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
