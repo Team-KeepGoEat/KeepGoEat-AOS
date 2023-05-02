@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.BuildConfig
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityMyBinding
-import org.keepgoeat.presentation.base.MixpanelActivity
+import org.keepgoeat.presentation.base.screen.MixpanelActivity
 import org.keepgoeat.presentation.common.WebViewActivity
 import org.keepgoeat.presentation.my.archive.ArchivedGoalActivity
 import org.keepgoeat.util.extension.showToast

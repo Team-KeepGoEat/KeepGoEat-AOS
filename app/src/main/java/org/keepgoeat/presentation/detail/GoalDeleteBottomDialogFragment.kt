@@ -6,7 +6,7 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomGoalDeleteBinding
-import org.keepgoeat.presentation.base.MixpanelBottomSheetDialogFragment
+import org.keepgoeat.presentation.base.screen.MixpanelBottomSheetDialogFragment
 
 @AndroidEntryPoint
 class GoalDeleteBottomDialogFragment :

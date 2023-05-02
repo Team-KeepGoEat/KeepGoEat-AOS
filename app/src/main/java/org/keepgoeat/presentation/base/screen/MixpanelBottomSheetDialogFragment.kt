@@ -1,4 +1,4 @@
-package org.keepgoeat.presentation.base
+package org.keepgoeat.presentation.base.screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.keepgoeat.presentation.common.MixpanelViewModel
+import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
 
 abstract class MixpanelBottomSheetDialogFragment<B : ViewDataBinding>(
     @LayoutRes private val layoutResId: Int,

@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomHomeBinding
-import org.keepgoeat.presentation.base.MixpanelBottomSheetDialogFragment
+import org.keepgoeat.presentation.base.screen.MixpanelBottomSheetDialogFragment
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.type.EatingType
 

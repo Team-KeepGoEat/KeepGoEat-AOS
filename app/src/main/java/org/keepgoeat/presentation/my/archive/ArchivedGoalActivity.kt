@@ -14,9 +14,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityArchivedGoalBinding
-import org.keepgoeat.presentation.base.MixpanelActivity
+import org.keepgoeat.presentation.base.screen.MixpanelActivity
 import org.keepgoeat.presentation.home.HomeActivity
-import org.keepgoeat.presentation.my.GoalDeleteDialogFragment
 import org.keepgoeat.presentation.my.MyActivity
 import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.presentation.type.EatingType

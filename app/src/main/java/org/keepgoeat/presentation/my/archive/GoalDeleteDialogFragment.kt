@@ -1,11 +1,12 @@
-package org.keepgoeat.presentation.my
+package org.keepgoeat.presentation.my.archive
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogGoalDeleteBinding
-import org.keepgoeat.util.binding.BindingDialogFragment
+import org.keepgoeat.presentation.my.MyViewModel
+import org.keepgoeat.presentation.base.screen.BindingDialogFragment
 
 class GoalDeleteDialogFragment :
     BindingDialogFragment<DialogGoalDeleteBinding>(R.layout.dialog_goal_delete) {

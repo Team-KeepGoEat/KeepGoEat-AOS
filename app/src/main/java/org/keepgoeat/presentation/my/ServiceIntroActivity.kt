@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityServiceIntroBinding
-import org.keepgoeat.presentation.base.MixpanelActivity
+import org.keepgoeat.presentation.base.screen.MixpanelActivity
 import org.keepgoeat.presentation.common.WebViewActivity
 import org.keepgoeat.presentation.common.WebViewActivity.Companion.ARG_WEB_VIEW_LINK
 

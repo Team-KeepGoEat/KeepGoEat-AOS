@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import org.keepgoeat.domain.model.GoalDetail
 import org.keepgoeat.domain.model.GoalSticker
 import org.keepgoeat.domain.repository.GoalRepository
-import org.keepgoeat.presentation.common.MixpanelViewModel
+import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.mixpanel.GoalEvent
 import timber.log.Timber

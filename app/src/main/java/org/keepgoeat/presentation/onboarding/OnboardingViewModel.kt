@@ -4,7 +4,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import org.keepgoeat.data.datasource.local.KGEDataSource
-import org.keepgoeat.presentation.common.MixpanelViewModel
+import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
 import org.keepgoeat.presentation.type.OnBoardingViewType
 import javax.inject.Inject
 

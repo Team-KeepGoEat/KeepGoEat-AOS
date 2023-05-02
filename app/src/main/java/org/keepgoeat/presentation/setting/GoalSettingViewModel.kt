@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.keepgoeat.domain.repository.GoalRepository
-import org.keepgoeat.presentation.common.MixpanelViewModel
+import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
 import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.UiState

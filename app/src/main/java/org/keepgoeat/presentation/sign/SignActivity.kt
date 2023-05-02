@@ -12,7 +12,7 @@ import org.keepgoeat.R
 import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivitySignBinding
-import org.keepgoeat.presentation.base.MixpanelActivity
+import org.keepgoeat.presentation.base.screen.MixpanelActivity
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.onboarding.OnboardingActivity
 import org.keepgoeat.util.UiState

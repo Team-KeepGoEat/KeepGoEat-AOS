@@ -10,7 +10,7 @@ import org.keepgoeat.domain.model.HomeContent
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.domain.repository.VersionRepository
-import org.keepgoeat.presentation.common.MixpanelViewModel
+import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.UiState

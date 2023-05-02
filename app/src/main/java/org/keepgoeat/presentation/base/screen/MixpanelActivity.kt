@@ -1,9 +1,8 @@
-package org.keepgoeat.presentation.base
+package org.keepgoeat.presentation.base.screen
 
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import org.keepgoeat.presentation.common.MixpanelViewModel
-import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
 
 abstract class MixpanelActivity<B : ViewDataBinding>(
     @LayoutRes private val layoutRes: Int,

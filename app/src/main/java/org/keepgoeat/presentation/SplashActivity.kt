@@ -13,7 +13,7 @@ import org.keepgoeat.databinding.ActivitySplashBinding
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.onboarding.OnboardingActivity
 import org.keepgoeat.presentation.sign.SignActivity
-import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.presentation.base.screen.BindingActivity
 
 @AndroidEntryPoint
 class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_splash) {

@@ -13,7 +13,7 @@ import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivityAccountInfoBinding
 import org.keepgoeat.domain.model.UserInfo
-import org.keepgoeat.presentation.base.MixpanelActivity
+import org.keepgoeat.presentation.base.screen.MixpanelActivity
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.home.HomeActivity.Companion.ARG_KILL_HOME_AND_GO_TO_SIGN
 import org.keepgoeat.presentation.my.MyActivity.Companion.ARG_USER_INFO

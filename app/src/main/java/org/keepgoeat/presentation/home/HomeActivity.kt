@@ -18,7 +18,7 @@ import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.presentation.base.screen.BindingActivity
 
 @AndroidEntryPoint
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalDetailBinding
-import org.keepgoeat.presentation.base.MixpanelActivity
+import org.keepgoeat.presentation.base.screen.MixpanelActivity
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.model.GoalContent

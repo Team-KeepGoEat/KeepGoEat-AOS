@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomGoalKeepBinding
-import org.keepgoeat.presentation.base.MixpanelBottomSheetDialogFragment
+import org.keepgoeat.presentation.base.screen.MixpanelBottomSheetDialogFragment
 import org.keepgoeat.util.UiState
 
 @AndroidEntryPoint

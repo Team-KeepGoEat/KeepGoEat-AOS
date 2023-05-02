@@ -6,7 +6,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityWebViewBinding
-import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.presentation.base.screen.BindingActivity
 
 class WebViewActivity : BindingActivity<ActivityWebViewBinding>(R.layout.activity_web_view) {
     override fun onCreate(savedInstanceState: Bundle?) {
