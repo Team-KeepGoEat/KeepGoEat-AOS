@@ -129,7 +129,7 @@ class HomeViewModel @Inject constructor(
         val splitCurrent = BuildConfig.VERSION_NAME.split(".")
         val splitUpdate = updateVersion.split(".")
         if (splitCurrent.size > 1 && splitUpdate.size > 1) {
-            if (splitCurrent[1] != splitUpdate[1]) return true
+            if (splitCurrent[2] != splitUpdate[2]) return true
         }
 
         return false
