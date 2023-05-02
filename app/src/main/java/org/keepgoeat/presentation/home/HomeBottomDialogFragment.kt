@@ -7,28 +7,20 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomHomeBinding
+import org.keepgoeat.presentation.base.MixpanelBottomSheetDialogFragment
 import org.keepgoeat.presentation.setting.GoalSettingActivity
 import org.keepgoeat.presentation.type.EatingType
-import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
 @AndroidEntryPoint
 class HomeBottomDialogFragment :
-    BindingBottomSheetDialogFragment<DialogBottomHomeBinding>(R.layout.dialog_bottom_home) {
-    private val viewModel: HomeViewModel by viewModels()
+    MixpanelBottomSheetDialogFragment<DialogBottomHomeBinding>(
+        R.layout.dialog_bottom_home, SCREEN_NAME
+    ) {
+    override val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addListeners()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.startRecodingScreenTime()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.stopRecodingScreenTime(SCREEN_NAME)
     }
 
     private fun addListeners() {

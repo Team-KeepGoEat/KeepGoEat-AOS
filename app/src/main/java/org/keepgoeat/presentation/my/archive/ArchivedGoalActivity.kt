@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityArchivedGoalBinding
+import org.keepgoeat.presentation.base.MixpanelActivity
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.my.GoalDeleteDialogFragment
 import org.keepgoeat.presentation.my.MyActivity
@@ -21,13 +22,12 @@ import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showToast
 
 @AndroidEntryPoint
 class ArchivedGoalActivity :
-    BindingActivity<ActivityArchivedGoalBinding>(R.layout.activity_archived_goal) {
-    private val viewModel: MyViewModel by viewModels()
+    MixpanelActivity<ActivityArchivedGoalBinding>(R.layout.activity_archived_goal, SCREEN_NAME) {
+    override val viewModel: MyViewModel by viewModels()
     lateinit var goalAdapter: ArchivedGoalAdapter
     private val headerAdapter = ArchivedGoalHeaderAdapter(::getFilteredGoalWithEatingType)
     lateinit var goalConcatAdapter: ConcatAdapter
@@ -52,16 +52,6 @@ class ArchivedGoalActivity :
         initLayout()
         addListeners()
         collectData()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.startRecodingScreenTime()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.stopRecodingScreenTime(SCREEN_NAME)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

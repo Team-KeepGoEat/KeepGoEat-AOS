@@ -6,29 +6,19 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityServiceIntroBinding
+import org.keepgoeat.presentation.base.MixpanelActivity
 import org.keepgoeat.presentation.common.WebViewActivity
 import org.keepgoeat.presentation.common.WebViewActivity.Companion.ARG_WEB_VIEW_LINK
-import org.keepgoeat.util.binding.BindingActivity
 
 @AndroidEntryPoint
 class ServiceIntroActivity :
-    BindingActivity<ActivityServiceIntroBinding>(R.layout.activity_service_intro) {
-    private val viewModel: MyViewModel by viewModels()
+    MixpanelActivity<ActivityServiceIntroBinding>(R.layout.activity_service_intro, SCREEN_NAME) {
+    override val viewModel: MyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         addListeners()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.startRecodingScreenTime()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.stopRecodingScreenTime(SCREEN_NAME)
     }
 
     private fun addListeners() {

@@ -10,13 +10,15 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.DialogBottomGoalKeepBinding
+import org.keepgoeat.presentation.base.MixpanelBottomSheetDialogFragment
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.binding.BindingBottomSheetDialogFragment
 
 @AndroidEntryPoint
 class GoalKeepBottomDialogFragment : // TODO 네이밍 수정 keep -> archive
-    BindingBottomSheetDialogFragment<DialogBottomGoalKeepBinding>(R.layout.dialog_bottom_goal_keep) {
-    private val viewModel: GoalDetailViewModel by activityViewModels()
+    MixpanelBottomSheetDialogFragment<DialogBottomGoalKeepBinding>(
+        R.layout.dialog_bottom_goal_keep, SCREEN_NAME
+    ) {
+    override val viewModel: GoalDetailViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,16 +26,6 @@ class GoalKeepBottomDialogFragment : // TODO 네이밍 수정 keep -> archive
 
         addListeners()
         collectData()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.startRecodingScreenTime()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.stopRecodingScreenTime(SCREEN_NAME)
     }
 
     private fun addListeners() {

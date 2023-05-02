@@ -10,14 +10,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.BuildConfig
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityMyBinding
+import org.keepgoeat.presentation.base.MixpanelActivity
 import org.keepgoeat.presentation.common.WebViewActivity
 import org.keepgoeat.presentation.my.archive.ArchivedGoalActivity
-import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showToast
 
 @AndroidEntryPoint
-class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
-    private val viewModel: MyViewModel by viewModels()
+class MyActivity : MixpanelActivity<ActivityMyBinding>(R.layout.activity_my, SCREEN_NAME) {
+    override val viewModel: MyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,16 +26,6 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
 
         viewModel.fetchUserInfo()
         addListeners()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.startRecodingScreenTime()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.stopRecodingScreenTime(SCREEN_NAME)
     }
 
     private fun addListeners() {
