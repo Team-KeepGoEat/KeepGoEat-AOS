@@ -1,4 +1,4 @@
-package org.keepgoeat.presentation.common
+package org.keepgoeat.presentation.base.viewmodel
 
 import androidx.lifecycle.ViewModel
 

@@ -9,7 +9,7 @@ import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.DialogLogoutBinding
 import org.keepgoeat.presentation.type.LoginPlatformType
-import org.keepgoeat.util.binding.BindingDialogFragment
+import org.keepgoeat.presentation.base.screen.BindingDialogFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint

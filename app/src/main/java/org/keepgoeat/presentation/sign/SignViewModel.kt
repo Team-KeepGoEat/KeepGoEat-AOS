@@ -9,7 +9,7 @@ import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.data.model.request.RequestAuth
 import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.domain.repository.AuthRepository
-import org.keepgoeat.presentation.common.MixpanelViewModel
+import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
 import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.mixpanel.SignEvent

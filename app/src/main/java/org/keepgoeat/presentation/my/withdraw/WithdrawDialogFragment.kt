@@ -17,7 +17,7 @@ import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.binding.BindingDialogFragment
+import org.keepgoeat.presentation.base.screen.BindingDialogFragment
 import org.keepgoeat.util.extension.showToast
 import javax.inject.Inject
 

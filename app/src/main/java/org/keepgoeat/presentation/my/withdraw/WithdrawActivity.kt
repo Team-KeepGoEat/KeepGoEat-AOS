@@ -12,15 +12,16 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityWithdrawBinding
+import org.keepgoeat.presentation.base.screen.MixpanelActivity
 import org.keepgoeat.presentation.my.MyViewModel
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showKeyboard
 import org.keepgoeat.util.setVisibility
 
 @AndroidEntryPoint
-class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activity_withdraw) {
-    private val viewModel: MyViewModel by viewModels()
+class WithdrawActivity :
+    MixpanelActivity<ActivityWithdrawBinding>(R.layout.activity_withdraw, SCREEN_NAME) {
+    override val viewModel: MyViewModel by viewModels()
     lateinit var onGlobalListener: ViewTreeObserver.OnGlobalLayoutListener
     lateinit var rootView: View
 
@@ -37,13 +38,11 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
 
     override fun onStart() {
         super.onStart()
-        viewModel.startRecodingScreenTime()
         rootView.viewTreeObserver.addOnGlobalLayoutListener(onGlobalListener)
     }
 
     override fun onStop() {
         super.onStop()
-        viewModel.stopRecodingScreenTime(SCREEN_NAME)
         rootView.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalListener)
     }
 

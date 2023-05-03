@@ -10,7 +10,7 @@ import org.keepgoeat.domain.model.HomeContent
 import org.keepgoeat.domain.model.HomeGoal
 import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.domain.repository.VersionRepository
-import org.keepgoeat.presentation.common.MixpanelViewModel
+import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.UiState
@@ -39,10 +39,6 @@ class HomeViewModel @Inject constructor(
     val lottieState get() = _lottieState.asStateFlow()
     private val _updateVersion = MutableStateFlow("")
     val updateVersion get() = _updateVersion.asStateFlow()
-
-    init {
-        getForcedUpdateVersion()
-    }
 
     fun fetchHomeContent() {
         viewModelScope.launch {
@@ -111,7 +107,7 @@ class HomeViewModel @Inject constructor(
         mixpanelProvider.sendEvent(GoalEvent.addGoal(goalType), false)
     }
 
-    private fun getForcedUpdateVersion() {
+    fun getForcedUpdateVersion() {
         viewModelScope.launch {
             versionRepository.getForcedUpdateVersion(CLIENT_TYPE)
                 .onSuccess {

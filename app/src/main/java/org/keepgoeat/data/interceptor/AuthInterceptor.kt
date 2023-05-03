@@ -30,7 +30,7 @@ class AuthInterceptor @Inject constructor(
 
         when (response.code) {
             401 -> {
-                val refreshTokenRequest = originalRequest.newBuilder().get()
+                val refreshTokenRequest = originalRequest.newBuilder()
                     .url("${BuildConfig.KGE_BASE_URL}auth/refresh")
                     .addHeader(ACCESS_TOKEN, localStorage.accessToken)
                     .addHeader(REFRESH_TOKEN, localStorage.refreshToken)

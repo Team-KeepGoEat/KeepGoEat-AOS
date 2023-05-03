@@ -12,37 +12,27 @@ import org.keepgoeat.R
 import org.keepgoeat.data.service.KakaoAuthService
 import org.keepgoeat.data.service.NaverAuthService
 import org.keepgoeat.databinding.ActivitySignBinding
+import org.keepgoeat.presentation.base.screen.MixpanelActivity
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.onboarding.OnboardingActivity
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SignActivity : BindingActivity<ActivitySignBinding>(R.layout.activity_sign) {
+class SignActivity : MixpanelActivity<ActivitySignBinding>(R.layout.activity_sign, SCREEN_NAME) {
     @Inject
     lateinit var kakaoSignService: KakaoAuthService
 
     @Inject
     lateinit var naverSignService: NaverAuthService
-    private val viewModel: SignViewModel by viewModels()
+    override val viewModel: SignViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         addListeners()
         collectData()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.startRecodingScreenTime()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.stopRecodingScreenTime(SCREEN_NAME)
     }
 
     private fun addListeners() {
