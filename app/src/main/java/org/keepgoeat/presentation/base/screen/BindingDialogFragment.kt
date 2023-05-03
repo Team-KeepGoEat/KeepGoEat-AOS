@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 
-abstract class BindingDialogFragment<B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
+abstract class BindingDialogFragment<B : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
     DialogFragment() {
     private var _binding: B? = null
     val binding get() = requireNotNull(_binding!!) { "${this::class.java.simpleName}에서 에러가 발생했습니다." }
@@ -29,7 +29,7 @@ abstract class BindingDialogFragment<B : ViewDataBinding>(@LayoutRes private val
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
+        _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         return binding.root
     }
 
