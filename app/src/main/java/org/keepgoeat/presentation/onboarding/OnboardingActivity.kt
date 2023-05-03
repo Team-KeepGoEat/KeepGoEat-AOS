@@ -9,7 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityOnboardingBinding
 import org.keepgoeat.presentation.home.HomeActivity
-import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.presentation.base.screen.BindingActivity
 
 @AndroidEntryPoint
 class OnboardingActivity :

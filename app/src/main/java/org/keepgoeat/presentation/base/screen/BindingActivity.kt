@@ -1,4 +1,4 @@
-package org.keepgoeat.util.binding
+package org.keepgoeat.presentation.base.screen
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes

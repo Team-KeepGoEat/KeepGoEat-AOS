@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.keepgoeat.R
 import org.keepgoeat.databinding.ActivityGoalDetailBinding
+import org.keepgoeat.presentation.base.screen.MixpanelActivity
 import org.keepgoeat.presentation.detail.GoalDetailViewModel.Companion.CELL_COUNT
 import org.keepgoeat.presentation.home.HomeActivity
 import org.keepgoeat.presentation.model.GoalContent
@@ -23,14 +24,13 @@ import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.RecyclerLayoutType
 import org.keepgoeat.util.ItemDecorationUtil
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.binding.BindingActivity
 import org.keepgoeat.util.extension.showToast
 import org.keepgoeat.util.safeValueOf
 
 @AndroidEntryPoint
 class GoalDetailActivity :
-    BindingActivity<ActivityGoalDetailBinding>(R.layout.activity_goal_detail) {
-    private val viewModel: GoalDetailViewModel by viewModels()
+    MixpanelActivity<ActivityGoalDetailBinding>(R.layout.activity_goal_detail, SCREEN_NAME) {
+    override val viewModel: GoalDetailViewModel by viewModels()
     private lateinit var adapter: GoalStickerListAdapter
     private var isUpdated = false
     private val callback = object : OnBackPressedCallback(true) {
@@ -57,16 +57,6 @@ class GoalDetailActivity :
         initLayout()
         addListeners()
         collectData()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.startRecodingScreenTime()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.stopRecodingScreenTime(SCREEN_NAME)
     }
 
     private fun initLayout() {

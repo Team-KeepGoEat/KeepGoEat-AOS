@@ -18,7 +18,7 @@ import org.keepgoeat.presentation.sign.SignActivity
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.presentation.type.ProcessState
 import org.keepgoeat.util.UiState
-import org.keepgoeat.util.binding.BindingActivity
+import org.keepgoeat.presentation.base.screen.BindingActivity
 
 @AndroidEntryPoint
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
@@ -32,6 +32,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
         if (intent.getBooleanExtra(ARG_KILL_HOME_AND_GO_TO_SIGN, false)) moveToSign()
 
+        viewModel.getForcedUpdateVersion()
         initLayout()
         addListeners()
         collectData()

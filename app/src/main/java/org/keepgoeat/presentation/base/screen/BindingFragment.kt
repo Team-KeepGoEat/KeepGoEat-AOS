@@ -1,35 +1,25 @@
-package org.keepgoeat.util.binding
+package org.keepgoeat.presentation.base.screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 
-abstract class BindingDialogFragment<B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
-    DialogFragment() {
+abstract class BindingFragment<B : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
+    Fragment() {
     private var _binding: B? = null
     val binding get() = requireNotNull(_binding!!) { "${this::class.java.simpleName}에서 에러가 발생했습니다." }
-
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
+        _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         return binding.root
     }
 
