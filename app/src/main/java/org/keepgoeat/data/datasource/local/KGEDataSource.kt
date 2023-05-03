@@ -3,10 +3,10 @@ package org.keepgoeat.data.datasource.local
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import androidx.databinding.ktx.BuildConfig
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import dagger.hilt.android.qualifiers.ApplicationContext
+import org.keepgoeat.BuildConfig
 import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.safeValueOf
 import javax.inject.Inject
