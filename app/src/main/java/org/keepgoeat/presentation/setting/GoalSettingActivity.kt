@@ -80,7 +80,7 @@ class GoalSettingActivity :
     private fun initLayout() {
         binding.etGoal.filters = arrayOf(
             InputFilter { src, start, end, dst, dstart, dend ->
-                if (src.isNotBlank() && src.toString().getGraphemeLength() > 15) {
+                if (src.isNotBlank() && src.toString().getStringLength() > 15) {
                     return@InputFilter src.dropLast(1)
                 }
                 return@InputFilter src

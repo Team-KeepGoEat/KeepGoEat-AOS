@@ -2,7 +2,7 @@ package org.keepgoeat.util.extension
 
 import java.text.BreakIterator
 
-fun String?.getGraphemeLength(): Int {
+fun String?.getStringLength(): Int {
     val it: BreakIterator = BreakIterator.getCharacterInstance()
     it.setText(this)
     var count = 0
