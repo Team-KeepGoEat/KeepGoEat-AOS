@@ -40,10 +40,6 @@ class HomeViewModel @Inject constructor(
     private val _updateVersion = MutableStateFlow("")
     val updateVersion get() = _updateVersion.asStateFlow()
 
-    init {
-        getForcedUpdateVersion()
-    }
-
     fun fetchHomeContent() {
         viewModelScope.launch {
             goalRepository.fetchHomeContent()
@@ -111,7 +107,7 @@ class HomeViewModel @Inject constructor(
         mixpanelProvider.sendEvent(GoalEvent.addGoal(goalType), false)
     }
 
-    private fun getForcedUpdateVersion() {
+    fun getForcedUpdateVersion() {
         viewModelScope.launch {
             versionRepository.getForcedUpdateVersion(CLIENT_TYPE)
                 .onSuccess {

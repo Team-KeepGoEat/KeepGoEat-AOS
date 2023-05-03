@@ -32,6 +32,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
         if (intent.getBooleanExtra(ARG_KILL_HOME_AND_GO_TO_SIGN, false)) moveToSign()
 
+        viewModel.getForcedUpdateVersion()
         initLayout()
         addListeners()
         collectData()
