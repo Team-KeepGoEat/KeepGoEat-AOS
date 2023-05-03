@@ -2,6 +2,7 @@ package org.keepgoeat.presentation.setting
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputFilter
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,10 +18,7 @@ import org.keepgoeat.presentation.model.GoalContent
 import org.keepgoeat.presentation.type.EatingType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.binding.BindingActivity
-import org.keepgoeat.util.extension.getParcelable
-import org.keepgoeat.util.extension.setOnSingleClickListener
-import org.keepgoeat.util.extension.showKeyboard
-import org.keepgoeat.util.extension.showToast
+import org.keepgoeat.util.extension.*
 import org.keepgoeat.util.safeValueOf
 
 @AndroidEntryPoint
@@ -46,6 +44,7 @@ class GoalSettingActivity :
             }
         }
 
+        initLayout()
         addListeners()
         collectData()
     }
@@ -76,6 +75,17 @@ class GoalSettingActivity :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun initLayout() {
+        binding.etGoal.filters = arrayOf(
+            InputFilter { src, start, end, dst, dstart, dend ->
+                if (src.isNotBlank() && src.toString().getGraphemeLength() > 15) {
+                    return@InputFilter src.dropLast(1)
+                }
+                return@InputFilter src
+            }
+        )
     }
 
     private fun addListeners() {

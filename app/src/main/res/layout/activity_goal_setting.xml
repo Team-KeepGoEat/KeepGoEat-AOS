@@ -70,7 +70,6 @@
             android:background="@drawable/selector_edittext_background"
             android:hint="@{viewModel.eatingType == null ? `` : context.getString(viewModel.eatingType == EatingType.MORE ? R.string.goal_setting_title_hint_for_more : R.string.goal_setting_title_hint_for_less)}"
             android:inputType="text"
-            android:maxLength="15"
             android:maxLines="1"
             android:text="@={viewModel.goalFood}"
             android:textAppearance="@style/TextAppearance.System4_Bold"
