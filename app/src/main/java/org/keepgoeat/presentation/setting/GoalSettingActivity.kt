@@ -2,7 +2,6 @@ package org.keepgoeat.presentation.setting
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputFilter
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -44,7 +43,6 @@ class GoalSettingActivity :
             }
         }
 
-        initLayout()
         addListeners()
         collectData()
     }
@@ -75,17 +73,6 @@ class GoalSettingActivity :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
-    }
-
-    private fun initLayout() {
-        binding.etGoal.filters = arrayOf(
-            InputFilter { src, start, end, dst, dstart, dend ->
-                if (src.isNotBlank() && src.toString().getStringLength() > 15) {
-                    return@InputFilter src.dropLast(1)
-                }
-                return@InputFilter src
-            }
-        )
     }
 
     private fun addListeners() {

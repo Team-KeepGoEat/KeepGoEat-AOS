@@ -1,12 +1,16 @@
 package org.keepgoeat.util
 
+import android.text.InputFilter
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
 import coil.load
 import org.keepgoeat.presentation.type.HomeBackgroundType
+import org.keepgoeat.util.extension.getStringLength
 
 @BindingAdapter("image")
 fun ImageView.setImage(imageUrl: String) {
@@ -54,4 +58,16 @@ fun ImageView.setBackground(hour: Int) {
         }
     }
     setBackgroundResource(imgRes)
+}
+
+/** 시스템이 인식하는 글자 수를 사용자가 인식하는 글자 수로 변환해서 글자 수 범위에 따라 maxLength 를 설정 */
+@BindingAdapter("maxLen")
+fun EditText.cutTextToMaxLength(maxLength: Int) {
+    val filterArray = arrayOfNulls<InputFilter>(1)
+    addTextChangedListener {
+        val str = text.toString()
+        val lengthFilter =
+            if (str.getStringLength() == maxLength) str.length else Int.MAX_VALUE
+        filters = filterArray.apply { this[0] = InputFilter.LengthFilter(lengthFilter) }
+    }
 }
