@@ -14,7 +14,7 @@ import org.keepgoeat.domain.repository.AuthRepository
 import org.keepgoeat.domain.repository.GoalRepository
 import org.keepgoeat.domain.repository.UserRepository
 import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
-import org.keepgoeat.presentation.model.WithdrawReason
+import org.keepgoeat.presentation.type.WithdrawReason
 import org.keepgoeat.presentation.type.SortType
 import org.keepgoeat.util.UiState
 import org.keepgoeat.util.extension.toStateFlow
