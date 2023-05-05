@@ -31,8 +31,7 @@ class SignViewModel @Inject constructor(
                 RequestAuth(accessToken, loginPlatForm.name)
             ).onSuccess {
                 _loginUiState.value = UiState.Success(
-                    Pair(it?.signType == SignType.SIGN_UP,
-                        localStorage.isClickedOnboardingButton)
+                    Pair(it?.signType == SignType.SIGN_UP, localStorage.isClickedOnboardingButton)
                 )
                 sendSignEventLog(it?.signType, loginPlatForm.label)
             }.onFailure {
