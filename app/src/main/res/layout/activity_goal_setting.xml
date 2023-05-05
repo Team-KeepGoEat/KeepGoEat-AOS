@@ -9,6 +9,8 @@
 
         <import type="org.keepgoeat.presentation.type.EatingType" />
 
+        <import type="org.keepgoeat.util.extension.StringExtKt" />
+
         <variable
             name="viewModel"
             type="org.keepgoeat.presentation.setting.GoalSettingViewModel" />
@@ -68,7 +70,6 @@
             android:background="@drawable/selector_edittext_background"
             android:hint="@{viewModel.eatingType == null ? `` : context.getString(viewModel.eatingType == EatingType.MORE ? R.string.goal_setting_title_hint_for_more : R.string.goal_setting_title_hint_for_less)}"
             android:inputType="text"
-            android:maxLength="15"
             android:maxLines="1"
             android:text="@={viewModel.goalFood}"
             android:textAppearance="@style/TextAppearance.System4_Bold"
@@ -77,6 +78,7 @@
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/tv_goal_title"
+            app:maxLen="@{15}"
             tools:hint="@string/goal_setting_title_hint_for_more">
 
             <requestFocus />
@@ -99,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
-            android:text="@{@string/goal_setting_title_length_limit(viewModel.goalFood.length())}"
+            android:text="@{@string/goal_setting_title_length_limit(StringExtKt.getStringLength(viewModel.goalFood))}"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_400"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
@@ -148,7 +150,6 @@
             android:background="@drawable/selector_edittext_background"
             android:hint="@{viewModel.eatingType == null ? `` : context.getString(viewModel.eatingType == EatingType.MORE ? R.string.goal_setting_criterion_title_hint_for_more : R.string.goal_setting_criterion_title_hint_for_less)}"
             android:inputType="text"
-            android:maxLength="20"
             android:maxLines="1"
             android:text="@={viewModel.goalCriterion}"
             android:textAppearance="@style/TextAppearance.System4_Bold"
@@ -157,6 +158,7 @@
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/tv_goal_criterion_description"
+            app:maxLen="@{20}"
             tools:hint="@string/goal_setting_criterion_title_hint_for_more" />
 
         <TextView
@@ -164,7 +166,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing8"
-            android:text="@{@string/goal_setting_criterion_length_limit(viewModel.goalCriterion.length())}"
+            android:text="@{@string/goal_setting_criterion_length_limit(StringExtKt.getStringLength(viewModel.goalCriterion))}"
             android:textAppearance="@style/TextAppearance.System5"
             android:textColor="@color/gray_400"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"

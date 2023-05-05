@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.keepgoeat.databinding.ItemWithdrawBinding
-import org.keepgoeat.presentation.model.WithdrawReason
+import org.keepgoeat.presentation.type.WithdrawReason
 import org.keepgoeat.util.ItemDiffCallback
 
 class WithdrawReasonAdapter(

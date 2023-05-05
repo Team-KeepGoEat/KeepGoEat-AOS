@@ -1,9 +1,9 @@
-package org.keepgoeat.presentation.model
+package org.keepgoeat.presentation.type
 
 import androidx.annotation.StringRes
 import org.keepgoeat.R
 
-enum class WithdrawReason( // TODO type 패키지로 이동
+enum class WithdrawReason(
     @StringRes val reason: Int,
 ) {
     QUIT_ISSUE(R.string.withdraw_reason1),
