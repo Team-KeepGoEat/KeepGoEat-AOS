@@ -9,6 +9,7 @@ import org.keepgoeat.data.datasource.local.KGEDataSource
 import org.keepgoeat.data.model.request.RequestAuth
 import org.keepgoeat.domain.model.AccountInfo
 import org.keepgoeat.domain.repository.AuthRepository
+import org.keepgoeat.domain.type.SignType
 import org.keepgoeat.presentation.base.viewmodel.MixpanelViewModel
 import org.keepgoeat.presentation.type.LoginPlatformType
 import org.keepgoeat.util.UiState
@@ -30,9 +31,9 @@ class SignViewModel @Inject constructor(
                 RequestAuth(accessToken, loginPlatForm.name)
             ).onSuccess {
                 _loginUiState.value = UiState.Success(
-                    Pair(it?.type == SIGN_UP, localStorage.isClickedOnboardingButton)
+                    Pair(it?.signType == SignType.SIGN_UP, localStorage.isClickedOnboardingButton)
                 )
-                sendSignEventLog(it?.type, loginPlatForm.label)
+                sendSignEventLog(it?.signType, loginPlatForm.label)
             }.onFailure {
                 _loginUiState.value = UiState.Error(it.message)
             }
@@ -44,20 +45,16 @@ class SignViewModel @Inject constructor(
         localStorage.userEmail = accountInfo.email
     }
 
-    private fun sendSignEventLog(signType: String?, platform: String) {
+    private fun sendSignEventLog(signType: SignType?, platform: String) {
         when (signType) {
-            SIGN_UP -> {
+            SignType.SIGN_UP -> {
                 mixpanelProvider.setUser()
                 mixpanelProvider.sendEvent(SignEvent.completeSignUp(platform))
             }
-            SIGN_IN -> {
+            SignType.SIGN_IN -> {
                 mixpanelProvider.sendEvent(SignEvent.completeLogin())
             }
+            else -> {}
         }
-    }
-
-    companion object {
-        private const val SIGN_UP = "signup"
-        private const val SIGN_IN = "signin"
     }
 }
