@@ -43,12 +43,23 @@ class SignViewModel @Inject constructor(
     fun saveAccount(accountInfo: AccountInfo) {
         localStorage.userName = accountInfo.name
         localStorage.userEmail = accountInfo.email
+        when (val state = loginUiState.value) {
+            is UiState.Success -> {
+                sendUserEventLog(state.data.first)
+            }
+            else -> {}
+        }
+    }
+
+    private fun sendUserEventLog(isSignType: Boolean) {
+        if (isSignType) {
+            mixpanelProvider.setUser()
+        }
     }
 
     private fun sendSignEventLog(signType: SignType?, platform: String) {
         when (signType) {
             SignType.SIGN_UP -> {
-                mixpanelProvider.setUser()
                 mixpanelProvider.sendEvent(SignEvent.completeSignUp(platform))
             }
             SignType.SIGN_IN -> {
