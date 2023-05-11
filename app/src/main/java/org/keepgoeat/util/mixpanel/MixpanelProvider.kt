@@ -20,7 +20,7 @@ class MixpanelProvider @Inject constructor(
 
     fun setUser() {
         if (BuildConfig.DEBUG) return
-        instance.identify(localStorage.userEmail)
+        instance.identify("${localStorage.loginPlatform.label} ${localStorage.userEmail}")
 
         val props = JSONObject().apply {
             put(PROPERTY_NICKNAME, localStorage.userName)
