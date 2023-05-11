@@ -26,10 +26,13 @@ class MixpanelProvider @Inject constructor(
             put(PROPERTY_NICKNAME, localStorage.userName)
             put(PROPERTY_EMAIL, localStorage.userEmail)
             put(PROPERTY_PLATFORM, localStorage.loginPlatform.label)
-            put(PROPERTY_GOAL_NUMBER, 0)
         }
 
         instance.people.set(props)
+    }
+
+    fun initUserGoalNumber() {
+        instance.people.set(PROPERTY_GOAL_NUMBER, 0)
     }
 
     private fun getUserProperties() = JSONObject().apply {
