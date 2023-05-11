@@ -53,7 +53,7 @@ class SignViewModel @Inject constructor(
 
     private fun sendUserEventLog(isSignType: Boolean) {
         if (isSignType) {
-            mixpanelProvider.setUser()
+            mixpanelProvider.setUserProfile()
         }
     }
 

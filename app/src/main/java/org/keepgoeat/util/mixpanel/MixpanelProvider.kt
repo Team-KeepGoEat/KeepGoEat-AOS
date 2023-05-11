@@ -18,7 +18,7 @@ class MixpanelProvider @Inject constructor(
     private val instance: MixpanelAPI =
         MixpanelAPI.getInstance(context, BuildConfig.MIXPANEL_PROJECT_TOKEN, true)
 
-    fun setUser() {
+    fun setUserProfile() {
         if (BuildConfig.DEBUG) return
         instance.identify("${localStorage.loginPlatform.label} ${localStorage.userEmail}")
 
