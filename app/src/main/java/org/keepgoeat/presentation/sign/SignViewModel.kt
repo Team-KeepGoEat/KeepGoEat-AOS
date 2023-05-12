@@ -30,9 +30,11 @@ class SignViewModel @Inject constructor(
             authRepository.login(
                 RequestAuth(accessToken, loginPlatForm.name)
             ).onSuccess {
+                val isSignUp = it?.signType == SignType.SIGN_UP
                 _loginUiState.value = UiState.Success(
-                    Pair(it?.signType == SignType.SIGN_UP, localStorage.isClickedOnboardingButton)
+                    Pair(isSignUp, localStorage.isClickedOnboardingButton)
                 )
+                initMixpanelGoalNumber(isSignUp)
                 sendSignEventLog(it?.signType, loginPlatForm.label)
             }.onFailure {
                 _loginUiState.value = UiState.Error(it.message)
@@ -43,12 +45,17 @@ class SignViewModel @Inject constructor(
     fun saveAccount(accountInfo: AccountInfo) {
         localStorage.userName = accountInfo.name
         localStorage.userEmail = accountInfo.email
+        mixpanelProvider.setUserProfile()
+    }
+
+    /** 회원가입 시에만 유저 프로퍼티 > 목표수를 초기화하는 함수 */
+    private fun initMixpanelGoalNumber(isSignUp: Boolean) {
+        if (isSignUp) mixpanelProvider.initUserGoalNumber()
     }
 
     private fun sendSignEventLog(signType: SignType?, platform: String) {
         when (signType) {
             SignType.SIGN_UP -> {
-                mixpanelProvider.setUser()
                 mixpanelProvider.sendEvent(SignEvent.completeSignUp(platform))
             }
             SignType.SIGN_IN -> {

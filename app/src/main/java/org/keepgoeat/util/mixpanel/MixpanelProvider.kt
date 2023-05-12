@@ -18,18 +18,21 @@ class MixpanelProvider @Inject constructor(
     private val instance: MixpanelAPI =
         MixpanelAPI.getInstance(context, BuildConfig.MIXPANEL_PROJECT_TOKEN, true)
 
-    fun setUser() {
+    fun setUserProfile() {
         if (BuildConfig.DEBUG) return
-        instance.identify(localStorage.userEmail)
+        instance.identify("${localStorage.loginPlatform.label} ${localStorage.userEmail}")
 
         val props = JSONObject().apply {
             put(PROPERTY_NICKNAME, localStorage.userName)
             put(PROPERTY_EMAIL, localStorage.userEmail)
             put(PROPERTY_PLATFORM, localStorage.loginPlatform.label)
-            put(PROPERTY_GOAL_NUMBER, 0)
         }
 
         instance.people.set(props)
+    }
+
+    fun initUserGoalNumber() {
+        instance.people.set(PROPERTY_GOAL_NUMBER, 0)
     }
 
     private fun getUserProperties() = JSONObject().apply {
