@@ -1,0 +1,15 @@
+<resources>
+    <!-- Spacing -->
+    <dimen name="spacing4">4dp</dimen>
+    <dimen name="spacing8">8dp</dimen>
+    <dimen name="spacing10">10dp</dimen>
+    <dimen name="spacing12">12dp</dimen>
+    <dimen name="spacing14">14dp</dimen>
+    <dimen name="spacing16">16dp</dimen>
+    <dimen name="spacing_base">20dp</dimen>
+    <dimen name="spacing24">24dp</dimen>
+    <dimen name="spacing36">36dp</dimen>
+
+    <!-- Widget Size -->
+    <dimen name="button_height">48dp</dimen>
+</resources>

@@ -21,16 +21,28 @@ android {
         applicationId "org.keepgoeat"
         minSdk 28
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 16
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "KGE_BASE_URL", properties["KGE_BASE_URL"]
+        buildConfigField "String", "KAKAO_NATIVE_KEY", properties["KAKAO_NATIVE_KEY"]
+        buildConfigField "String", "NAVER_CLIENT_ID", properties["NAVER_CLIENT_ID"]
+        buildConfigField "String", "NAVER_CLIENT_SECRETE", properties["NAVER_CLIENT_SECRETE"]
     }
 
     buildTypes {
-        release {
+        debug {
+            manifestPlaceholders = [KAKAO_NATIVE_KEY: properties["KAKAO_NATIVE_KEY"]]
             minifyEnabled false
+            buildConfigField "String", "MIXPANEL_PROJECT_TOKEN", properties["MIXPANEL_DEV_TOKEN"]
+        }
+        release {
+            manifestPlaceholders = [KAKAO_NATIVE_KEY: properties["KAKAO_NATIVE_KEY"]]
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "MIXPANEL_PROJECT_TOKEN", properties["MIXPANEL_PROD_TOKEN"]
         }
     }
     compileOptions {
@@ -52,6 +64,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-rc01'
 
     // Ktx
     implementation 'androidx.activity:activity-ktx:1.6.0'
@@ -63,6 +76,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    kapt "com.google.dagger:dagger-compiler:$hilt_version"
 
     // Coil
     implementation 'io.coil-kt:coil:2.2.2'
@@ -77,15 +91,37 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
+    implementation 'com.google.code.gson:gson:2.10'
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
-    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Mixpanel
+    implementation 'com.mixpanel.android:mixpanel-android:7.+'
+
+    // KakaoSignIn
+    implementation "com.kakao.sdk:v2-user:2.12.0"
+
+    // NaverSignIn
+    implementation 'com.navercorp.nid:oauth-jdk8:5.3.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    // ViewPager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    // Splashscreen
+    implementation 'androidx.core:core-splashscreen:1.0.0'
+
+    // Lottie
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
+    // In-App Review
+    implementation 'com.google.android.play:review:2.0.1'
+    implementation 'com.google.android.play:review-ktx:2.0.1'
 }
 
 ktlint {

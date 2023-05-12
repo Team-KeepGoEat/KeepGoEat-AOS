@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.KeepGoEat" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
@@ -13,60 +13,35 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
+
+        <item name="bottomSheetDialogTheme">@style/Style.BottomSheetDialog</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <!-- Text Appearance -->
-    <style name="TextAppearance.System1" parent="">
-        <item name="android:textSize">24dp</item>
-        <item name="android:fontFamily">@font/pretendard_r</item>
-    </style>
-    <style name="TextAppearance.System2" parent="">
-        <item name="android:textSize">20dp</item>
-        <item name="android:fontFamily">@font/pretendard_r</item>
-    </style>
-    <style name="TextAppearance.System3" parent="">
-        <item name="android:textSize">18dp</item>
-        <item name="android:fontFamily">@font/pretendard_r</item>
-    </style>
-    <style name="TextAppearance.System4" parent="">
-        <item name="android:textSize">16dp</item>
-        <item name="android:fontFamily">@font/pretendard_r</item>
-    </style>
-    <style name="TextAppearance.System5" parent="">
-        <item name="android:textSize">14dp</item>
-        <item name="android:fontFamily">@font/pretendard_r</item>
-    </style>
-    <style name="TextAppearance.System6" parent="">
-        <item name="android:textSize">12dp</item>
-        <item name="android:fontFamily">@font/pretendard_r</item>
-    </style>
-
-    <style name="TextAppearance.System1_Bold" parent="">
-        <item name="android:textSize">24dp</item>
-        <item name="android:fontFamily">@font/pretendard_b</item>
-    </style>
-    <style name="TextAppearance.System2_Bold" parent="">
-        <item name="android:textSize">20dp</item>
-        <item name="android:fontFamily">@font/pretendard_b</item>
-    </style>
-    <style name="TextAppearance.System3_Bold" parent="">
-        <item name="android:textSize">18dp</item>
-        <item name="android:fontFamily">@font/pretendard_b</item>
-    </style>
-    <style name="TextAppearance.System4_Bold" parent="">
-        <item name="android:textSize">16dp</item>
-        <item name="android:fontFamily">@font/pretendard_b</item>
-    </style>
-    <style name="TextAppearance.System5_Bold" parent="">
-        <item name="android:textSize">14dp</item>
-        <item name="android:fontFamily">@font/pretendard_b</item>
-    </style>
-    <style name="TextAppearance.System6_Bold" parent="">
-        <item name="android:textSize">12dp</item>
-        <item name="android:fontFamily">@font/pretendard_b</item>
+    <!-- Splash -->
+    <style name="Theme.KeepGoEat.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
+        <item name="postSplashScreenTheme">@style/Theme.KeepGoEat</item>
     </style>
 
     <!-- Widget -->
+    <style name="Style.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Style.BottomSheet</item>
+    </style>
+
+    <style name="Style.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/Style.ShapeAppearance.BottomSheetDialog</item>
+    </style>
+
+    <style name="Style.ShapeAppearance.BottomSheetDialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">10dp</item>
+        <item name="cornerSizeTopLeft">10dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
     <style name="Widget.Material.Button.Basic" parent="">
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -75,9 +50,69 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
+    <style name="Widget.FullButton.Basic" parent="Widget.Material.Button.Basic">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_b</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <style name="Widget.Toolbar" parent="">
+        <item name="android:background">@color/white</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:paddingHorizontal">@dimen/spacing16</item>
+        <item name="android:paddingVertical">8dp</item>
+    </style>
+
+    <style name="Widget.Divider" parent="">
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/gray_200</item>
+        <item name="android:paddingHorizontal">@dimen/spacing16</item>
+        <item name="android:paddingVertical">8dp</item>
+    </style>
+
     <!-- Circle Image View -->
     <style name="Style.CircleImageView.Half" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- My Menu -->
+    <style name="Style.My.Menu.Title" parent="">
+        <item name="android:textAppearance">@style/TextAppearance.System5_Bold</item>
+        <item name="android:textColor">@color/gray_500</item>
+        <item name="android:layout_marginStart">@dimen/spacing16</item>
+        <item name="android:layout_marginTop">19dp</item>
+    </style>
+
+    <style name="Style.Menu" parent="">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:textAppearance">@style/TextAppearance.System4</item>
+        <item name="android:textColor">@color/gray_800</item>
+    </style>
+
+    <style name="Style.My.Menu" parent="Style.Menu">
+        <item name="android:padding">@dimen/spacing16</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="Style.AccountInfo.Menu" parent="Style.Menu">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingStart">@dimen/spacing16</item>
+        <item name="android:paddingVertical">12dp</item>
+    </style>
+
+    <style name="Style.Dialog.Button" parent="">
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingVertical">@dimen/spacing16</item>
+        <item name="android:textAppearance">@style/TextAppearance.System4</item>
+        <item name="android:textColor">@color/gray_800</item>
+    </style>
+
+    <style name="Style.CheckBox" parent="">
+        <item name="android:background">@drawable/selector_checkbox</item>
+        <item name="android:button">@null</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
     </style>
 </resources>

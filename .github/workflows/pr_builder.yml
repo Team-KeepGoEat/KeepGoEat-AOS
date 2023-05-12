@@ -43,6 +43,36 @@ jobs:
       - name: Touch local properties
         run: touch local.properties
 
+      - name: Access KAKAO_NATIVE_KEY
+        env:
+          KAKAO_NATIVE_KEY: ${{ secrets.KAKAO_NATIVE_KEY }}
+        run: echo "KAKAO_NATIVE_KEY=\"$KAKAO_NATIVE_KEY\"" >> local.properties
+        
+      - name: Access NAVER_CLIENT_ID
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+        run: echo "NAVER_CLIENT_ID=\"$NAVER_CLIENT_ID\"" >> local.properties
+        
+      - name: Access NAVER_CLIENT_SECRETE
+        env:
+          NAVER_CLIENT_SECRETE: ${{ secrets.NAVER_CLIENT_SECRETE }}
+        run: echo "NAVER_CLIENT_SECRETE=\"$NAVER_CLIENT_SECRETE\"" >> local.properties
+
+      - name: Access KGE_BASE_URL
+        env:
+          HFM_BASE_URL: ${{ secrets.KGE_BASE_URL }}
+        run: echo "KGE_BASE_URL=\"$KGE_BASE_URL\"" >> local.properties
+
+      - name: Access MIXPANEL_PROD_TOKEN
+        env:
+          HFM_BASE_URL: ${{ secrets.MIXPANEL_PROD_TOKEN }}
+        run: echo "MIXPANEL_PROD_TOKEN=\"$MIXPANEL_PROD_TOKEN\"" >> local.properties
+
+      - name: Access MIXPANEL_DEV_TOKEN
+        env:
+          HFM_BASE_URL: ${{ secrets.MIXPANEL_DEV_TOKEN }}
+        run: echo "MIXPANEL_DEV_TOKEN=\"$MIXPANEL_DEV_TOKEN\"" >> local.properties
+
       - name: Lint Check
         run: ./gradlew ktlintCheck
 

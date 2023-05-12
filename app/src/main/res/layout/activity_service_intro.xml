@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.my.ServiceIntroActivity">
+
+        <include
+            android:id="@+id/view_toolbar"
+            layout="@layout/view_toolbar"
+            app:title="@{@string/my_about_service}" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/img_service_intro_background"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_text_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing16"
+                    android:layout_marginTop="34dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/img_service_intro_logo"
+                    app:layout_constraintStart_toStartOf="@id/iv_background"
+                    app:layout_constraintTop_toTopOf="@id/iv_background" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="31dp"
+                    android:background="@drawable/shape_border_radius_12"
+                    android:backgroundTint="@color/white"
+                    android:lineSpacingExtra="4dp"
+                    android:paddingVertical="32dp"
+                    android:paddingStart="@dimen/spacing16"
+                    android:paddingEnd="60dp"
+                    android:text="@string/my_service_intro_description"
+                    android:textAppearance="@style/TextAppearance.System5"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/iv_text_logo"
+                    app:layout_constraintStart_toStartOf="@id/iv_text_logo"
+                    app:layout_constraintTop_toBottomOf="@id/iv_text_logo" />
+
+                <TextView
+                    style="@style/Style.Menu"
+                    android:id="@+id/tv_open_source"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/spacing16"
+                    android:text="@string/my_service_intro_open_source"
+                    app:drawableEndCompat="@drawable/ic_detail_large"
+                    app:layout_constraintTop_toBottomOf="@id/iv_background" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

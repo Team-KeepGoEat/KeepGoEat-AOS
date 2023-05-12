@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="org.keepgoeat.presentation.type.OnBoardingViewType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_onboarding_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing4"
+            android:text="@{context.getString(item.titleStrRes)}"
+            android:textAppearance="@style/TextAppearance.System3_Bold"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toTopOf="@+id/tv_onboarding_des"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/onboarding1_title" />
+
+        <TextView
+            android:id="@+id/tv_onboarding_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing10"
+            android:lineSpacingExtra="4dp"
+            android:text="@{context.getString(item.desStrRes)}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_800"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_onboarding_title"
+            tools:text="@string/onboarding1_des" />
+
+        <ImageView
+            android:id="@+id/iv_onboarding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="59dp"
+            android:adjustViewBounds="true"
+            android:src="@{context.getDrawable(item.imageRes)}"
+            app:layout_constraintTop_toBottomOf="@id/tv_onboarding_des"
+            tools:src="@drawable/img_onboarding_1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

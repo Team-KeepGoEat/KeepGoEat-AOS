@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isClicked"
+            type="Boolean" />
+
+        <variable
+            name="reason"
+            type="Integer" />
+
+        <import type="org.keepgoeat.R" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_withdraw_reason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/spacing12"
+        android:layout_marginStart="@dimen/spacing16">
+
+        <CheckBox
+            android:id="@+id/iv_withdraw_checkbox"
+            style="@style/Style.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{isClicked}"
+            android:clickable="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:checked="true"
+            tools:src="@drawable/ic_checkbox_checked" />
+
+        <TextView
+            android:id="@+id/tv_withdraw_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/spacing4"
+            android:layout_marginStart="@dimen/spacing4"
+            android:text="@{context.getString(reason)}"
+            android:textAppearance="@{isClicked ? R.style.TextAppearance_System4_Bold : R.style.TextAppearance_System4}"
+            android:textColor="@{isClicked ? @color/orange_600 : @color/gray_700}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_withdraw_checkbox"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/withdraw_reason1"
+            tools:textAppearance="@style/TextAppearance.System4_Bold"
+            tools:textColor="@color/orange_600" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

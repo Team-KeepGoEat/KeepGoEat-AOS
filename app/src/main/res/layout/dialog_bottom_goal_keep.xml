@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.keepgoeat.presentation.detail.GoalDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".presentation.detail.GoalKeepBottomDialogFragment">
+
+        <TextView
+            android:id="@+id/tv_goal_keep_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/goal_keep_dialog_title"
+            android:textAppearance="@style/TextAppearance.System3_Bold"
+            android:textColor="@color/gray_600"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_goal_keep_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/goal_keep_dialog_guide"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.System5"
+            android:textColor="@color/gray_600"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_keep_title" />
+
+        <ImageView
+            android:id="@+id/iv_snail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing16"
+            android:src="@{context.getDrawable(viewModel.goalDetail.eatingType.snailCheerInKeepRes)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal_keep_guide"
+            tools:src="@drawable/ic_snail_orange_cheer_left" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_keep"
+            style="@style/Widget.FullButton.Basic"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing12"
+            android:layout_marginBottom="61dp"
+            android:backgroundTint="@{context.getColor(viewModel.goalDetail.eatingType.buttonBackgroundColor)}"
+            android:onClick="@{() -> viewModel.keepGoal()}"
+            android:text="@string/goal_keep"
+            android:textColor="@{context.getColor(viewModel.goalDetail.eatingType.buttonTextColor)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_snail"
+            app:rippleColor="@{context.getColor(viewModel.goalDetail.eatingType.buttonRippleColor)}"
+            tools:backgroundTint="@color/orange_600" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/pretendard_r"
+            android:padding="@dimen/spacing10"
+            android:text="@string/goal_keep_delete_guide"
+            android:textAlignment="center"
+            android:textColor="@color/gray_500"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_keep" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

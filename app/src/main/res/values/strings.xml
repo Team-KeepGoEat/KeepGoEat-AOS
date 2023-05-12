@@ -1,4 +1,169 @@
 <resources>
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
+    <string name="app_version">1.0.0</string>
+    <string name="keep_go_eat_mail">Keepgo2at@gmail.com</string>
+    <string name="play_store_detail_url">market://details?id=</string>
+
+    <!-- Global -->
+    <string name="keep_go_eat">킵고잇</string>
+    <string name="complete">완료</string>
+    <string name="eating_type_less">덜 먹기</string>
+    <string name="eating_type_more">더 먹기</string>
+    <string name="btn_text_no">아니오</string>
+    <string name="title_more">%s 더 먹기</string>
+    <string name="title_less">%s 덜 먹기</string>
+    <string name="cancel">취소</string>
+    <string name="yes">네</string>
+    <string name="network_error_snackbar_message">네트워크 연결을 확인해주세요.</string>
+
+    <!-- sign -->
+    <string name="signin_kakao">카카오톡 로그인</string>
+    <string name="signin_naver">네이버 로그인</string>
+    <string name="sign_description1">식습관 관리,</string>
+    <string name="sign_description2">같이 천천히 시작해볼까요?\n먹는 재미는 언제나 소중하니까!</string>
+    <string name="auto_login_failure">자동 로그인이 만료되었습니다.</string>
+    <string name="signin_success_toast_message">로그인 되었습니다.</string>
+    <string name="signin_failure_toast_message">로그인에 실패하였습니다.</string>
+
+    <!-- Goal Detail -->
+    <string name="goal_detail_my_goal">나의 목표</string>
+    <string name="goal_detail_title">%s %s</string>
+    <string name="goal_detail_num_of_days_eaten_last_month">지난달 %s 날</string>
+    <string name="goal_detail_num_of_days_eaten_this_month">이번달 %s 날</string>
+    <string name="goal_detail_eat">먹은</string>
+    <string name="goal_detail_hold">참은</string>
+    <string name="goal_detail_success_goal_delete_toast_message">목표가 삭제되었습니다.</string>
+    <string name="goal_detail_success_goal_keep_toast_message">목표가 보관되었습니다.</string>
+
+    <!-- Home View -->
+    <string name="home_today_goal">오늘 식습관 목표</string>
+
+    <string name="home_goal_more_btn">오늘도 잘 먹었나요?</string>
+    <string name="home_goal_more_achieved">오늘도 해냈어요!</string>
+    <string name="home_goal_less_btn">오늘도 잘 참았나요?</string>
+    <string name="home_goal_less_achieved">오늘도 참았어요!</string>
+
+    <string name="home_goal_string">일 해냈어요.</string>
+
+    <string name="home_more_goal">또 다른 도전을 원하시나요?</string>
+    <string name="home_two_more_goal">2개의 목표를 더 정할 수 있어요.</string>
+    <string name="home_one_more_goal">1개의 목표를 더 정할 수 있어요.</string>
+    <string name="home_no_more_goal">3개의 목표까지 동시에 진행할 수 있어요.</string>
+
+    <string name="home_txt_no_goal_1">아직 목표를 정하지 않았어요.</string>
+    <string name="home_txt_no_goal_2">새로운 목표를 추가해 보세요.</string>
+
+    <string name="home_make_goal">목표 추가하기</string>
+
+    <string name="cheer_msg">나 김더팽, 멋진 달팽...✨\n내가 세상을 지배한다...!!</string>
+
+    <!-- Home Bottom -->
+    <string name="bottom_home_more_txt">건강한 음식을 더 먹어볼까?</string>
+    <string name="bottom_home_less_txt">안 좋은 식습관을 줄여가보자!</string>
+
+    <!-- Goal Keep -->
+    <string name="goal_keep_dialog_title">목표를 보관하시겠어요?</string>
+    <string name="goal_keep_dialog_guide">달성을 완료한 목표는 보관해서 모아볼 수 있어요.</string>
+    <string name="goal_keep_delete_guide">잘못된 목표인가요? 삭제하기</string>
+    <string name="goal_keep">목표 보관하기</string>
+
+    <!-- Goal Delete -->
+    <string name="goal_delete_dialog_guide">삭제한 목표는 복구할 수 없어요.</string>
+    <string name="goal_delete_dialog_title">삭제하시겠어요?</string>
+    <string name="goal_delete_button_text">네, 삭제할래요</string>
+
+    <!-- Goal Setting -->
+    <string name="goal_setting">목표 입력</string>
+    <string name="goal_setting_title">나의 목표를 입력해 볼까요?</string>
+    <string name="goal_setting_title_hint_for_more">ex) 물</string>
+    <string name="goal_setting_title_hint_for_less">ex) 커피</string>
+    <string name="goal_setting_title_length_guide">목표는 최소 1글자 이상 입력해주세요.</string>
+    <string name="goal_setting_title_language_guide">한글, 영문, 숫자만 입력 가능합니다.</string>
+    <string name="goal_setting_title_length_limit">(%d/15)</string>
+    <string name="goal_setting_criterion">목표 달성 기준을 세워볼까요?</string>
+    <string name="goal_setting_criterion_description">나에게 맞는 달성 기준을 세워요.</string>
+    <string name="goal_setting_criterion_title_hint_for_more">ex) 하루에 2L씩 마시기</string>
+    <string name="goal_setting_criterion_title_hint_for_less">ex) 아침에 딱 1잔만 마시기</string>
+    <string name="goal_setting_criterion_length_limit">(%d/20)</string>
+    <string name="goal_setting_edit_success_toast_message">목표가 수정되었습니다.</string>
+    <string name="goal_setting_add_success_toast_message">목표가 추가되었습니다.</string>
+
+    <!-- On Boarding -->
+    <string name="onboarding1_title">차근차근 식습관 목표를 세워보세요.</string>
+    <string name="onboarding1_des">건강한 식습관의 필요성을 느끼셨나요?\n이제는 조금씩 더 먹고, 덜 먹으며 균형을 맞춰요.</string>
+    <string name="onboarding1_button">조금 더 설명해주세요!</string>
+    <string name="onboarding2_title">우리는 같이 해낼 거예요.</string>
+    <string name="onboarding2_des">목표를 달성한 날이면 킵고잇을 찾아와\n달성 버튼을 눌러주세요.</string>
+    <string name="onboarding2_button">매일 기록에 실패하면 어쩌죠?</string>
+    <string name="onboarding3_title">완벽하지 않아도 괜찮아요.</string>
+    <string name="onboarding3_des">노력한 날들은 빈틈없이 채워질 거예요.\n성취의 즐거움과 뿌듯함이 오롯이 남아요.</string>
+    <string name="onboarding3_button">KEEP GO EAT 시작하기</string>
+    <string name="onboarding_skip">건너뛰기</string>
+
+    <!-- My -->
+    <string name="all">전체</string>
+    <string name="my">마이페이지</string>
+    <string name="my_archived_goal">보관한 목표</string>
+    <string name="my_total_achievement_day">총 달성일</string>
+    <string name="my_duration">진행기간</string>
+    <string name="my_goal_duration_format">%s. %s. %s ~ %s. %s. %s</string>
+    <string name="my_logout">로그아웃</string>
+    <string name="my_delete_account">탈퇴하기</string>
+    <string name="my_contact_and_feedback">문의 및 피드백</string>
+    <string name="my_contact_us">문의하기</string>
+    <string name="my_feedback">리뷰 남기기</string>
+    <string name="my_app_info">앱 정보</string>
+    <string name="my_about_service">서비스 소개</string>
+    <string name="my_version_info">버전 정보</string>
+    <string name="my_terms_and_policy">약관 및 정책</string>
+    <string name="my_terms">서비스 이용약관</string>
+    <string name="my_policy">개인정보처리방침</string>
+
+    <string name="my_account_info">계정 정보</string>
+    <string name="my_logout_title">로그아웃 하시겠어요?</string>
+    <string name="my_logout_description">그동안의 기록은 사라지지 않으니\n안심하고 다녀오세요.</string>
+    <string name="my_logout_success_toast_message">로그아웃 되었습니다.</string>
+    <string name="my_logout_failure_toast_message">로그아웃에 실패하였습니다.</string>
+
+    <string name="my_archived_goal_empty_title">더이상 기록하지 않는 목표는 보관해요.</string>
+    <string name="my_archived_goal_empty_description">진행하지 않는 목표가 생긴다면,\n그동안의 노력을 지우지 말고 남겨보세요.</string>
+    <string name="my_archived_goal_empty_make_goal">목표 만들러 가기</string>
+    <string name="my_archived_goal_delete_title">삭제 하시겠어요?</string>
+    <string name="my_archived_goal_delete_description">삭제된 목표와 달성 기록은\n다시 복구할 수 없어요.</string>
+
+    <string name="my_service_intro_description">킵고잇은\n영양소나 칼로리처럼 복잡한 방법 대신\n가볍고, 지속가능한 식습관 관리를\n돕기 위해 탄생했어요.\n\n늘리거나 줄이고 싶은 식습관 목표를 설정하고,\n목표를 달성한 날이면 킵고잇을 찾아와주세요.\n건강한 하루하루를 기록할 수 있어요.\n\n매일 완벽한 식사만을 하기란 어렵죠.\n대신 건강하지 않은 음식을 덜 먹고,\n건강한 음식을 더 먹은 날을 늘려가볼까요?\n\n먹는 건 원래 즐거운 일이니까.\n완벽한 식사에 대한 부담 없이\n킵고잇에서 건강한 즐거움을 쌓아보세요.</string>
+    <string name="my_service_intro_open_source">오픈소스 라이브러리</string>
+
+    <string name="my_contact_us_mail_title">킵고잇 문의사항</string>
+    <string name="my_contact_us_mail_content">Device: %s %s\nApp version: %s\nOS Version: %d(%s)\n-------------\n내용 :</string>
+
+    <string name="my_feedback_success_toast_message">리뷰를 남겨주셔서 감사합니다.</string>
+
+    <!-- WithDraw -->
+    <string name="withdraw">탈퇴하기</string>
+    <string name="withdraw_title">그동안 함께 해서 기뻤어요.</string>
+    <string name="withdraw_description">떠났던 이유를 모두 알려주시면 더 나은 킵고잇이 될게요.</string>
+
+    <string name="withdraw_reason1">식습관 관리를 그만 뒀어요.</string>
+    <string name="withdraw_reason2">자주 사용하지 않아요.</string>
+    <string name="withdraw_reason3">앱 오류가 있어요.</string>
+    <string name="withdraw_reason4">콘텐츠가 만족스럽지 않아요.</string>
+
+    <string name="withdraw_other_reason">직접 입력</string>
+    <string name="withdraw_other_reason_description">다른 이유가 있다면 알려주세요.</string>
+    <string name="withdraw_edittext_error">탈퇴 이유를 작성해주세요.</string>
+
+    <string name="withdraw_dialog_title">탈퇴는 되돌릴 수 없어요.</string>
+    <string name="withdraw_dialog_description">이 계정에서 만든 목표와\n활동 기록이 모두 사라져요.</string>
+    <string name="withdraw_dialog">탈퇴</string>
+    <string name="withdraw_cancel">취소</string>
+
+    <string name="withdraw_success">회원 탈퇴가 완료되었습니다.</string>
+    <string name="withdraw_fail">회원 탈퇴에 실패하였습니다.</string>
+
+    <!--  ForceUpdate  -->
+    <string name="force_update_title">업데이트 알림</string>
+    <string name="force_update">업데이트 하러가기</string>
+    <string name="force_update_message">더 좋아진 킵고잇 앱을 사용하시기 위해서는 새로운 버전 %s으로 업데이트가 필요합니다. 현재 버전은 %s 입니다.</string>
 </resources>

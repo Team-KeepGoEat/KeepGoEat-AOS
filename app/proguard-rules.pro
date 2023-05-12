@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.kakao.sdk.**.model.* { <fields>; }
+-keep public class com.navercorp.nid.** { public *; }
+-keep class * extends com.google.gson.TypeAdapter
+
+-keepnames class * extends android.os.Parcelable
+-keepnames class * extends java.io.Serializable
+-keep class org.keepgoeat.data.model.** { *; }
