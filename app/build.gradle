@@ -21,7 +21,7 @@ android {
         applicationId "org.keepgoeat"
         minSdk 28
         targetSdk 33
-        versionCode 1
+        versionCode 16
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -29,18 +29,20 @@ android {
         buildConfigField "String", "KAKAO_NATIVE_KEY", properties["KAKAO_NATIVE_KEY"]
         buildConfigField "String", "NAVER_CLIENT_ID", properties["NAVER_CLIENT_ID"]
         buildConfigField "String", "NAVER_CLIENT_SECRETE", properties["NAVER_CLIENT_SECRETE"]
-        buildConfigField "String", "MIXPANEL_PROJECT_TOKEN", properties["MIXPANEL_PROJECT_TOKEN"]
     }
 
     buildTypes {
         debug {
             manifestPlaceholders = [KAKAO_NATIVE_KEY: properties["KAKAO_NATIVE_KEY"]]
             minifyEnabled false
+            buildConfigField "String", "MIXPANEL_PROJECT_TOKEN", properties["MIXPANEL_DEV_TOKEN"]
         }
         release {
             manifestPlaceholders = [KAKAO_NATIVE_KEY: properties["KAKAO_NATIVE_KEY"]]
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "MIXPANEL_PROJECT_TOKEN", properties["MIXPANEL_PROD_TOKEN"]
         }
     }
     compileOptions {
