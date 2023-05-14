@@ -2,11 +2,12 @@ package org.keepgoeat.data.interceptor
 
 import android.app.Application
 import android.content.Intent
-import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -46,6 +47,8 @@ class AuthInterceptor @Inject constructor(
                         accessToken = responseRefresh.data.accessToken
                         refreshToken = responseRefresh.data.refreshToken
                     }
+                    refreshTokenResponse.close()
+
                     val newRequest = originalRequest.newAuthBuilder().build()
                     return chain.proceed(newRequest)
                 } else {
