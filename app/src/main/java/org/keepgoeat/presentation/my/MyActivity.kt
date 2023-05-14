@@ -25,7 +25,12 @@ class MyActivity : MixpanelActivity<ActivityMyBinding>(R.layout.activity_my, SCR
         binding.lifecycleOwner = this
 
         viewModel.fetchUserInfo()
+        initLayout()
         addListeners()
+    }
+
+    private fun initLayout() {
+        binding.tvVersionName.text = BuildConfig.VERSION_NAME
     }
 
     private fun addListeners() {
