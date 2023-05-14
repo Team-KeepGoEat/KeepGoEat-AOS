@@ -21,8 +21,8 @@ android {
         applicationId "org.keepgoeat"
         minSdk 28
         targetSdk 33
-        versionCode 16
-        versionName "1.0.0"
+        versionCode 17
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "KGE_BASE_URL", properties["KGE_BASE_URL"]
