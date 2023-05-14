@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Intent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -63,7 +62,6 @@ class AuthInterceptor @Inject constructor(
                             )
                             showToast(getString(R.string.auto_login_failure))
                             localStorage.clear()
-                            cancel()
                         }
                     }
                 }
