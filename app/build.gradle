@@ -21,8 +21,8 @@ android {
         applicationId "org.keepgoeat"
         minSdk 28
         targetSdk 33
-        versionCode 16
-        versionName "1.0.0"
+        versionCode 17
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "KGE_BASE_URL", properties["KGE_BASE_URL"]
@@ -91,11 +91,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
-    implementation 'com.google.code.gson:gson:2.10'
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Mixpanel
     implementation 'com.mixpanel.android:mixpanel-android:7.+'
