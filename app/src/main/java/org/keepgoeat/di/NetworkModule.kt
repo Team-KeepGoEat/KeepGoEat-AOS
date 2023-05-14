@@ -1,7 +1,5 @@
 package org.keepgoeat.di
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -32,10 +30,6 @@ object NetworkModule {
         explicitNulls = false
         ignoreUnknownKeys = true
     }
-
-    @Provides
-    @Singleton
-    fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
     @ExperimentalSerializationApi
     @Provides

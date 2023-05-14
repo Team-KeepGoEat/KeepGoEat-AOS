@@ -19,8 +19,8 @@ import org.keepgoeat.util.extension.showToast
 import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(
+    private val json: Json,
     private val localStorage: KGEDataSource,
-    private val gson: Gson,
     private val context: Application,
 ) : Interceptor {
 
@@ -39,10 +39,12 @@ class AuthInterceptor @Inject constructor(
                 val refreshTokenResponse = chain.proceed(refreshTokenRequest)
 
                 if (refreshTokenResponse.isSuccessful) {
-                    val responseRefresh = gson.fromJson(
-                        refreshTokenResponse.body?.string(),
-                        ResponseRefresh::class.java
-                    )
+                    val responseRefresh =
+                        json.decodeFromString<ResponseRefresh>(
+                            refreshTokenResponse.body?.string()
+                                ?: throw IllegalStateException("refreshTokenResponse is null $refreshTokenResponse")
+                        )
+
                     with(localStorage) {
                         accessToken = responseRefresh.data.accessToken
                         refreshToken = responseRefresh.data.refreshToken
