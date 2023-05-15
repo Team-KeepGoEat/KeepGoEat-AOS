@@ -25,11 +25,13 @@ class AuthInterceptor @Inject constructor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
-        val authRequest = originalRequest.newAuthBuilder().build()
+        val authRequest =
+            if (!localStorage.isLogin) originalRequest else originalRequest.newAuthBuilder().build()
         val response = chain.proceed(authRequest)
 
         when (response.code) {
             401 -> {
+                response.close()
                 val refreshTokenRequest = originalRequest.newBuilder().get()
                     .url("${BuildConfig.KGE_BASE_URL}auth/refresh")
                     .addHeader(ACCESS_TOKEN, localStorage.accessToken)
