@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">KeepGoEat</string>
     <string name="dummy_upload">upload</string>
-    <string name="app_version">1.0.0</string>
-    <string name="keep_go_eat_mail">Keepgo2at@gmail.com</string>
+    <string name="keep_go_eat_mail">keepgo2at@gmail.com</string>
     <string name="play_store_detail_url">market://details?id=</string>
 
     <!-- Global -->

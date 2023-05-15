@@ -160,16 +160,16 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tv_version_code"
+                        android:id="@+id/tv_version_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/spacing16"
-                        android:text="@string/app_version"
                         android:textAppearance="@style/TextAppearance.System4"
                         android:textColor="@color/gray_400"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="1.0.0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
